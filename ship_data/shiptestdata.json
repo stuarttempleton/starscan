@@ -1,0 +1,15 @@
+{
+    "Name":"Starscan",
+    "X":0.5,
+    "Y":0.5,
+    "TravelRange":0.1,
+    "Crew":100,
+    "MaxInventory":10,
+    "Inventory":[
+        {
+            "Type":0,
+            "Quantity":0
+        }
+    ],
+    "DeliveredArtifacts":0
+}
