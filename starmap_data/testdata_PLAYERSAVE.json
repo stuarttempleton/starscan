@@ -1,0 +1,19 @@
+{
+	"Systems": [
+		{
+			"Name": "System1!",
+			"X": 1,
+			"Y": 1,
+			"Scan": false,
+			"Planets": [
+				{
+					"Name": "updated name!",
+					"Hazard": 1,
+					"Artifacts": 0,
+					"Resources": 2,
+					"Type": 0
+				}
+			]
+		}
+	]
+}
