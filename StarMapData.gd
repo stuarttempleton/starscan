@@ -15,6 +15,7 @@ func _ready():
 	
 	#Print name of first planet in first system
 	#print(self.Systems()[0].Planets[0].Name)
+	#print(self.Systems()[0].X - self.Systems()[0].Y)
 	
 	#Change name of first planet in first system
 	#self.Systems()[0].Planets[0].Name = "updated name!"
