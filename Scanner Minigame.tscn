@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scanner Minigame.gd" type="Script" id=1]
+[ext_resource path="res://Oscillator.gd" type="Script" id=2]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Scanner Minigame" type="Node" parent="."]
+script = ExtResource( 1 )
+oscillator_path = NodePath("Oscillator")
+speed = 2.0
+
+[node name="Oscillator" type="ColorRect" parent="Scanner Minigame"]
+margin_top = -20.0
+margin_right = 40.0
+margin_bottom = 20.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
