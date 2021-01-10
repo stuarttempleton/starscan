@@ -7,6 +7,8 @@ var target = Vector2()
 var velocity = Vector2()
 var Ship
 var MapScale = StarMapData.MapScale
+var MinCameraZoom = 0.5
+var MaxCameraZoom = 3
 
 func _ready():
 	Ship = ShipData.Ship()
@@ -15,10 +17,19 @@ func _ready():
 	
 func _input(event):
 	if event.is_action_pressed('starmap_click'):
-		target = get_global_mouse_position()
-		Ship.X = target.x / MapScale
-		Ship.Y = target.y / MapScale
+		if position.distance_to(get_global_mouse_position()) <= Ship.TravelRange * MapScale :
+			target = get_global_mouse_position()
+			Ship.X = target.x / MapScale
+			Ship.Y = target.y / MapScale
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_WHEEL_DOWN and event.pressed:
+			Zoom(0.25)
+		if event.button_index == BUTTON_WHEEL_UP and event.pressed:
+			Zoom(-0.25)
 
+func Zoom(amount) :
+	$Camera2D.zoom = Vector2(clamp($Camera2D.zoom.x + amount, MinCameraZoom, MaxCameraZoom), clamp($Camera2D.zoom.y + amount, MinCameraZoom, MaxCameraZoom) )
+	
 func HandleBoundary() :
 	if target.x > MapScale :
 		target.x = MapScale
