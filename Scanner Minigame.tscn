@@ -5,16 +5,50 @@
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Scanner Minigame" type="Node" parent="."]
+[node name="Scanner Minigame" type="Node2D" parent="."]
+position = Vector2( 83.4163, 79.7002 )
 script = ExtResource( 1 )
 oscillator_path = NodePath("Oscillator")
-speed = 2.0
+bg_path = NodePath("BG")
+targetZone_path = NodePath("TargetZone")
+speed = 1.0
+
+[node name="BG" type="ColorRect" parent="Scanner Minigame"]
+margin_left = -5.0
+margin_top = -25.0
+margin_right = 279.0
+margin_bottom = 25.0
+color = Color( 0.443137, 0.443137, 0.443137, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TargetZone" type="ColorRect" parent="Scanner Minigame"]
+margin_top = -20.0
+margin_right = 40.0
+margin_bottom = 20.0
+color = Color( 0, 1, 0.552941, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Oscillator" type="ColorRect" parent="Scanner Minigame"]
 margin_top = -20.0
 margin_right = 40.0
 margin_bottom = 20.0
+color = Color( 1, 1, 1, 0.494118 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Button" type="Button" parent="Scanner Minigame"]
+margin_left = 87.0566
+margin_top = 45.3371
+margin_right = 190.057
+margin_bottom = 65.3371
+text = "Scan!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Scanner Minigame/Button" to="Scanner Minigame" method="_on_Button_pressed"]
