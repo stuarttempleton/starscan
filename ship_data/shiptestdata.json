@@ -1,7 +1,7 @@
 {
     "Name":"Starscan",
-    "X":0.5,
-    "Y":0.5,
+    "X":1,
+    "Y":1,
     "TravelRange":0.1,
     "Crew":100,
     "MaxInventory":10,

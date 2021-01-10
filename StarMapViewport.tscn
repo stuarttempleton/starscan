@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Starfield.gd" type="Script" id=1]
+[ext_resource path="res://ShipAvatar.gd" type="Script" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 30, 30 )
+
+[node name="StarMapView" type="Node2D"]
+light_mask = -2147483647
+
+[node name="Starfield" type="Node2D" parent="."]
+script = ExtResource( 1 )
+
+[node name="ShipAvatar" type="KinematicBody2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="ShipAvatar"]
+current = true
+
+[node name="icon" type="Sprite" parent="ShipAvatar"]
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipAvatar"]
+shape = SubResource( 1 )

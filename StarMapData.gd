@@ -2,6 +2,7 @@ extends Node
 
 
 var StarMap
+var MapScale = 10000
 var Loaded = false
 var SavedSinceLoad = false
 var DatabaseFileName = "res://starmap_data/testdata.json"
