@@ -18,7 +18,7 @@ func _draw():
 		AddSystemToMap(system)
 
 func AddSystemToMap( system ) :
-	print("%s (%f, %f)" % [system.Name, system.X * MapScale, system.Y * MapScale]);
+	#print("%s (%f, %f)" % [system.Name, system.X * MapScale, system.Y * MapScale]);
 	draw_circle(Vector2(system.X * MapScale, system.Y * MapScale), system.Planets.size() * PlanetSizeScale ,Color(255,255,255))
 	pass
 
