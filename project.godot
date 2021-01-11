@@ -24,6 +24,10 @@ config/icon="res://icon.png"
 ShipData="*res://ShipData.tscn"
 StarMapData="*res://StarMapData.tscn"
 
+[logging]
+
+file_logging/enable_file_logging=true
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
