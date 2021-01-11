@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Starfield.gd" type="Script" id=1]
 [ext_resource path="res://ShipAvatar.gd" type="Script" id=2]
@@ -7,6 +7,9 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 30 )
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 0.878906, 0.878906, 0.878906, 1, 0.382355, 0.483758, 0.523438, 0 )
 
 [node name="StarMapView" type="Node2D"]
 light_mask = -2147483647
@@ -30,3 +33,31 @@ texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipAvatar"]
 shape = SubResource( 1 )
+
+[node name="Thruster1" type="CPUParticles2D" parent="ShipAvatar"]
+position = Vector2( -25.6957, -13.6821 )
+amount = 50
+lifetime = 0.5
+preprocess = 1.0
+local_coords = false
+spread = 135.97
+gravity = Vector2( 0, 0 )
+initial_velocity = 5.0
+angular_velocity = 10.0
+scale_amount = 7.0
+scale_amount_random = 1.0
+color_ramp = SubResource( 2 )
+
+[node name="Thruster2" type="CPUParticles2D" parent="ShipAvatar"]
+position = Vector2( -26.0294, 11.3462 )
+amount = 50
+lifetime = 0.5
+preprocess = 1.0
+local_coords = false
+spread = 135.97
+gravity = Vector2( 0, 0 )
+initial_velocity = 5.0
+angular_velocity = 10.0
+scale_amount = 7.0
+scale_amount_random = 1.0
+color_ramp = SubResource( 2 )
