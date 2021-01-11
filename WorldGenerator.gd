@@ -1,7 +1,7 @@
 extends Node
 
 export var seedNumber = -1
-export var MinStarDistance = 0.5
+export var MinStarDistance = 0.05
 export var MinOutpostDistance = 0.2
 export var TotalArtifacts = 100
 export var MinPlanetsPerStar = 1
@@ -21,7 +21,7 @@ var positions
 func _ready():
 	if (seedNumber < 0):
 		 print("World generator seed is negative, choosing a random seed")
-	generate(seedNumber if seedNumber < 0 else randi())
+	generate(seedNumber if seedNumber >= 0 else randi())
 	#generate(3161026589)
 
 
@@ -32,15 +32,35 @@ func _ready():
 func generate(seednumber):
 	var rng = RandomNumberGenerator.new()
 	rng.seed = seednumber
-	print("Generating world data with seed " + str(seednumber))
+	print("Generating world data with seed " + str(seednumber) + "...")
+	
 	generateStarPositions(rng)
 	
+	var map = Dictionary()
+	var systems = []
+	systems.resize(posCount)
+	for i in range(posCount):
+		var system = Dictionary()
+		system["Name"] = "System " + str(i+1)
+		system["X"] = positions[i].x
+		system["Y"] = positions[i].y
+		system["Scan"] = false
+		#TODO: planets
+		systems[i] = system
+	map["Systems"] = systems
+	#print("Generated world data: " + str(map))
+	
+	StarMapData.StarMap = map
+	var filename = "res://starmap_data/Generated_" + str(seednumber) + ".json"
+	StarMapData.Save(filename)
+	print("...World generated. Saved to file " + filename)
+	
 func generateStarPositions(rng):
-	print("Generating star positions.")
+	#print("Generating star positions.")
 	# Build an empty square grid sized to hold at most 1 star per grid cell based on minimum distance between stars
 	#var cellSize = MinStarDistance / sqrt(2)
 	var gridSize = 1.0 / MinStarDistance
-	print("\tGrid is " + str(gridSize) + " cells square.")
+	#print("\tGrid is " + str(gridSize) + " cells square.")
 	var grid = []
 	grid.resize(gridSize)
 	for x in range(gridSize):
@@ -65,7 +85,7 @@ func generateStarPositions(rng):
 	var targetPosIndex = addPosition(targetPosition, grid, targetGridPos)
 	# Add index of the new position array element to the active positions list
 	activePositionIndices.append(targetPosIndex)
-	print("\t\t\tactivePositionIndices size: " + str(activePositionIndices.size()) + ", contents: " + str(activePositionIndices))
+	#print("\t\t\tactivePositionIndices size: " + str(activePositionIndices.size()) + ", contents: " + str(activePositionIndices))
 	
 	# while there are still active positions:
 	while activePositionIndices.size() > 0:
@@ -74,7 +94,7 @@ func generateStarPositions(rng):
 		var indexIndex = rng.randi_range(0, activePositionIndices.size() - 1)
 		var currentActivePosIndex = activePositionIndices[indexIndex]
 		var currentActivePos = positions[currentActivePosIndex]
-		print("\tAttempting to fit a new neighbor near (" + str(currentActivePos.x) + "," + str(currentActivePos.y) + ").")
+		#print("\tAttempting to fit a new neighbor near (" + str(currentActivePos.x) + "," + str(currentActivePos.y) + ").")
 		
 		# Try creating random neighbors until one is legal (keep it) or too many attempts fail (deactivate the current active position)
 		for _i in range(MaxTargetTries):
@@ -130,12 +150,12 @@ func generateStarPositions(rng):
 		else:
 			# Remove the current active position from the active positions list
 			activePositionIndices.remove(indexIndex)
-			print("\t\tExhausted attempts to fit a new neighbor near (" + str(currentActivePos.x) + "," + str(currentActivePos.y) + "). Deactivating it.")
+			#print("\t\tExhausted attempts to fit a new neighbor near (" + str(currentActivePos.x) + "," + str(currentActivePos.y) + "). Deactivating it.")
 		
-		print("\t\t" + str(activePositionIndices.size()) + " active positions remain. Moving to the next active position.")
+		#print("\t\t" + str(activePositionIndices.size()) + " active positions remain. Moving to the next active position.")
 	# End of active position loop
-	print("\tNo active positions remain, star position generation is complete.")
-	print("\tPositions generated: " + str(positions))
+	#print("\tNo active positions remain, star position generation is complete.")
+	#print("\tPositions generated: " + str(positions))
 
 func fitVectorToNormalArea(vector):
 	var newVector = Vector2(clamp(vector.x, 0.0, 0.999999), clamp(vector.y, 0.0, 0.999999))
@@ -144,11 +164,11 @@ func fitVectorToNormalArea(vector):
 	return newVector
 
 func addPosition(targetPosition, grid, gridPos):
-	print("\t\tAdding position (" + str(targetPosition.x) + "," + str(targetPosition.y) + "), grid cell (" + str(gridPos.x) + "," + str(gridPos.y) + "). There are now " + str(posCount+1) + " positions.")
+	#print("\t\tAdding position (" + str(targetPosition.x) + "," + str(targetPosition.y) + "), grid cell (" + str(gridPos.x) + "," + str(gridPos.y) + "). There are now " + str(posCount+1) + " positions.")
 	var targetPosIndex = posCount
 	positions[targetPosIndex] = targetPosition
 	posCount += 1
 	# Assign the index of the new position array element to its grid position
-	print("\t\t\tGrid cell content is currently " + str(grid[gridPos.x][gridPos.y]))
+	#print("\t\t\tGrid cell content is currently " + str(grid[gridPos.x][gridPos.y]))
 	grid[gridPos.x][gridPos.y] = targetPosIndex
 	return targetPosIndex
