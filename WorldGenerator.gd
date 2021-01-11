@@ -37,6 +37,7 @@ func generate(seednumber):
 	generateStarPositions(rng)
 	
 	var map = Dictionary()
+	
 	var systems = []
 	systems.resize(posCount)
 	for i in range(posCount):
@@ -45,8 +46,17 @@ func generate(seednumber):
 		system["X"] = positions[i].x
 		system["Y"] = positions[i].y
 		system["Scan"] = false
-		#TODO: planets
+		
+		var planets = []
+		planets.resize(rng.randi_range(MinPlanetsPerStar, MaxPlanetsPerStar))
+		for j in range(planets.size()):
+			var planet = Dictionary()
+			planet["Name"] = "System " + str(i+1) + " Planet " + str(j+1)
+			planets[j] = [planet]
+		system["Planets"] = planets
+		
 		systems[i] = system
+		
 	map["Systems"] = systems
 	#print("Generated world data: " + str(map))
 	
