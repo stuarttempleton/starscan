@@ -23,6 +23,21 @@ func _ready():
 	
 	#Save to a save file
 	#self.Save(SavedDatabaseFileName)
+
+func ResetMap() :
+	self.LoadMapData(DatabaseFileName)
+	var dir = Directory.new()
+	dir.remove(SavedDatabaseFileName)
+
+func LoadSave() :
+	self.LoadMapData(SavedDatabaseFileName)
+
+func SaveMap() :
+	self.Save(SavedDatabaseFileName)
+	
+func SaveExists():
+	var save_file = File.new()
+	return save_file.file_exists(SavedDatabaseFileName)
 	
 func LoadMapData(filename):
 	var starmapdata_file = File.new()

@@ -2,12 +2,78 @@
 	"Systems": [
 		{
 			"Name": "System1!",
+			"X": 0,
+			"Y": 0,
+			"Scan": false,
+			"Planets": [
+				{
+					"Name": "Planet1",
+					"Hazard": 1,
+					"Artifacts": 0,
+					"Resources": 2,
+					"Type": 0
+				}
+			]
+		},
+		{
+			"Name": "System2!",
+			"X": 0.022,
+			"Y": 0.015,
+			"Scan": false,
+			"Planets": [
+				{
+					"Name": "Planet1",
+					"Hazard": 1,
+					"Artifacts": 0,
+					"Resources": 2,
+					"Type": 0
+				},
+				{
+					"Name": "Planet2",
+					"Hazard": 1,
+					"Artifacts": 0,
+					"Resources": 2,
+					"Type": 0
+				},
+				{
+					"Name": "Planet3",
+					"Hazard": 1,
+					"Artifacts": 0,
+					"Resources": 2,
+					"Type": 0
+				},
+				{
+					"Name": "Planet4",
+					"Hazard": 1,
+					"Artifacts": 0,
+					"Resources": 2,
+					"Type": 0
+				}
+			]
+		},
+		{
+			"Name": "System3!",
+			"X": 0.5,
+			"Y": 0.5,
+			"Scan": false,
+			"Planets": [
+				{
+					"Name": "Planet1",
+					"Hazard": 1,
+					"Artifacts": 0,
+					"Resources": 2,
+					"Type": 0
+				}
+			]
+		},
+		{
+			"Name": "System4!",
 			"X": 1,
 			"Y": 1,
 			"Scan": false,
 			"Planets": [
 				{
-					"Name": "updated name!",
+					"Name": "Planet1",
 					"Hazard": 1,
 					"Artifacts": 0,
 					"Resources": 2,

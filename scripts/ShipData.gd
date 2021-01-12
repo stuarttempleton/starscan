@@ -29,6 +29,19 @@ func _ready():
 	#Save to a save file
 	#self.Save(SavedDatabaseFileName)
 	
+func ResetShip() :
+	self.LoadMapData(DatabaseFileName)
+
+func LoadSave() :
+	self.LoadMapData(SavedDatabaseFileName)
+
+func SaveShip() :
+	self.Save(SavedDatabaseFileName)
+	
+func SaveExists():
+	var save_file = File.new()
+	return save_file.file_exists(SavedDatabaseFileName)
+	
 func LoadMapData(filename):
 	var shipdata_file = File.new()
 	shipdata_file.open(filename, File.READ)
