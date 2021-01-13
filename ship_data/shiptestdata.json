@@ -2,7 +2,8 @@
     "Name":"Starscan",
     "X":1,
     "Y":1,
-    "TravelRange":0.03,
+    "Fuel":100,
+    "Efficiency":0.03,
     "Crew":100,
     "MaxInventory":10,
     "Inventory":[

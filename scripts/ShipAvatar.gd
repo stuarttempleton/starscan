@@ -17,7 +17,7 @@ func _ready():
 	
 func _input(event):
 	if event.is_action_pressed('starmap_click'):
-		if position.distance_to(get_global_mouse_position()) <= Ship.TravelRange * MapScale :
+		if position.distance_to(get_global_mouse_position()) <= Ship.Efficiency * MapScale :
 			target = get_global_mouse_position()
 			Ship.X = target.x / MapScale
 			Ship.Y = target.y / MapScale
@@ -46,4 +46,5 @@ func _physics_process(delta):
 	HandleBoundary()
 	
 	if position.distance_to(target) > 5:
+		Ship.Fuel -= 1 * Ship.Efficiency
 		velocity = move_and_slide(velocity)
