@@ -102,7 +102,7 @@ custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 text = "PLAY"
 script = ExtResource( 2 )
-scene_to_load = "res://StarMapViewport.tscn"
+scene_to_load = "res://scenes/StarMapViewport.tscn"
 
 [node name="Restart" type="Button" parent="Menu/Buttons"]
 margin_top = 39.0
@@ -121,7 +121,7 @@ custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 text = "RESTART"
 script = ExtResource( 3 )
-scene_to_load = "res://StarMapViewport.tscn"
+scene_to_load = "res://scenes/StarMapViewport.tscn"
 
 [node name="Exit" type="Button" parent="Menu/Buttons"]
 margin_top = 78.0

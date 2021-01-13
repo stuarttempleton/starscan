@@ -22,7 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 ShipData="*res://scenes/ShipData.tscn"
-StarMapData="*res://StarMapData.tscn"
+StarMapData="*res://scenes/StarMapData.tscn"
 
 [input]
 

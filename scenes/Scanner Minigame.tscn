@@ -1,7 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Scanner Minigame.gd" type="Script" id=1]
-[ext_resource path="res://Oscillator.gd" type="Script" id=2]
+[ext_resource path="res://scripts/Scanner Minigame.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Oscillator.gd" type="Script" id=2]
+
+
 
 [node name="Node2D" type="Node2D"]
 

@@ -6,7 +6,7 @@ var MapScale = 10000
 var Loaded = false
 var SavedSinceLoad = false
 var DatabaseFileName = "res://starmap_data/testdata.json"
-var SavedDatabaseFileName = "res://starmap_data/testdata_PLAYERSAVE.json"
+var SavedDatabaseFileName = "user://testdata_PLAYERSAVE.json"
 
 
 func _ready():
@@ -28,8 +28,12 @@ func ResetMap() :
 	self.LoadMapData(DatabaseFileName)
 	var dir = Directory.new()
 	dir.remove(SavedDatabaseFileName)
+	self.SaveMap()
 
 func LoadSave() :
+	if (!self.SaveExists()):
+		self.LoadMapData(DatabaseFileName)
+		self.SaveMap()
 	self.LoadMapData(SavedDatabaseFileName)
 
 func SaveMap() :

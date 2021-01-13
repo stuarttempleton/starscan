@@ -5,11 +5,11 @@ var StarShip
 var Loaded = false
 var SavedSinceLoad = false
 var DatabaseFileName = "res://ship_data/shiptestdata.json"
-var SavedDatabaseFileName = "res://ship_data/shiptestdata_PLAYERSAVE.json"
+var SavedDatabaseFileName = "user://shiptestdata_PLAYERSAVE.json"
 
 
 func _ready():
-	self.LoadMapData(DatabaseFileName)
+	self.LoadShipData(DatabaseFileName)
 	
 	#EXPLANATION
 	
@@ -30,10 +30,16 @@ func _ready():
 	#self.Save(SavedDatabaseFileName)
 	
 func ResetShip() :
-	self.LoadMapData(DatabaseFileName)
+	self.LoadShipData(DatabaseFileName)
+	var dir = Directory.new()
+	dir.remove(SavedDatabaseFileName)
+	self.SaveShip()
 
 func LoadSave() :
-	self.LoadMapData(SavedDatabaseFileName)
+	if (!self.SaveExists()):
+		self.LoadShipData(DatabaseFileName)
+		self.SaveShip()
+	self.LoadShipData(SavedDatabaseFileName)
 
 func SaveShip() :
 	self.Save(SavedDatabaseFileName)
@@ -42,7 +48,7 @@ func SaveExists():
 	var save_file = File.new()
 	return save_file.file_exists(SavedDatabaseFileName)
 	
-func LoadMapData(filename):
+func LoadShipData(filename):
 	var shipdata_file = File.new()
 	shipdata_file.open(filename, File.READ)
 	var shipdata_json = JSON.parse(shipdata_file.get_as_text())
