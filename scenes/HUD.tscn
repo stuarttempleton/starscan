@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/ValueBarScale.gd" type="Script" id=1]
+[ext_resource path="res://scripts/NearestSystemText.gd" type="Script" id=2]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-Medium.ttf"
@@ -8,6 +9,12 @@ font_path = "res://fonts/Montserrat-Medium.ttf"
 [sub_resource type="DynamicFont" id=2]
 size = 22
 font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://fonts/Montserrat-Medium.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+font_data = SubResource( 3 )
 
 [node name="HUD" type="Control"]
 anchor_right = 1.0
@@ -136,3 +143,33 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="StatusText" type="HBoxContainer" parent="."]
+margin_top = 556.0
+margin_right = 1024.0
+margin_bottom = 577.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NearestSystem" type="Label" parent="StatusText"]
+margin_right = 510.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 4 )
+text = "Nearest System: "
+align = 2
+valign = 1
+
+[node name="SystemInfo" type="Label" parent="StatusText"]
+margin_left = 514.0
+margin_right = 1024.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 4 )
+text = "ABCD (3423424u)"
+valign = 1
+script = ExtResource( 2 )
+boiler_plate = "%s (%fu)"

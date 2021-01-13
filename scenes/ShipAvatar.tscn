@@ -3,10 +3,10 @@
 [ext_resource path="res://scripts/ShipAvatar.gd" type="Script" id=2]
 [ext_resource path="res://sprites/LSS_Science.png" type="Texture" id=4]
 
-[sub_resource type="Gradient" id=2]
+[sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0.878906, 0.878906, 0.878906, 1, 0.382355, 0.483758, 0.523438, 0 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 30, 30 )
 
 [node name="ShipAvatarView" type="Node2D"]
@@ -30,7 +30,7 @@ initial_velocity = 5.0
 angular_velocity = 10.0
 scale_amount = 7.0
 scale_amount_random = 1.0
-color_ramp = SubResource( 2 )
+color_ramp = SubResource( 1 )
 
 [node name="Thruster2" type="CPUParticles2D" parent="ShipAvatar"]
 position = Vector2( -26.0294, 11.3462 )
@@ -44,11 +44,11 @@ initial_velocity = 5.0
 angular_velocity = 10.0
 scale_amount = 7.0
 scale_amount_random = 1.0
-color_ramp = SubResource( 2 )
+color_ramp = SubResource( 1 )
 
 [node name="LSS_Science" type="Sprite" parent="ShipAvatar"]
 rotation = -1.5708
 texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipAvatar"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )

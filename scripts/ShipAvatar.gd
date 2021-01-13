@@ -17,10 +17,8 @@ func _ready():
 	
 func _input(event):
 	if event.is_action_pressed('starmap_click'):
-		if position.distance_to(get_global_mouse_position()) <= Ship.Efficiency * MapScale :
-			target = get_global_mouse_position()
-			Ship.X = target.x / MapScale
-			Ship.Y = target.y / MapScale
+		#if position.distance_to(get_global_mouse_position()) <= Ship.Efficiency * MapScale :
+		target = get_global_mouse_position()
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_WHEEL_DOWN and event.pressed:
 			Zoom(0.25)
@@ -48,3 +46,6 @@ func _physics_process(delta):
 	if position.distance_to(target) > 5:
 		Ship.Fuel -= 1 * Ship.Efficiency
 		velocity = move_and_slide(velocity)
+	
+	Ship.X = position.x / MapScale
+	Ship.Y = position.y / MapScale

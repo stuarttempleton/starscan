@@ -5,7 +5,7 @@ var StarMap
 var MapScale = 10000
 var Loaded = false
 var SavedSinceLoad = false
-var DatabaseFileName = "res://starmap_data/testdata.json"
+var DatabaseFileName = "res://starmap_data/Generated_3161026589.json"
 var SavedDatabaseFileName = "user://testdata_PLAYERSAVE.json"
 
 
@@ -64,5 +64,15 @@ func Systems() :
 		print("StarMap Not Loaded! FAILING ON PURPOSE FIX THIS")
 	else:
 		return StarMap.Systems
+
+func GetNearestSystem(origin):
+	var NearbySystem = StarMap.Systems[0]
+	var previous_distance = origin.distance_to(Vector2(StarMap.Systems[0].X, StarMap.Systems[0].Y))
 	
+	for system in StarMap.Systems :
+		var distance = origin.distance_to(Vector2(system.X, system.Y))
+		if (distance < previous_distance):
+			previous_distance = distance
+			NearbySystem = system
+	return [NearbySystem, previous_distance]
 
