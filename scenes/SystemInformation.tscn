@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scripts/SystemInfoController.gd" type="Script" id=1]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://fonts/Montserrat-Black.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://fonts/Montserrat-Medium.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+size = 15
+font_data = SubResource( 3 )
+
+[node name="SystemInformation" type="CanvasLayer"]
+layer = 3
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="Control"]
+margin_left = 576.0
+margin_top = 192.0
+margin_right = 760.0
+margin_bottom = 416.0
+color = Color( 0.333333, 0.333333, 0.333333, 0.529412 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InfoContainer" type="VBoxContainer" parent="Control/Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = 1.52588e-05
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SystemName" type="Label" parent="Control/Background/InfoContainer"]
+margin_right = 174.0
+margin_bottom = 21.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 2 )
+text = "System Name"
+
+[node name="SystemDetail" type="Label" parent="Control/Background/InfoContainer"]
+margin_top = 25.0
+margin_right = 174.0
+margin_bottom = 165.0
+rect_min_size = Vector2( 0, 140 )
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 4 )
+text = "Outpost: No
+Planets: 7
+Scanned: No
+Suitability: Unknown"
+autowrap = true
+
+[node name="ScanButton" type="Button" parent="Control/Background/InfoContainer"]
+margin_top = 169.0
+margin_right = 174.0
+margin_bottom = 189.0
+text = "Scan System"
+
+[node name="EnterButton" type="Button" parent="Control/Background/InfoContainer"]
+margin_top = 193.0
+margin_right = 174.0
+margin_bottom = 213.0
+text = "Enter System"

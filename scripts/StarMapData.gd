@@ -64,7 +64,12 @@ func Systems() :
 		print("StarMap Not Loaded! FAILING ON PURPOSE FIX THIS")
 	else:
 		return StarMap.Systems
-
+func SystemHasOutpost(system):
+	for planet in system.Planets:
+		if planet.Type == 2:
+			return true
+	return false
+	
 func GetNearestSystem(origin):
 	var NearbySystem = StarMap.Systems[0]
 	var previous_distance = origin.distance_to(Vector2(StarMap.Systems[0].X, StarMap.Systems[0].Y))

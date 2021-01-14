@@ -4,6 +4,7 @@ extends Node2D
 export var pause_menu_path = ""
 var is_paused = false
 var is_gameloop = false
+var is_movement_enabled = true
 var pause_menu_scene
 var pause_menu_instance
 signal paused(pause_state)
@@ -27,7 +28,10 @@ func Unpause():
 func EnterGameLoop(is_loop):
 	is_gameloop = is_loop
 	emit_signal("gameloop_state",is_gameloop)
-	
+
+func EnableDisableMovement(toggle_movement):
+	is_movement_enabled = toggle_movement
+		
 func _input(_event):
 	if is_gameloop:
 		if Input.is_action_just_released("ui_cancel"):

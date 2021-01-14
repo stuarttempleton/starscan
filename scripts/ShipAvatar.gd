@@ -16,7 +16,7 @@ func _ready():
 	target = self.position
 	
 func _input(event):
-	if !GameController.is_paused:
+	if !GameController.is_paused && GameController.is_movement_enabled:
 		if event.is_action_pressed('starmap_click'):
 			#if position.distance_to(get_global_mouse_position()) <= Ship.Efficiency * MapScale :
 			target = get_global_mouse_position()
