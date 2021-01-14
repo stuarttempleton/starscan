@@ -16,13 +16,14 @@ _global_script_class_icons={
 [application]
 
 config/name="Project Starscan"
-run/main_scene="res://scenes/TestScene.tscn"
+run/main_scene="res://scenes/Title.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 ShipData="*res://scenes/ShipData.tscn"
 StarMapData="*res://scenes/StarMapData.tscn"
+GameController="*res://scenes/GameController.tscn"
 
 [input]
 

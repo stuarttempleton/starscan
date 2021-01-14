@@ -16,14 +16,15 @@ func _ready():
 	target = self.position
 	
 func _input(event):
-	if event.is_action_pressed('starmap_click'):
-		#if position.distance_to(get_global_mouse_position()) <= Ship.Efficiency * MapScale :
-		target = get_global_mouse_position()
-	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_WHEEL_DOWN and event.pressed:
-			Zoom(0.25)
-		if event.button_index == BUTTON_WHEEL_UP and event.pressed:
-			Zoom(-0.25)
+	if !GameController.is_paused:
+		if event.is_action_pressed('starmap_click'):
+			#if position.distance_to(get_global_mouse_position()) <= Ship.Efficiency * MapScale :
+			target = get_global_mouse_position()
+		if event is InputEventMouseButton:
+			if event.button_index == BUTTON_WHEEL_DOWN and event.pressed:
+				Zoom(0.25)
+			if event.button_index == BUTTON_WHEEL_UP and event.pressed:
+				Zoom(-0.25)
 
 func Zoom(amount) :
 	$Camera2D.zoom = Vector2(clamp($Camera2D.zoom.x + amount, MinCameraZoom, MaxCameraZoom), clamp($Camera2D.zoom.y + amount, MinCameraZoom, MaxCameraZoom) )
@@ -39,13 +40,14 @@ func HandleBoundary() :
 		target.y = 0
 		
 func _physics_process(delta):
-	velocity = position.direction_to(target) * speed
-	look_at(target)
-	HandleBoundary()
-	
-	if position.distance_to(target) > 5:
-		Ship.Fuel -= 1 * Ship.Efficiency
-		velocity = move_and_slide(velocity)
-	
-	Ship.X = position.x / MapScale
-	Ship.Y = position.y / MapScale
+	if !GameController.is_paused:
+		velocity = position.direction_to(target) * speed
+		look_at(target)
+		HandleBoundary()
+		
+		if position.distance_to(target) > 5:
+			Ship.Fuel -= 1 * Ship.Efficiency
+			velocity = move_and_slide(velocity)
+		
+		Ship.X = position.x / MapScale
+		Ship.Y = position.y / MapScale

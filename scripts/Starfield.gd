@@ -6,6 +6,7 @@ var PlanetSizeScale = 5
 
 
 func _ready():
+	GameController.EnterGameLoop(true)
 	pass # Replace with function body.
 
 func _draw():
