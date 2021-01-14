@@ -28,7 +28,7 @@ func EnterGameLoop(is_loop):
 	is_gameloop = is_loop
 	emit_signal("gameloop_state",is_gameloop)
 	
-func _input(event):
+func _input(_event):
 	if is_gameloop:
 		if Input.is_action_just_released("ui_cancel"):
 			if is_paused:

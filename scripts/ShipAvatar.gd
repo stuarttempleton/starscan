@@ -39,7 +39,7 @@ func HandleBoundary() :
 	if target.y < 0 :
 		target.y = 0
 		
-func _physics_process(delta):
+func _physics_process(_delta):
 	if !GameController.is_paused:
 		velocity = position.direction_to(target) * speed
 		look_at(target)

@@ -14,5 +14,5 @@ func _ready():
 func SetSystemText(system):
 	text = boiler_plate % [system[0].Name, system[1] * 1000]
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	SetSystemText(StarMapData.GetNearestSystem(Vector2(ShipData.Ship().X,ShipData.Ship().Y)))

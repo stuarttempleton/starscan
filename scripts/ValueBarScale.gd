@@ -10,7 +10,7 @@ func SetPercent(percent) :
 	lastpeek = percent * 100
 	rect_scale = Vector2(percent, 1)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if (ShipData.Ship()[ship_value_key] != lastpeek) :
 		SetPercent(ShipData.Ship()[ship_value_key] / 100)
 	pass
