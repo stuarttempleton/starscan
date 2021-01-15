@@ -7,13 +7,11 @@ export var system_detail_boilerplate = "Outpost: %s\r\nPlanets: %d\r\nScan: %s\r
 func _ready():
 	$Background.connect("mouse_entered",self,"mouse_enter")
 	$Background.connect("mouse_exited",self,"mouse_exit")
-	pass # Replace with function body.
 
 func mouse_enter():
-	print("mouse entered")
 	GameController.EnableDisableMovement(false)
+	
 func mouse_exit():
-	print("mouse exited")
 	GameController.EnableDisableMovement(true)
 
 func ScanTextHelper(scan):
@@ -23,7 +21,6 @@ func ScanTextHelper(scan):
 		return "No"
 
 func OutpustTextHelper(system):
-	return "UNFINISHED"
 	if StarMapData.SystemHasOutpost(system):
 		return "Yes"
 	else:

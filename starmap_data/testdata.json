@@ -11,7 +11,9 @@
                     "Hazard":1,
                     "Artifacts":0,
                     "Resources":2,
-                    "Type":0
+                    "Type":0,
+                    "Size":0,
+                    "Ring":true
                 }
             ]
         },
@@ -26,28 +28,36 @@
                     "Hazard":1,
                     "Artifacts":0,
                     "Resources":2,
-                    "Type":0
+                    "Type":0,
+                    "Size":0,
+                    "Ring":true
                 },
                 {
                     "Name":"Planet2",
                     "Hazard":1,
                     "Artifacts":0,
                     "Resources":2,
-                    "Type":0
+                    "Type":0,
+                    "Size":0,
+                    "Ring":true
                 },
                 {
                     "Name":"Planet3",
                     "Hazard":1,
                     "Artifacts":0,
                     "Resources":2,
-                    "Type":0
+                    "Type":0,
+                    "Size":0,
+                    "Ring":true
                 },
                 {
                     "Name":"Planet4",
                     "Hazard":1,
                     "Artifacts":0,
                     "Resources":2,
-                    "Type":0
+                    "Type":0,
+                    "Size":0,
+                    "Ring":true
                 }
             ]
         },
@@ -62,22 +72,44 @@
                     "Hazard":1,
                     "Artifacts":0,
                     "Resources":2,
-                    "Type":0
+                    "Type":0,
+                    "Size":0,
+                    "Ring":true
                 }
             ]
         },
         {
-            "Name":"System4!",
-            "X":1,
-            "Y":1,
+            "Name":"Tantalus V",
+            "X":0.95,
+            "Y":0.9,
             "Scan":false,
             "Planets":[
                 {
-                    "Name":"Planet1",
+                    "Name":"Piccadilly",
                     "Hazard":1,
                     "Artifacts":0,
                     "Resources":2,
-                    "Type":0
+                    "Type":2,
+                    "Size":0,
+                    "Ring":true
+                },
+                {
+                    "Name":"Amalthea",
+                    "Hazard":1,
+                    "Artifacts":0,
+                    "Resources":2,
+                    "Type":3,
+                    "Size":0,
+                    "Ring":true
+                },
+                {
+                    "Name":"Warpgate 7",
+                    "Hazard":1,
+                    "Artifacts":0,
+                    "Resources":2,
+                    "Type":8,
+                    "Size":0,
+                    "Ring":true
                 }
             ]
         }

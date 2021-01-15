@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/SystemInfoController.gd" type="Script" id=1]
+[ext_resource path="res://scripts/SysInfo_scan_button.gd" type="Script" id=2]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-Black.ttf"
@@ -30,8 +31,8 @@ __meta__ = {
 margin_left = 576.0
 margin_top = 192.0
 margin_right = 760.0
-margin_bottom = 416.0
-color = Color( 0.333333, 0.333333, 0.333333, 0.529412 )
+margin_bottom = 312.0
+color = Color( 0.133333, 0.133333, 0.133333, 0.521569 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -58,8 +59,8 @@ text = "System Name"
 [node name="SystemDetail" type="Label" parent="Control/Background/InfoContainer"]
 margin_top = 25.0
 margin_right = 174.0
-margin_bottom = 165.0
-rect_min_size = Vector2( 0, 140 )
+margin_bottom = 125.0
+rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
 size_flags_vertical = 0
 custom_fonts/font = SubResource( 4 )
@@ -70,13 +71,15 @@ Suitability: Unknown"
 autowrap = true
 
 [node name="ScanButton" type="Button" parent="Control/Background/InfoContainer"]
-margin_top = 169.0
+margin_top = 129.0
 margin_right = 174.0
-margin_bottom = 189.0
+margin_bottom = 149.0
 text = "Scan System"
+script = ExtResource( 2 )
 
 [node name="EnterButton" type="Button" parent="Control/Background/InfoContainer"]
-margin_top = 193.0
+margin_top = 153.0
 margin_right = 174.0
-margin_bottom = 213.0
+margin_bottom = 173.0
 text = "Enter System"
+script = ExtResource( 2 )

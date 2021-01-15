@@ -11,7 +11,9 @@
                     "Hazard":1,
                     "Artifacts":0,
                     "Resources":2,
-                    "Type":0
+                    "Type":0,
+                    "Size":0,
+                    "Ring":true
                 }
             ]
         }

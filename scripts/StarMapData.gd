@@ -5,7 +5,7 @@ var StarMap
 var MapScale = 10000
 var Loaded = false
 var SavedSinceLoad = false
-var DatabaseFileName = "res://starmap_data/Generated_3161026589.json"
+var DatabaseFileName = "res://starmap_data/testdata.json"
 var SavedDatabaseFileName = "user://testdata_PLAYERSAVE.json"
 
 
@@ -64,9 +64,10 @@ func Systems() :
 		print("StarMap Not Loaded! FAILING ON PURPOSE FIX THIS")
 	else:
 		return StarMap.Systems
+		
 func SystemHasOutpost(system):
 	for planet in system.Planets:
-		if planet.Type == 2:
+		if planet.Type == 8:
 			return true
 	return false
 	
