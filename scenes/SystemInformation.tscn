@@ -76,6 +76,7 @@ margin_right = 174.0
 margin_bottom = 149.0
 text = "Scan System"
 script = ExtResource( 2 )
+scene_to_load = "res://scenes/Scanner Minigame.tscn"
 
 [node name="EnterButton" type="Button" parent="Control/Background/InfoContainer"]
 margin_top = 153.0
@@ -83,3 +84,5 @@ margin_right = 174.0
 margin_bottom = 173.0
 text = "Enter System"
 script = ExtResource( 2 )
+scene_to_load = "res://scenes/SystemViewport.tscn"
+additive_load_scene = false
