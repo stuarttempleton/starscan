@@ -32,7 +32,7 @@ func generate(seednumber):
 	print("Generating world data with seed " + str(seednumber) + "...")
 	
 	var map = Dictionary()
-	map.Stars = generateStars(rng)
+	map.Systems = generateStars(rng)
 	var filename = serializeToFile(map, rng)
 	print("...World generated. Saved to file " + filename)
 	
@@ -68,8 +68,8 @@ func generatePlanets(rng, starName):
 	for j in range(planetCount):
 		var planet = Dictionary()
 		planet.Name = starName + " Planet " + str(j+1)
-		planet.Type = Planet.Types[rng.randi_range(0, Planet.Types.size()-1)]
-		planet.Size = Planet.Sizes[rng.randi_range(0, Planet.Sizes.size()-1)]
+		planet.Type = StarMapData.PlanetTypes[rng.randi_range(0, StarMapData.PlanetTypes.size()-1)]
+		planet.Size = StarMapData.PlanetSizes[rng.randi_range(0, StarMapData.PlanetSizes.size()-1)]
 		planet.Ring = (rng.randf() <= RingChance)
 		planet.ArtifactCount = randomArtifactCount(rng.randf())
 		planet.HazardCount = randomHazardCount(rng.randf())

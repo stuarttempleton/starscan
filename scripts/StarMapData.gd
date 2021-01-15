@@ -5,9 +5,26 @@ var StarMap
 var MapScale = 10000
 var Loaded = false
 var SavedSinceLoad = false
-var DatabaseFileName = "res://starmap_data/testdata.json"
-var SavedDatabaseFileName = "user://testdata_PLAYERSAVE.json"
+export var DatabaseFileName = "res://starmap_data/testdata.json"
+export var SavedDatabaseFileName = "user://testdata_PLAYERSAVE.json"
 
+var PlanetTypes = [
+	"Gas",
+	"Ice",
+	"Lava",
+	"Goldilocks",
+	"Desert",
+	"Ocean",
+	"Asteroid Belt",
+	"Comet",
+	"Outpost"
+]
+
+var PlanetSizes = [
+	"Giant",
+	"Medium",
+	"Tiny"
+]
 
 func _ready():
 	self.LoadMapData(DatabaseFileName)
