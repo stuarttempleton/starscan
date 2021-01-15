@@ -6,5 +6,6 @@ func _ready():
 
 func on_button_pressed () :
 	StarMapData.SaveMap()
+	ShipData.SaveShip()
 	get_tree().quit()
 
