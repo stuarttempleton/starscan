@@ -7,6 +7,8 @@
 font_path = "res://fonts/Montserrat-Black.ttf"
 
 [sub_resource type="DynamicFont" id=2]
+outline_size = 2
+outline_color = Color( 0, 0, 0, 0.87451 )
 font_data = SubResource( 1 )
 
 [sub_resource type="DynamicFontData" id=3]
@@ -14,6 +16,8 @@ font_path = "res://fonts/Montserrat-Medium.ttf"
 
 [sub_resource type="DynamicFont" id=4]
 size = 15
+outline_size = 2
+outline_color = Color( 0, 0, 0, 0.6 )
 font_data = SubResource( 3 )
 
 [node name="SystemInformation" type="CanvasLayer"]
@@ -32,7 +36,7 @@ margin_left = 576.0
 margin_top = 192.0
 margin_right = 760.0
 margin_bottom = 312.0
-color = Color( 0.133333, 0.133333, 0.133333, 0.521569 )
+color = Color( 0.133333, 0.133333, 0.133333, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
