@@ -1,23 +1,42 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/SysInfo_scan_button.gd" type="Script" id=1]
+[ext_resource path="res://sprites/planets/star.png" type="Texture" id=2]
+[ext_resource path="res://fonts/star_dynamicfont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://sprites/planets/blue_planet.png" type="Texture" id=4]
+[ext_resource path="res://sprites/planets/red_planet.png" type="Texture" id=5]
+[ext_resource path="res://scenes/VFX Scene.tscn" type="PackedScene" id=6]
+[ext_resource path="res://sprites/planets/gray_planet.png" type="Texture" id=7]
+[ext_resource path="res://sprites/green-space-bg.png" type="Texture" id=8]
 
-[node name="SystemViewport" type="CanvasLayer"]
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://fonts/Montserrat-Medium.ttf"
 
-[node name="Node2D" type="Node2D" parent="."]
+[sub_resource type="DynamicFont" id=2]
+size = 18
+font_data = SubResource( 1 )
 
-[node name="SystemViewUI" type="Control" parent="Node2D"]
+[node name="SystemViewPort" type="Node2D"]
+
+[node name="VFX Scene" parent="." instance=ExtResource( 6 )]
+
+[node name="green-space-bg" type="Sprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0.43 )
+position = Vector2( 576, 368 )
+texture = ExtResource( 8 )
+
+[node name="SystemViewUI" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LeaveSystem" type="Button" parent="Node2D/SystemViewUI"]
-margin_left = 384.0
-margin_top = 448.0
-margin_right = 640.0
-margin_bottom = 512.0
+[node name="LeaveSystem" type="Button" parent="SystemViewUI"]
+margin_left = 448.0
+margin_top = 536.0
+margin_right = 576.0
+margin_bottom = 576.0
 text = "LEAVE SYSTEM"
 script = ExtResource( 1 )
 __meta__ = {
@@ -25,3 +44,223 @@ __meta__ = {
 }
 scene_to_load = "res://scenes/StarMapViewport.tscn"
 additive_load_scene = false
+
+[node name="StarCard" type="VBoxContainer" parent="SystemViewUI"]
+margin_left = 832.0
+margin_top = 120.0
+margin_right = 1332.0
+margin_bottom = 674.0
+rect_scale = Vector2( 0.5, 0.5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="SystemViewUI/StarCard"]
+margin_right = 500.0
+margin_bottom = 43.0
+custom_fonts/font = ExtResource( 3 )
+text = "TANTALUS V"
+align = 1
+
+[node name="TextureRect" type="TextureRect" parent="SystemViewUI/StarCard"]
+self_modulate = Color( 1.2, 1.2, 1.2, 1 )
+margin_top = 47.0
+margin_right = 500.0
+margin_bottom = 608.0
+size_flags_horizontal = 7
+size_flags_vertical = 7
+texture = ExtResource( 2 )
+stretch_mode = 6
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 288.0
+margin_top = 4.76837e-07
+margin_right = 848.0
+margin_bottom = 50.0
+rect_scale = Vector2( 0.8, 0.8 )
+custom_fonts/font = ExtResource( 3 )
+text = "SYSTEM MAP - TANTALUS V"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlanetCards" type="Node2D" parent="."]
+position = Vector2( 480, 152 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="PlanetCard_" type="Node2D" parent="PlanetCards"]
+position = Vector2( -576, -112 )
+
+[node name="Label" type="Label" parent="PlanetCards/PlanetCard_"]
+margin_left = 192.0
+margin_top = 136.0
+margin_right = 442.0
+margin_bottom = 186.0
+custom_fonts/font = ExtResource( 3 )
+text = "AMALTHEA"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="PlanetCards/PlanetCard_"]
+self_modulate = Color( 1.1, 1.1, 1.2, 1 )
+position = Vector2( 320, 336 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard_"]
+margin_left = 192.0
+margin_top = 496.0
+margin_right = 448.0
+margin_bottom = 560.0
+rect_min_size = Vector2( 0, 50 )
+color = Color( 0.215686, 0.215686, 0.215686, 0.556863 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="PlanetCards/PlanetCard_"]
+margin_left = 192.0
+margin_top = 576.0
+margin_right = 448.0
+margin_bottom = 626.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = SubResource( 2 )
+text = "VISIT PLANET"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlanetCard_4" type="Node2D" parent="PlanetCards"]
+position = Vector2( -896, -112 )
+
+[node name="Label" type="Label" parent="PlanetCards/PlanetCard_4"]
+margin_left = 192.0
+margin_top = 136.0
+margin_right = 442.0
+margin_bottom = 186.0
+custom_fonts/font = ExtResource( 3 )
+text = "POTATO"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="PlanetCards/PlanetCard_4"]
+self_modulate = Color( 1.1, 1.1, 1.2, 1 )
+position = Vector2( 320, 336 )
+rotation = 0.253073
+scale = Vector2( 0.4, 0.3 )
+texture = ExtResource( 7 )
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard_4"]
+margin_left = 192.0
+margin_top = 496.0
+margin_right = 448.0
+margin_bottom = 560.0
+rect_min_size = Vector2( 0, 50 )
+color = Color( 0.215686, 0.215686, 0.215686, 0.556863 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="PlanetCards/PlanetCard_4"]
+margin_left = 192.0
+margin_top = 576.0
+margin_right = 448.0
+margin_bottom = 626.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = SubResource( 2 )
+text = "VISIT PLANET"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlanetCard_2" type="Node2D" parent="PlanetCards"]
+position = Vector2( -256, -112 )
+
+[node name="Label" type="Label" parent="PlanetCards/PlanetCard_2"]
+margin_left = 192.0
+margin_top = 136.0
+margin_right = 442.0
+margin_bottom = 186.0
+custom_fonts/font = ExtResource( 3 )
+text = "PICCADILLY"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="PlanetCards/PlanetCard_2"]
+self_modulate = Color( 1.1, 1.1, 1.2, 1 )
+position = Vector2( 320, 336 )
+texture = ExtResource( 5 )
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard_2"]
+margin_left = 192.0
+margin_top = 496.0
+margin_right = 448.0
+margin_bottom = 560.0
+rect_min_size = Vector2( 0, 50 )
+color = Color( 0.215686, 0.215686, 0.215686, 0.556863 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="PlanetCards/PlanetCard_2"]
+margin_left = 192.0
+margin_top = 576.0
+margin_right = 448.0
+margin_bottom = 626.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = SubResource( 2 )
+text = "VISIT PLANET"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlanetCard_3" type="Node2D" parent="PlanetCards"]
+position = Vector2( 64, -112 )
+
+[node name="Label" type="Label" parent="PlanetCards/PlanetCard_3"]
+margin_left = 192.0
+margin_top = 136.0
+margin_right = 442.0
+margin_bottom = 186.0
+custom_fonts/font = ExtResource( 3 )
+text = "RAPUCHI"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="PlanetCards/PlanetCard_3"]
+self_modulate = Color( 1.1, 1.1, 1.2, 1 )
+position = Vector2( 320, 336 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 5 )
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard_3"]
+margin_left = 192.0
+margin_top = 496.0
+margin_right = 448.0
+margin_bottom = 560.0
+rect_min_size = Vector2( 0, 50 )
+color = Color( 0.215686, 0.215686, 0.215686, 0.556863 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="PlanetCards/PlanetCard_3"]
+margin_left = 192.0
+margin_top = 576.0
+margin_right = 448.0
+margin_bottom = 626.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = SubResource( 2 )
+text = "VISIT PLANET"
+__meta__ = {
+"_edit_use_anchors_": false
+}
