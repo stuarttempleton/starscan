@@ -1,71 +1,12 @@
-extends Node
+class_name StarPosGenerator
 
-export var seedNumber = -1
-export var MinStarDistance = 0.05
-export var MinOutpostDistance = 0.2
-export var TotalArtifacts = 100
-export var MinPlanetsPerStar = 1
-export var MaxPlanetsPerStar = 6
-export var MinPlanetArtifacts = 0
-export var MaxPlanetArtifacts = 3
-export var MinPlanetResources = 0
-export var MaxPlanetResources = 3
-export var MinHazard = 0
-export var MaxHazard = 3
-export var MaxTargetTries = 5
+var MinStarDistance
+var MaxTargetTries
 
-var posCount
 var positions
+var posCount
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	if (seedNumber < 0):
-		 print("World generator seed is negative, choosing a random seed")
-	generate(seedNumber if seedNumber >= 0 else randi())
-	#generate(3161026589)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-func generate(seednumber):
-	var rng = RandomNumberGenerator.new()
-	rng.seed = seednumber
-	print("Generating world data with seed " + str(seednumber) + "...")
-	
-	generateStarPositions(rng)
-	
-	var map = Dictionary()
-	
-	var systems = []
-	systems.resize(posCount)
-	for i in range(posCount):
-		var system = Dictionary()
-		system["Name"] = "System " + str(i+1)
-		system["X"] = positions[i].x
-		system["Y"] = positions[i].y
-		system["Scan"] = false
-		
-		var planets = []
-		planets.resize(rng.randi_range(MinPlanetsPerStar, MaxPlanetsPerStar))
-		for j in range(planets.size()):
-			var planet = Dictionary()
-			planet["Name"] = "System " + str(i+1) + " Planet " + str(j+1)
-			planets[j] = [planet]
-		system["Planets"] = planets
-		
-		systems[i] = system
-		
-	map["Systems"] = systems
-	#print("Generated world data: " + str(map))
-	
-	StarMapData.StarMap = map
-	var filename = "res://starmap_data/Generated_" + str(seednumber) + ".json"
-	StarMapData.Save(filename)
-	print("...World generated. Saved to file " + filename)
-	
-func generateStarPositions(rng):
+func generate(rng):
 	#print("Generating star positions.")
 	# Build an empty square grid sized to hold at most 1 star per grid cell based on minimum distance between stars
 	#var cellSize = MinStarDistance / sqrt(2)
@@ -78,9 +19,9 @@ func generateStarPositions(rng):
 		grid[x].resize(gridSize)
 		
 	# Build a Vec2 array to hold the star positions
-	posCount = 0
 	positions = []
 	positions.resize(pow(gridSize, 2))
+	posCount = 0
 	#print("Position array size " + str(positions.size()))
 	
 	# Build a list to point to the "active" star positions
@@ -114,6 +55,7 @@ func generateStarPositions(rng):
 			var vectorAngle = rng.randf_range(0, 2*PI)
 			var vector = Vector2(0, vectorLength).rotated(vectorAngle)
 			targetPosition = fitVectorToNormalArea(currentActivePos + vector)
+			#targetPosition = currentActivePos + vector
 			
 			# Find the grid cell the new point belongs to
 			targetGridPos = Vector2(int(targetPosition.x / MinStarDistance), int(targetPosition.y / MinStarDistance))
@@ -166,6 +108,8 @@ func generateStarPositions(rng):
 	# End of active position loop
 	#print("\tNo active positions remain, star position generation is complete.")
 	#print("\tPositions generated: " + str(positions))
+	positions.resize(posCount)
+	return positions
 
 func fitVectorToNormalArea(vector):
 	var newVector = Vector2(clamp(vector.x, 0.0, 0.999999), clamp(vector.y, 0.0, 0.999999))
