@@ -5,7 +5,7 @@ var StarMap
 var MapScale = 10000
 var Loaded = false
 var SavedSinceLoad = false
-export var DatabaseFileName = "res://starmap_data/testdata.json"
+export var DatabaseFileName = "res://starmap_data/generated/Generated_2021-1-15_0-5-35_-6022814405790740079.json"
 export var SavedDatabaseFileName = "user://testdata_PLAYERSAVE.json"
 
 var PlanetTypes = [
@@ -84,7 +84,7 @@ func Systems() :
 		
 func SystemHasOutpost(system):
 	for planet in system.Planets:
-		if planet.Type == 8:
+		if PlanetTypes[8] == planet.Type:
 			return true
 	return false
 	
