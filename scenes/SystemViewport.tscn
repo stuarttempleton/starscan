@@ -1,33 +1,75 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scripts/SysInfo_scan_button.gd" type="Script" id=1]
-[ext_resource path="res://sprites/planets/star.png" type="Texture" id=2]
+[ext_resource path="res://scripts/SolarSystemRender.gd" type="Script" id=2]
 [ext_resource path="res://fonts/star_dynamicfont.tres" type="DynamicFont" id=3]
 [ext_resource path="res://sprites/planets/blue_planet.png" type="Texture" id=4]
-[ext_resource path="res://sprites/planets/red_planet.png" type="Texture" id=5]
+[ext_resource path="res://sprites/UI_border.png" type="Texture" id=5]
 [ext_resource path="res://scenes/VFX Scene.tscn" type="PackedScene" id=6]
-[ext_resource path="res://sprites/planets/gray_planet.png" type="Texture" id=7]
+[ext_resource path="res://scripts/SystemNameLabel.gd" type="Script" id=7]
 [ext_resource path="res://sprites/green-space-bg.png" type="Texture" id=8]
+[ext_resource path="res://scripts/SystemDetailLabel.gd" type="Script" id=9]
 
-[sub_resource type="DynamicFontData" id=1]
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://fonts/Montserrat-Light.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+size = 17
+font_data = SubResource( 3 )
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://fonts/Montserrat-SemiBold.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 12
+font_data = SubResource( 5 )
+
+[sub_resource type="DynamicFontData" id=11]
+font_path = "res://fonts/Montserrat-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=12]
+size = 15
+font_data = SubResource( 11 )
+
+[sub_resource type="DynamicFontData" id=7]
 font_path = "res://fonts/Montserrat-Medium.ttf"
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=8]
 size = 18
-font_data = SubResource( 1 )
+font_data = SubResource( 7 )
+
+[sub_resource type="DynamicFontData" id=9]
+font_path = "res://fonts/Montserrat-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=10]
+size = 22
+font_data = SubResource( 9 )
+
+[sub_resource type="DynamicFontData" id=13]
+font_path = "res://fonts/Montserrat-ExtraLight.ttf"
+
+[sub_resource type="DynamicFont" id=14]
+size = 17
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = SubResource( 13 )
 
 [node name="SystemViewPort" type="Node2D"]
 
 [node name="VFX Scene" parent="." instance=ExtResource( 6 )]
 
 [node name="green-space-bg" type="Sprite" parent="."]
+visible = false
 self_modulate = Color( 1, 1, 1, 0.43 )
 position = Vector2( 576, 368 )
 texture = ExtResource( 8 )
 
+[node name="SolarSystem" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
 [node name="SystemViewUI" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -45,58 +87,155 @@ __meta__ = {
 scene_to_load = "res://scenes/StarMapViewport.tscn"
 additive_load_scene = false
 
-[node name="StarCard" type="VBoxContainer" parent="SystemViewUI"]
-margin_left = 832.0
-margin_top = 120.0
-margin_right = 1332.0
-margin_bottom = 674.0
-rect_scale = Vector2( 0.5, 0.5 )
+[node name="PlanetCard" type="NinePatchRect" parent="SystemViewUI"]
+visible = false
+margin_left = 744.0
+margin_top = 176.0
+margin_right = 960.0
+margin_bottom = 544.0
+texture = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="SystemViewUI/StarCard"]
-margin_right = 500.0
-margin_bottom = 43.0
-custom_fonts/font = ExtResource( 3 )
-text = "TANTALUS V"
+[node name="Label" type="Label" parent="SystemViewUI/PlanetCard"]
+margin_left = 8.0
+margin_top = 32.0
+margin_right = 208.0
+margin_bottom = 58.0
+custom_fonts/font = SubResource( 4 )
+text = "AMALTHEA"
 align = 1
 
-[node name="TextureRect" type="TextureRect" parent="SystemViewUI/StarCard"]
-self_modulate = Color( 1.2, 1.2, 1.2, 1 )
-margin_top = 47.0
-margin_right = 500.0
-margin_bottom = 608.0
-size_flags_horizontal = 7
-size_flags_vertical = 7
-texture = ExtResource( 2 )
-stretch_mode = 6
+[node name="Button" type="Button" parent="SystemViewUI/PlanetCard"]
+margin_left = 24.0
+margin_top = 312.0
+margin_right = 192.0
+margin_bottom = 344.0
+custom_fonts/font = SubResource( 6 )
+text = "GATHER RESOURCES"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label2" type="Label" parent="."]
+[node name="Sprite" type="Sprite" parent="SystemViewUI/PlanetCard"]
+self_modulate = Color( 1.1, 1.1, 1.3, 1 )
+position = Vector2( 109, 152 )
+scale = Vector2( 0.45, 0.45 )
+texture = ExtResource( 4 )
+
+[node name="Label2" type="Label" parent="SystemViewUI/PlanetCard"]
+margin_left = 8.0
+margin_top = 264.0
+margin_right = 208.0
+margin_bottom = 291.0
+custom_fonts/font = SubResource( 12 )
+text = "Scan accuracy: 80%"
+align = 1
+valign = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SystemViewUI/PlanetCard"]
+margin_left = 40.0
+margin_top = 248.0
+margin_right = 176.0
+margin_bottom = 264.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="SystemViewUI/PlanetCard/HBoxContainer"]
+margin_right = 10.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 10, 10 )
+color = Color( 0, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="SystemViewUI/PlanetCard/HBoxContainer"]
+margin_left = 14.0
+margin_right = 24.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 10, 10 )
+color = Color( 0, 1.2, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="SystemViewUI/PlanetCard/HBoxContainer"]
+margin_left = 28.0
+margin_right = 38.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 10, 10 )
+color = Color( 0, 1.2, 0, 1 )
+
+[node name="ColorRect6" type="ColorRect" parent="SystemViewUI/PlanetCard/HBoxContainer"]
+margin_left = 42.0
+margin_right = 52.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 10, 10 )
+color = Color( 0.188235, 0.188235, 1, 1 )
+
+[node name="ColorRect7" type="ColorRect" parent="SystemViewUI/PlanetCard/HBoxContainer"]
+margin_left = 56.0
+margin_right = 66.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 10, 10 )
+color = Color( 0.188235, 0.188235, 1, 1 )
+
+[node name="ColorRect8" type="ColorRect" parent="SystemViewUI/PlanetCard/HBoxContainer"]
+margin_left = 70.0
+margin_right = 80.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 10, 10 )
+color = Color( 0.188235, 0.188235, 1, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="SystemViewUI/PlanetCard/HBoxContainer"]
+margin_left = 84.0
+margin_right = 94.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 10, 10 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect5" type="ColorRect" parent="SystemViewUI/PlanetCard/HBoxContainer"]
+margin_left = 98.0
+margin_right = 108.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 10, 10 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect9" type="ColorRect" parent="SystemViewUI/PlanetCard/HBoxContainer"]
+margin_left = 112.0
+margin_right = 122.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 10, 10 )
+color = Color( 0.231373, 0.231373, 0.231373, 1 )
+
+[node name="ColorRect10" type="ColorRect" parent="SystemViewUI/PlanetCard/HBoxContainer"]
+margin_left = 126.0
+margin_right = 136.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 10, 10 )
+color = Color( 0.231373, 0.231373, 0.231373, 1 )
+
+[node name="SystemNameLabel" type="Label" parent="."]
 margin_left = 288.0
 margin_top = 4.76837e-07
 margin_right = 848.0
 margin_bottom = 50.0
 rect_scale = Vector2( 0.8, 0.8 )
 custom_fonts/font = ExtResource( 3 )
-text = "SYSTEM MAP - TANTALUS V"
+text = "TANTALUS V"
 align = 1
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PlanetCards" type="Node2D" parent="."]
-position = Vector2( 480, 152 )
-scale = Vector2( 0.5, 0.5 )
+visible = false
+position = Vector2( 48, 176 )
+scale = Vector2( 0.4, 0.4 )
 
-[node name="PlanetCard_" type="Node2D" parent="PlanetCards"]
-position = Vector2( -576, -112 )
+[node name="PlanetCard" type="Node2D" parent="PlanetCards"]
 
-[node name="Label" type="Label" parent="PlanetCards/PlanetCard_"]
-margin_left = 192.0
-margin_top = 136.0
-margin_right = 442.0
-margin_bottom = 186.0
+[node name="Label" type="Label" parent="PlanetCards/PlanetCard"]
+margin_right = 250.0
+margin_bottom = 50.0
 custom_fonts/font = ExtResource( 3 )
 text = "AMALTHEA"
 align = 1
@@ -104,163 +243,2842 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="PlanetCards/PlanetCard_"]
-self_modulate = Color( 1.1, 1.1, 1.2, 1 )
-position = Vector2( 320, 336 )
-scale = Vector2( 0.5, 0.5 )
+[node name="Sprite" type="Sprite" parent="PlanetCards/PlanetCard"]
+self_modulate = Color( 1.2, 1.2, 1.3, 1 )
+position = Vector2( 128, 185.5 )
 texture = ExtResource( 4 )
 
-[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard_"]
-margin_left = 192.0
-margin_top = 496.0
-margin_right = 448.0
-margin_bottom = 560.0
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard"]
+margin_top = 360.0
+margin_right = 256.0
+margin_bottom = 424.0
 rect_min_size = Vector2( 0, 50 )
-color = Color( 0.215686, 0.215686, 0.215686, 0.556863 )
+color = Color( 0.215686, 0.215686, 0.215686, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="PlanetCards/PlanetCard_"]
-margin_left = 192.0
-margin_top = 576.0
-margin_right = 448.0
-margin_bottom = 626.0
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard"]
+visible = false
+margin_left = 190.0
+margin_top = 462.0
+margin_right = 398.0
+margin_bottom = 502.0
+color = Color( 0.215686, 0.215686, 0.215686, 0.662745 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="PlanetCards/PlanetCard"]
+margin_top = 440.0
+margin_right = 256.0
+margin_bottom = 490.0
 rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 8 )
 text = "VISIT PLANET"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlanetCard_4" type="Node2D" parent="PlanetCards"]
-position = Vector2( -896, -112 )
+[node name="Label2" type="Label" parent="PlanetCards/PlanetCard"]
+visible = false
+margin_left = 40.0
+margin_top = 448.0
+margin_right = 290.0
+margin_bottom = 538.0
+custom_fonts/font = SubResource( 10 )
+text = "Artifacts:
+Resources:
+Hazards:"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" type="Label" parent="PlanetCards/PlanetCard_4"]
-margin_left = 192.0
-margin_top = 136.0
-margin_right = 442.0
-margin_bottom = 186.0
+[node name="Label3" type="Label" parent="PlanetCards/PlanetCard"]
+visible = false
+margin_left = 200.0
+margin_top = 480.0
+margin_right = 450.0
+margin_bottom = 520.0
+custom_fonts/font = SubResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlanetCards/PlanetCard"]
+visible = false
+margin_left = 256.0
+margin_top = 296.0
+margin_right = 388.0
+margin_bottom = 394.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetCards/PlanetCard/VBoxContainer"]
+margin_right = 132.0
+margin_bottom = 30.0
+
+[node name="Spacer" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer/HBoxContainer"]
+margin_right = 15.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer/HBoxContainer"]
+margin_left = 19.0
+margin_right = 49.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer/HBoxContainer"]
+margin_left = 53.0
+margin_right = 83.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer/HBoxContainer"]
+margin_left = 87.0
+margin_right = 117.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PlanetCards/PlanetCard/VBoxContainer"]
+margin_top = 34.0
+margin_right = 132.0
+margin_bottom = 64.0
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer/HBoxContainer2"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.239216, 0.239216, 0.239216, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer/HBoxContainer2"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer/HBoxContainer2"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer/HBoxContainer2"]
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PlanetCards/PlanetCard/VBoxContainer"]
+margin_top = 68.0
+margin_right = 132.0
+margin_bottom = 98.0
+
+[node name="Spacer2" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer/HBoxContainer3"]
+margin_right = 15.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer/HBoxContainer3"]
+margin_left = 19.0
+margin_right = 49.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.239216, 0.239216, 0.239216, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer/HBoxContainer3"]
+margin_left = 53.0
+margin_right = 83.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.49, 1.2, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer/HBoxContainer3"]
+margin_left = 87.0
+margin_right = 117.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.49, 1.2, 1 )
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PlanetCards/PlanetCard"]
+margin_left = 64.0
+margin_top = 419.0
+margin_right = 419.0
+margin_bottom = 449.0
+rect_rotation = -90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetCards/PlanetCard/VBoxContainer2"]
+margin_right = 355.0
+margin_bottom = 30.0
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer2/HBoxContainer"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer2/HBoxContainer"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer2/HBoxContainer"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect5" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 136.0
+margin_right = 166.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect6" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 170.0
+margin_right = 200.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect7" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 204.0
+margin_right = 234.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect8" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 238.0
+margin_right = 268.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="Spacer" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 272.0
+margin_right = 287.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect9" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 291.0
+margin_right = 321.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="ColorRect10" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 325.0
+margin_right = 355.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="PlanetCards/PlanetCard"]
+margin_left = 112.0
+margin_top = 419.0
+margin_right = 467.0
+margin_bottom = 449.0
+rect_rotation = -90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetCards/PlanetCard/VBoxContainer3"]
+margin_right = 355.0
+margin_bottom = 30.0
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer3/HBoxContainer"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect5" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer3/HBoxContainer"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect6" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer3/HBoxContainer"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect7" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect8" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 136.0
+margin_right = 166.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="Spacer" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 170.0
+margin_right = 185.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect9" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 189.0
+margin_right = 219.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="ColorRect10" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 223.0
+margin_right = 253.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="PlanetCards/PlanetCard"]
+margin_left = 160.0
+margin_top = 419.0
+margin_right = 515.0
+margin_bottom = 449.0
+rect_rotation = -90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetCards/PlanetCard/VBoxContainer4"]
+margin_right = 355.0
+margin_bottom = 30.0
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect5" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 136.0
+margin_right = 166.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect6" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 170.0
+margin_right = 200.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect7" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer4/HBoxContainer"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect8" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer4/HBoxContainer"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="Spacer" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 68.0
+margin_right = 83.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect9" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer4/HBoxContainer"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[node name="ColorRect10" type="ColorRect" parent="PlanetCards/PlanetCard/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="PlanetCard2" type="Node2D" parent="PlanetCards"]
+position = Vector2( 320, 0 )
+
+[node name="Label" type="Label" parent="PlanetCards/PlanetCard2"]
+margin_right = 250.0
+margin_bottom = 50.0
 custom_fonts/font = ExtResource( 3 )
-text = "POTATO"
+text = "AMALTHEA"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="PlanetCards/PlanetCard_4"]
-self_modulate = Color( 1.1, 1.1, 1.2, 1 )
-position = Vector2( 320, 336 )
-rotation = 0.253073
-scale = Vector2( 0.4, 0.3 )
-texture = ExtResource( 7 )
+[node name="Sprite" type="Sprite" parent="PlanetCards/PlanetCard2"]
+self_modulate = Color( 1.2, 1.2, 1.3, 1 )
+position = Vector2( 128, 185.5 )
+texture = ExtResource( 4 )
 
-[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard_4"]
-margin_left = 192.0
-margin_top = 496.0
-margin_right = 448.0
-margin_bottom = 560.0
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard2"]
+margin_top = 360.0
+margin_right = 256.0
+margin_bottom = 424.0
 rect_min_size = Vector2( 0, 50 )
-color = Color( 0.215686, 0.215686, 0.215686, 0.556863 )
+color = Color( 0.215686, 0.215686, 0.215686, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="PlanetCards/PlanetCard_4"]
-margin_left = 192.0
-margin_top = 576.0
-margin_right = 448.0
-margin_bottom = 626.0
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard2"]
+visible = false
+margin_left = 190.0
+margin_top = 462.0
+margin_right = 398.0
+margin_bottom = 502.0
+color = Color( 0.215686, 0.215686, 0.215686, 0.662745 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="PlanetCards/PlanetCard2"]
+margin_top = 440.0
+margin_right = 256.0
+margin_bottom = 490.0
 rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 8 )
 text = "VISIT PLANET"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlanetCard_2" type="Node2D" parent="PlanetCards"]
-position = Vector2( -256, -112 )
+[node name="Label2" type="Label" parent="PlanetCards/PlanetCard2"]
+visible = false
+margin_left = 40.0
+margin_top = 448.0
+margin_right = 290.0
+margin_bottom = 538.0
+custom_fonts/font = SubResource( 10 )
+text = "Artifacts:
+Resources:
+Hazards:"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" type="Label" parent="PlanetCards/PlanetCard_2"]
-margin_left = 192.0
-margin_top = 136.0
-margin_right = 442.0
-margin_bottom = 186.0
+[node name="Label3" type="Label" parent="PlanetCards/PlanetCard2"]
+visible = false
+margin_left = 200.0
+margin_top = 480.0
+margin_right = 450.0
+margin_bottom = 520.0
+custom_fonts/font = SubResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlanetCards/PlanetCard2"]
+visible = false
+margin_left = 256.0
+margin_top = 296.0
+margin_right = 388.0
+margin_bottom = 394.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetCards/PlanetCard2/VBoxContainer"]
+margin_right = 132.0
+margin_bottom = 30.0
+
+[node name="Spacer" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer/HBoxContainer"]
+margin_right = 15.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer/HBoxContainer"]
+margin_left = 19.0
+margin_right = 49.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer/HBoxContainer"]
+margin_left = 53.0
+margin_right = 83.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer/HBoxContainer"]
+margin_left = 87.0
+margin_right = 117.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PlanetCards/PlanetCard2/VBoxContainer"]
+margin_top = 34.0
+margin_right = 132.0
+margin_bottom = 64.0
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer/HBoxContainer2"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.239216, 0.239216, 0.239216, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer/HBoxContainer2"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer/HBoxContainer2"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer/HBoxContainer2"]
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PlanetCards/PlanetCard2/VBoxContainer"]
+margin_top = 68.0
+margin_right = 132.0
+margin_bottom = 98.0
+
+[node name="Spacer2" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer/HBoxContainer3"]
+margin_right = 15.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer/HBoxContainer3"]
+margin_left = 19.0
+margin_right = 49.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.239216, 0.239216, 0.239216, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer/HBoxContainer3"]
+margin_left = 53.0
+margin_right = 83.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.49, 1.2, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer/HBoxContainer3"]
+margin_left = 87.0
+margin_right = 117.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.49, 1.2, 1 )
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PlanetCards/PlanetCard2"]
+margin_left = 64.0
+margin_top = 419.0
+margin_right = 419.0
+margin_bottom = 449.0
+rect_rotation = -90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetCards/PlanetCard2/VBoxContainer2"]
+margin_right = 355.0
+margin_bottom = 30.0
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer2/HBoxContainer"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer2/HBoxContainer"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer2/HBoxContainer"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect5" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 136.0
+margin_right = 166.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect6" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 170.0
+margin_right = 200.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect7" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 204.0
+margin_right = 234.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect8" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 238.0
+margin_right = 268.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="Spacer" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 272.0
+margin_right = 287.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect9" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 291.0
+margin_right = 321.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="ColorRect10" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 325.0
+margin_right = 355.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="PlanetCards/PlanetCard2"]
+margin_left = 112.0
+margin_top = 419.0
+margin_right = 467.0
+margin_bottom = 449.0
+rect_rotation = -90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetCards/PlanetCard2/VBoxContainer3"]
+margin_right = 355.0
+margin_bottom = 30.0
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer3/HBoxContainer"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect5" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer3/HBoxContainer"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect6" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer3/HBoxContainer"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect7" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect8" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 136.0
+margin_right = 166.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="Spacer" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 170.0
+margin_right = 185.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect9" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 189.0
+margin_right = 219.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="ColorRect10" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 223.0
+margin_right = 253.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="PlanetCards/PlanetCard2"]
+margin_left = 160.0
+margin_top = 419.0
+margin_right = 515.0
+margin_bottom = 449.0
+rect_rotation = -90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetCards/PlanetCard2/VBoxContainer4"]
+margin_right = 355.0
+margin_bottom = 30.0
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect5" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 136.0
+margin_right = 166.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect6" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 170.0
+margin_right = 200.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect7" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer4/HBoxContainer"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect8" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer4/HBoxContainer"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="Spacer" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 68.0
+margin_right = 83.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect9" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer4/HBoxContainer"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[node name="ColorRect10" type="ColorRect" parent="PlanetCards/PlanetCard2/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="PlanetCard3" type="Node2D" parent="PlanetCards"]
+position = Vector2( 640, 0 )
+
+[node name="Label" type="Label" parent="PlanetCards/PlanetCard3"]
+margin_right = 250.0
+margin_bottom = 50.0
 custom_fonts/font = ExtResource( 3 )
-text = "PICCADILLY"
+text = "AMALTHEA"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="PlanetCards/PlanetCard_2"]
-self_modulate = Color( 1.1, 1.1, 1.2, 1 )
-position = Vector2( 320, 336 )
-texture = ExtResource( 5 )
+[node name="Sprite" type="Sprite" parent="PlanetCards/PlanetCard3"]
+self_modulate = Color( 1.2, 1.2, 1.3, 1 )
+position = Vector2( 128, 185.5 )
+texture = ExtResource( 4 )
 
-[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard_2"]
-margin_left = 192.0
-margin_top = 496.0
-margin_right = 448.0
-margin_bottom = 560.0
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard3"]
+margin_top = 360.0
+margin_right = 256.0
+margin_bottom = 424.0
 rect_min_size = Vector2( 0, 50 )
-color = Color( 0.215686, 0.215686, 0.215686, 0.556863 )
+color = Color( 0.215686, 0.215686, 0.215686, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="PlanetCards/PlanetCard_2"]
-margin_left = 192.0
-margin_top = 576.0
-margin_right = 448.0
-margin_bottom = 626.0
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard3"]
+visible = false
+margin_left = 190.0
+margin_top = 462.0
+margin_right = 398.0
+margin_bottom = 502.0
+color = Color( 0.215686, 0.215686, 0.215686, 0.662745 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="PlanetCards/PlanetCard3"]
+margin_top = 440.0
+margin_right = 256.0
+margin_bottom = 490.0
 rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 8 )
 text = "VISIT PLANET"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlanetCard_3" type="Node2D" parent="PlanetCards"]
-position = Vector2( 64, -112 )
+[node name="Label2" type="Label" parent="PlanetCards/PlanetCard3"]
+visible = false
+margin_left = 40.0
+margin_top = 448.0
+margin_right = 290.0
+margin_bottom = 538.0
+custom_fonts/font = SubResource( 10 )
+text = "Artifacts:
+Resources:
+Hazards:"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" type="Label" parent="PlanetCards/PlanetCard_3"]
-margin_left = 192.0
-margin_top = 136.0
-margin_right = 442.0
-margin_bottom = 186.0
+[node name="Label3" type="Label" parent="PlanetCards/PlanetCard3"]
+visible = false
+margin_left = 200.0
+margin_top = 480.0
+margin_right = 450.0
+margin_bottom = 520.0
+custom_fonts/font = SubResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlanetCards/PlanetCard3"]
+visible = false
+margin_left = 256.0
+margin_top = 296.0
+margin_right = 388.0
+margin_bottom = 394.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetCards/PlanetCard3/VBoxContainer"]
+margin_right = 132.0
+margin_bottom = 30.0
+
+[node name="Spacer" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer/HBoxContainer"]
+margin_right = 15.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer/HBoxContainer"]
+margin_left = 19.0
+margin_right = 49.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer/HBoxContainer"]
+margin_left = 53.0
+margin_right = 83.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer/HBoxContainer"]
+margin_left = 87.0
+margin_right = 117.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PlanetCards/PlanetCard3/VBoxContainer"]
+margin_top = 34.0
+margin_right = 132.0
+margin_bottom = 64.0
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer/HBoxContainer2"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.239216, 0.239216, 0.239216, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer/HBoxContainer2"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer/HBoxContainer2"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer/HBoxContainer2"]
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PlanetCards/PlanetCard3/VBoxContainer"]
+margin_top = 68.0
+margin_right = 132.0
+margin_bottom = 98.0
+
+[node name="Spacer2" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer/HBoxContainer3"]
+margin_right = 15.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer/HBoxContainer3"]
+margin_left = 19.0
+margin_right = 49.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.239216, 0.239216, 0.239216, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer/HBoxContainer3"]
+margin_left = 53.0
+margin_right = 83.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.49, 1.2, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer/HBoxContainer3"]
+margin_left = 87.0
+margin_right = 117.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.49, 1.2, 1 )
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PlanetCards/PlanetCard3"]
+margin_left = 64.0
+margin_top = 419.0
+margin_right = 419.0
+margin_bottom = 449.0
+rect_rotation = -90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetCards/PlanetCard3/VBoxContainer2"]
+margin_right = 355.0
+margin_bottom = 30.0
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer2/HBoxContainer"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer2/HBoxContainer"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer2/HBoxContainer"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect5" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 136.0
+margin_right = 166.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect6" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 170.0
+margin_right = 200.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect7" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 204.0
+margin_right = 234.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect8" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 238.0
+margin_right = 268.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="Spacer" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 272.0
+margin_right = 287.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect9" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 291.0
+margin_right = 321.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="ColorRect10" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 325.0
+margin_right = 355.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="PlanetCards/PlanetCard3"]
+margin_left = 112.0
+margin_top = 419.0
+margin_right = 467.0
+margin_bottom = 449.0
+rect_rotation = -90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetCards/PlanetCard3/VBoxContainer3"]
+margin_right = 355.0
+margin_bottom = 30.0
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer3/HBoxContainer"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect5" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer3/HBoxContainer"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect6" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer3/HBoxContainer"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect7" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect8" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 136.0
+margin_right = 166.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="Spacer" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 170.0
+margin_right = 185.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect9" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 189.0
+margin_right = 219.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="ColorRect10" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 223.0
+margin_right = 253.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="PlanetCards/PlanetCard3"]
+margin_left = 160.0
+margin_top = 419.0
+margin_right = 515.0
+margin_bottom = 449.0
+rect_rotation = -90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetCards/PlanetCard3/VBoxContainer4"]
+margin_right = 355.0
+margin_bottom = 30.0
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect5" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 136.0
+margin_right = 166.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect6" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 170.0
+margin_right = 200.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect7" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer4/HBoxContainer"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect8" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer4/HBoxContainer"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="Spacer" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 68.0
+margin_right = 83.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect9" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer4/HBoxContainer"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[node name="ColorRect10" type="ColorRect" parent="PlanetCards/PlanetCard3/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="PlanetCard4" type="Node2D" parent="PlanetCards"]
+position = Vector2( 960, 0 )
+
+[node name="Label" type="Label" parent="PlanetCards/PlanetCard4"]
+margin_right = 250.0
+margin_bottom = 50.0
 custom_fonts/font = ExtResource( 3 )
-text = "RAPUCHI"
+text = "AMALTHEA"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="PlanetCards/PlanetCard_3"]
-self_modulate = Color( 1.1, 1.1, 1.2, 1 )
-position = Vector2( 320, 336 )
-scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 5 )
+[node name="Sprite" type="Sprite" parent="PlanetCards/PlanetCard4"]
+self_modulate = Color( 1.2, 1.2, 1.3, 1 )
+position = Vector2( 128, 185.5 )
+texture = ExtResource( 4 )
 
-[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard_3"]
-margin_left = 192.0
-margin_top = 496.0
-margin_right = 448.0
-margin_bottom = 560.0
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard4"]
+margin_top = 360.0
+margin_right = 256.0
+margin_bottom = 424.0
 rect_min_size = Vector2( 0, 50 )
-color = Color( 0.215686, 0.215686, 0.215686, 0.556863 )
+color = Color( 0.215686, 0.215686, 0.215686, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="PlanetCards/PlanetCard_3"]
-margin_left = 192.0
-margin_top = 576.0
-margin_right = 448.0
-margin_bottom = 626.0
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard4"]
+visible = false
+margin_left = 190.0
+margin_top = 462.0
+margin_right = 398.0
+margin_bottom = 502.0
+color = Color( 0.215686, 0.215686, 0.215686, 0.662745 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="PlanetCards/PlanetCard4"]
+margin_top = 440.0
+margin_right = 256.0
+margin_bottom = 490.0
 rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 8 )
 text = "VISIT PLANET"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="PlanetCards/PlanetCard4"]
+visible = false
+margin_left = 40.0
+margin_top = 448.0
+margin_right = 290.0
+margin_bottom = 538.0
+custom_fonts/font = SubResource( 10 )
+text = "Artifacts:
+Resources:
+Hazards:"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="PlanetCards/PlanetCard4"]
+visible = false
+margin_left = 200.0
+margin_top = 480.0
+margin_right = 450.0
+margin_bottom = 520.0
+custom_fonts/font = SubResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlanetCards/PlanetCard4"]
+visible = false
+margin_left = 256.0
+margin_top = 296.0
+margin_right = 388.0
+margin_bottom = 394.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetCards/PlanetCard4/VBoxContainer"]
+margin_right = 132.0
+margin_bottom = 30.0
+
+[node name="Spacer" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer/HBoxContainer"]
+margin_right = 15.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer/HBoxContainer"]
+margin_left = 19.0
+margin_right = 49.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer/HBoxContainer"]
+margin_left = 53.0
+margin_right = 83.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer/HBoxContainer"]
+margin_left = 87.0
+margin_right = 117.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PlanetCards/PlanetCard4/VBoxContainer"]
+margin_top = 34.0
+margin_right = 132.0
+margin_bottom = 64.0
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer/HBoxContainer2"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.239216, 0.239216, 0.239216, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer/HBoxContainer2"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer/HBoxContainer2"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer/HBoxContainer2"]
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PlanetCards/PlanetCard4/VBoxContainer"]
+margin_top = 68.0
+margin_right = 132.0
+margin_bottom = 98.0
+
+[node name="Spacer2" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer/HBoxContainer3"]
+margin_right = 15.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer/HBoxContainer3"]
+margin_left = 19.0
+margin_right = 49.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.239216, 0.239216, 0.239216, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer/HBoxContainer3"]
+margin_left = 53.0
+margin_right = 83.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.49, 1.2, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer/HBoxContainer3"]
+margin_left = 87.0
+margin_right = 117.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.49, 1.2, 1 )
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PlanetCards/PlanetCard4"]
+margin_left = 64.0
+margin_top = 419.0
+margin_right = 419.0
+margin_bottom = 449.0
+rect_rotation = -90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetCards/PlanetCard4/VBoxContainer2"]
+margin_right = 355.0
+margin_bottom = 30.0
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer2/HBoxContainer"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer2/HBoxContainer"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer2/HBoxContainer"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect5" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 136.0
+margin_right = 166.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect6" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 170.0
+margin_right = 200.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect7" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 204.0
+margin_right = 234.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect8" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 238.0
+margin_right = 268.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="Spacer" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 272.0
+margin_right = 287.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect9" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 291.0
+margin_right = 321.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="ColorRect10" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 325.0
+margin_right = 355.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="PlanetCards/PlanetCard4"]
+margin_left = 112.0
+margin_top = 419.0
+margin_right = 467.0
+margin_bottom = 449.0
+rect_rotation = -90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetCards/PlanetCard4/VBoxContainer3"]
+margin_right = 355.0
+margin_bottom = 30.0
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer3/HBoxContainer"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect5" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer3/HBoxContainer"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect6" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer3/HBoxContainer"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect7" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect8" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 136.0
+margin_right = 166.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="Spacer" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 170.0
+margin_right = 185.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect9" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 189.0
+margin_right = 219.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="ColorRect10" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 223.0
+margin_right = 253.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="PlanetCards/PlanetCard4"]
+margin_left = 160.0
+margin_top = 419.0
+margin_right = 515.0
+margin_bottom = 449.0
+rect_rotation = -90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetCards/PlanetCard4/VBoxContainer4"]
+margin_right = 355.0
+margin_bottom = 30.0
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect5" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 136.0
+margin_right = 166.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect6" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 170.0
+margin_right = 200.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect7" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer4/HBoxContainer"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect8" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer4/HBoxContainer"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="Spacer" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 68.0
+margin_right = 83.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect9" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer4/HBoxContainer"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[node name="ColorRect10" type="ColorRect" parent="PlanetCards/PlanetCard4/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="PlanetCard5" type="Node2D" parent="PlanetCards"]
+position = Vector2( 1280, 0 )
+
+[node name="Label" type="Label" parent="PlanetCards/PlanetCard5"]
+margin_right = 250.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 3 )
+text = "AMALTHEA"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="PlanetCards/PlanetCard5"]
+self_modulate = Color( 1.2, 1.2, 1.3, 1 )
+position = Vector2( 128, 185.5 )
+texture = ExtResource( 4 )
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard5"]
+margin_top = 360.0
+margin_right = 256.0
+margin_bottom = 424.0
+rect_min_size = Vector2( 0, 50 )
+color = Color( 0.215686, 0.215686, 0.215686, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard5"]
+visible = false
+margin_left = 190.0
+margin_top = 462.0
+margin_right = 398.0
+margin_bottom = 502.0
+color = Color( 0.215686, 0.215686, 0.215686, 0.662745 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="PlanetCards/PlanetCard5"]
+margin_top = 440.0
+margin_right = 256.0
+margin_bottom = 490.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = SubResource( 8 )
+text = "VISIT PLANET"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="PlanetCards/PlanetCard5"]
+visible = false
+margin_left = 40.0
+margin_top = 448.0
+margin_right = 290.0
+margin_bottom = 538.0
+custom_fonts/font = SubResource( 10 )
+text = "Artifacts:
+Resources:
+Hazards:"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="PlanetCards/PlanetCard5"]
+visible = false
+margin_left = 200.0
+margin_top = 480.0
+margin_right = 450.0
+margin_bottom = 520.0
+custom_fonts/font = SubResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlanetCards/PlanetCard5"]
+visible = false
+margin_left = 256.0
+margin_top = 296.0
+margin_right = 388.0
+margin_bottom = 394.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetCards/PlanetCard5/VBoxContainer"]
+margin_right = 132.0
+margin_bottom = 30.0
+
+[node name="Spacer" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer/HBoxContainer"]
+margin_right = 15.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer/HBoxContainer"]
+margin_left = 19.0
+margin_right = 49.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer/HBoxContainer"]
+margin_left = 53.0
+margin_right = 83.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer/HBoxContainer"]
+margin_left = 87.0
+margin_right = 117.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PlanetCards/PlanetCard5/VBoxContainer"]
+margin_top = 34.0
+margin_right = 132.0
+margin_bottom = 64.0
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer/HBoxContainer2"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.239216, 0.239216, 0.239216, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer/HBoxContainer2"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer/HBoxContainer2"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer/HBoxContainer2"]
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PlanetCards/PlanetCard5/VBoxContainer"]
+margin_top = 68.0
+margin_right = 132.0
+margin_bottom = 98.0
+
+[node name="Spacer2" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer/HBoxContainer3"]
+margin_right = 15.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer/HBoxContainer3"]
+margin_left = 19.0
+margin_right = 49.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.239216, 0.239216, 0.239216, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer/HBoxContainer3"]
+margin_left = 53.0
+margin_right = 83.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.49, 1.2, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer/HBoxContainer3"]
+margin_left = 87.0
+margin_right = 117.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.49, 1.2, 1 )
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PlanetCards/PlanetCard5"]
+margin_left = 64.0
+margin_top = 419.0
+margin_right = 419.0
+margin_bottom = 449.0
+rect_rotation = -90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetCards/PlanetCard5/VBoxContainer2"]
+margin_right = 355.0
+margin_bottom = 30.0
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer2/HBoxContainer"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer2/HBoxContainer"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer2/HBoxContainer"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect5" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 136.0
+margin_right = 166.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect6" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 170.0
+margin_right = 200.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect7" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 204.0
+margin_right = 234.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect8" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 238.0
+margin_right = 268.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="Spacer" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 272.0
+margin_right = 287.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect9" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 291.0
+margin_right = 321.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="ColorRect10" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 325.0
+margin_right = 355.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="PlanetCards/PlanetCard5"]
+margin_left = 112.0
+margin_top = 419.0
+margin_right = 467.0
+margin_bottom = 449.0
+rect_rotation = -90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetCards/PlanetCard5/VBoxContainer3"]
+margin_right = 355.0
+margin_bottom = 30.0
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer3/HBoxContainer"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect5" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer3/HBoxContainer"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect6" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer3/HBoxContainer"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect7" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect8" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 136.0
+margin_right = 166.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="Spacer" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 170.0
+margin_right = 185.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect9" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 189.0
+margin_right = 219.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="ColorRect10" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 223.0
+margin_right = 253.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="PlanetCards/PlanetCard5"]
+margin_left = 160.0
+margin_top = 419.0
+margin_right = 515.0
+margin_bottom = 449.0
+rect_rotation = -90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetCards/PlanetCard5/VBoxContainer4"]
+margin_right = 355.0
+margin_bottom = 30.0
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect5" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 136.0
+margin_right = 166.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect6" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 170.0
+margin_right = 200.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect7" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer4/HBoxContainer"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect8" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer4/HBoxContainer"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="Spacer" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 68.0
+margin_right = 83.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect9" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer4/HBoxContainer"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[node name="ColorRect10" type="ColorRect" parent="PlanetCards/PlanetCard5/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="PlanetCard6" type="Node2D" parent="PlanetCards"]
+position = Vector2( 1600, 0 )
+
+[node name="Label" type="Label" parent="PlanetCards/PlanetCard6"]
+margin_right = 250.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 3 )
+text = "AMALTHEA"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="PlanetCards/PlanetCard6"]
+self_modulate = Color( 1.2, 1.2, 1.3, 1 )
+position = Vector2( 128, 185.5 )
+texture = ExtResource( 4 )
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard6"]
+margin_top = 360.0
+margin_right = 256.0
+margin_bottom = 424.0
+rect_min_size = Vector2( 0, 50 )
+color = Color( 0.215686, 0.215686, 0.215686, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard6"]
+visible = false
+margin_left = 190.0
+margin_top = 462.0
+margin_right = 398.0
+margin_bottom = 502.0
+color = Color( 0.215686, 0.215686, 0.215686, 0.662745 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="PlanetCards/PlanetCard6"]
+margin_top = 440.0
+margin_right = 256.0
+margin_bottom = 490.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = SubResource( 8 )
+text = "VISIT PLANET"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="PlanetCards/PlanetCard6"]
+visible = false
+margin_left = 40.0
+margin_top = 448.0
+margin_right = 290.0
+margin_bottom = 538.0
+custom_fonts/font = SubResource( 10 )
+text = "Artifacts:
+Resources:
+Hazards:"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="PlanetCards/PlanetCard6"]
+visible = false
+margin_left = 200.0
+margin_top = 480.0
+margin_right = 450.0
+margin_bottom = 520.0
+custom_fonts/font = SubResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlanetCards/PlanetCard6"]
+visible = false
+margin_left = 256.0
+margin_top = 296.0
+margin_right = 388.0
+margin_bottom = 394.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetCards/PlanetCard6/VBoxContainer"]
+margin_right = 132.0
+margin_bottom = 30.0
+
+[node name="Spacer" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer/HBoxContainer"]
+margin_right = 15.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer/HBoxContainer"]
+margin_left = 19.0
+margin_right = 49.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer/HBoxContainer"]
+margin_left = 53.0
+margin_right = 83.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer/HBoxContainer"]
+margin_left = 87.0
+margin_right = 117.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PlanetCards/PlanetCard6/VBoxContainer"]
+margin_top = 34.0
+margin_right = 132.0
+margin_bottom = 64.0
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer/HBoxContainer2"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.239216, 0.239216, 0.239216, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer/HBoxContainer2"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer/HBoxContainer2"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer/HBoxContainer2"]
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PlanetCards/PlanetCard6/VBoxContainer"]
+margin_top = 68.0
+margin_right = 132.0
+margin_bottom = 98.0
+
+[node name="Spacer2" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer/HBoxContainer3"]
+margin_right = 15.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer/HBoxContainer3"]
+margin_left = 19.0
+margin_right = 49.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.239216, 0.239216, 0.239216, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer/HBoxContainer3"]
+margin_left = 53.0
+margin_right = 83.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.49, 1.2, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer/HBoxContainer3"]
+margin_left = 87.0
+margin_right = 117.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.49, 1.2, 1 )
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PlanetCards/PlanetCard6"]
+margin_left = 64.0
+margin_top = 419.0
+margin_right = 419.0
+margin_bottom = 449.0
+rect_rotation = -90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetCards/PlanetCard6/VBoxContainer2"]
+margin_right = 355.0
+margin_bottom = 30.0
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer2/HBoxContainer"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer2/HBoxContainer"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer2/HBoxContainer"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect5" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 136.0
+margin_right = 166.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect6" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 170.0
+margin_right = 200.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect7" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 204.0
+margin_right = 234.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect8" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 238.0
+margin_right = 268.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="Spacer" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 272.0
+margin_right = 287.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect9" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 291.0
+margin_right = 321.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="ColorRect10" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer2/HBoxContainer"]
+visible = false
+margin_left = 325.0
+margin_right = 355.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="PlanetCards/PlanetCard6"]
+margin_left = 112.0
+margin_top = 419.0
+margin_right = 467.0
+margin_bottom = 449.0
+rect_rotation = -90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetCards/PlanetCard6/VBoxContainer3"]
+margin_right = 355.0
+margin_bottom = 30.0
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer3/HBoxContainer"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect5" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer3/HBoxContainer"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect6" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer3/HBoxContainer"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect7" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect8" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 136.0
+margin_right = 166.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="Spacer" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 170.0
+margin_right = 185.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect9" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 189.0
+margin_right = 219.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="ColorRect10" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer3/HBoxContainer"]
+visible = false
+margin_left = 223.0
+margin_right = 253.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="PlanetCards/PlanetCard6"]
+margin_left = 160.0
+margin_top = 419.0
+margin_right = 515.0
+margin_bottom = 449.0
+rect_rotation = -90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetCards/PlanetCard6/VBoxContainer4"]
+margin_right = 355.0
+margin_bottom = 30.0
+
+[node name="ColorRect" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.29, 1.2, 0, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect5" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 136.0
+margin_right = 166.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect6" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 170.0
+margin_right = 200.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0, 0.298039, 1, 1 )
+
+[node name="ColorRect7" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer4/HBoxContainer"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect8" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer4/HBoxContainer"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="Spacer" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 68.0
+margin_right = 83.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 15, 30 )
+color = Color( 0.290196, 1, 0, 0 )
+
+[node name="ColorRect9" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer4/HBoxContainer"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.290196, 0.290196, 0.290196, 1 )
+
+[node name="ColorRect10" type="ColorRect" parent="PlanetCards/PlanetCard6/VBoxContainer4/HBoxContainer"]
+visible = false
+margin_left = 102.0
+margin_right = 132.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+color = Color( 0.552941, 0.552941, 0.552941, 1 )
+
+[node name="SystemDetailLabel" type="Label" parent="."]
+margin_left = 32.0
+margin_top = -32.0
+margin_right = 194.0
+margin_bottom = 568.0
+custom_fonts/font = SubResource( 14 )
+text = "SYSTEM NAME
+Known planets: 4
+Planet Name - Giant - Ice"
+valign = 2
+script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

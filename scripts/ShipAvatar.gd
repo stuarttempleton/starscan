@@ -14,6 +14,7 @@ func _ready():
 	Ship = ShipData.Ship()
 	self.position = Vector2(Ship.X * MapScale, Ship.Y * MapScale)
 	target = self.position
+	GameController.EnableDisableMovement(true)
 	
 func _input(event):
 	if !GameController.is_paused && GameController.is_movement_enabled:
