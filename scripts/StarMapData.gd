@@ -8,6 +8,9 @@ var SavedSinceLoad = false
 export var DatabaseFileName = "res://starmap_data/generated/Generated_2021-1-15_0-5-35_-6022814405790740079.json"
 export var SavedDatabaseFileName = "user://testdata_PLAYERSAVE.json"
 
+var NearestSystem = null
+var NearestSystemDistance = INF
+
 var PlanetTypes = [
 	"Gas",
 	"Ice",
@@ -88,7 +91,7 @@ func SystemHasOutpost(system):
 			return true
 	return false
 	
-func GetNearestSystem(origin):
+func FindNearestSystem(origin):
 	var NearbySystem = StarMap.Systems[0]
 	var previous_distance = origin.distance_to(Vector2(StarMap.Systems[0].X, StarMap.Systems[0].Y))
 	
@@ -97,5 +100,47 @@ func GetNearestSystem(origin):
 		if (distance < previous_distance):
 			previous_distance = distance
 			NearbySystem = system
-	return [NearbySystem, previous_distance]
+			
+	NearestSystem = NearbySystem
+	NearestSystemDistance = previous_distance
 
+func ScanNearestSystem(quality):
+	NearestSystem.Scan = quality
+	for planet in NearestSystem.Planets:
+		ScanPlanet(planet, quality)
+	#print("Scanned star results: " + JSON.print(NearestSystem, "\t"))
+	
+func ScanPlanet(planet, quality):
+	var totalIcons = 10
+	var icons = []
+	icons.resize(totalIcons)
+	for i in range(totalIcons):
+		if i < planet.ArtifactCount:
+			icons[i] = "Artifact"
+		elif i < planet.ArtifactCount + planet.ResourceCount:
+			icons[i] = "Resource"
+		elif i < planet.ArtifactCount + planet.ResourceCount + planet.HazardCount:
+			icons[i] = "Hazard"
+		else:
+			icons[i] = "Dud"
+			
+	#TODO: replace this shuffle, it doesn't use a configurable seed
+	icons.shuffle()
+	#print("Shuffled icons for " + planet.Name + ": " + str(icons))
+	
+	planet.PerceivedArtifactCount = 0
+	planet.PerceivedResourceCount = 0
+	planet.PerceivedHazardCount = 0
+	planet.PerceivedDudCount = 0
+	
+	var scanCount = totalIcons * quality
+	#print("\tRevealing " + str(scanCount) + " icons.")
+	for i in range(scanCount):
+		if icons[i] == "Artifact":
+			planet.PerceivedArtifactCount += 1
+		if icons[i] == "Resource":
+			planet.PerceivedResourceCount += 1
+		if icons[i] == "Hazard":
+			planet.PerceivedHazardCount += 1
+		if icons[i] == "Dud":
+			planet.PerceivedDudCount += 1

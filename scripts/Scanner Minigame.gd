@@ -35,8 +35,8 @@ func _ready():
 	targetZone.rect_size.x = oscillator.maxSize * (greenMax - greenMin)
 	
 	#These lines only exist for diagnostic purposes, remove them
-	self.connect("success", self, "_reset")
-	self.connect("fail", self, "_reset")
+	#self.connect("success", self, "_reset")
+	#self.connect("fail", self, "_reset")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -49,7 +49,19 @@ func _on_Button_pressed():
 	var score = abs(x - 1.0)
 	var success = (score >= greenMin and score <= greenMax)
 	print("Scanned! x=" + str(x) + ", max=" + str(amplitude) + ", scored " + str(score) + ", goal range=" + str(greenMin) + "..." + str(greenMax) + ". Result: " + ("Success." if success else "Fail."))
-	emit_signal("success" if success else "fail")
+	if success:
+		scanSucceeded()
+	else:
+		scanFailed()
+	#emit_signal("success" if success else "fail")
 
-func _reset():
+func reset():
 	scanButtonPressed = false
+
+func scanFailed():
+	StarMapData.ScanNearestSystem(0.5)
+	emit_signal("fail")
+	
+func scanSucceeded():
+	StarMapData.ScanNearestSystem(1.0)
+	emit_signal("success")

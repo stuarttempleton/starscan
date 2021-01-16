@@ -8,7 +8,7 @@ extends Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var system = StarMapData.GetNearestSystem(Vector2(ShipData.Ship().X, ShipData.Ship().Y))[0]
+	var system = StarMapData.NearestSystem
 	text = system.Name
 
 

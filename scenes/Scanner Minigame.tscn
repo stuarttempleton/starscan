@@ -3,8 +3,6 @@
 [ext_resource path="res://scripts/Scanner Minigame.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Oscillator.gd" type="Script" id=2]
 
-
-
 [node name="Node2D" type="Node2D"]
 
 [node name="Scanner Minigame" type="Node2D" parent="."]

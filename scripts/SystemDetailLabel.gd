@@ -11,7 +11,7 @@ export var planet_sub_boiler_plate = "%s: %s, %s"
 var display_speed = 0.5
 
 func _ready():
-	var system = StarMapData.GetNearestSystem(Vector2(ShipData.Ship().X, ShipData.Ship().Y))[0]
+	var system = StarMapData.NearestSystem
 	var details = main_boiler_plate % [system.Name, system.Planets.size()]
 	for planet in system.Planets:
 		details = "%s\r\n%s: %s, %s" % [details, planet.Name, planet.Type, planet.Size]
