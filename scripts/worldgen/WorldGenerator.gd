@@ -56,7 +56,7 @@ func generateStars(rng):
 		star.Name = "System " + str(i+1)
 		star.X = positions[i].x
 		star.Y = positions[i].y
-		star.Scan = false
+		star.Scan = 0.0
 		star.Planets = generatePlanets(rng, star.Name)
 		stars[i] = star
 	return stars
@@ -74,6 +74,10 @@ func generatePlanets(rng, starName):
 		planet.ArtifactCount = randomArtifactCount(rng.randf())
 		planet.HazardCount = randomHazardCount(rng.randf())
 		planet.ResourceCount = randomResourceCount(rng.randf())
+		planet.PerceivedArtifactCount = -1
+		planet.PerceivedHazardCount = -1
+		planet.PerceivedResourceCount = -1
+		planet.PerceivedDudCount = -1
 		planets[j] = planet
 	return planets
 	

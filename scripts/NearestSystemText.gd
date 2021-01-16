@@ -12,7 +12,12 @@ func _ready():
 	pass
 
 func SetSystemText(system):
-	text = boiler_plate % [system[0].Name, system[1] * 1000]
+	var SystemName = "No Systems Nearby"
+	var SystemDistance = INF
+	if StarMapData.NearestSystem != null: 
+		SystemName = StarMapData.NearestSystem.Name
+		SystemDistance = StarMapData.NearestSystemDistance
+	text = boiler_plate % [SystemName, SystemDistance]
 
 func _physics_process(_delta):
-	SetSystemText(StarMapData.GetNearestSystem(Vector2(ShipData.Ship().X,ShipData.Ship().Y)))
+	SetSystemText(StarMapData.NearestSystem)
