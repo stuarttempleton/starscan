@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/Scanner Minigame.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Oscillator.gd" type="Script" id=2]
+[ext_resource path="res://scripts/ScanGame_ScanButton.gd" type="Script" id=3]
 
 [node name="Node2D" type="Node2D"]
 
@@ -42,13 +43,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="Scanner Minigame"]
+[node name="ScanButton" type="Button" parent="Scanner Minigame"]
 margin_left = 87.0566
 margin_top = 45.3371
 margin_right = 190.057
 margin_bottom = 65.3371
 text = "Scan!"
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="Scanner Minigame/Button" to="Scanner Minigame" method="_on_Button_pressed"]
+[connection signal="mouse_entered" from="Scanner Minigame/ScanButton" to="Scanner Minigame/ScanButton" method="_mouse_entered"]
+[connection signal="mouse_exited" from="Scanner Minigame/ScanButton" to="Scanner Minigame/ScanButton" method="_mouse_exited"]
+[connection signal="pressed" from="Scanner Minigame/ScanButton" to="Scanner Minigame" method="_on_Button_pressed"]

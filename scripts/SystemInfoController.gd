@@ -5,15 +5,7 @@ export var system_detail_boilerplate = "Outpost: %s\r\nPlanets: %d\r\nScan: %s\r
 var DisplayedSystem
 
 func _ready():
-	$Background.connect("mouse_entered",self,"mouse_enter")
-	$Background.connect("mouse_exited",self,"mouse_exit")
 	$Background/InfoContainer/ScanButton.connect("minigameComplete", self, "RefreshDisplayedData")
-
-func mouse_enter():
-	GameController.EnableDisableMovement(false)
-	
-func mouse_exit():
-	GameController.EnableDisableMovement(true)
 
 func ScanTextHelper(scan):
 	if scan < 0.001:
