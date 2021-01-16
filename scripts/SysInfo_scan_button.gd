@@ -18,8 +18,9 @@ func on_button_pressed () :
 		var loaded_scene = load(scene_to_load)
 		minigame = loaded_scene.instance()
 		add_child(minigame)
-		minigame.get_node("Scanner Minigame").connect("success", self, "scanComplete")
-		minigame.get_node("Scanner Minigame").connect("fail", self, "scanComplete")
+		minigame.get_node("Scanner Minigame").connect("success", self, "scanPerformed")
+		minigame.get_node("Scanner Minigame").connect("fail", self, "scanPerformed")
+		minigame.get_node("Scanner Minigame").connect("complete", self, "hideMinigame")
 	else:
 		get_tree().change_scene(scene_to_load)
 
@@ -29,7 +30,9 @@ func mouse_enter():
 func mouse_exit():
 	GameController.EnableDisableMovement(true)
 
-func scanComplete():
+func scanPerformed():
 	#print("Scan game ended")
-	minigame.queue_free()
 	emit_signal("minigameComplete")
+
+func hideMinigame():
+	minigame.queue_free()
