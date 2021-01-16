@@ -24,6 +24,8 @@ var nebulae_color = Color(0.59668, 0, 0.8125)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if (StarMapData.NearestSystem == null):
+		StarMapData.FindNearestSystem(Vector2(ShipData.Ship().X,ShipData.Ship().Y))
 	system = StarMapData.NearestSystem
 	
 func _draw():
