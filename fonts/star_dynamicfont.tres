@@ -3,5 +3,4 @@
 [ext_resource path="res://fonts/star_dynamicfontdata.tres" type="DynamicFontData" id=1]
 
 [resource]
-size = 35
 font_data = ExtResource( 1 )

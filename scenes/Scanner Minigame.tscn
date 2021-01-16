@@ -1,10 +1,69 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/Scanner Minigame.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Oscillator.gd" type="Script" id=2]
 [ext_resource path="res://scripts/ScanGame_ScanButton.gd" type="Script" id=3]
+[ext_resource path="res://fonts/star_dynamicfont.tres" type="DynamicFont" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "LoseAnim"
+
+[sub_resource type="Animation" id=2]
+resource_name = "WinAnim"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../ResultTextHandle/ResultText:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -100 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../ResultTextHandle/ResultText:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 2.82842, 4.75683 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_endAnimComplete"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../ResultTextHandle/ResultText:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
 
 [node name="Node2D" type="Node2D"]
+z_index = 1000
+z_as_relative = false
 
 [node name="Scanner Minigame" type="Node2D" parent="."]
 position = Vector2( 83.4163, 79.7002 )
@@ -50,6 +109,26 @@ margin_right = 190.057
 margin_bottom = 65.3371
 text = "Scan!"
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResultTextHandle" type="Node2D" parent="Scanner Minigame"]
+position = Vector2( 117.466, -2.66968 )
+
+[node name="ResultTextAnimator" type="AnimationPlayer" parent="Scanner Minigame/ResultTextHandle"]
+anims/LoseAnim = SubResource( 1 )
+anims/WinAnim = SubResource( 2 )
+
+[node name="ResultText" type="Label" parent="Scanner Minigame/ResultTextHandle"]
+visible = false
+margin_right = 50.0
+margin_bottom = 21.0
+grow_horizontal = 2
+custom_fonts/font = ExtResource( 4 )
+text = "+100%"
+align = 1
+valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -11,6 +11,7 @@ var targetZone
 
 signal success
 signal fail
+signal complete
 
 export var speed = 0.5
 export var greenMin = 0.4
@@ -46,6 +47,7 @@ func _process(delta):
 
 func _on_Button_pressed():
 	scanButtonPressed = true
+	$ScanButton.disabled = true
 	var score = abs(x - 1.0)
 	var success = (score >= greenMin and score <= greenMax)
 	print("Scanned! x=" + str(x) + ", max=" + str(amplitude) + ", scored " + str(score) + ", goal range=" + str(greenMin) + "..." + str(greenMax) + ". Result: " + ("Success." if success else "Fail."))
@@ -57,11 +59,21 @@ func _on_Button_pressed():
 
 func reset():
 	scanButtonPressed = false
+	$ScanButton.disabled = false
 
 func scanFailed():
-	StarMapData.ScanNearestSystem(0.5)
+	var scanAccuracy = 0.5
+	$ResultTextHandle/ResultText.text = str(int(scanAccuracy * 10) * 10) + "%"
+	$ResultTextHandle/ResultTextAnimator.play("WinAnim")
+	StarMapData.ScanNearestSystem(scanAccuracy)
 	emit_signal("fail")
 	
 func scanSucceeded():
-	StarMapData.ScanNearestSystem(1.0)
+	var scanAccuracy = 1.0
+	$ResultTextHandle/ResultText.text = str(int(scanAccuracy * 10) * 10) + "%"
+	$ResultTextHandle/ResultTextAnimator.play("WinAnim")
+	StarMapData.ScanNearestSystem(scanAccuracy)
 	emit_signal("success")
+
+func _on_endAnimComplete():
+	emit_signal("complete")
