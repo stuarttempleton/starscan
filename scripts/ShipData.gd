@@ -75,3 +75,41 @@ func Ship() :
 		print("Ship Data Not Loaded! FAILING ON PURPOSE FIX THIS")
 	else:
 		return StarShip
+
+func PayToVisitAStar():
+	return PayResourcesDefaultToCrew(2, 1.0)
+	
+func PayToVisitAPlanet():
+	return PayResourcesDefaultToCrew(1, 1.0)
+	
+func PayResourcesDefaultToCrew(resourcesToPay, crewLostPerUnpaidResource):
+	var paid = {
+		"Resources" : resourcesToPay,
+		"Crew" : 0
+	}
+	
+	var availableResources
+	for cargo in StarShip.Inventory:
+		if cargo.Type == "Resources":
+			availableResources = cargo
+			break
+	
+	if availableResources == null || availableResources.Quantity < paid.Resources:
+		var difference = paid.Resources
+		
+		if availableResources != null:
+			paid.Resources = availableResources.Quantity
+			difference -= availableResources.Quantity
+			availableResources.Quantity = 0
+		
+		paid.Crew = difference * crewLostPerUnpaidResource
+		StarShip.Crew -= paid.Crew
+		#TODO: notify GameControllere of new crew count for game over check
+	else:
+		availableResources.Quantity -= paid.Resources
+	
+	return paid
+
+func DeductCrew(crewLost):
+	StarShip.Crew -= crewLost
+	#TODO: report new crew count to GameController for game over check

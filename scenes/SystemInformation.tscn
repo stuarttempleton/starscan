@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/SystemInfoController.gd" type="Script" id=1]
 [ext_resource path="res://scripts/SysInfo_scan_button.gd" type="Script" id=2]
+[ext_resource path="res://scripts/SysInfo_enter_button.gd" type="Script" id=4]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-Black.ttf"
@@ -80,13 +81,13 @@ margin_right = 174.0
 margin_bottom = 149.0
 text = "Scan System"
 script = ExtResource( 2 )
-scene_to_load = "res://scenes/Scanner Minigame.tscn"
+minigame_scene = "res://scenes/Scanner Minigame.tscn"
 
 [node name="EnterButton" type="Button" parent="Control/Background/InfoContainer"]
 margin_top = 153.0
 margin_right = 174.0
 margin_bottom = 173.0
 text = "Enter System"
-script = ExtResource( 2 )
-scene_to_load = "res://scenes/SystemViewport.tscn"
-additive_load_scene = false
+script = ExtResource( 4 )
+SystemViewport_scene = "res://scenes/SystemViewport.tscn"
+[connection signal="button_down" from="Control/Background/InfoContainer/EnterButton" to="Control/Background/InfoContainer/EnterButton" method="_on_button_down"]

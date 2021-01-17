@@ -3,13 +3,19 @@
     "X":1,
     "Y":1,
     "Fuel":100,
+	"FuelCapacity":100,
     "Efficiency":0.03,
-    "Crew":100,
+    "Crew":20,
+	"CrewCapacity":20,
     "MaxInventory":10,
     "Inventory":[
         {
-            "Type":0,
-            "Quantity":0
+            "Type": "Resources",
+            "Quantity": 8
+        },
+        {
+            "Type": "Artifacts",
+            "Quantity": 0
         }
     ],
     "DeliveredArtifacts":0

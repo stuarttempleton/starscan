@@ -1,6 +1,6 @@
 extends Button
 
-export var scene_to_load = ""
+export(String) var minigame_scene
 export var additive_load_scene = true #additive or replacement
 
 signal minigameComplete
@@ -13,16 +13,13 @@ func _ready():
 	connect("pressed", self, "on_button_pressed")
 
 func on_button_pressed () :
-	print("Load: %s" % [scene_to_load])
-	if additive_load_scene:
-		var loaded_scene = load(scene_to_load)
-		minigame = loaded_scene.instance()
-		add_child(minigame)
-		minigame.get_node("Scanner Minigame").connect("success", self, "scanPerformed")
-		minigame.get_node("Scanner Minigame").connect("fail", self, "scanPerformed")
-		minigame.get_node("Scanner Minigame").connect("complete", self, "hideMinigame")
-	else:
-		get_tree().change_scene(scene_to_load)
+	print("Load: %s" % [minigame_scene])
+	var loaded_scene = load(minigame_scene)
+	minigame = loaded_scene.instance()
+	add_child(minigame)
+	minigame.get_node("Scanner Minigame").connect("success", self, "scanPerformed")
+	minigame.get_node("Scanner Minigame").connect("fail", self, "scanPerformed")
+	minigame.get_node("Scanner Minigame").connect("complete", self, "hideMinigame")
 
 func mouse_enter():
 	GameController.EnableDisableMovement(false)
