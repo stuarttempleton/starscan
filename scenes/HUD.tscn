@@ -93,6 +93,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 ship_value_key = "Crew"
+ship_capacity_key = "CrewCapacity"
 
 [node name="FuelEnergy2" type="MarginContainer" parent="Vitals"]
 margin_top = 19.0
@@ -153,6 +154,8 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+ship_value_key = "Fuel"
+ship_capacity_key = "FuelCapacity"
 
 [node name="StatusText" type="HBoxContainer" parent="."]
 margin_top = 556.0
