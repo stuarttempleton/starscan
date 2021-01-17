@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/red_planet.png-dabcb81db970cdbce43a58d44bfb1bd0.stex"
+path="res://.import/star_40px.png-bc4cfe2e4c5145ae99a8947cab331333.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/planets/red_planet.png"
-dest_files=[ "res://.import/red_planet.png-dabcb81db970cdbce43a58d44bfb1bd0.stex" ]
+source_file="res://sprites/planets/star_40px.png"
+dest_files=[ "res://.import/star_40px.png-bc4cfe2e4c5145ae99a8947cab331333.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/gray_planet.png-66917b32640661a2f27b495c3c53aa5a.stex"
+path="res://.import/outpost_base_30x.png-5cf8636d2cd0c099e72e4f65f8098e51.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/planets/gray_planet.png"
-dest_files=[ "res://.import/gray_planet.png-66917b32640661a2f27b495c3c53aa5a.stex" ]
+source_file="res://sprites/planets/outpost_base_30x.png"
+dest_files=[ "res://.import/outpost_base_30x.png-5cf8636d2cd0c099e72e4f65f8098e51.stex" ]
 
 [params]
 
