@@ -1,11 +1,13 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scripts/SysInfo_scan_button.gd" type="Script" id=1]
 [ext_resource path="res://scripts/SolarSystemRender.gd" type="Script" id=2]
+[ext_resource path="res://sprites/artifact_100px.png" type="Texture" id=3]
 [ext_resource path="res://sprites/planets/blue_planet.png" type="Texture" id=4]
 [ext_resource path="res://sprites/UI_border.png" type="Texture" id=5]
 [ext_resource path="res://scenes/VFX Scene.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/SystemNameLabel.gd" type="Script" id=7]
+[ext_resource path="res://sprites/fuel_100px.png" type="Texture" id=8]
 [ext_resource path="res://scripts/SystemDetailLabel.gd" type="Script" id=9]
 
 [sub_resource type="DynamicFontData" id=1]
@@ -28,6 +30,15 @@ font_path = "res://fonts/Montserrat-Regular.ttf"
 [sub_resource type="DynamicFont" id=6]
 size = 15
 font_data = SubResource( 5 )
+
+[sub_resource type="DynamicFontData" id=11]
+font_path = "res://fonts/Montserrat-Black.ttf"
+
+[sub_resource type="DynamicFont" id=12]
+size = 20
+outline_size = 3
+outline_color = Color( 0, 0, 0, 0.780392 )
+font_data = SubResource( 11 )
 
 [sub_resource type="DynamicFontData" id=7]
 font_path = "res://fonts/Montserrat-Regular.ttf"
@@ -74,7 +85,6 @@ scene_to_load = "res://scenes/StarMapViewport.tscn"
 additive_load_scene = false
 
 [node name="PlanetCard" type="NinePatchRect" parent="SystemViewUI"]
-visible = false
 margin_left = 744.0
 margin_top = 176.0
 margin_right = 960.0
@@ -92,6 +102,9 @@ margin_bottom = 58.0
 custom_fonts/font = SubResource( 2 )
 text = "AMALTHEA"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Button" type="Button" parent="SystemViewUI/PlanetCard"]
 margin_left = 24.0
@@ -111,6 +124,7 @@ scale = Vector2( 0.45, 0.45 )
 texture = ExtResource( 4 )
 
 [node name="Label2" type="Label" parent="SystemViewUI/PlanetCard"]
+visible = false
 margin_left = 8.0
 margin_top = 264.0
 margin_right = 208.0
@@ -119,8 +133,12 @@ custom_fonts/font = SubResource( 6 )
 text = "Scan accuracy: 80%"
 align = 1
 valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SystemViewUI/PlanetCard"]
+visible = false
 margin_left = 40.0
 margin_top = 248.0
 margin_right = 176.0
@@ -197,6 +215,60 @@ margin_right = 136.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 10, 10 )
 color = Color( 0.231373, 0.231373, 0.231373, 1 )
+
+[node name="Sprite2" type="Sprite" parent="SystemViewUI/PlanetCard"]
+position = Vector2( 49, 257 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="Label3" type="Label" parent="SystemViewUI/PlanetCard"]
+margin_left = 33.0
+margin_top = 257.0
+margin_right = 89.0
+margin_bottom = 297.0
+custom_fonts/font = SubResource( 12 )
+text = "x1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite3" type="Sprite" parent="SystemViewUI/PlanetCard"]
+position = Vector2( 105, 257 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 8 )
+
+[node name="Label4" type="Label" parent="SystemViewUI/PlanetCard"]
+margin_left = 89.0
+margin_top = 257.0
+margin_right = 145.0
+margin_bottom = 297.0
+custom_fonts/font = SubResource( 12 )
+text = "x3"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite4" type="Sprite" parent="SystemViewUI/PlanetCard"]
+position = Vector2( 161, 257 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="Label5" type="Label" parent="SystemViewUI/PlanetCard"]
+margin_left = 145.0
+margin_top = 257.0
+margin_right = 201.0
+margin_bottom = 297.0
+custom_fonts/font = SubResource( 12 )
+text = "x2"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="SystemNameLabel" type="Label" parent="."]
 margin_left = 288.0
