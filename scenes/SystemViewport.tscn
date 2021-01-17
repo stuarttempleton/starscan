@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=2]
 
-[ext_resource path="res://scripts/SysInfo_scan_button.gd" type="Script" id=1]
+[ext_resource path="res://scripts/SysView_Leave_Button.gd" type="Script" id=1]
 [ext_resource path="res://scripts/SolarSystemRender.gd" type="Script" id=2]
 [ext_resource path="res://fonts/star_dynamicfont.tres" type="DynamicFont" id=3]
 [ext_resource path="res://sprites/planets/blue_planet.png" type="Texture" id=4]
@@ -84,8 +84,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-scene_to_load = "res://scenes/StarMapViewport.tscn"
-additive_load_scene = false
+StarMapViewport_scene = "res://scenes/StarMapViewport.tscn"
 
 [node name="PlanetCard" type="NinePatchRect" parent="SystemViewUI"]
 visible = false
@@ -3082,3 +3081,4 @@ script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="button_down" from="SystemViewUI/LeaveSystem" to="SystemViewUI/LeaveSystem" method="_on_button_down"]

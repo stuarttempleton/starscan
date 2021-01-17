@@ -1,16 +1,18 @@
 extends ColorRect
 
-var lastpeek = 100
-export var ship_value_key = "Fuel"
+var lastpeek
+export(String) var ship_value_key
+export(String) var ship_capacity_key
+
 func _ready():
-	print("%s %f" % [ship_value_key, ShipData.Ship()[ship_value_key]])
-	SetPercent(0.5)
+	print("%s %f, %s %f" % [ship_value_key, ShipData.StarShip[ship_value_key], ship_capacity_key, ShipData.StarShip[ship_capacity_key]])
+	SetPercent(1.0)
 
-func SetPercent(percent) :
-	lastpeek = percent * 100
-	rect_scale = Vector2(percent, 1)
+func SetPercent(fraction) :
+	lastpeek = fraction * ShipData.StarShip[ship_capacity_key]
+	rect_scale = Vector2(fraction, 1)
 
-func _physics_process(_delta):
-	if (ShipData.Ship()[ship_value_key] != lastpeek) :
-		SetPercent(ShipData.Ship()[ship_value_key] / 100)
+func _process(_delta):
+	if (ShipData.StarShip[ship_value_key] != lastpeek) :
+		SetPercent(ShipData.StarShip[ship_value_key] / ShipData.StarShip[ship_capacity_key])
 	pass
