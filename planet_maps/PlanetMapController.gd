@@ -7,6 +7,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	_generate_planet_map("Goldilocks")
 	pass
 
 func _generate_planet_map(planet_type):
