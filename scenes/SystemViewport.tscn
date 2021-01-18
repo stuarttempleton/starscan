@@ -31,30 +31,30 @@ font_path = "res://fonts/Montserrat-Regular.ttf"
 size = 15
 font_data = SubResource( 5 )
 
-[sub_resource type="DynamicFontData" id=11]
+[sub_resource type="DynamicFontData" id=7]
 font_path = "res://fonts/Montserrat-Black.ttf"
 
-[sub_resource type="DynamicFont" id=12]
+[sub_resource type="DynamicFont" id=8]
 size = 20
 outline_size = 3
 outline_color = Color( 0, 0, 0, 0.780392 )
-font_data = SubResource( 11 )
-
-[sub_resource type="DynamicFontData" id=7]
-font_path = "res://fonts/Montserrat-Regular.ttf"
-
-[sub_resource type="DynamicFont" id=8]
-size = 30
 font_data = SubResource( 7 )
 
 [sub_resource type="DynamicFontData" id=9]
-font_path = "res://fonts/Montserrat-ExtraLight.ttf"
+font_path = "res://fonts/Montserrat-Regular.ttf"
 
 [sub_resource type="DynamicFont" id=10]
+size = 30
+font_data = SubResource( 9 )
+
+[sub_resource type="DynamicFontData" id=11]
+font_path = "res://fonts/Montserrat-ExtraLight.ttf"
+
+[sub_resource type="DynamicFont" id=12]
 size = 17
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 9 )
+font_data = SubResource( 11 )
 
 [node name="SystemViewPort" type="Node2D"]
 
@@ -225,7 +225,7 @@ margin_left = 33.0
 margin_top = 257.0
 margin_right = 89.0
 margin_bottom = 297.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 8 )
 text = "x1"
 align = 1
 valign = 1
@@ -243,7 +243,7 @@ margin_left = 89.0
 margin_top = 257.0
 margin_right = 145.0
 margin_bottom = 297.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 8 )
 text = "x3"
 align = 1
 valign = 1
@@ -261,7 +261,7 @@ margin_left = 145.0
 margin_top = 257.0
 margin_right = 201.0
 margin_bottom = 297.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 8 )
 text = "x2"
 align = 1
 valign = 1
@@ -275,7 +275,7 @@ margin_top = 4.76837e-07
 margin_right = 848.0
 margin_bottom = 50.0
 rect_scale = Vector2( 0.8, 0.8 )
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 10 )
 text = "TANTALUS V"
 align = 1
 script = ExtResource( 7 )
@@ -288,7 +288,7 @@ margin_left = 32.0
 margin_top = -32.0
 margin_right = 194.0
 margin_bottom = 568.0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 12 )
 text = "SYSTEM NAME
 Known planets: 4
 Planet Name - Giant - Ice"

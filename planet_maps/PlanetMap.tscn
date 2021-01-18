@@ -1,0 +1,226 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://sprites/planets/tilemaps/goldilocks_surface.tres" type="TileSet" id=1]
+[ext_resource path="res://planet_maps/PlanetMap.gd" type="Script" id=2]
+[ext_resource path="res://planet_maps/PlanetMapController.gd" type="Script" id=3]
+
+[node name="PlanetMaps" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Goldilocks" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="MapLayer1" type="TileMap" parent="Goldilocks"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+format = 1
+
+[node name="MapLayer2" type="TileMap" parent="Goldilocks"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="MapLayer3" type="TileMap" parent="Goldilocks"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="MapLayer4" type="TileMap" parent="Goldilocks"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="MapLayer5" type="TileMap" parent="Goldilocks"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="MapLayer6" type="TileMap" parent="Goldilocks"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="MapLayer7" type="TileMap" parent="Goldilocks"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="MapLayer8" type="TileMap" parent="Goldilocks"]
+self_modulate = Color( 1, 1, 1, 0.129412 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="MapLayer9" type="TileMap" parent="Goldilocks"]
+self_modulate = Color( 0.678431, 0.678431, 0.678431, 0.223529 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="Desert" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 2 )
+meta_data = [ [ "MapLayer1", 3, 1, false ], [ "MapLayer2", 3, 0.8, false ], [ "MapLayer3", 1, -0.1, false ], [ "MapLayer4", 2, 0.2, false ], [ "MapLayer5", 3, -0.2, false ], [ "MapLayer6", 2, -0.22, false ], [ "MapLayer7", 2, -0.24, false ], [ "MapLayer8", 3, 0.2, true ], [ "MapLayer9", 6, 0.2, true ] ]
+
+[node name="MapLayer1" type="TileMap" parent="Desert"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+format = 1
+
+[node name="MapLayer2" type="TileMap" parent="Desert"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="MapLayer3" type="TileMap" parent="Desert"]
+self_modulate = Color( 1, 0.211765, 0.211765, 0.501961 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="MapLayer4" type="TileMap" parent="Desert"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="MapLayer5" type="TileMap" parent="Desert"]
+self_modulate = Color( 1, 1, 1, 0.305882 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="MapLayer6" type="TileMap" parent="Desert"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="MapLayer7" type="TileMap" parent="Desert"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="MapLayer8" type="TileMap" parent="Desert"]
+self_modulate = Color( 1, 1, 1, 0.129412 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="MapLayer9" type="TileMap" parent="Desert"]
+self_modulate = Color( 0.592157, 0.592157, 0.592157, 0.180392 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="Icy" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 2 )
+meta_data = [ [ "MapLayer1", 6, 1, false ], [ "MapLayer2", 6, 0.8, false ], [ "MapLayer3", 6, -0.1, false ], [ "MapLayer4", 6, 0.2, false ], [ "MapLayer5", 6, -0.2, false ], [ "MapLayer6", 1, -0.22, false ], [ "MapLayer7", 6, -0.24, false ], [ "MapLayer8", 6, 0.2, true ], [ "MapLayer9", 6, 0.2, true ] ]
+
+[node name="MapLayer1" type="TileMap" parent="Icy"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+format = 1
+
+[node name="MapLayer2" type="TileMap" parent="Icy"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="MapLayer3" type="TileMap" parent="Icy"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="MapLayer4" type="TileMap" parent="Icy"]
+self_modulate = Color( 1, 1, 1, 0.564706 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="MapLayer5" type="TileMap" parent="Icy"]
+self_modulate = Color( 1, 1, 1, 0.305882 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="MapLayer6" type="TileMap" parent="Icy"]
+self_modulate = Color( 1, 1, 1, 0.113725 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="MapLayer7" type="TileMap" parent="Icy"]
+self_modulate = Color( 1, 1, 1, 0.486275 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="MapLayer8" type="TileMap" parent="Icy"]
+self_modulate = Color( 1, 1, 1, 0.129412 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="MapLayer9" type="TileMap" parent="Icy"]
+self_modulate = Color( 0.592157, 0.592157, 0.592157, 0.0784314 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+margin_right = 128.0
+margin_bottom = 88.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Goldilocks" type="Button" parent="Control/VBoxContainer"]
+margin_right = 128.0
+margin_bottom = 20.0
+text = "Goldilocks"
+
+[node name="Desert" type="Button" parent="Control/VBoxContainer"]
+margin_top = 24.0
+margin_right = 128.0
+margin_bottom = 44.0
+text = "Desert"
+
+[node name="Icy" type="Button" parent="Control/VBoxContainer"]
+margin_top = 48.0
+margin_right = 128.0
+margin_bottom = 68.0
+text = "Icy"
+[connection signal="pressed" from="Control/VBoxContainer/Goldilocks" to="." method="_generate_planet_map" binds= [ "Goldilocks" ]]
+[connection signal="pressed" from="Control/VBoxContainer/Desert" to="." method="_generate_planet_map" binds= [ "Desert" ]]
+[connection signal="pressed" from="Control/VBoxContainer/Icy" to="." method="_generate_planet_map" binds= [ "Icy" ]]
