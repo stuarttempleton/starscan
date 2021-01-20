@@ -7,6 +7,13 @@ var DisplayedSystem
 func _ready():
 	$Background/InfoContainer/ScanButton.connect("minigameComplete", self, "RefreshDisplayedData")
 
+func _process(_delta):
+	StarMapData.FindNearestSystem(Vector2(ShipData.Ship().X,ShipData.Ship().Y))
+	if (StarMapData.NearestSystemDistance * 1000 < 3 ):
+		InRange(StarMapData.NearestSystem)
+	else:
+		NotInRange()
+
 func ScanTextHelper(scan):
 	if scan < 0.001:
 		return "Unknown"
@@ -41,10 +48,3 @@ func RefreshDetailText():
 	
 func RefreshScannability():
 	$Background/InfoContainer/ScanButton.disabled = (DisplayedSystem.Scan > 0)
-
-func _process(_delta):
-	StarMapData.FindNearestSystem(Vector2(ShipData.Ship().X,ShipData.Ship().Y))
-	if (StarMapData.NearestSystemDistance * 1000 < 3 ):
-		InRange(StarMapData.NearestSystem)
-	else:
-		NotInRange()

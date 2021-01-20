@@ -5,7 +5,7 @@
     "Fuel":100,
 	"FuelCapacity":100,
     "FuelPerUnitDistance":0.03,
-	"TravelSpeed":200.0,
+	"TravelSpeed":500.0,
     "Crew":20,
 	"CrewCapacity":20,
     "MaxInventory":10,

@@ -91,6 +91,19 @@ func SystemHasOutpost(system):
 			return true
 	return false
 	
+func GetNearestOutpostSystem(origin):
+	var NearestOutpostSystem = StarMap.Systems[0]
+	var previous_distance = origin.distance_to(Vector2(StarMap.Systems[0].X, StarMap.Systems[0].Y))
+	
+	for system in StarMap.Systems :
+		if not SystemHasOutpost(system): continue
+		var distance = origin.distance_to(Vector2(system.X, system.Y))
+		if (distance < previous_distance):
+			previous_distance = distance
+			NearestOutpostSystem = system
+			
+	return NearestOutpostSystem
+	
 func FindNearestSystem(origin):
 	var NearbySystem = StarMap.Systems[0]
 	var previous_distance = origin.distance_to(Vector2(StarMap.Systems[0].X, StarMap.Systems[0].Y))

@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+export (NodePath) var TargetDebug
+
 var target = Vector2()
 var velocity = Vector2()
 var MapScale = StarMapData.MapScale
@@ -11,6 +13,9 @@ func _ready():
 	self.position = Vector2(ShipData.Ship().X * MapScale, ShipData.Ship().Y * MapScale)
 	target = self.position
 	GameController.EnableDisableMovement(true)
+	TargetDebug = get_node(TargetDebug)
+	if not OS.is_debug_build():
+		TargetDebug.queue_free()
 	
 func _input(event):
 	if !GameController.is_paused && GameController.is_movement_enabled:
@@ -44,31 +49,32 @@ func _physics_process(_delta):
 	HandleBoundary()
 	
 	var ship = ShipData.Ship()
+	var distanceToTravel = min(ship.TravelSpeed * _delta, position.distance_to(target))
 	
-	if position.distance_to(target) > 5:
+	if distanceToTravel > 0.001 && ship.Fuel > 0.001:
 		
-		var distanceToTravel = ship.TravelSpeed * _delta
-		var fuelRequired = distanceToTravel * ship.FuelPerUnitDistance
+		var fuelRequired = min(distanceToTravel * ship.FuelPerUnitDistance, ship.Fuel)
+		var availableFuelFraction = min(1.0, ship.Fuel / ship.FuelPerUnitDistance)
+		var speedToHitTargetThisFrame = availableFuelFraction * distanceToTravel / _delta
 		
-		if ship.Fuel >= fuelRequired:
+		look_at(target)
+		velocity = position.direction_to(target) * speedToHitTargetThisFrame
+		velocity = move_and_slide(velocity)
+		ShipData.ConsumeFuel(fuelRequired)
 			
-			look_at(target)
-			velocity = position.direction_to(target) * ship.TravelSpeed
-			velocity = move_and_slide(velocity)
-			ship.Fuel -= fuelRequired
-			
-		elif ship.Fuel > 0.001:
-			
-			look_at(target)
-			var availableFuelFraction = ship.Fuel / ship.FuelPerUnitDistance
-			velocity = position.direction_to(target) * ship.TravelSpeed * availableFuelFraction
-			velocity = move_and_slide(velocity)
-			ship.Fuel = 0.0
-			
-		else:
-			
-			ship.Fuel = 0.0
-			#TODO: trigger fadeout and respawn at nearest outpost
+	else:
+		
+		target = position
 	
-	ship.X = position.x / MapScale
-	ship.Y = position.y / MapScale
+	TargetDebug.position = target
+	_setMapPosition(position)
+
+func _setMapPosition(newPosition):
+	position = newPosition
+	ShipData.Ship().X = position.x / MapScale
+	ShipData.Ship().Y = position.y / MapScale
+
+func JumpToMapPosition(newPosition):
+	_setMapPosition(newPosition)
+	target = newPosition
+	mouseIsPressed = false

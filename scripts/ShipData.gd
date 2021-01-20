@@ -7,6 +7,7 @@ var SavedSinceLoad = false
 var DatabaseFileName = "res://ship_data/shiptestdata.json"
 var SavedDatabaseFileName = "user://shiptestdata_PLAYERSAVE.json"
 
+signal FuelTanksEmpty
 
 func _ready():
 	self.LoadShipData(DatabaseFileName)
@@ -75,6 +76,15 @@ func Ship() :
 		print("Ship Data Not Loaded! FAILING ON PURPOSE FIX THIS")
 	else:
 		return StarShip
+		
+func ConsumeFuel(amount):
+	StarShip.Fuel -= amount
+	if StarShip.Fuel < 0.001:
+		StarShip.Fuel = 0
+		emit_signal("FuelTanksEmpty")
+		
+func Refuel():
+	StarShip.Fuel = StarShip.FuelCapacity
 
 func PayToVisitAStar():
 	return PayResourcesDefaultToCrew(2, 1.0)
@@ -103,8 +113,7 @@ func PayResourcesDefaultToCrew(resourcesToPay, crewLostPerUnpaidResource):
 			availableResources.Quantity = 0
 		
 		paid.Crew = difference * crewLostPerUnpaidResource
-		StarShip.Crew -= paid.Crew
-		#TODO: notify GameControllere of new crew count for game over check
+		DeductCrew(paid.Crew)
 	else:
 		availableResources.Quantity -= paid.Resources
 	
