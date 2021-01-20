@@ -5,6 +5,7 @@ var velocity = Vector2()
 var MapScale = StarMapData.MapScale
 var MinCameraZoom = 0.5
 var MaxCameraZoom = 3
+var mouseIsPressed = false
 
 func _ready():
 	self.position = Vector2(ShipData.Ship().X * MapScale, ShipData.Ship().Y * MapScale)
@@ -13,13 +14,12 @@ func _ready():
 	
 func _input(event):
 	if !GameController.is_paused && GameController.is_movement_enabled:
-		if event.is_action_pressed('starmap_click'):
-			#if position.distance_to(get_global_mouse_position()) <= Ship.Efficiency * MapScale :
-			target = get_global_mouse_position()
 		if event is InputEventMouseButton:
-			if event.button_index == BUTTON_WHEEL_DOWN and event.pressed:
+			if event.button_index == BUTTON_LEFT:
+				mouseIsPressed = event.pressed
+			elif event.button_index == BUTTON_WHEEL_DOWN and event.pressed:
 				Zoom(0.25)
-			if event.button_index == BUTTON_WHEEL_UP and event.pressed:
+			elif event.button_index == BUTTON_WHEEL_UP and event.pressed:
 				Zoom(-0.25)
 
 func Zoom(amount) :
@@ -37,6 +37,9 @@ func HandleBoundary() :
 		
 func _physics_process(_delta):
 	if GameController.is_paused: return
+	
+	if mouseIsPressed:
+		target = get_global_mouse_position()
 	
 	HandleBoundary()
 	
