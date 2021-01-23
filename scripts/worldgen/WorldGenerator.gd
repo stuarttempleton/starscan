@@ -21,7 +21,11 @@ export var Artifact2_Chance = 0.15
 export var Artifact3_Chance = 0.05
 export var MaxTargetTries = 5
 
+export var NameGenerationNodePath = ""
+var NameGenerator
+
 func _ready():
+	NameGenerator = get_parent().get_node(NameGenerationNodePath)
 	if (seedNumber < 0):
 		 print("World generator seed is negative, choosing a random seed")
 	generate(seedNumber if seedNumber >= 0 else randi())
@@ -53,7 +57,7 @@ func generateStars(rng):
 	stars.resize(starCount)
 	for i in range(starCount):
 		var star = Dictionary()
-		star.Name = "System " + str(i+1)
+		star.Name = NameGenerator.CreateWord().capitalize()
 		star.X = positions[i].x
 		star.Y = positions[i].y
 		star.Scan = 0.0
@@ -67,7 +71,7 @@ func generatePlanets(rng, starName):
 	planets.resize(planetCount)
 	for j in range(planetCount):
 		var planet = Dictionary()
-		planet.Name = starName + " Planet " + str(j+1)
+		planet.Name = NameGenerator.CreateWord().capitalize()
 		planet.Type = StarMapData.PlanetTypes[rng.randi_range(0, StarMapData.PlanetTypes.size()-1)]
 		planet.Size = StarMapData.PlanetSizes[rng.randi_range(0, StarMapData.PlanetSizes.size()-1)]
 		planet.Ring = (rng.randf() <= RingChance)
