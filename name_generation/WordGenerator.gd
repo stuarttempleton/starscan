@@ -1,13 +1,13 @@
 extends Node
 
 var LanguageStructure = {
-	"Vowels":[["a",8.12],
+	"V":[["a",8.12],
 		["e",12],
 		["i",7.31],
 		["o",7.68],
 		["u",2.88],
 		["y",2.11]],
-	"Consonants":[["b",1.49],
+	"C":[["b",1.49],
 		["c",2.71],
 		["d",4.32],
 		["f",2.3],
@@ -63,10 +63,7 @@ func CreateWord():
 	var pattern = GetWeightedItem(LanguageStructure["CharacterPatterns"],2)[0]
 	var output = ""
 	for i in pattern.length():
-		if (pattern[i] == "V"):
-			output += GetWeightedItem(LanguageStructure["Vowels"],2)[0]
-		elif(pattern[i] == "C"):
-			output += GetWeightedItem(LanguageStructure["Consonants"],3)[0]
+		output += GetWeightedItem(LanguageStructure[pattern[i]],3)[0]
 	return(output)
 
 func CreateWordList(_qty):
