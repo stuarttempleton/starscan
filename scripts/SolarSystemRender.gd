@@ -4,6 +4,7 @@ export var planet_scene_path = ""
 var system
 
 var orbit_color = Color(0.2, 0.2, 0.2)
+var built = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,7 +13,9 @@ func _ready():
 	system = StarMapData.NearestSystem
 	
 func _draw():
-	BuildSystem()
+	if(!built):
+		BuildSystem()
+		built = true
 
 func BuildSystem():
 	var center = Vector2(get_viewport().get_visible_rect().size.x/2, get_viewport().get_visible_rect().size.y/2)

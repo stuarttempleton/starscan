@@ -12,11 +12,15 @@ func _ready():
 
 func _generate_planet_map(planet_type):
 	for _i in self.get_children ():
-		if (_i.name != "Control"):
+		if (_i.get_class() != "Control"):
 			_i.visible = false
 	get_node(planet_type).visible = true
-	get_node(planet_type)._generate()
+	#get_node(planet_type)._generate()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+
+func _on_LeaveOrbitButton_pressed():
+	get_parent().ViewSystem()

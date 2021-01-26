@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scripts/SysView_Leave_Button.gd" type="Script" id=1]
 [ext_resource path="res://scripts/SolarSystemRender.gd" type="Script" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://scripts/SystemNameLabel.gd" type="Script" id=7]
 [ext_resource path="res://sprites/fuel_100px.png" type="Texture" id=8]
 [ext_resource path="res://scripts/SystemDetailLabel.gd" type="Script" id=9]
+[ext_resource path="res://scripts/SystemViewportController.gd" type="Script" id=10]
+[ext_resource path="res://planet_maps/PlanetMap.tscn" type="PackedScene" id=11]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-Light.ttf"
@@ -57,21 +59,24 @@ outline_color = Color( 0, 0, 0, 1 )
 font_data = SubResource( 11 )
 
 [node name="SystemViewPort" type="Node2D"]
+script = ExtResource( 10 )
 
 [node name="VFX Scene" parent="." instance=ExtResource( 6 )]
 
-[node name="SolarSystem" type="Node2D" parent="."]
+[node name="SystemView" type="Node2D" parent="."]
+
+[node name="SolarSystem" type="Node2D" parent="SystemView"]
 script = ExtResource( 2 )
 planet_scene_path = "res://sprites/planets/planet.tscn"
 
-[node name="SystemViewUI" type="Control" parent="."]
+[node name="SystemViewUI" type="Control" parent="SystemView"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LeaveSystem" type="Button" parent="SystemViewUI"]
+[node name="LeaveSystem" type="Button" parent="SystemView/SystemViewUI"]
 margin_left = 448.0
 margin_top = 536.0
 margin_right = 576.0
@@ -83,7 +88,8 @@ __meta__ = {
 }
 StarMapViewport_scene = "res://scenes/StarMapViewport.tscn"
 
-[node name="PlanetCard" type="NinePatchRect" parent="SystemViewUI"]
+[node name="PlanetCard" type="NinePatchRect" parent="SystemView/SystemViewUI"]
+visible = false
 margin_left = 744.0
 margin_top = 176.0
 margin_right = 960.0
@@ -93,7 +99,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="SystemViewUI/PlanetCard"]
+[node name="Label" type="Label" parent="SystemView/SystemViewUI/PlanetCard"]
 margin_left = 8.0
 margin_top = 32.0
 margin_right = 208.0
@@ -105,7 +111,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="SystemViewUI/PlanetCard"]
+[node name="Button" type="Button" parent="SystemView/SystemViewUI/PlanetCard"]
 margin_left = 24.0
 margin_top = 312.0
 margin_right = 192.0
@@ -116,13 +122,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="SystemViewUI/PlanetCard"]
+[node name="Sprite" type="Sprite" parent="SystemView/SystemViewUI/PlanetCard"]
 self_modulate = Color( 1.1, 1.1, 1.3, 1 )
 position = Vector2( 109, 152 )
 scale = Vector2( 0.45, 0.45 )
 texture = ExtResource( 4 )
 
-[node name="Label2" type="Label" parent="SystemViewUI/PlanetCard"]
+[node name="Label2" type="Label" parent="SystemView/SystemViewUI/PlanetCard"]
 visible = false
 margin_left = 8.0
 margin_top = 264.0
@@ -136,7 +142,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SystemViewUI/PlanetCard"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SystemView/SystemViewUI/PlanetCard"]
 visible = false
 margin_left = 40.0
 margin_top = 248.0
@@ -146,81 +152,81 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="SystemViewUI/PlanetCard/HBoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="SystemView/SystemViewUI/PlanetCard/HBoxContainer"]
 margin_right = 10.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 10, 10 )
 color = Color( 0, 1.2, 0, 1 )
 
-[node name="ColorRect2" type="ColorRect" parent="SystemViewUI/PlanetCard/HBoxContainer"]
+[node name="ColorRect2" type="ColorRect" parent="SystemView/SystemViewUI/PlanetCard/HBoxContainer"]
 margin_left = 14.0
 margin_right = 24.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 10, 10 )
 color = Color( 0, 1.2, 0, 1 )
 
-[node name="ColorRect3" type="ColorRect" parent="SystemViewUI/PlanetCard/HBoxContainer"]
+[node name="ColorRect3" type="ColorRect" parent="SystemView/SystemViewUI/PlanetCard/HBoxContainer"]
 margin_left = 28.0
 margin_right = 38.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 10, 10 )
 color = Color( 0, 1.2, 0, 1 )
 
-[node name="ColorRect6" type="ColorRect" parent="SystemViewUI/PlanetCard/HBoxContainer"]
+[node name="ColorRect6" type="ColorRect" parent="SystemView/SystemViewUI/PlanetCard/HBoxContainer"]
 margin_left = 42.0
 margin_right = 52.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 10, 10 )
 color = Color( 0.188235, 0.188235, 1, 1 )
 
-[node name="ColorRect7" type="ColorRect" parent="SystemViewUI/PlanetCard/HBoxContainer"]
+[node name="ColorRect7" type="ColorRect" parent="SystemView/SystemViewUI/PlanetCard/HBoxContainer"]
 margin_left = 56.0
 margin_right = 66.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 10, 10 )
 color = Color( 0.188235, 0.188235, 1, 1 )
 
-[node name="ColorRect8" type="ColorRect" parent="SystemViewUI/PlanetCard/HBoxContainer"]
+[node name="ColorRect8" type="ColorRect" parent="SystemView/SystemViewUI/PlanetCard/HBoxContainer"]
 margin_left = 70.0
 margin_right = 80.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 10, 10 )
 color = Color( 0.188235, 0.188235, 1, 1 )
 
-[node name="ColorRect4" type="ColorRect" parent="SystemViewUI/PlanetCard/HBoxContainer"]
+[node name="ColorRect4" type="ColorRect" parent="SystemView/SystemViewUI/PlanetCard/HBoxContainer"]
 margin_left = 84.0
 margin_right = 94.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 10, 10 )
 color = Color( 1.2, 0, 0, 1 )
 
-[node name="ColorRect5" type="ColorRect" parent="SystemViewUI/PlanetCard/HBoxContainer"]
+[node name="ColorRect5" type="ColorRect" parent="SystemView/SystemViewUI/PlanetCard/HBoxContainer"]
 margin_left = 98.0
 margin_right = 108.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 10, 10 )
 color = Color( 1.2, 0, 0, 1 )
 
-[node name="ColorRect9" type="ColorRect" parent="SystemViewUI/PlanetCard/HBoxContainer"]
+[node name="ColorRect9" type="ColorRect" parent="SystemView/SystemViewUI/PlanetCard/HBoxContainer"]
 margin_left = 112.0
 margin_right = 122.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 10, 10 )
 color = Color( 0.231373, 0.231373, 0.231373, 1 )
 
-[node name="ColorRect10" type="ColorRect" parent="SystemViewUI/PlanetCard/HBoxContainer"]
+[node name="ColorRect10" type="ColorRect" parent="SystemView/SystemViewUI/PlanetCard/HBoxContainer"]
 margin_left = 126.0
 margin_right = 136.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 10, 10 )
 color = Color( 0.231373, 0.231373, 0.231373, 1 )
 
-[node name="Sprite2" type="Sprite" parent="SystemViewUI/PlanetCard"]
+[node name="Sprite2" type="Sprite" parent="SystemView/SystemViewUI/PlanetCard"]
 position = Vector2( 49, 257 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 
-[node name="Label3" type="Label" parent="SystemViewUI/PlanetCard"]
+[node name="Label3" type="Label" parent="SystemView/SystemViewUI/PlanetCard"]
 margin_left = 33.0
 margin_top = 257.0
 margin_right = 89.0
@@ -233,12 +239,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite3" type="Sprite" parent="SystemViewUI/PlanetCard"]
+[node name="Sprite3" type="Sprite" parent="SystemView/SystemViewUI/PlanetCard"]
 position = Vector2( 105, 257 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 8 )
 
-[node name="Label4" type="Label" parent="SystemViewUI/PlanetCard"]
+[node name="Label4" type="Label" parent="SystemView/SystemViewUI/PlanetCard"]
 margin_left = 89.0
 margin_top = 257.0
 margin_right = 145.0
@@ -251,12 +257,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite4" type="Sprite" parent="SystemViewUI/PlanetCard"]
+[node name="Sprite4" type="Sprite" parent="SystemView/SystemViewUI/PlanetCard"]
 position = Vector2( 161, 257 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 
-[node name="Label5" type="Label" parent="SystemViewUI/PlanetCard"]
+[node name="Label5" type="Label" parent="SystemView/SystemViewUI/PlanetCard"]
 margin_left = 145.0
 margin_top = 257.0
 margin_right = 201.0
@@ -269,7 +275,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SystemNameLabel" type="Label" parent="."]
+[node name="SystemNameLabel" type="Label" parent="SystemView"]
 margin_left = 288.0
 margin_top = 4.76837e-07
 margin_right = 848.0
@@ -283,10 +289,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SystemDetailLabel" type="Label" parent="."]
+[node name="SystemDetailLabel" type="Label" parent="SystemView"]
 margin_left = 32.0
 margin_top = -32.0
-margin_right = 194.0
+margin_right = 239.0
 margin_bottom = 568.0
 custom_fonts/font = SubResource( 12 )
 text = "SYSTEM NAME
@@ -297,4 +303,6 @@ script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="button_down" from="SystemViewUI/LeaveSystem" to="SystemViewUI/LeaveSystem" method="_on_button_down"]
+
+[node name="PlanetView" parent="." instance=ExtResource( 11 )]
+[connection signal="button_down" from="SystemView/SystemViewUI/LeaveSystem" to="SystemView/SystemViewUI/LeaveSystem" method="_on_button_down"]

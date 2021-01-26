@@ -19,7 +19,8 @@ func _ready():
 
 func planet_selected():
 	if (PlanetID >= 0):
-	 print("Selected: %s" % [PlanetID])
+		print("Selected: %s" % [PlanetID])
+		get_parent().get_parent().get_parent().ViewPlanet(PlanetID)
 	
 func SetPlanetInfo(planet_type, planet_scale, planet_id):
 	for _p in Planets.values():
