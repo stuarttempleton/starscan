@@ -20,14 +20,106 @@ export var meta_data = [
 	["MapLayer8", 6, 0.2, true],
 	["MapLayer9", 6, 0.2, true]
 	]
-
+var planetary_meta_data = { 
+	"Gas":[
+		["MapLayer1", 0, 1, false],
+		["MapLayer2", 7, 0.8, false],
+		["MapLayer3", 1, -0.1, false],
+		["MapLayer4", 2, 0.2, false],
+		["MapLayer5", 3, -0.2, false],
+		["MapLayer6", 4, -0.22, false],
+		["MapLayer7", 5, -0.24, false],
+		["MapLayer8", 6, 0.2, true],
+		["MapLayer9", 6, 0.2, true]],
+	"Ice":[
+		["MapLayer1", 0, 1, false],
+		["MapLayer2", 7, 0.8, false],
+		["MapLayer3", 1, -0.1, false],
+		["MapLayer4", 2, 0.2, false],
+		["MapLayer5", 3, -0.2, false],
+		["MapLayer6", 4, -0.22, false],
+		["MapLayer7", 5, -0.24, false],
+		["MapLayer8", 6, 0.2, true],
+		["MapLayer9", 6, 0.2, true]],
+	"Lava":[
+		["MapLayer1", 0, 1, false],
+		["MapLayer2", 7, 0.8, false],
+		["MapLayer3", 1, -0.1, false],
+		["MapLayer4", 2, 0.2, false],
+		["MapLayer5", 3, -0.2, false],
+		["MapLayer6", 4, -0.22, false],
+		["MapLayer7", 5, -0.24, false],
+		["MapLayer8", 6, 0.2, true],
+		["MapLayer9", 6, 0.2, true]],
+	"Goldilocks":[
+		["MapLayer1", 0, 1, false],
+		["MapLayer2", 7, 0.8, false],
+		["MapLayer3", 1, -0.1, false],
+		["MapLayer4", 2, 0.2, false],
+		["MapLayer5", 3, -0.2, false],
+		["MapLayer6", 4, -0.22, false],
+		["MapLayer7", 5, -0.24, false],
+		["MapLayer8", 6, 0.2, true],
+		["MapLayer9", 6, 0.2, true]],
+	"Desert":[
+		["MapLayer1", 0, 1, false],
+		["MapLayer2", 7, 0.8, false],
+		["MapLayer3", 1, -0.1, false],
+		["MapLayer4", 2, 0.2, false],
+		["MapLayer5", 3, -0.2, false],
+		["MapLayer6", 4, -0.22, false],
+		["MapLayer7", 5, -0.24, false],
+		["MapLayer8", 6, 0.2, true],
+		["MapLayer9", 6, 0.2, true]],
+	"Ocean":[
+		["MapLayer1", 0, 1, false],
+		["MapLayer2", 7, 0.8, false],
+		["MapLayer3", 1, -0.1, false],
+		["MapLayer4", 2, 0.2, false],
+		["MapLayer5", 3, -0.2, false],
+		["MapLayer6", 4, -0.22, false],
+		["MapLayer7", 5, -0.24, false],
+		["MapLayer8", 6, 0.2, true],
+		["MapLayer9", 6, 0.2, true]],
+	"Asteroid Belt":[
+		["MapLayer1", 0, 1, false],
+		["MapLayer2", 7, 0.8, false],
+		["MapLayer3", 1, -0.1, false],
+		["MapLayer4", 2, 0.2, false],
+		["MapLayer5", 3, -0.2, false],
+		["MapLayer6", 4, -0.22, false],
+		["MapLayer7", 5, -0.24, false],
+		["MapLayer8", 6, 0.2, true],
+		["MapLayer9", 6, 0.2, true]],
+	"Comet":[
+		["MapLayer1", 0, 1, false],
+		["MapLayer2", 7, 0.8, false],
+		["MapLayer3", 1, -0.1, false],
+		["MapLayer4", 2, 0.2, false],
+		["MapLayer5", 3, -0.2, false],
+		["MapLayer6", 4, -0.22, false],
+		["MapLayer7", 5, -0.24, false],
+		["MapLayer8", 6, 0.2, true],
+		["MapLayer9", 6, 0.2, true]],
+	"Outpost":[
+		["MapLayer1", 0, 1, false],
+		["MapLayer2", 7, 0.8, false],
+		["MapLayer3", 1, -0.1, false],
+		["MapLayer4", 2, 0.2, false],
+		["MapLayer5", 3, -0.2, false],
+		["MapLayer6", 4, -0.22, false],
+		["MapLayer7", 5, -0.24, false],
+		["MapLayer8", 6, 0.2, true],
+		["MapLayer9", 6, 0.2, true]],
+	}
+	
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_generate()
+	_generate("Goldilocks")
 	
-func _generate():
+func _generate(planet_type):
 	make_some_noise()
-	for layer_meta in meta_data:
+	for layer_meta in planetary_meta_data[planet_type]:
 		make_map_layer(layer_meta)
 		
 func make_some_noise():

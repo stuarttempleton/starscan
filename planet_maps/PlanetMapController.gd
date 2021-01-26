@@ -1,26 +1,20 @@
 extends Node2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	_generate_planet_map("Goldilocks")
 	pass
 
+
 func _generate_planet_map(planet_type):
-	for _i in self.get_children ():
-		if (_i.get_class() != "Control"):
-			_i.visible = false
-	get_node(planet_type).visible = true
-	#get_node(planet_type)._generate()
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	$PlanetMap.visible = true
+	$PlanetMap._generate(planet_type)
 
 
 func _on_LeaveOrbitButton_pressed():
 	get_parent().ViewSystem()
+
+
+func _on_generate_button_pressed(planet_type):
+	$PlanetMap._generate(planet_type)
