@@ -4,4 +4,4 @@
 
 [node name="StarMapData" type="Node"]
 script = ExtResource( 1 )
-DatabaseFileName = "res://starmap_data/generated/Generated_2021-1-23_15-45-45_-6022814405790740079.json"
+DatabaseFileName = "res://starmap_data/generated/Generated_2021-1-26_15-0-28_4849723487210453756.json"

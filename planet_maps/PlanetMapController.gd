@@ -3,13 +3,12 @@ extends Node2D
 
 
 func _ready():
-	_generate_planet_map("Goldilocks")
 	pass
 
 
-func _generate_planet_map(planet_type):
+func _generate_planet_map(planet):
 	$PlanetMap.visible = true
-	$PlanetMap._generate(planet_type)
+	$PlanetMap._generate(planet)
 
 
 func _on_LeaveOrbitButton_pressed():
