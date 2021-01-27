@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scripts/SysView_Leave_Button.gd" type="Script" id=1]
 [ext_resource path="res://scripts/SolarSystemRender.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://scripts/SystemDetailLabel.gd" type="Script" id=9]
 [ext_resource path="res://scripts/SystemViewportController.gd" type="Script" id=10]
 [ext_resource path="res://planet_maps/PlanetMap.tscn" type="PackedScene" id=11]
+[ext_resource path="res://sprites/UI_planet_hover_border.png" type="Texture" id=12]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-Light.ttf"
@@ -57,6 +58,15 @@ size = 17
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = SubResource( 11 )
+
+[sub_resource type="DynamicFontData" id=13]
+font_path = "res://fonts/Montserrat-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=14]
+size = 15
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = SubResource( 13 )
 
 [node name="SystemViewPort" type="Node2D"]
 script = ExtResource( 10 )
@@ -300,6 +310,41 @@ Known planets: 4
 Planet Name - Giant - Ice"
 valign = 2
 script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverUI" type="Control" parent="."]
+visible = false
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 32.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 0.5, 0.5 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="HoverUI"]
+self_modulate = Color( 1.2, 0.51, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HoverUI"]
+margin_left = -32.0
+margin_top = 72.0
+margin_right = 96.0
+margin_bottom = 88.0
+custom_fonts/font = SubResource( 14 )
+custom_colors/font_color = Color( 1.2, 0.51, 0, 1 )
+text = "Planet Name"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

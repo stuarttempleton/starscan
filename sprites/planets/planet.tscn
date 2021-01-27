@@ -15,7 +15,7 @@
 [ext_resource path="res://sprites/planets/PlanetClick.gd" type="Script" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 30, 30 )
+extents = Vector2( 16, 16 )
 
 [node name="Planet" type="Node2D"]
 script = ExtResource( 2 )

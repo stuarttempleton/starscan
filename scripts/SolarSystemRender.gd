@@ -23,7 +23,7 @@ func BuildSystem():
 	print("building system: %s (%d)" % [system.Name, system_size])
 	
 	#build star
-	AddPlanetToMap(center, "Giant", "Star", -1)
+	AddPlanetToMap(center, "Giant", "Star", -1, system.Name)
 	
 	var orbital_radius = 50 #start here
 	
@@ -34,17 +34,17 @@ func BuildSystem():
 		var next_planet_center = draw_circle_arc(center, orbital_radius, 0, 360, orbit_color )
 		randomize()
 		orbital_radius += planet.RadialOffset
-		AddPlanetToMap(next_planet_center, planet.Size, planet.Type, i)
+		AddPlanetToMap(next_planet_center, planet.Size, planet.Type, i, planet.Name)
 		i += 1
 
-func AddPlanetToMap( planet_position, planet_size, planet_type, planet_id ) :
+func AddPlanetToMap( planet_position, planet_size, planet_type, planet_id, planet_name ) :
 	var loaded_scene = load(planet_scene_path)
 	var planet = loaded_scene.instance()
 	add_child(planet)
 	
 	#set position, sprite, and scale
 	planet.position = planet_position
-	planet.SetPlanetInfo(planet_type, planet_size, planet_id)
+	planet.SetPlanetInfo(planet_type, planet_size, planet_id, planet_name)
 
 func draw_circle_arc(center, radius, angle_from, angle_to, color):
 	var nb_points = 64
