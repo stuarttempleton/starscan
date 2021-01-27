@@ -83,6 +83,7 @@ func generatePlanets(rng, starName):
 		planet.PerceivedResourceCount = -1
 		planet.PerceivedDudCount = -1
 		planet.SurfaceSeednumber = rng.randi_range(0, 2147483646)
+		planet.RadialOffset = rng.randi_range(25, 60)
 		planets[j] = planet
 	return planets
 	

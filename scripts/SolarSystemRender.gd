@@ -25,7 +25,6 @@ func BuildSystem():
 	#build star
 	AddPlanetToMap(center, "Giant", "Star", -1)
 	
-	var radius_offset = 50
 	var orbital_radius = 50 #start here
 	
 	#Build orbits and planets
@@ -34,7 +33,7 @@ func BuildSystem():
 		print(planet.Type)
 		var next_planet_center = draw_circle_arc(center, orbital_radius, 0, 360, orbit_color )
 		randomize()
-		orbital_radius += rand_range(25, radius_offset)
+		orbital_radius += planet.RadialOffset
 		AddPlanetToMap(next_planet_center, planet.Size, planet.Type, i)
 		i += 1
 
