@@ -211,27 +211,6 @@ cell_size = Vector2( 8, 8 )
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 format = 1
 
-[node name="PlanetOrbitUI" type="Control" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LeaveOrbitButton" type="Button" parent="PlanetOrbitUI"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = 448.0
-margin_top = 536.0
-margin_right = 576.0
-margin_bottom = 576.0
-text = "LEAVE ORBIT"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="GeneratorUI" type="Control" parent="."]
 visible = false
 margin_left = 512.0
@@ -301,7 +280,6 @@ margin_top = 192.0
 margin_right = 128.0
 margin_bottom = 212.0
 text = "Outpost"
-[connection signal="pressed" from="PlanetOrbitUI/LeaveOrbitButton" to="." method="_on_LeaveOrbitButton_pressed"]
 [connection signal="pressed" from="GeneratorUI/GeneratorButtonList/Gas" to="." method="_on_generate_button_pressed" binds= [ "Gas" ]]
 [connection signal="pressed" from="GeneratorUI/GeneratorButtonList/Ice" to="." method="_on_generate_button_pressed" binds= [ "Ice" ]]
 [connection signal="pressed" from="GeneratorUI/GeneratorButtonList/Lava" to="." method="_on_generate_button_pressed" binds= [ "Lava" ]]

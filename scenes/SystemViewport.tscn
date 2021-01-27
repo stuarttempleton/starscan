@@ -14,17 +14,19 @@
 [ext_resource path="res://sprites/UI_planet_hover_border.png" type="Texture" id=12]
 
 [sub_resource type="DynamicFontData" id=1]
-font_path = "res://fonts/Montserrat-Light.ttf"
+font_path = "res://fonts/Montserrat-Regular.ttf"
 
 [sub_resource type="DynamicFont" id=2]
-size = 17
+size = 30
 font_data = SubResource( 1 )
 
 [sub_resource type="DynamicFontData" id=3]
-font_path = "res://fonts/Montserrat-SemiBold.ttf"
+font_path = "res://fonts/Montserrat-ExtraLight.ttf"
 
 [sub_resource type="DynamicFont" id=4]
-size = 12
+size = 17
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
 font_data = SubResource( 3 )
 
 [sub_resource type="DynamicFontData" id=5]
@@ -32,40 +34,38 @@ font_path = "res://fonts/Montserrat-Regular.ttf"
 
 [sub_resource type="DynamicFont" id=6]
 size = 15
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
 font_data = SubResource( 5 )
 
 [sub_resource type="DynamicFontData" id=7]
-font_path = "res://fonts/Montserrat-Black.ttf"
+font_path = "res://fonts/Montserrat-Light.ttf"
 
 [sub_resource type="DynamicFont" id=8]
-size = 20
-outline_size = 3
-outline_color = Color( 0, 0, 0, 0.780392 )
+size = 17
 font_data = SubResource( 7 )
 
 [sub_resource type="DynamicFontData" id=9]
-font_path = "res://fonts/Montserrat-Regular.ttf"
+font_path = "res://fonts/Montserrat-SemiBold.ttf"
 
 [sub_resource type="DynamicFont" id=10]
-size = 30
+size = 12
 font_data = SubResource( 9 )
 
 [sub_resource type="DynamicFontData" id=11]
-font_path = "res://fonts/Montserrat-ExtraLight.ttf"
+font_path = "res://fonts/Montserrat-Regular.ttf"
 
 [sub_resource type="DynamicFont" id=12]
-size = 17
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
+size = 15
 font_data = SubResource( 11 )
 
 [sub_resource type="DynamicFontData" id=13]
-font_path = "res://fonts/Montserrat-Regular.ttf"
+font_path = "res://fonts/Montserrat-Black.ttf"
 
 [sub_resource type="DynamicFont" id=14]
-size = 15
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
+size = 20
+outline_size = 3
+outline_color = Color( 0, 0, 0, 0.780392 )
 font_data = SubResource( 13 )
 
 [node name="SystemViewPort" type="Node2D"]
@@ -79,219 +79,13 @@ script = ExtResource( 10 )
 script = ExtResource( 2 )
 planet_scene_path = "res://sprites/planets/planet.tscn"
 
-[node name="SystemViewUI" type="Control" parent="SystemView"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LeaveSystem" type="Button" parent="SystemView/SystemViewUI"]
-margin_left = 448.0
-margin_top = 536.0
-margin_right = 576.0
-margin_bottom = 576.0
-text = "LEAVE SYSTEM"
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-StarMapViewport_scene = "res://scenes/StarMapViewport.tscn"
-
-[node name="PlanetCard" type="NinePatchRect" parent="SystemView/SystemViewUI"]
-visible = false
-margin_left = 744.0
-margin_top = 176.0
-margin_right = 960.0
-margin_bottom = 544.0
-texture = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="SystemView/SystemViewUI/PlanetCard"]
-margin_left = 8.0
-margin_top = 32.0
-margin_right = 208.0
-margin_bottom = 58.0
-custom_fonts/font = SubResource( 2 )
-text = "AMALTHEA"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button" type="Button" parent="SystemView/SystemViewUI/PlanetCard"]
-margin_left = 24.0
-margin_top = 312.0
-margin_right = 192.0
-margin_bottom = 344.0
-custom_fonts/font = SubResource( 4 )
-text = "GATHER RESOURCES"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Sprite" type="Sprite" parent="SystemView/SystemViewUI/PlanetCard"]
-self_modulate = Color( 1.1, 1.1, 1.3, 1 )
-position = Vector2( 109, 152 )
-scale = Vector2( 0.45, 0.45 )
-texture = ExtResource( 4 )
-
-[node name="Label2" type="Label" parent="SystemView/SystemViewUI/PlanetCard"]
-visible = false
-margin_left = 8.0
-margin_top = 264.0
-margin_right = 208.0
-margin_bottom = 291.0
-custom_fonts/font = SubResource( 6 )
-text = "Scan accuracy: 80%"
-align = 1
-valign = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HBoxContainer" type="HBoxContainer" parent="SystemView/SystemViewUI/PlanetCard"]
-visible = false
-margin_left = 40.0
-margin_top = 248.0
-margin_right = 176.0
-margin_bottom = 264.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="SystemView/SystemViewUI/PlanetCard/HBoxContainer"]
-margin_right = 10.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 10, 10 )
-color = Color( 0, 1.2, 0, 1 )
-
-[node name="ColorRect2" type="ColorRect" parent="SystemView/SystemViewUI/PlanetCard/HBoxContainer"]
-margin_left = 14.0
-margin_right = 24.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 10, 10 )
-color = Color( 0, 1.2, 0, 1 )
-
-[node name="ColorRect3" type="ColorRect" parent="SystemView/SystemViewUI/PlanetCard/HBoxContainer"]
-margin_left = 28.0
-margin_right = 38.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 10, 10 )
-color = Color( 0, 1.2, 0, 1 )
-
-[node name="ColorRect6" type="ColorRect" parent="SystemView/SystemViewUI/PlanetCard/HBoxContainer"]
-margin_left = 42.0
-margin_right = 52.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 10, 10 )
-color = Color( 0.188235, 0.188235, 1, 1 )
-
-[node name="ColorRect7" type="ColorRect" parent="SystemView/SystemViewUI/PlanetCard/HBoxContainer"]
-margin_left = 56.0
-margin_right = 66.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 10, 10 )
-color = Color( 0.188235, 0.188235, 1, 1 )
-
-[node name="ColorRect8" type="ColorRect" parent="SystemView/SystemViewUI/PlanetCard/HBoxContainer"]
-margin_left = 70.0
-margin_right = 80.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 10, 10 )
-color = Color( 0.188235, 0.188235, 1, 1 )
-
-[node name="ColorRect4" type="ColorRect" parent="SystemView/SystemViewUI/PlanetCard/HBoxContainer"]
-margin_left = 84.0
-margin_right = 94.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 10, 10 )
-color = Color( 1.2, 0, 0, 1 )
-
-[node name="ColorRect5" type="ColorRect" parent="SystemView/SystemViewUI/PlanetCard/HBoxContainer"]
-margin_left = 98.0
-margin_right = 108.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 10, 10 )
-color = Color( 1.2, 0, 0, 1 )
-
-[node name="ColorRect9" type="ColorRect" parent="SystemView/SystemViewUI/PlanetCard/HBoxContainer"]
-margin_left = 112.0
-margin_right = 122.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 10, 10 )
-color = Color( 0.231373, 0.231373, 0.231373, 1 )
-
-[node name="ColorRect10" type="ColorRect" parent="SystemView/SystemViewUI/PlanetCard/HBoxContainer"]
-margin_left = 126.0
-margin_right = 136.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 10, 10 )
-color = Color( 0.231373, 0.231373, 0.231373, 1 )
-
-[node name="Sprite2" type="Sprite" parent="SystemView/SystemViewUI/PlanetCard"]
-position = Vector2( 49, 257 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 3 )
-
-[node name="Label3" type="Label" parent="SystemView/SystemViewUI/PlanetCard"]
-margin_left = 33.0
-margin_top = 257.0
-margin_right = 89.0
-margin_bottom = 297.0
-custom_fonts/font = SubResource( 8 )
-text = "x1"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Sprite3" type="Sprite" parent="SystemView/SystemViewUI/PlanetCard"]
-position = Vector2( 105, 257 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 8 )
-
-[node name="Label4" type="Label" parent="SystemView/SystemViewUI/PlanetCard"]
-margin_left = 89.0
-margin_top = 257.0
-margin_right = 145.0
-margin_bottom = 297.0
-custom_fonts/font = SubResource( 8 )
-text = "x3"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Sprite4" type="Sprite" parent="SystemView/SystemViewUI/PlanetCard"]
-position = Vector2( 161, 257 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 3 )
-
-[node name="Label5" type="Label" parent="SystemView/SystemViewUI/PlanetCard"]
-margin_left = 145.0
-margin_top = 257.0
-margin_right = 201.0
-margin_bottom = 297.0
-custom_fonts/font = SubResource( 8 )
-text = "x2"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="SystemNameLabel" type="Label" parent="SystemView"]
 margin_left = 288.0
 margin_top = 4.76837e-07
 margin_right = 848.0
 margin_bottom = 50.0
 rect_scale = Vector2( 0.8, 0.8 )
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 2 )
 text = "TANTALUS V"
 align = 1
 script = ExtResource( 7 )
@@ -304,7 +98,7 @@ margin_left = 32.0
 margin_top = -32.0
 margin_right = 239.0
 margin_bottom = 568.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 4 )
 text = "SYSTEM NAME
 Known planets: 4
 Planet Name - Giant - Ice"
@@ -341,7 +135,7 @@ margin_left = -32.0
 margin_top = 72.0
 margin_right = 96.0
 margin_bottom = 88.0
-custom_fonts/font = SubResource( 14 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1.2, 0.51, 0, 1 )
 text = "Planet Name"
 align = 1
@@ -350,4 +144,241 @@ __meta__ = {
 }
 
 [node name="PlanetView" parent="." instance=ExtResource( 11 )]
-[connection signal="button_down" from="SystemView/SystemViewUI/LeaveSystem" to="SystemView/SystemViewUI/LeaveSystem" method="_on_button_down"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SystemViewUI" type="Control" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -192.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlanetCard" type="NinePatchRect" parent="CanvasLayer/SystemViewUI"]
+visible = false
+margin_left = 744.0
+margin_top = 176.0
+margin_right = 960.0
+margin_bottom = 544.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/SystemViewUI/PlanetCard"]
+margin_left = 8.0
+margin_top = 32.0
+margin_right = 208.0
+margin_bottom = 58.0
+custom_fonts/font = SubResource( 8 )
+text = "AMALTHEA"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="CanvasLayer/SystemViewUI/PlanetCard"]
+margin_left = 24.0
+margin_top = 312.0
+margin_right = 192.0
+margin_bottom = 344.0
+custom_fonts/font = SubResource( 10 )
+text = "GATHER RESOURCES"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="CanvasLayer/SystemViewUI/PlanetCard"]
+self_modulate = Color( 1.1, 1.1, 1.3, 1 )
+position = Vector2( 109, 152 )
+scale = Vector2( 0.45, 0.45 )
+texture = ExtResource( 4 )
+
+[node name="Label2" type="Label" parent="CanvasLayer/SystemViewUI/PlanetCard"]
+visible = false
+margin_left = 8.0
+margin_top = 264.0
+margin_right = 208.0
+margin_bottom = 291.0
+custom_fonts/font = SubResource( 12 )
+text = "Scan accuracy: 80%"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/SystemViewUI/PlanetCard"]
+visible = false
+margin_left = 40.0
+margin_top = 248.0
+margin_right = 176.0
+margin_bottom = 264.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/SystemViewUI/PlanetCard/HBoxContainer"]
+margin_right = 10.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 10, 10 )
+color = Color( 0, 1.2, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/SystemViewUI/PlanetCard/HBoxContainer"]
+margin_left = 14.0
+margin_right = 24.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 10, 10 )
+color = Color( 0, 1.2, 0, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="CanvasLayer/SystemViewUI/PlanetCard/HBoxContainer"]
+margin_left = 28.0
+margin_right = 38.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 10, 10 )
+color = Color( 0, 1.2, 0, 1 )
+
+[node name="ColorRect6" type="ColorRect" parent="CanvasLayer/SystemViewUI/PlanetCard/HBoxContainer"]
+margin_left = 42.0
+margin_right = 52.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 10, 10 )
+color = Color( 0.188235, 0.188235, 1, 1 )
+
+[node name="ColorRect7" type="ColorRect" parent="CanvasLayer/SystemViewUI/PlanetCard/HBoxContainer"]
+margin_left = 56.0
+margin_right = 66.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 10, 10 )
+color = Color( 0.188235, 0.188235, 1, 1 )
+
+[node name="ColorRect8" type="ColorRect" parent="CanvasLayer/SystemViewUI/PlanetCard/HBoxContainer"]
+margin_left = 70.0
+margin_right = 80.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 10, 10 )
+color = Color( 0.188235, 0.188235, 1, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="CanvasLayer/SystemViewUI/PlanetCard/HBoxContainer"]
+margin_left = 84.0
+margin_right = 94.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 10, 10 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect5" type="ColorRect" parent="CanvasLayer/SystemViewUI/PlanetCard/HBoxContainer"]
+margin_left = 98.0
+margin_right = 108.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 10, 10 )
+color = Color( 1.2, 0, 0, 1 )
+
+[node name="ColorRect9" type="ColorRect" parent="CanvasLayer/SystemViewUI/PlanetCard/HBoxContainer"]
+margin_left = 112.0
+margin_right = 122.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 10, 10 )
+color = Color( 0.231373, 0.231373, 0.231373, 1 )
+
+[node name="ColorRect10" type="ColorRect" parent="CanvasLayer/SystemViewUI/PlanetCard/HBoxContainer"]
+margin_left = 126.0
+margin_right = 136.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 10, 10 )
+color = Color( 0.231373, 0.231373, 0.231373, 1 )
+
+[node name="Sprite2" type="Sprite" parent="CanvasLayer/SystemViewUI/PlanetCard"]
+position = Vector2( 49, 257 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="Label3" type="Label" parent="CanvasLayer/SystemViewUI/PlanetCard"]
+margin_left = 33.0
+margin_top = 257.0
+margin_right = 89.0
+margin_bottom = 297.0
+custom_fonts/font = SubResource( 14 )
+text = "x1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite3" type="Sprite" parent="CanvasLayer/SystemViewUI/PlanetCard"]
+position = Vector2( 105, 257 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 8 )
+
+[node name="Label4" type="Label" parent="CanvasLayer/SystemViewUI/PlanetCard"]
+margin_left = 89.0
+margin_top = 257.0
+margin_right = 145.0
+margin_bottom = 297.0
+custom_fonts/font = SubResource( 14 )
+text = "x3"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite4" type="Sprite" parent="CanvasLayer/SystemViewUI/PlanetCard"]
+position = Vector2( 161, 257 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="Label5" type="Label" parent="CanvasLayer/SystemViewUI/PlanetCard"]
+margin_left = 145.0
+margin_top = 257.0
+margin_right = 201.0
+margin_bottom = 297.0
+custom_fonts/font = SubResource( 14 )
+text = "x2"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ActionButtons" type="VBoxContainer" parent="CanvasLayer/SystemViewUI"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -150.0
+margin_top = 510.0
+margin_right = -49.0
+margin_bottom = -50.0
+grow_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeaveOrbit" type="Button" parent="CanvasLayer/SystemViewUI/ActionButtons"]
+visible = false
+margin_right = 101.0
+margin_bottom = 40.0
+grow_vertical = 0
+rect_min_size = Vector2( 0, 40 )
+text = "LEAVE ORBIT"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+StarMapViewport_scene = "res://scenes/StarMapViewport.tscn"
+
+[node name="LeaveSystem" type="Button" parent="CanvasLayer/SystemViewUI/ActionButtons"]
+margin_right = 101.0
+margin_bottom = 40.0
+grow_vertical = 0
+rect_min_size = Vector2( 0, 40 )
+text = "LEAVE SYSTEM"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+StarMapViewport_scene = "res://scenes/StarMapViewport.tscn"
+[connection signal="button_down" from="CanvasLayer/SystemViewUI/ActionButtons/LeaveOrbit" to="." method="ViewSystem"]
+[connection signal="button_down" from="CanvasLayer/SystemViewUI/ActionButtons/LeaveSystem" to="CanvasLayer/SystemViewUI/ActionButtons/LeaveSystem" method="_on_button_down"]
