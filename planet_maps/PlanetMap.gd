@@ -9,17 +9,17 @@ var noise
 var map_size = Vector2(120,60)
 
 # tilemap_node, tilemap cell, noise threshold, randi() noise
-export var meta_data = [
-	["MapLayer1", 0, 1, false],
-	["MapLayer2", 7, 0.8, false],
-	["MapLayer3", 1, -0.1, false],
-	["MapLayer4", 2, 0.2, false],
-	["MapLayer5", 3, -0.2, false],
-	["MapLayer6", 4, -0.22, false],
-	["MapLayer7", 5, -0.24, false],
-	["MapLayer8", 6, 0.2, true],
-	["MapLayer9", 6, 0.2, true]
-	]
+#export var meta_data = [
+#	["MapLayer1", 0, 1, false],
+#	["MapLayer2", 7, 0.8, false],
+#	["MapLayer3", 1, -0.1, false],
+#	["MapLayer4", 2, 0.2, false],
+#	["MapLayer5", 3, -0.2, false],
+#	["MapLayer6", 4, -0.22, false],
+#	["MapLayer7", 5, -0.24, false],
+#	["MapLayer8", 6, 0.2, true],
+#	["MapLayer9", 6, 0.2, true]
+#	]
 var planetary_meta_data = { 
 	"Gas":[
 		["MapLayer1", 0, 1, false],
@@ -32,13 +32,13 @@ var planetary_meta_data = {
 		["MapLayer8", 6, 0.2, true],
 		["MapLayer9", 6, 0.2, true]],
 	"Ice":[
-		["MapLayer1", 0, 1, false],
-		["MapLayer2", 7, 0.8, false],
-		["MapLayer3", 1, -0.1, false],
-		["MapLayer4", 2, 0.2, false],
-		["MapLayer5", 3, -0.2, false],
-		["MapLayer6", 4, -0.22, false],
-		["MapLayer7", 5, -0.24, false],
+		["MapLayer1", 6, 1, false],
+		["MapLayer2", 6, 0.8, false],
+		["MapLayer3", 6, -0.1, false],
+		["MapLayer4", 6, 0.2, false],
+		["MapLayer5", 6, -0.2, false],
+		["MapLayer6", 1, -0.22, false],
+		["MapLayer7", 6, -0.24, false],
 		["MapLayer8", 6, 0.2, true],
 		["MapLayer9", 6, 0.2, true]],
 	"Lava":[
@@ -62,14 +62,14 @@ var planetary_meta_data = {
 		["MapLayer8", 6, 0.2, true],
 		["MapLayer9", 6, 0.2, true]],
 	"Desert":[
-		["MapLayer1", 0, 1, false],
-		["MapLayer2", 7, 0.8, false],
+		["MapLayer1", 3, 1, false],
+		["MapLayer2", 3, 0.8, false],
 		["MapLayer3", 1, -0.1, false],
 		["MapLayer4", 2, 0.2, false],
 		["MapLayer5", 3, -0.2, false],
-		["MapLayer6", 4, -0.22, false],
-		["MapLayer7", 5, -0.24, false],
-		["MapLayer8", 6, 0.2, true],
+		["MapLayer6", 2, -0.22, false],
+		["MapLayer7", 2, -0.24, false],
+		["MapLayer8", 3, 0.2, true],
 		["MapLayer9", 6, 0.2, true]],
 	"Ocean":[
 		["MapLayer1", 0, 1, false],
