@@ -159,5 +159,5 @@ text = "Outpost"
 [connection signal="pressed" from="GeneratorUI/GeneratorButtonList/Desert" to="." method="_on_generate_button_pressed" binds= [ "Desert" ]]
 [connection signal="pressed" from="GeneratorUI/GeneratorButtonList/Ocean" to="." method="_on_generate_button_pressed" binds= [ "Ocean" ]]
 [connection signal="pressed" from="GeneratorUI/GeneratorButtonList/Asteroid Belt" to="." method="_on_generate_button_pressed" binds= [ "Asteroid Belt" ]]
-[connection signal="pressed" from="GeneratorUI/GeneratorButtonList/Comet" to="." method="_on_generate_button_pressed" binds= [ "Outpost" ]]
+[connection signal="pressed" from="GeneratorUI/GeneratorButtonList/Comet" to="." method="_on_generate_button_pressed" binds= [ "Comet" ]]
 [connection signal="pressed" from="GeneratorUI/GeneratorButtonList/Outpost" to="." method="_on_generate_button_pressed" binds= [ "Outpost" ]]

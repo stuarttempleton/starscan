@@ -103,7 +103,23 @@ func GetNearestOutpostSystem(origin):
 			NearestOutpostSystem = system
 			
 	return NearestOutpostSystem
+
+func GetPlanetsByType(planet_type):
+	var planets = []
 	
+	for system in StarMapData.Systems():
+		for planet in system.Planets:
+			if (planet_type == planet.Type):
+				planets.append(planet)
+	return planets
+
+
+func GetRandomPlanetByType(planet_type):
+	var planets = GetPlanetsByType(planet_type)
+	
+	return planets[randi()%planets.size()]
+
+
 func FindNearestSystem(origin):
 	var NearbySystem = StarMap.Systems[0]
 	var previous_distance = origin.distance_to(Vector2(StarMap.Systems[0].X, StarMap.Systems[0].Y))

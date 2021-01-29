@@ -14,6 +14,5 @@ func _generate_planet_map(planet):
 func _on_LeaveOrbitButton_pressed():
 	get_parent().ViewSystem()
 
-
 func _on_generate_button_pressed(planet_type):
-	$PlanetMap._generate(planet_type)
+	$PlanetMap._generate(StarMapData.GetRandomPlanetByType(planet_type))
