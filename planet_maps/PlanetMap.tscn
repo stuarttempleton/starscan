@@ -25,7 +25,7 @@ __meta__ = {
 }
 
 [node name="PlanetMap" type="Node2D" parent="."]
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 0.75, 0.75 )
 script = ExtResource( 2 )
 
 [node name="MapLayer1" type="TileMap" parent="PlanetMap"]
@@ -36,51 +36,43 @@ format = 1
 [node name="MapLayer2" type="TileMap" parent="PlanetMap"]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 8, 8 )
-cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 format = 1
 
 [node name="MapLayer3" type="TileMap" parent="PlanetMap"]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 8, 8 )
-cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 format = 1
 
 [node name="MapLayer4" type="TileMap" parent="PlanetMap"]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 8, 8 )
-cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 format = 1
 
 [node name="MapLayer5" type="TileMap" parent="PlanetMap"]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 8, 8 )
-cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 format = 1
 
 [node name="MapLayer6" type="TileMap" parent="PlanetMap"]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 8, 8 )
-cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 format = 1
 
 [node name="MapLayer7" type="TileMap" parent="PlanetMap"]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 8, 8 )
-cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 format = 1
 
 [node name="MapLayer8" type="TileMap" parent="PlanetMap"]
 self_modulate = Color( 1, 1, 1, 0.129412 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 8, 8 )
-cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 format = 1
 
 [node name="MapLayer9" type="TileMap" parent="PlanetMap"]
 self_modulate = Color( 0.678431, 0.678431, 0.678431, 0.223529 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 8, 8 )
-cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 format = 1
 
 [node name="GeneratorUI" type="Control" parent="."]

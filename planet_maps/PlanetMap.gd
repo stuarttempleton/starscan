@@ -117,6 +117,22 @@ var planet
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# start centered
+	var mapX = get_viewport().get_visible_rect().size.x/2
+	var mapY = get_viewport().get_visible_rect().size.y/2
+	
+	# apply offset based on map size.
+	mapX -= map_size.x / 2 * ($MapLayer1.cell_size.x * scale.x)
+	mapY -= map_size.y / 2 * ($MapLayer1.cell_size.y * scale.y)
+	
+	# apply adjustment for scale changes
+	#mapX *= (1 / scale.x)
+	#mapY *= (1 / scale.y)
+	
+	var center = Vector2(mapX, mapY)
+	position = center
+	
+	print(center)
 	pass
 
 
