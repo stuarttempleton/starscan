@@ -15,6 +15,7 @@ script = ExtResource( 6 )
 
 [node name="Starfield" type="Node2D" parent="."]
 script = ExtResource( 1 )
+NebulaPath = "res://scenes/background space dust.tscn"
 
 [node name="ShipAvatarView" parent="." instance=ExtResource( 2 )]
 

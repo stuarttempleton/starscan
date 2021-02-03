@@ -2,6 +2,7 @@ extends Node
 
 export var seedNumber = -1
 export var MinStarDistance = 0.05
+export var MinNebulaDistance = 0.2
 export var MinOutpostDistance = 0.2
 export var TotalArtifacts = 100
 export var MinPlanetsPerStar = 1
@@ -37,6 +38,7 @@ func generate(seednumber):
 	
 	var map = Dictionary()
 	map.Systems = generateStars(rng)
+	map.Nebulae = generateNebulae(rng)
 	var filename = serializeToFile(map, rng)
 	print("...World generated. Saved to file " + filename)
 	
@@ -46,6 +48,23 @@ func serializeToFile(map, rng):
 	var filename = "res://starmap_data/generated/Generated_" + str(currtime.year) + "-" + str(currtime.month) + "-" + str(currtime.day) + "_" + str(currtime.hour) + "-" + str(currtime.minute) + "-" + str(currtime.second) + "_" + str(rng.seed) + ".json"
 	StarMapData.Save(filename)
 	return filename
+
+func generateNebulae(rng):
+	var posGen = StarPosGenerator.new()
+	posGen.MaxTargetTries = MaxTargetTries
+	posGen.MinStarDistance = MinNebulaDistance
+	var positions = posGen.generate(rng)
+	var nebCount = positions.size()
+	var nebs = []
+	nebs.resize(nebCount)
+	for i in range(nebCount):
+		var neb = Dictionary()
+		neb.Name = NameGenerator.CreateWord().capitalize()
+		neb.X = positions[i].x
+		neb.Y = positions[i].y
+		neb.Size = StarMapData.PlanetSizes[rng.randi_range(0, StarMapData.PlanetSizes.size()-1)]
+		nebs[i] = neb
+	return nebs
 	
 func generateStars(rng):
 	var posGen = StarPosGenerator.new()

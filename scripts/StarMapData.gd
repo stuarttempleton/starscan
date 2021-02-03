@@ -78,6 +78,12 @@ func Save(filename):
 	file.store_string(JSON.print(StarMap, "\t"))
 	file.close()
 	SavedSinceLoad = true;
+
+func Nebulae() :
+	if !Loaded :
+		print("StarMap Not Loaded! FAILING ON PURPOSE FIX THIS")
+	else:
+		return StarMap.Nebulae
 	
 func Systems() :
 	if !Loaded :
