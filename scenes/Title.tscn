@@ -19,7 +19,7 @@ __meta__ = {
 [node name="StarField" parent="." instance=ExtResource( 3 )]
 
 [node name="Nebula" parent="." instance=ExtResource( 4 )]
-position = Vector2( 512, 696 )
+position = Vector2( 512, 832 )
 scale = Vector2( 5, 5 )
 
 [node name="MainMenu" parent="." instance=ExtResource( 1 )]
