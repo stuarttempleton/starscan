@@ -6,7 +6,7 @@ var target = Vector2()
 var velocity = Vector2()
 var MapScale = StarMapData.MapScale
 var MinCameraZoom = 0.5
-var MaxCameraZoom = 3
+var MaxCameraZoom = 2
 var mouseIsPressed = false
 
 func _ready():

@@ -12,16 +12,9 @@ func _ready():
 	
 	for nebula in StarMapData.Nebulae():
 		print("Building nebula: ", nebula.Name)
-		AddNebulaToMap(Vector2(nebula.X * MapScale, nebula.Y * MapScale), get_nebula_scale(nebula.Size))
+		AddNebulaToMap(Vector2(nebula.X * MapScale, nebula.Y * MapScale), StarMapData.get_nebula_scale(nebula.Size))
 		pass
 
-func get_nebula_scale(size_str):
-	var nebula_size = 5
-	if (size_str == "Medium"):
-		nebula_size = 3
-	elif (size_str == "Tiny"):
-		nebula_size = 1
-	return nebula_size
 	
 func AddNebulaToMap(pos,size):
 	var loaded_scene = load(NebulaPath)

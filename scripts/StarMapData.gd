@@ -10,6 +10,8 @@ export var SavedDatabaseFileName = "user://testdata_PLAYERSAVE.json"
 
 var NearestSystem = null
 var NearestSystemDistance = INF
+var NearestNebula = null
+var NearestNebulaDistance = INF
 
 var PlanetTypes = [
 	"Gas",
@@ -125,7 +127,28 @@ func GetRandomPlanetByType(planet_type):
 	
 	return planets[randi()%planets.size()]
 
+func get_nebula_scale(size_str):
+	var nebula_size = 5
+	if (size_str == "Medium"):
+		nebula_size = 3
+	elif (size_str == "Tiny"):
+		nebula_size = 1
+	return nebula_size
 
+func DistanceToNearestNebula(origin):
+	var Nearbynebula = StarMap.Nebulae[0]
+	var previous_distance = origin.distance_to(Vector2(StarMap.Nebulae[0].X, StarMap.Nebulae[0].Y))
+	
+	for nebula in StarMap.Nebulae :
+		var distance = origin.distance_to(Vector2(nebula.X, nebula.Y))
+		if (distance < previous_distance):
+			previous_distance = distance
+			Nearbynebula = nebula
+			
+	NearestNebula = Nearbynebula
+	NearestNebulaDistance = previous_distance
+	return NearestNebulaDistance
+	
 func FindNearestSystem(origin):
 	var NearbySystem = StarMap.Systems[0]
 	var previous_distance = origin.distance_to(Vector2(StarMap.Systems[0].X, StarMap.Systems[0].Y))

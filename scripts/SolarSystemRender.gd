@@ -12,6 +12,24 @@ func _ready():
 		StarMapData.FindNearestSystem(Vector2(ShipData.Ship().X,ShipData.Ship().Y))
 	system = StarMapData.NearestSystem
 	
+	StarMapData.DistanceToNearestNebula(Vector2(system.X, system.Y))
+	var nebuladistance = StarMapData.NearestNebulaDistance
+	var nebula = StarMapData.NearestNebula
+	var nebulascale = StarMapData.get_nebula_scale(nebula.Size)
+	
+	print("Dist to nebula: ", nebuladistance)
+	print("Dist checking: ", 0.01 * nebulascale)
+	print("NEBULA ", nebula.Name)
+	
+	if ( nebuladistance < 0.015 * nebulascale ):
+		print("Close to nebula!")
+		$"../../Nebula".visible = true
+		var distance_scaling = nebuladistance / (0.01 * nebulascale)
+		print (distance_scaling)
+		$"../../Nebula".scale = Vector2($"../../Nebula".scale.x * distance_scaling, $"../../Nebula".scale.y * distance_scaling)
+	else:
+		$"../../Nebula".visible = false
+
 func _draw():
 	if(!built):
 		BuildSystem()
