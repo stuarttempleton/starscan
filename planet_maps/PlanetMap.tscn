@@ -76,7 +76,6 @@ cell_size = Vector2( 8, 8 )
 format = 1
 
 [node name="GeneratorUI" type="Control" parent="."]
-visible = false
 margin_left = 512.0
 margin_top = 64.0
 margin_right = 552.0

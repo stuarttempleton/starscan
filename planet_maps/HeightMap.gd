@@ -5,6 +5,18 @@ export var colormap: GradientTexture
 const L8_MAX := 255 #8 bit max color
 
 
+export var PlanetGradientMaps = {
+	"Gas":"res://planet_maps/goldilocks_planet_surface_gradient.tres",
+	"Ice":"res://planet_maps/ice_planet_surface_gradient.tres",
+	"Lava":"res://planet_maps/lava_planet_surface_gradient.tres",
+	"Goldilocks":"res://planet_maps/goldilocks_planet_surface_gradient.tres",
+	"Desert":"res://planet_maps/desert_planet_surface_gradient.tres",
+	"Ocean":"res://planet_maps/ocean_planet_surface_gradient.tres",
+	"Asteroid Belt":"res://planet_maps/goldilocks_planet_surface_gradient.tres",
+	"Comet":"res://planet_maps/goldilocks_planet_surface_gradient.tres",
+	"Outpost":"res://planet_maps/goldilocks_planet_surface_gradient.tres"
+}
+
 func _ready() -> void:
 	_generate(StarMapData.GetRandomPlanetByType("Goldilocks"))
 
@@ -12,13 +24,16 @@ func _ready() -> void:
 func _generate(planet):
 	print("Building map for ", planet.Name, " seed ", planet.SurfaceSeednumber)
 	$"../PlanetName".text = planet.Name
-	var _seed = planet.SurfaceSeednumber
+	
+	var planet_texture_gradient = GradientTexture.new()
+	planet_texture_gradient.gradient = load(PlanetGradientMaps[planet.Type])
+	
 	var new_noise = OpenSimplexNoise.new()
 	new_noise.period = texture.noise.period
 	new_noise.octaves = texture.noise.octaves
 	new_noise.persistence = texture.noise.persistence
 	new_noise.lacunarity = texture.noise.lacunarity
-	new_noise.seed = _seed
+	new_noise.seed = planet.SurfaceSeednumber
 	
 	var new_texture = NoiseTexture.new()
 	new_texture.height = texture.get_height()
@@ -34,6 +49,7 @@ func _generate(planet):
 	
 	# Use the material's `set_shader_param` method to assign values to a shader's uniforms.
 	material.set_shader_param("noise_minmax", heightmap_minmax)
+	material.set_shader_param("colormap", planet_texture_gradient)
 	pass
 
 # gotta normalize the noise data to 0..1
