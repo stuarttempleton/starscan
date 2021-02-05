@@ -124,7 +124,7 @@ func GetPlanetsByType(planet_type):
 
 func GetRandomPlanetByType(planet_type):
 	var planets = GetPlanetsByType(planet_type)
-	
+	randomize()
 	return planets[randi()%planets.size()]
 
 func get_nebula_scale(size_str):

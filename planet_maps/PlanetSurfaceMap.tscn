@@ -1,0 +1,120 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://planet_maps/HeightMap.gd" type="Script" id=1]
+[ext_resource path="res://sprites/smoke-particle-png-2.png" type="Texture" id=2]
+[ext_resource path="res://scenes/VFX Scene.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+// Our gradient texture.
+uniform sampler2D colormap : hint_black;
+
+uniform vec2 noise_minmax = vec2(0.0, 1.0);
+
+void fragment() {
+	// Using `noise_minmax`, we normalize our `noise` variable's range.
+	float noise = (texture(TEXTURE, UV).r - noise_minmax.x) / (noise_minmax.y - noise_minmax.x);
+	vec2 uv_noise = vec2(noise, 0);
+	COLOR = texture(colormap, uv_noise);
+}"
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.20284, 0.438134, 0.440162, 0.503704, 0.607407, 0.905405 )
+colors = PoolColorArray( 0, 0.0268555, 0.429688, 1, 0, 0.123603, 0.522347, 1, 0, 0.304199, 0.695313, 1, 0.777344, 0.731939, 0.576935, 1, 0.691406, 0.580694, 0.424026, 1, 0.03479, 0.46875, 0.0822544, 1, 0.00556946, 0.285156, 0.0361492, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 1 )
+shader_param/noise_minmax = Vector2( 0, 1 )
+shader_param/colormap = SubResource( 3 )
+
+[sub_resource type="OpenSimplexNoise" id=5]
+octaves = 9
+period = 128.0
+
+[sub_resource type="NoiseTexture" id=6]
+width = 800
+height = 400
+noise = SubResource( 5 )
+
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 2 )
+
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 0, 0.00552486, 0.370166, 0.690608, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.091954, 1, 1, 1, 0, 2, 2, 2, 1, 1.90196, 1.90196, 1.90196, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=10]
+emission_shape = 2
+emission_box_extents = Vector3( 300, 100, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 5.0
+angle_random = 1.0
+scale = 0.25
+color_ramp = SubResource( 9 )
+
+[sub_resource type="DynamicFontData" id=11]
+font_path = "res://fonts/Montserrat-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=12]
+size = 29
+outline_size = 3
+outline_color = Color( 0, 0, 0, 0.109804 )
+font_data = SubResource( 11 )
+
+[node name="PlanetSurfaceMap" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VFX Scene" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[node name="HeightMap" type="TextureRect" parent="."]
+material = SubResource( 4 )
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -256.0
+margin_bottom = 256.0
+texture = SubResource( 6 )
+stretch_mode = 4
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+colormap = SubResource( 7 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 512, 320 )
+amount = 5
+lifetime = 10.0
+preprocess = 10.0
+process_material = SubResource( 10 )
+texture = ExtResource( 2 )
+
+[node name="PlanetName" type="Label" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -8.0
+margin_top = -136.0
+margin_right = -8.0
+margin_bottom = -97.0
+custom_fonts/font = SubResource( 12 )
+text = "PLANET"
+align = 1
+valign = 2
+uppercase = true

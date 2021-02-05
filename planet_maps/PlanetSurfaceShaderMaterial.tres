@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[ext_resource path="res://planet_maps/PlanetSurfaceMap.shader" type="Shader" id=1]
+[ext_resource path="res://planet_maps/goldilocks_planet_surface_gradient.tres" type="Gradient" id=2]
+
+[sub_resource type="GradientTexture" id=5]
+gradient = ExtResource( 2 )
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/noise_minmax = Vector2( 0, 1 )
+shader_param/colormap = SubResource( 5 )
