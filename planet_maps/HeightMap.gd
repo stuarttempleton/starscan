@@ -12,13 +12,13 @@ export var PlanetGradientMaps = {
 	"Goldilocks":"res://planet_maps/goldilocks_planet_surface_gradient.tres",
 	"Desert":"res://planet_maps/desert_planet_surface_gradient.tres",
 	"Ocean":"res://planet_maps/ocean_planet_surface_gradient.tres",
-	"Asteroid Belt":"res://planet_maps/goldilocks_planet_surface_gradient.tres",
-	"Comet":"res://planet_maps/goldilocks_planet_surface_gradient.tres",
+	"Asteroid Belt":"res://planet_maps/asteroid_planet_surface_gradient.tres",
+	"Comet":"res://planet_maps/comet_planet_surface_gradient.tres",
 	"Outpost":"res://planet_maps/goldilocks_planet_surface_gradient.tres"
 }
 
 func _ready() -> void:
-	_generate(StarMapData.GetRandomPlanetByType("Goldilocks"))
+	_generate(StarMapData.GetRandomPlanetByType("Comet"))
 
 
 func _generate(planet):

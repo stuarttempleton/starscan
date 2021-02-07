@@ -3,7 +3,7 @@
 [ext_resource path="res://planet_maps/HeightMap.gd" type="Script" id=1]
 [ext_resource path="res://sprites/smokeparticle.png" type="Texture" id=2]
 [ext_resource path="res://scenes/VFX Scene.tscn" type="PackedScene" id=3]
-[ext_resource path="res://planet_maps/ocean_planet_surface_gradient.tres" type="Gradient" id=4]
+[ext_resource path="res://planet_maps/comet_planet_surface_gradient.tres" type="Gradient" id=4]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -20,34 +20,34 @@ void fragment() {
 	COLOR = texture(colormap, uv_noise);
 }"
 
-[sub_resource type="GradientTexture" id=13]
+[sub_resource type="GradientTexture" id=2]
 gradient = ExtResource( 4 )
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=3]
 shader = SubResource( 1 )
 shader_param/noise_minmax = Vector2( 0, 1 )
-shader_param/colormap = SubResource( 13 )
+shader_param/colormap = SubResource( 2 )
 
-[sub_resource type="OpenSimplexNoise" id=5]
+[sub_resource type="OpenSimplexNoise" id=4]
 octaves = 9
 period = 128.0
 
-[sub_resource type="NoiseTexture" id=6]
+[sub_resource type="NoiseTexture" id=5]
 width = 1024
 height = 600
-noise = SubResource( 5 )
+noise = SubResource( 4 )
 
-[sub_resource type="GradientTexture" id=14]
+[sub_resource type="GradientTexture" id=6]
 gradient = ExtResource( 4 )
 
-[sub_resource type="Gradient" id=8]
+[sub_resource type="Gradient" id=7]
 offsets = PoolRealArray( 0, 0.00552486, 0.370166, 0.690608, 1 )
 colors = PoolColorArray( 1, 1, 1, 0.091954, 1, 1, 1, 0, 2, 2, 2, 1, 1.90196, 1.90196, 1.90196, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=9]
-gradient = SubResource( 8 )
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 7 )
 
-[sub_resource type="ParticlesMaterial" id=10]
+[sub_resource type="ParticlesMaterial" id=9]
 emission_shape = 2
 emission_box_extents = Vector3( 400, 300, 1 )
 flag_disable_z = true
@@ -61,16 +61,16 @@ angle = 15.9
 angle_random = 1.0
 scale = 3.0
 scale_random = 1.0
-color_ramp = SubResource( 9 )
+color_ramp = SubResource( 8 )
 
-[sub_resource type="DynamicFontData" id=11]
+[sub_resource type="DynamicFontData" id=10]
 font_path = "res://fonts/Montserrat-Regular.ttf"
 
-[sub_resource type="DynamicFont" id=12]
+[sub_resource type="DynamicFont" id=11]
 size = 29
 outline_size = 3
 outline_color = Color( 0, 0, 0, 0.403922 )
-font_data = SubResource( 11 )
+font_data = SubResource( 10 )
 
 [node name="PlanetSurfaceMap" type="Control"]
 anchor_right = 1.0
@@ -83,19 +83,19 @@ __meta__ = {
 visible = false
 
 [node name="HeightMap" type="TextureRect" parent="."]
-material = SubResource( 4 )
+material = SubResource( 3 )
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 margin_top = -300.0
 margin_bottom = 300.0
-texture = SubResource( 6 )
+texture = SubResource( 5 )
 stretch_mode = 4
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-colormap = SubResource( 14 )
+colormap = SubResource( 6 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 visible = false
@@ -104,7 +104,7 @@ position = Vector2( 512, 320 )
 amount = 10
 lifetime = 20.0
 preprocess = 10.0
-process_material = SubResource( 10 )
+process_material = SubResource( 9 )
 texture = ExtResource( 2 )
 
 [node name="PlanetName" type="Label" parent="."]
@@ -113,8 +113,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -64.0
 margin_bottom = -25.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 11 )
 text = "PLANET"
 align = 1
 valign = 2
 uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
