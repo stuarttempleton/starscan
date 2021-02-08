@@ -6,7 +6,7 @@ const L8_MAX := 255 #8 bit max color
 
 
 export var PlanetGradientMaps = {
-	"Gas":"res://planet_maps/goldilocks_planet_surface_gradient.tres",
+	"Gas":"res://planet_maps/gas_planet_surface_gradient.tres",
 	"Ice":"res://planet_maps/ice_planet_surface_gradient.tres",
 	"Lava":"res://planet_maps/lava_planet_surface_gradient.tres",
 	"Goldilocks":"res://planet_maps/goldilocks_planet_surface_gradient.tres",
@@ -18,7 +18,7 @@ export var PlanetGradientMaps = {
 }
 
 func _ready() -> void:
-	_generate(StarMapData.GetRandomPlanetByType("Comet"))
+	_generate(StarMapData.GetRandomPlanetByType("Gas"))
 
 
 func _generate(planet):
