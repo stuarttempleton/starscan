@@ -25,10 +25,10 @@ __meta__ = {
 }
 
 [node name="Vitals" type="VBoxContainer" parent="."]
-margin_left = -36.5721
-margin_top = 21.7818
-margin_right = 313.428
-margin_bottom = 93.7818
+margin_left = -32.0
+margin_top = 48.0
+margin_right = 318.0
+margin_bottom = 120.0
 size_flags_vertical = 0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -158,9 +158,14 @@ ship_value_key = "Fuel"
 ship_capacity_key = "FuelCapacity"
 
 [node name="StatusText" type="HBoxContainer" parent="."]
-margin_top = 556.0
-margin_right = 1024.0
-margin_bottom = 577.0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -512.0
+margin_top = -56.0
+margin_right = 512.0
+margin_bottom = -35.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

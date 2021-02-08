@@ -54,12 +54,12 @@ scale = Vector2( 5, 5 )
 script = ExtResource( 2 )
 planet_scene_path = "res://sprites/planets/planet.tscn"
 
-[node name="SystemNameLabel" type="Label" parent="SystemView"]
-margin_left = 288.0
-margin_top = 4.76837e-07
-margin_right = 848.0
-margin_bottom = 50.0
-rect_scale = Vector2( 0.8, 0.8 )
+[node name="Control" type="CanvasLayer" parent="SystemView"]
+
+[node name="SystemNameLabel" type="Label" parent="SystemView/Control"]
+anchor_right = 1.0
+margin_top = 40.0
+margin_bottom = 78.0
 custom_fonts/font = SubResource( 2 )
 text = "TANTALUS V"
 align = 1
@@ -68,11 +68,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SystemDetailLabel" type="Label" parent="SystemView"]
+[node name="SystemDetailLabel" type="Label" parent="SystemView/Control"]
+anchor_top = 1.0
+anchor_bottom = 1.0
 margin_left = 32.0
-margin_top = -32.0
+margin_top = -592.0
 margin_right = 239.0
-margin_bottom = 568.0
+margin_bottom = -56.0
 custom_fonts/font = SubResource( 4 )
 text = "SYSTEM NAME
 Known planets: 4
@@ -121,12 +123,17 @@ __meta__ = {
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PlanetSurfaceMap" parent="CanvasLayer" instance=ExtResource( 11 )]
+visible = false
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="SystemViewUI" type="Control" parent="CanvasLayer"]
 anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -192.0
+margin_top = -600.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
