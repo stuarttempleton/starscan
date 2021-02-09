@@ -42,14 +42,23 @@ noise = SubResource( 4 )
 [sub_resource type="GradientTexture" id=6]
 gradient = ExtResource( 4 )
 
-[sub_resource type="Gradient" id=7]
+[sub_resource type="DynamicFontData" id=7]
+font_path = "res://fonts/Montserrat-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=8]
+size = 29
+outline_size = 3
+outline_color = Color( 0, 0, 0, 0.403922 )
+font_data = SubResource( 7 )
+
+[sub_resource type="Gradient" id=9]
 offsets = PoolRealArray( 0, 0.00552486, 0.370166, 0.690608, 1 )
 colors = PoolColorArray( 1, 1, 1, 0.091954, 1, 1, 1, 0, 2, 2, 2, 1, 1.90196, 1.90196, 1.90196, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=8]
-gradient = SubResource( 7 )
+[sub_resource type="GradientTexture" id=10]
+gradient = SubResource( 9 )
 
-[sub_resource type="ParticlesMaterial" id=9]
+[sub_resource type="ParticlesMaterial" id=11]
 emission_shape = 2
 emission_box_extents = Vector3( 400, 300, 1 )
 flag_disable_z = true
@@ -63,16 +72,7 @@ angle = 15.9
 angle_random = 1.0
 scale = 3.0
 scale_random = 1.0
-color_ramp = SubResource( 8 )
-
-[sub_resource type="DynamicFontData" id=10]
-font_path = "res://fonts/Montserrat-Regular.ttf"
-
-[sub_resource type="DynamicFont" id=11]
-size = 29
-outline_size = 3
-outline_color = Color( 0, 0, 0, 0.403922 )
-font_data = SubResource( 10 )
+color_ramp = SubResource( 10 )
 
 [node name="PlanetSurfaceMap" type="Control"]
 anchor_right = 1.0
@@ -97,23 +97,13 @@ __meta__ = {
 }
 colormap = SubResource( 6 )
 
-[node name="Particles2D" type="Particles2D" parent="."]
-visible = false
-self_modulate = Color( 1, 1, 1, 0.2 )
-position = Vector2( 512, 320 )
-amount = 10
-lifetime = 20.0
-preprocess = 10.0
-process_material = SubResource( 9 )
-texture = ExtResource( 2 )
-
 [node name="PlanetName" type="Label" parent="."]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -64.0
 margin_bottom = -25.0
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 8 )
 text = "PLANET"
 align = 1
 valign = 2
@@ -124,3 +114,12 @@ __meta__ = {
 
 [node name="PointsOfInterest" type="Node2D" parent="."]
 script = ExtResource( 6 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+self_modulate = Color( 1, 1, 1, 0.2 )
+position = Vector2( 512, 320 )
+amount = 10
+lifetime = 20.0
+preprocess = 10.0
+process_material = SubResource( 11 )
+texture = ExtResource( 2 )

@@ -18,7 +18,8 @@ export var PlanetGradientMaps = {
 }
 
 func _ready() -> void:
-	_generate(StarMapData.GetRandomPlanetByType("Gas"))
+	#_generate(StarMapData.GetRandomPlanetByType("Desert"))
+	pass
 
 
 func _generate(planet):
