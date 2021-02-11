@@ -18,13 +18,11 @@ export var PlanetGradientMaps = {
 }
 
 func _ready() -> void:
-	#_generate(StarMapData.GetRandomPlanetByType("Desert"))
 	pass
 
 
 func _generate(planet):
 	print("Building map for ", planet.Name, " seed ", planet.SurfaceSeednumber)
-	$"../PlanetName".text = planet.Name
 	
 	var planet_texture_gradient = GradientTexture.new()
 	planet_texture_gradient.gradient = load(PlanetGradientMaps[planet.Type])
@@ -51,7 +49,6 @@ func _generate(planet):
 	# Use the material's `set_shader_param` method to assign values to a shader's uniforms.
 	material.set_shader_param("noise_minmax", heightmap_minmax)
 	material.set_shader_param("colormap", planet_texture_gradient)
-	
 	$"../PointsOfInterest"._generate(planet)
 	pass
 

@@ -14,18 +14,21 @@ func _ready():
 	$ClickArea.connect("unhover", self, "unhover")
 
 func hover(hover_position):
-	#get_parent().get_parent().get_parent().PlanetHover(hover_position, planet_name)
+	print(get_parent().get_parent().get_parent().get_parent().get_parent().name)
+	get_parent().get_parent().get_parent().get_parent().get_parent().POIHover(hover_position)
 	pass
-	
-	
+
+
 func unhover():
-	#get_parent().get_parent().get_parent().PlanetUnhover()
+	get_parent().get_parent().get_parent().get_parent().get_parent().POIUnhover()
 	pass
-	
-	
+
+
 func selected():
+	get_parent().get_parent().get_parent().get_parent().get_parent().POISelect()
 	pass
-	
+
+
 func SetPOIInfo(poi_type):
 	for _p in poi_types:
 		get_node(_p).visible = false

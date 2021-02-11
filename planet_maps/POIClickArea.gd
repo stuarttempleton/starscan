@@ -15,9 +15,9 @@ func _input_event(viewport, event, shape_idx):
 			emit_signal("selected")
 
 func mouse_enter():
-	print("mouse entered...")
+	#print("mouse entered...")
 	emit_signal("hover", get_parent().position)
 	
 func mouse_exit():
-	print("mouse exited...")
+	#print("mouse exited...")
 	emit_signal("unhover")

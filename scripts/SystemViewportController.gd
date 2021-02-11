@@ -1,8 +1,7 @@
 extends Node2D
 
 
-var allow_planet_click = false
-
+var allow_planet_click = false # this is a toggle for what you're viewing.
 
 func _ready():
 	ToggleView()
@@ -21,7 +20,7 @@ func PlanetUnhover():
 func ViewPlanet(_planetID):
 	if (allow_planet_click):
 		ToggleView()
-		$CanvasLayer/PlanetSurfaceMap._generate_planet_map($SystemView/SolarSystem.system.Planets[_planetID])
+		$CanvasLayer/PlanetSurface._generate_planet_map($SystemView/SolarSystem.system.Planets[_planetID])
 		$CanvasLayer/SystemViewUI/ActionButtons/LeaveOrbit.visible = true
 		$CanvasLayer/SystemViewUI/ActionButtons/LeaveSystem.visible = false
 
@@ -35,7 +34,16 @@ func ViewSystem():
 
 func ToggleView():
 	allow_planet_click = !allow_planet_click
-	$CanvasLayer/PlanetSurfaceMap.visible = !allow_planet_click
+	$CanvasLayer/PlanetSurface.visible = !allow_planet_click
 	$CanvasLayer/SystemViewUI/ActionButtons/LeaveOrbit.visible = !allow_planet_click
 	$CanvasLayer/SystemViewUI/ActionButtons/LeaveSystem.visible = allow_planet_click
+
+func POIHover(_point):
+	print("POIHover()")
+
+func POIUnhover():
+	print("POIUnhover()")
+
+func POISelect():
+	print("POISelect()")
 

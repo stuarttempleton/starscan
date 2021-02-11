@@ -122,30 +122,30 @@ __meta__ = {
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="PlanetSurfaceMap" parent="CanvasLayer" instance=ExtResource( 11 )]
+[node name="PlanetSurface" parent="CanvasLayer" instance=ExtResource( 11 )]
 visible = false
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="SystemViewUI" type="Control" parent="CanvasLayer"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -192.0
-margin_top = -600.0
+margin_left = -136.0
+margin_top = -72.0
+margin_right = -32.0
+margin_bottom = -32.0
+mouse_filter = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ActionButtons" type="VBoxContainer" parent="CanvasLayer/SystemViewUI"]
 anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -150.0
-margin_top = 510.0
-margin_right = -49.0
-margin_bottom = -50.0
+margin_left = -101.0
+margin_top = -40.0
 grow_vertical = 0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -157,6 +157,7 @@ margin_right = 101.0
 margin_bottom = 40.0
 grow_vertical = 0
 rect_min_size = Vector2( 0, 40 )
+mouse_filter = 1
 text = "LEAVE ORBIT"
 script = ExtResource( 1 )
 __meta__ = {

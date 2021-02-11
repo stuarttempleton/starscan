@@ -1,8 +1,7 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://planet_maps/HeightMap.gd" type="Script" id=1]
 [ext_resource path="res://sprites/smokeparticle.png" type="Texture" id=2]
-[ext_resource path="res://scenes/VFX Scene.tscn" type="PackedScene" id=3]
 [ext_resource path="res://planet_maps/gas_planet_surface_gradient.tres" type="Gradient" id=4]
 [ext_resource path="res://planet_maps/PlanetMapController.gd" type="Script" id=5]
 [ext_resource path="res://planet_maps/PointsOfInterest.gd" type="Script" id=6]
@@ -47,9 +46,17 @@ font_path = "res://fonts/Montserrat-Regular.ttf"
 
 [sub_resource type="DynamicFont" id=8]
 size = 29
-outline_size = 3
+outline_size = 1
 outline_color = Color( 0, 0, 0, 0.403922 )
 font_data = SubResource( 7 )
+
+[sub_resource type="DynamicFontData" id=12]
+font_path = "res://fonts/Montserrat-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=13]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 0.423529 )
+font_data = SubResource( 12 )
 
 [sub_resource type="Gradient" id=9]
 offsets = PoolRealArray( 0, 0.00552486, 0.370166, 0.690608, 1 )
@@ -74,21 +81,21 @@ scale = 3.0
 scale_random = 1.0
 color_ramp = SubResource( 10 )
 
-[node name="PlanetSurfaceMap" type="Control"]
+[node name="PlanetSurface" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="PlanetSurfaceMap" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VFX Scene" parent="." instance=ExtResource( 3 )]
-visible = false
-
-[node name="PlanetMap" type="TextureRect" parent="."]
+[node name="PlanetMap" type="TextureRect" parent="PlanetSurfaceMap"]
 material = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 texture = SubResource( 5 )
 stretch_mode = 1
 script = ExtResource( 1 )
@@ -97,25 +104,38 @@ __meta__ = {
 }
 colormap = SubResource( 6 )
 
-[node name="PlanetName" type="Label" parent="."]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -64.0
-margin_bottom = -25.0
+[node name="PlanetName" type="Label" parent="PlanetSurfaceMap"]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 151.0
+margin_bottom = 69.0
 custom_fonts/font = SubResource( 8 )
 text = "PLANET"
-align = 1
 valign = 2
 uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PointsOfInterest" type="Node2D" parent="."]
+[node name="PlanetInformation" type="Label" parent="PlanetSurfaceMap"]
+margin_left = 32.0
+margin_top = 72.0
+margin_right = 216.0
+margin_bottom = 200.0
+custom_fonts/font = SubResource( 13 )
+text = "Type: Gas
+Size: Huge
+Orbital Debris: Yes"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PointsOfInterest" type="Node2D" parent="PlanetSurfaceMap"]
+z_index = 2
 script = ExtResource( 6 )
 
-[node name="Particles2D" type="Particles2D" parent="."]
+[node name="Particles2D" type="Particles2D" parent="PlanetSurfaceMap"]
+visible = false
 self_modulate = Color( 1, 1, 1, 0.2 )
 position = Vector2( 512, 320 )
 amount = 10
