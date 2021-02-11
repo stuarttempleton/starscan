@@ -7,6 +7,7 @@ extends Node2D
 
 var poi_types = ["Artifact","Resource","Hazard", "Empty"]
 var poi_node = ""
+var type = "Empty"
 
 func _ready():
 	$ClickArea.connect("selected", self, "selected")
@@ -25,7 +26,7 @@ func unhover():
 
 
 func selected():
-	get_parent().get_parent().get_parent().get_parent().get_parent().POISelect()
+	get_parent().get_parent().get_parent().get_parent().get_parent().POISelect(type)
 	pass
 
 
@@ -34,3 +35,4 @@ func SetPOIInfo(poi_type):
 		get_node(_p).visible = false
 	poi_node = get_node(poi_type)
 	poi_node.visible = true
+	type = poi_type

@@ -50,22 +50,22 @@ outline_size = 1
 outline_color = Color( 0, 0, 0, 0.403922 )
 font_data = SubResource( 7 )
 
-[sub_resource type="DynamicFontData" id=12]
+[sub_resource type="DynamicFontData" id=9]
 font_path = "res://fonts/Montserrat-Regular.ttf"
 
-[sub_resource type="DynamicFont" id=13]
+[sub_resource type="DynamicFont" id=10]
 outline_size = 1
 outline_color = Color( 0, 0, 0, 0.423529 )
-font_data = SubResource( 12 )
+font_data = SubResource( 9 )
 
-[sub_resource type="Gradient" id=9]
+[sub_resource type="Gradient" id=11]
 offsets = PoolRealArray( 0, 0.00552486, 0.370166, 0.690608, 1 )
 colors = PoolColorArray( 1, 1, 1, 0.091954, 1, 1, 1, 0, 2, 2, 2, 1, 1.90196, 1.90196, 1.90196, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=10]
-gradient = SubResource( 9 )
+[sub_resource type="GradientTexture" id=12]
+gradient = SubResource( 11 )
 
-[sub_resource type="ParticlesMaterial" id=11]
+[sub_resource type="ParticlesMaterial" id=13]
 emission_shape = 2
 emission_box_extents = Vector3( 400, 300, 1 )
 flag_disable_z = true
@@ -79,7 +79,7 @@ angle = 15.9
 angle_random = 1.0
 scale = 3.0
 scale_random = 1.0
-color_ramp = SubResource( 10 )
+color_ramp = SubResource( 12 )
 
 [node name="PlanetSurface" type="Node2D"]
 script = ExtResource( 5 )
@@ -122,7 +122,7 @@ margin_left = 32.0
 margin_top = 72.0
 margin_right = 216.0
 margin_bottom = 200.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 10 )
 text = "Type: Gas
 Size: Huge
 Orbital Debris: Yes"
@@ -141,5 +141,5 @@ position = Vector2( 512, 320 )
 amount = 10
 lifetime = 20.0
 preprocess = 10.0
-process_material = SubResource( 11 )
+process_material = SubResource( 13 )
 texture = ExtResource( 2 )

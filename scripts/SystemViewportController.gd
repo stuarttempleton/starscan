@@ -2,6 +2,7 @@ extends Node2D
 
 
 var allow_planet_click = false # this is a toggle for what you're viewing.
+var allow_poi_click = true #
 
 func _ready():
 	ToggleView()
@@ -34,6 +35,7 @@ func ViewSystem():
 
 func ToggleView():
 	allow_planet_click = !allow_planet_click
+	allow_poi_click = !allow_planet_click 
 	$CanvasLayer/PlanetSurface.visible = !allow_planet_click
 	$CanvasLayer/SystemViewUI/ActionButtons/LeaveOrbit.visible = !allow_planet_click
 	$CanvasLayer/SystemViewUI/ActionButtons/LeaveSystem.visible = allow_planet_click
@@ -44,6 +46,7 @@ func POIHover(_point):
 func POIUnhover():
 	print("POIUnhover()")
 
-func POISelect():
-	print("POISelect()")
+func POISelect(POIType):
+	if(allow_poi_click): # We are viewing the planet.
+		print("Selected: ", POIType)
 
