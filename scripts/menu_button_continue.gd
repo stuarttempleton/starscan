@@ -2,7 +2,7 @@ extends Button
 
 
 func _ready():
-	if get_node("../../../..").in_game:
+	if Input.get_connected_joypads().size() > 0:
 		grab_focus()
 	connect("pressed", self, "on_button_pressed")
 
