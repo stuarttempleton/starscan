@@ -15,7 +15,6 @@ func _ready():
 	$ClickArea.connect("unhover", self, "unhover")
 
 func hover(hover_position):
-	print(get_parent().get_parent().get_parent().get_parent().get_parent().name)
 	get_parent().get_parent().get_parent().get_parent().get_parent().POIHover(hover_position)
 	pass
 

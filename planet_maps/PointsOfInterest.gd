@@ -13,7 +13,6 @@ var poi_list = []
 func _generate(planet):
 	ClearPOI()
 	var points = _generatePoints(10, planet.SurfaceSeednumber)
-	points.shuffle()
 	print(planet)
 	var i = 0
 	
