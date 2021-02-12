@@ -5,7 +5,7 @@ export var PlanetDetailBoilerPlate = "Type: %s\r\nSize: %s\r\nOrbital Debris: %s
 
 func _ready():
 	
-	_generate_planet_map(StarMapData.GetRandomPlanetByType("Desert"))
+	#_generate_planet_map(StarMapData.GetRandomPlanetByType("Comet"))
 	pass
 
 

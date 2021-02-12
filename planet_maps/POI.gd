@@ -15,17 +15,17 @@ func _ready():
 	$ClickArea.connect("unhover", self, "unhover")
 
 func hover(hover_position):
-	get_parent().get_parent().get_parent().get_parent().get_parent().POIHover(hover_position)
+	get_parent().get_parent().get_parent().get_parent().POIHover(hover_position)
 	pass
 
 
 func unhover():
-	get_parent().get_parent().get_parent().get_parent().get_parent().POIUnhover()
+	get_parent().get_parent().get_parent().get_parent().POIUnhover()
 	pass
 
 
 func selected():
-	get_parent().get_parent().get_parent().get_parent().get_parent().POISelect(type)
+	get_parent().get_parent().get_parent().get_parent().POISelect(type)
 	pass
 
 

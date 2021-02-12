@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/MainMenuController.gd" type="Script" id=1]
 [ext_resource path="res://sprites/starscan-logo.png" type="Texture" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://scripts/menu_button_play.gd" type="Script" id=5]
 [ext_resource path="res://scripts/menu_button_back_to_menu.gd" type="Script" id=6]
 [ext_resource path="res://scripts/menu_button_continue.gd" type="Script" id=7]
+[ext_resource path="res://scenes/MenuButton_Normal.tres" type="StyleBox" id=8]
+[ext_resource path="res://scenes/MenuButton_HoverFocus.tres" type="StyleBox" id=9]
+[ext_resource path="res://scenes/MenuButton_Pressed.tres" type="StyleBox" id=10]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-ExtraLight.ttf"
@@ -15,39 +18,12 @@ font_path = "res://fonts/Montserrat-ExtraLight.ttf"
 size = 115
 font_data = SubResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 1, 1, 1, 0.184314 )
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color( 0.188235, 0.337255, 1, 0 )
-border_blend = true
-
-[sub_resource type="StyleBoxFlat" id=4]
-draw_center = false
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0.188235, 0.337255, 1, 0 )
-border_blend = true
-
-[sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 1, 1, 1, 0.18 )
-border_color = Color( 1, 0.470588, 0, 1 )
-border_blend = true
-
-[sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 1, 1, 1, 0.0470588 )
-border_color = Color( 0.8, 0.8, 0.8, 0 )
-
-[sub_resource type="DynamicFontData" id=7]
+[sub_resource type="DynamicFontData" id=3]
 font_path = "res://fonts/Montserrat-Regular.ttf"
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=4]
 size = 24
-font_data = SubResource( 7 )
+font_data = SubResource( 3 )
 
 [node name="MainMenu" type="CanvasLayer"]
 layer = 4
@@ -98,22 +74,23 @@ stretch_mode = 4
 [node name="Buttons" type="VBoxContainer" parent="MenuUIContainer/Menu"]
 margin_top = 87.0
 margin_right = 624.0
-margin_bottom = 258.0
+margin_bottom = 268.0
 size_flags_vertical = 3
 alignment = 1
 
 [node name="Play" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
 margin_right = 624.0
-margin_bottom = 31.0
+margin_bottom = 33.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
-custom_fonts/font = SubResource( 8 )
-custom_colors/font_color_disabled = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_styles/hover = ExtResource( 9 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 9 )
+custom_styles/disabled = ExtResource( 9 )
+custom_styles/normal = ExtResource( 8 )
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
 custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
@@ -123,17 +100,18 @@ scene_to_load = "res://scenes/StarMapViewport.tscn"
 
 [node name="Restart" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 35.0
+margin_top = 37.0
 margin_right = 624.0
-margin_bottom = 66.0
+margin_bottom = 70.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
-custom_fonts/font = SubResource( 8 )
-custom_colors/font_color_disabled = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_styles/hover = ExtResource( 9 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 9 )
+custom_styles/disabled = ExtResource( 9 )
+custom_styles/normal = ExtResource( 8 )
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
 custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
@@ -143,17 +121,18 @@ scene_to_load = "res://scenes/StarMapViewport.tscn"
 
 [node name="Continue" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 70.0
+margin_top = 74.0
 margin_right = 624.0
-margin_bottom = 101.0
+margin_bottom = 107.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
-custom_fonts/font = SubResource( 8 )
-custom_colors/font_color_disabled = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_styles/hover = ExtResource( 9 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 9 )
+custom_styles/disabled = ExtResource( 9 )
+custom_styles/normal = ExtResource( 8 )
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
 custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
@@ -162,17 +141,18 @@ script = ExtResource( 7 )
 
 [node name="Back To Menu" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 105.0
+margin_top = 111.0
 margin_right = 624.0
-margin_bottom = 136.0
+margin_bottom = 144.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
-custom_fonts/font = SubResource( 8 )
-custom_colors/font_color_disabled = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_styles/hover = ExtResource( 9 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 9 )
+custom_styles/disabled = ExtResource( 9 )
+custom_styles/normal = ExtResource( 8 )
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
 custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
@@ -182,17 +162,18 @@ scene_to_load = "res://scenes/Title.tscn"
 
 [node name="Exit" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 140.0
+margin_top = 148.0
 margin_right = 624.0
-margin_bottom = 171.0
+margin_bottom = 181.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
-custom_fonts/font = SubResource( 8 )
-custom_colors/font_color_disabled = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_styles/hover = ExtResource( 9 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 9 )
+custom_styles/disabled = ExtResource( 9 )
+custom_styles/normal = ExtResource( 8 )
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
 custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )

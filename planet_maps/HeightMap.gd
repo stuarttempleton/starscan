@@ -49,7 +49,7 @@ func _generate(planet):
 	# Use the material's `set_shader_param` method to assign values to a shader's uniforms.
 	material.set_shader_param("noise_minmax", heightmap_minmax)
 	material.set_shader_param("colormap", planet_texture_gradient)
-	$"../PointsOfInterest"._generate(planet)
+	$"../../PointsOfInterest"._generate(planet)
 	pass
 
 # gotta normalize the noise data to 0..1

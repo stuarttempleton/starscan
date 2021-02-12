@@ -41,10 +41,12 @@ func ToggleView():
 	$CanvasLayer/SystemViewUI/ActionButtons/LeaveSystem.visible = allow_planet_click
 
 func POIHover(_point):
-	print("POIHover()")
+	if(allow_poi_click): # We are viewing the planet.
+		print("POIHover()")
 
 func POIUnhover():
-	print("POIUnhover()")
+	if(allow_poi_click): # We are viewing the planet.
+		print("POIUnhover()")
 
 func POISelect(POIType):
 	if(allow_poi_click): # We are viewing the planet.

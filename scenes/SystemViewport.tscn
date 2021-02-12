@@ -1,7 +1,10 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scripts/SysView_Leave_Button.gd" type="Script" id=1]
 [ext_resource path="res://scripts/SolarSystemRender.gd" type="Script" id=2]
+[ext_resource path="res://scenes/MenuButton_Normal.tres" type="StyleBox" id=3]
+[ext_resource path="res://scenes/MenuButton_HoverFocus.tres" type="StyleBox" id=4]
+[ext_resource path="res://scenes/MenuButton_Pressed.tres" type="StyleBox" id=5]
 [ext_resource path="res://scenes/VFX Scene.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/SystemNameLabel.gd" type="Script" id=7]
 [ext_resource path="res://scripts/SystemDetailLabel.gd" type="Script" id=9]
@@ -158,6 +161,15 @@ margin_bottom = 40.0
 grow_vertical = 0
 rect_min_size = Vector2( 0, 40 )
 mouse_filter = 1
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 3 )
+custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 text = "LEAVE ORBIT"
 script = ExtResource( 1 )
 __meta__ = {
@@ -170,6 +182,15 @@ margin_right = 101.0
 margin_bottom = 40.0
 grow_vertical = 0
 rect_min_size = Vector2( 0, 40 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 3 )
+custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 text = "LEAVE SYSTEM"
 script = ExtResource( 1 )
 __meta__ = {

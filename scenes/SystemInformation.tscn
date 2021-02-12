@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/SystemInfoController.gd" type="Script" id=1]
 [ext_resource path="res://scripts/SysInfo_scan_button.gd" type="Script" id=2]
+[ext_resource path="res://scenes/MenuButton_Normal.tres" type="StyleBox" id=3]
 [ext_resource path="res://scripts/SysInfo_enter_button.gd" type="Script" id=4]
+[ext_resource path="res://scenes/MenuButton_HoverFocus.tres" type="StyleBox" id=5]
+[ext_resource path="res://scenes/MenuButton_Pressed.tres" type="StyleBox" id=6]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-Black.ttf"
@@ -82,15 +85,35 @@ autowrap = true
 [node name="ScanButton" type="Button" parent="Control/Background/InfoContainer"]
 margin_top = 129.0
 margin_right = 174.0
-margin_bottom = 149.0
+margin_bottom = 154.0
+rect_min_size = Vector2( 0, 25 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 5 )
+custom_styles/normal = ExtResource( 3 )
+custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 text = "Scan System"
 script = ExtResource( 2 )
 minigame_scene = "res://scenes/Scanner Minigame.tscn"
 
 [node name="EnterButton" type="Button" parent="Control/Background/InfoContainer"]
-margin_top = 153.0
+margin_top = 158.0
 margin_right = 174.0
-margin_bottom = 173.0
+margin_bottom = 183.0
+rect_min_size = Vector2( 0, 25 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 5 )
+custom_styles/normal = ExtResource( 3 )
+custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 text = "Enter System"
 script = ExtResource( 4 )
 SystemViewport_scene = "res://scenes/SystemViewport.tscn"
