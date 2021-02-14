@@ -1,7 +1,7 @@
 {
     "Name":"Starscan",
-    "X":1,
-    "Y":1,
+    "X":0.5,
+    "Y":0.5,
     "Fuel":100,
 	"FuelCapacity":100,
     "FuelPerUnitDistance":0.03,
@@ -19,5 +19,6 @@
             "Quantity": 0
         }
     ],
-    "DeliveredArtifacts":0
+    "DeliveredArtifacts":0,
+    "FirstRun":true
 }

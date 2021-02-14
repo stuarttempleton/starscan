@@ -10,5 +10,6 @@
             "Quantity":0
         }
     ],
-    "DeliveredArtifacts":0
+    "DeliveredArtifacts":0,
+    "FirstRun":true
 }
