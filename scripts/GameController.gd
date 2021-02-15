@@ -11,19 +11,23 @@ signal gameloop_state(loopstate)
 
 func _ready():
 	pause_menu_scene = load(pause_menu_path)
-	
+
+
 func Pause():
 	pause_menu_instance = pause_menu_scene.instance()
 	add_child(pause_menu_instance)
 	get_tree().paused = true
-	
+
+
 func Unpause():
 	pause_menu_instance.queue_free()
 	get_tree().paused = false
 
+
 func EnterGameLoop(is_loop):
 	is_gameloop = is_loop
 	emit_signal("gameloop_state",is_gameloop)
+
 
 func EnableDisableMovement(toggle_movement):
 	is_movement_enabled = toggle_movement

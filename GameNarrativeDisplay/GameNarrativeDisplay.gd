@@ -1,16 +1,12 @@
 extends CanvasLayer
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 signal ChoiceSelected(int_choice)
 
 var Texts = {
 	"Greeting":"[b]Greetings, Nomad![/b]\r\nYou have been selected... etc....\r\n\r\nREFUEL and BEGIN your journey.",
-	"Lose":"You lose, Nomad.",
-	"Win":"You win, Nomad."
+	"Lose":"[b]You lose, Nomad.[/b]\r\nYour entire crew got Space Dysentery. I hope you're happy with what you've done.",
+	"Win":"[b]You win, Nomad.[/b]\r\nYou have delivered all of the artifacts to the fancy scientists."
 }
 
 var buttons = []

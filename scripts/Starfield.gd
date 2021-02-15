@@ -11,7 +11,6 @@ func _ready():
 	
 	
 	for nebula in StarMapData.Nebulae():
-		print("Building nebula: ", nebula.Name)
 		AddNebulaToMap(Vector2(nebula.X * MapScale, nebula.Y * MapScale), StarMapData.get_nebula_scale(nebula.Size))
 		pass
 
