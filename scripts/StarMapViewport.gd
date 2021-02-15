@@ -14,9 +14,15 @@ func _on_FirstPlay():
 	ShipData.ConsumeFuel(ShipData.Ship().Fuel)
 	
 	#display start up dialog "greetings, nomad!"
+	GameNarrativeDisplay.connect("ChoiceSelected", self, "StartingTextDone")
+	GameNarrativeDisplay.DisplayText("Greeting",["Begin"])
+	
 	
 	#add that you've completed the first moments of the game
 	ShipData.Ship().FirstRun = false
+
+func StartingTextDone(choice):
+	GameNarrativeDisplay.disconnect("ChoiceSelected",self,"StartingTextDone")
 
 
 func _on_FuelTanksEmpty():

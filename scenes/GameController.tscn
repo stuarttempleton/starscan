@@ -3,5 +3,6 @@
 [ext_resource path="res://scripts/GameController.gd" type="Script" id=1]
 
 [node name="GameController" type="Node2D"]
+pause_mode = 2
 script = ExtResource( 1 )
 pause_menu_path = "res://scenes/MainMenu.tscn"

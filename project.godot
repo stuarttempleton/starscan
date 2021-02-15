@@ -29,6 +29,7 @@ config/icon="res://icon.png"
 ShipData="*res://scenes/ShipData.tscn"
 StarMapData="*res://scenes/StarMapData.tscn"
 GameController="*res://scenes/GameController.tscn"
+GameNarrativeDisplay="*res://GameNarrativeDisplay/GameNarrativeDisplay.tscn"
 
 [display]
 

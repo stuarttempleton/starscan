@@ -1,0 +1,172 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://GameNarrativeDisplay/GameNarrativeDisplay.gd" type="Script" id=1]
+[ext_resource path="res://scenes/MenuButton_HoverFocus.tres" type="StyleBox" id=3]
+[ext_resource path="res://scenes/MenuButton_Normal.tres" type="StyleBox" id=4]
+[ext_resource path="res://scenes/MenuButton_Pressed.tres" type="StyleBox" id=5]
+[ext_resource path="res://fonts/Montserrat-Regular.ttf" type="DynamicFontData" id=7]
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://fonts/Montserrat-Light.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+size = 20
+font_data = SubResource( 3 )
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://fonts/Montserrat-SemiBoldItalic.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 20
+font_data = SubResource( 5 )
+
+[sub_resource type="DynamicFontData" id=7]
+font_path = "res://fonts/Montserrat-Italic.ttf"
+
+[sub_resource type="DynamicFont" id=8]
+size = 20
+font_data = SubResource( 7 )
+
+[sub_resource type="DynamicFontData" id=9]
+font_path = "res://fonts/Montserrat-SemiBold.ttf"
+
+[sub_resource type="DynamicFont" id=10]
+size = 20
+font_data = SubResource( 9 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 20
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://fonts/Montserrat-Medium.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+font_data = SubResource( 1 )
+
+[node name="GameNarrativeDisplay" type="CanvasLayer"]
+pause_mode = 2
+layer = 10
+script = ExtResource( 1 )
+
+[node name="GameNarrativeDisplay2" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="GameNarrativeDisplay2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.792157 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="GameNarrativeDisplay2"]
+margin_left = 320.0
+margin_top = 64.0
+margin_right = 960.0
+margin_bottom = 512.0
+color = Color( 1, 1, 1, 0.0470588 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Message" type="RichTextLabel" parent="GameNarrativeDisplay2"]
+margin_left = 352.0
+margin_top = 96.0
+margin_right = 928.0
+margin_bottom = 480.0
+custom_fonts/mono_font = SubResource( 4 )
+custom_fonts/bold_italics_font = SubResource( 6 )
+custom_fonts/italics_font = SubResource( 8 )
+custom_fonts/bold_font = SubResource( 10 )
+custom_fonts/normal_font = SubResource( 11 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[b]Greetings, Nomad![/b]
+
+You have been chosen.
+
+REFUEL and BEGIN your journey."
+text = "Greetings, Nomad!
+
+You have been chosen.
+
+REFUEL and BEGIN your journey."
+fit_content_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameNarrativeDisplay2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 352.0
+margin_top = 544.0
+margin_right = -352.0
+margin_bottom = -136.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button1" type="Button" parent="GameNarrativeDisplay2/HBoxContainer"]
+margin_left = 26.0
+margin_right = 154.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 128, 0 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 4 )
+custom_fonts/font = SubResource( 2 )
+text = "BUTTON1"
+
+[node name="Button2" type="Button" parent="GameNarrativeDisplay2/HBoxContainer"]
+margin_left = 158.0
+margin_right = 286.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 128, 0 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 4 )
+custom_fonts/font = SubResource( 2 )
+text = "BUTTON2"
+
+[node name="Button3" type="Button" parent="GameNarrativeDisplay2/HBoxContainer"]
+margin_left = 290.0
+margin_right = 418.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 128, 0 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 4 )
+custom_fonts/font = SubResource( 2 )
+text = "BUTTON3"
+
+[node name="Button4" type="Button" parent="GameNarrativeDisplay2/HBoxContainer"]
+margin_left = 422.0
+margin_right = 550.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 128, 0 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 4 )
+custom_fonts/font = SubResource( 2 )
+text = "BUTTON4"
+[connection signal="pressed" from="GameNarrativeDisplay2/HBoxContainer/Button1" to="." method="_on_Button1_pressed"]
+[connection signal="pressed" from="GameNarrativeDisplay2/HBoxContainer/Button2" to="." method="_on_Button2_pressed"]
+[connection signal="pressed" from="GameNarrativeDisplay2/HBoxContainer/Button3" to="." method="_on_Button3_pressed"]
+[connection signal="pressed" from="GameNarrativeDisplay2/HBoxContainer/Button4" to="." method="_on_Button4_pressed"]

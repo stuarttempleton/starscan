@@ -17,4 +17,3 @@ func GenerateVerts(num):
 	for i in num:
 		vectors.append(Vector2(10 + NewOffset(), 10 + NewOffset()))
 	return vectors
-
