@@ -24,7 +24,16 @@ func _ready():
 		$GameNarrativeDisplay2
 	]
 	SetMessageNodeVisibility(false)
-	#DisplayText("[b]Hello![/b]\r\nHow ya doin?", ["OK"])
+#	var txt = "[b]A surface encounter...[/b]\r\n\r\n"
+#	txt += "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+#	txt += "\r\n\r\n"
+#	txt += "[indent][code]"
+#	txt += "[color=#00ff00]You found 1 artifact.[/color]\r\n"
+#	txt += "[color=#00ff00]You gained 1 fuel.[/color]\r\n"
+#	txt += "[color=#ff0000]You lost 10 resources.[/color]\r\n"
+#	txt += "[color=#ff0000]You lost half your crew (42 souls).[/color]\r\n"
+#	txt += "[/code][/indent]"
+#	DisplayText(txt, ["OK"])
 
 
 func SetMessageNodeVisibility(newState):
