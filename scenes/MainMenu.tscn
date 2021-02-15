@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/MainMenuController.gd" type="Script" id=1]
 [ext_resource path="res://sprites/starscan-logo.png" type="Texture" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://scenes/MenuButton_Normal.tres" type="StyleBox" id=8]
 [ext_resource path="res://scenes/MenuButton_HoverFocus.tres" type="StyleBox" id=9]
 [ext_resource path="res://scenes/MenuButton_Pressed.tres" type="StyleBox" id=10]
+[ext_resource path="res://shaders/white.png" type="Texture" id=11]
+[ext_resource path="res://GameNarrativeDisplay/blur_shader_material.tres" type="Material" id=12]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-ExtraLight.ttf"
@@ -40,11 +42,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="ColorRect" parent="MenuUIContainer"]
+[node name="Background" type="TextureRect" parent="MenuUIContainer"]
 visible = false
+material = ExtResource( 12 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0.792157 )
+texture = ExtResource( 11 )
+expand = true
 
 [node name="Menu" type="VBoxContainer" parent="MenuUIContainer"]
 anchor_top = 0.5
@@ -61,7 +65,7 @@ __meta__ = {
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MenuUIContainer/Menu"]
 visible = false
-margin_right = 624.0
+margin_right = 880.0
 margin_bottom = 142.0
 custom_fonts/normal_font = SubResource( 2 )
 fit_content_height = true
@@ -75,14 +79,14 @@ stretch_mode = 4
 [node name="Buttons" type="VBoxContainer" parent="MenuUIContainer/Menu"]
 margin_top = 87.0
 margin_right = 880.0
-margin_bottom = 268.0
+margin_bottom = 414.0
 size_flags_vertical = 3
 alignment = 1
 
 [node name="Play" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
 margin_right = 880.0
-margin_bottom = 33.0
+margin_bottom = 62.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/hover = ExtResource( 9 )
@@ -101,9 +105,9 @@ scene_to_load = "res://scenes/StarMapViewport.tscn"
 
 [node name="Restart" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 37.0
+margin_top = 66.0
 margin_right = 880.0
-margin_bottom = 70.0
+margin_bottom = 128.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/hover = ExtResource( 9 )
@@ -122,9 +126,9 @@ scene_to_load = "res://scenes/StarMapViewport.tscn"
 
 [node name="Continue" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 74.0
+margin_top = 132.0
 margin_right = 880.0
-margin_bottom = 107.0
+margin_bottom = 194.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/hover = ExtResource( 9 )
@@ -142,9 +146,9 @@ script = ExtResource( 7 )
 
 [node name="Back To Menu" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 111.0
+margin_top = 198.0
 margin_right = 880.0
-margin_bottom = 144.0
+margin_bottom = 260.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/hover = ExtResource( 9 )
@@ -163,9 +167,9 @@ scene_to_load = "res://scenes/Title.tscn"
 
 [node name="Exit" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 148.0
+margin_top = 264.0
 margin_right = 880.0
-margin_bottom = 181.0
+margin_bottom = 327.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/hover = ExtResource( 9 )

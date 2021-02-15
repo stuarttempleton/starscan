@@ -1,10 +1,12 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://GameNarrativeDisplay/GameNarrativeDisplay.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Montserrat-Light.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scenes/MenuButton_HoverFocus.tres" type="StyleBox" id=3]
 [ext_resource path="res://scenes/MenuButton_Normal.tres" type="StyleBox" id=4]
 [ext_resource path="res://scenes/MenuButton_Pressed.tres" type="StyleBox" id=5]
+[ext_resource path="res://shaders/white.png" type="Texture" id=6]
+[ext_resource path="res://GameNarrativeDisplay/blur_shader_material.tres" type="Material" id=7]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-Regular.ttf"
@@ -56,10 +58,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect2" type="ColorRect" parent="GameNarrativeDisplay2"]
+[node name="Background" type="TextureRect" parent="GameNarrativeDisplay2"]
+material = ExtResource( 7 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0.792157 )
+texture = ExtResource( 6 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
