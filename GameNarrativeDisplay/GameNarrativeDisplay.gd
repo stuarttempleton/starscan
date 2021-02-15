@@ -67,6 +67,9 @@ func _process(delta):
 		$GameNarrativeDisplay2/Message.percent_visible += display_speed * delta
 
 
+func CancelDialog():
+	CloseWithPress(-1)
+
 func CloseWithPress(int_button):
 	SetMessageNodeVisibility(false)
 	emit_signal("ChoiceSelected", int_button)

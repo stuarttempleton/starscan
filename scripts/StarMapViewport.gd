@@ -16,12 +16,10 @@ func _on_FirstPlay():
 	#display start up dialog "greetings, nomad!"
 	GameNarrativeDisplay.connect("ChoiceSelected", self, "StartingTextDone")
 	GameNarrativeDisplay.DisplayText("Greeting",["Begin"])
-	
-	
-	#add that you've completed the first moments of the game
-	ShipData.Ship().FirstRun = false
+
 
 func StartingTextDone(choice):
+	ShipData.Ship().FirstRun = false
 	GameNarrativeDisplay.disconnect("ChoiceSelected",self,"StartingTextDone")
 
 

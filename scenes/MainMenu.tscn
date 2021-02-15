@@ -27,7 +27,7 @@ font_data = SubResource( 3 )
 
 [node name="MainMenu" type="CanvasLayer"]
 pause_mode = 2
-layer = 4
+layer = 11
 script = ExtResource( 1 )
 in_game_nodes = [ NodePath("MenuUIContainer/Background"), NodePath("MenuUIContainer/Menu/Buttons/Continue"), NodePath("MenuUIContainer/Menu/Buttons/Back To Menu") ]
 title_nodes = [ NodePath("MenuUIContainer/Menu/Buttons/Play"), NodePath("MenuUIContainer/Menu/Buttons/Restart") ]

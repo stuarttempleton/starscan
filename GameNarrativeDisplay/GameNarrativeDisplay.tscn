@@ -6,44 +6,44 @@
 [ext_resource path="res://scenes/MenuButton_Pressed.tres" type="StyleBox" id=5]
 [ext_resource path="res://fonts/Montserrat-Regular.ttf" type="DynamicFontData" id=7]
 
-[sub_resource type="DynamicFontData" id=3]
+[sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-Light.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://fonts/Montserrat-SemiBoldItalic.ttf"
 
 [sub_resource type="DynamicFont" id=4]
 size = 20
 font_data = SubResource( 3 )
 
 [sub_resource type="DynamicFontData" id=5]
-font_path = "res://fonts/Montserrat-SemiBoldItalic.ttf"
+font_path = "res://fonts/Montserrat-Italic.ttf"
 
 [sub_resource type="DynamicFont" id=6]
 size = 20
 font_data = SubResource( 5 )
 
 [sub_resource type="DynamicFontData" id=7]
-font_path = "res://fonts/Montserrat-Italic.ttf"
+font_path = "res://fonts/Montserrat-SemiBold.ttf"
 
 [sub_resource type="DynamicFont" id=8]
 size = 20
 font_data = SubResource( 7 )
 
-[sub_resource type="DynamicFontData" id=9]
-font_path = "res://fonts/Montserrat-SemiBold.ttf"
-
-[sub_resource type="DynamicFont" id=10]
-size = 20
-font_data = SubResource( 9 )
-
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=9]
 size = 20
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFontData" id=1]
+[sub_resource type="DynamicFontData" id=10]
 font_path = "res://fonts/Montserrat-Medium.ttf"
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=11]
 size = 20
-font_data = SubResource( 1 )
+font_data = SubResource( 10 )
 
 [node name="GameNarrativeDisplay" type="CanvasLayer"]
 pause_mode = 2
@@ -81,11 +81,11 @@ margin_left = 352.0
 margin_top = 96.0
 margin_right = 928.0
 margin_bottom = 480.0
-custom_fonts/mono_font = SubResource( 4 )
-custom_fonts/bold_italics_font = SubResource( 6 )
-custom_fonts/italics_font = SubResource( 8 )
-custom_fonts/bold_font = SubResource( 10 )
-custom_fonts/normal_font = SubResource( 11 )
+custom_fonts/mono_font = SubResource( 2 )
+custom_fonts/bold_italics_font = SubResource( 4 )
+custom_fonts/italics_font = SubResource( 6 )
+custom_fonts/bold_font = SubResource( 8 )
+custom_fonts/normal_font = SubResource( 9 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[b]Greetings, Nomad![/b]
@@ -125,7 +125,7 @@ custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 11 )
 text = "BUTTON1"
 
 [node name="Button2" type="Button" parent="GameNarrativeDisplay2/HBoxContainer"]
@@ -138,7 +138,7 @@ custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 11 )
 text = "BUTTON2"
 
 [node name="Button3" type="Button" parent="GameNarrativeDisplay2/HBoxContainer"]
@@ -151,7 +151,7 @@ custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 11 )
 text = "BUTTON3"
 
 [node name="Button4" type="Button" parent="GameNarrativeDisplay2/HBoxContainer"]
@@ -164,7 +164,7 @@ custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 11 )
 text = "BUTTON4"
 [connection signal="pressed" from="GameNarrativeDisplay2/HBoxContainer/Button1" to="." method="_on_Button1_pressed"]
 [connection signal="pressed" from="GameNarrativeDisplay2/HBoxContainer/Button2" to="." method="_on_Button2_pressed"]

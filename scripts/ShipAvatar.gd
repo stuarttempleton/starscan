@@ -18,7 +18,7 @@ func _ready():
 		TargetDebug.queue_free()
 	
 func _input(event):
-	if !GameController.is_paused && GameController.is_movement_enabled:
+	if GameController.is_movement_enabled:
 		if event is InputEventMouseButton:
 			if event.button_index == BUTTON_LEFT:
 				mouseIsPressed = event.pressed
@@ -41,7 +41,6 @@ func HandleBoundary() :
 		target.y = 0
 		
 func _physics_process(_delta):
-	if GameController.is_paused: return
 	
 	if mouseIsPressed:
 		target = get_global_mouse_position()

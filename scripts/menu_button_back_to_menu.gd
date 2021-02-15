@@ -10,6 +10,7 @@ func on_button_pressed () :
 	if (scene_to_load != "") :
 		StarMapData.SaveMap()
 		ShipData.SaveShip()
+		GameNarrativeDisplay.CancelDialog()
 		GameController.Unpause()
 		get_tree().change_scene(scene_to_load)
 	else :
