@@ -5,7 +5,10 @@ export var Planets = {}
 var Planet
 var PlanetID = 0
 var PlanetName = ""
-
+var defaultScale
+var bigScale = Vector2(0.35,0.35)
+var ScaleToVector = Vector2(0,0)
+var lerpSpeed = 10
 
 func get_planet_scale(size_str):
 	var planet_size = 1
@@ -22,11 +25,13 @@ func _ready():
 	$ClickArea.connect("planet_unhover", self, "planet_unhover")
 
 func planet_hover(planet_position, planet_name):
+	ScaleToVector = bigScale
 	get_parent().get_parent().get_parent().PlanetHover(planet_position, planet_name)
 	pass
 	
 	
 func planet_unhover():
+	ScaleToVector = defaultScale
 	get_parent().get_parent().get_parent().PlanetUnhover()
 	pass
 	
@@ -34,6 +39,13 @@ func planet_unhover():
 func planet_selected():
 	if (PlanetID >= 0):
 		get_parent().get_parent().get_parent().ViewPlanet(PlanetID)
+
+
+func _process(delta):
+	if Planet.scale.distance_to(ScaleToVector) <= 0.01:
+		Planet.scale = ScaleToVector
+	else:
+		Planet.scale = Planet.scale.linear_interpolate(ScaleToVector, lerpSpeed * delta)
 
 
 func SetPlanetInfo(planet_type, planet_scale, planet_id, planet_name):
@@ -44,4 +56,9 @@ func SetPlanetInfo(planet_type, planet_scale, planet_id, planet_name):
 	Planet.scale *= Vector2(Planet.scale.x * get_planet_scale(planet_scale), Planet.scale.y * get_planet_scale(planet_scale)) 
 	PlanetID = planet_id
 	PlanetName = planet_name
+	
+	defaultScale = Planet.scale
+	ScaleToVector = defaultScale
+	bigScale = Vector2(Planet.scale.x + 0.2, Planet.scale.y + 0.2) 
+	
 
