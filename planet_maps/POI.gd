@@ -5,9 +5,10 @@ extends Node2D
 # var a = 2
 # var b = "text"
 
-var poi_types = ["Artifact","Resource","Hazard", "Empty"]
+var poi_types = ["Artifact","Resource","Hazard", "Empty", "Exhausted", "Unknown"]
 var poi_node = ""
 var type = "Empty"
+var exhausted = false
 var defaultScale
 var bigScale = Vector2(0.35,0.35)
 var ScaleToVector = Vector2(0,0)
@@ -31,7 +32,34 @@ func unhover():
 
 
 func selected():
-	get_parent().get_parent().get_parent().get_parent().POISelect(type)
+	if !exhausted:
+		exhausted = true
+		get_parent().get_parent().get_parent().get_parent().POISelect(type)
+		CollectPOI(type)
+		GameNarrativeDisplay.connect("ChoiceSelected", self, "StoryResponse")
+		GameNarrativeDisplay.DisplayText(StoryGenerator.POIStory(type),["OK"])
+	pass
+
+func CollectPOI(POIType):
+	print(ShipData.StarShip.Inventory)
+	match POIType:
+		"Artifact":
+			print("collecting artifact")
+			ShipData.GainInventoryItem("Artifacts", 1)
+			#remove from planet
+		"Resource":
+			print("collecting resource")
+			ShipData.GainInventoryItem("Resources", 1)
+			#remove from planet
+		"Hazard":
+			print("TO DO handling hazard")
+			#apply effect
+			#do we remove?
+	print(ShipData.StarShip.Inventory)
+
+func StoryResponse(choice):
+	GameNarrativeDisplay.disconnect("ChoiceSelected", self, "StoryResponse")
+	SetPOIInfo("Exhausted")
 	pass
 
 

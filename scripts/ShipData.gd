@@ -91,7 +91,21 @@ func PayToVisitAStar():
 	
 func PayToVisitAPlanet():
 	return PayResourcesDefaultToCrew(1, 1.0)
+
+func GainInventoryItem(resourceName, resourcesToGain):
+	var updated = false
 	
+	for cargo in StarShip.Inventory:
+		if cargo.Type == resourceName:
+			cargo.Quantity += resourcesToGain
+			updated = true
+			break
+	if !updated:
+		#add it
+		StarShip.Inventory.append({
+			"Type": resourceName,
+			"Quantity": resourcesToGain })
+
 func PayResourcesDefaultToCrew(resourcesToPay, crewLostPerUnpaidResource):
 	var paid = {
 		"Resources" : resourcesToPay,

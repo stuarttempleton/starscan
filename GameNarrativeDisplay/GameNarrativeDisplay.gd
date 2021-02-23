@@ -11,7 +11,7 @@ var Texts = {
 
 var buttons = []
 var messageNodes = []
-var display_speed = 0.5
+var display_speed = 1.5
 
 func _ready():
 	buttons = [
@@ -44,7 +44,6 @@ func SetMessageNodeVisibility(newState):
 
 
 func DisplayText(txt, array_buttons):
-	print("Displaying: ", txt)
 	var message = txt if not Texts.has(txt) else Texts[txt]
 	
 	if array_buttons.size() > buttons.size():
