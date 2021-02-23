@@ -41,21 +41,15 @@ func selected():
 	pass
 
 func CollectPOI(POIType):
-	print(ShipData.StarShip.Inventory)
 	match POIType:
 		"Artifact":
-			print("collecting artifact")
 			ShipData.GainInventoryItem("Artifacts", 1)
-			#remove from planet
+			get_parent().Planet.ArtifactCount = min(get_parent().Planet.ArtifactCount - 1, 0)
 		"Resource":
-			print("collecting resource")
 			ShipData.GainInventoryItem("Resources", 1)
-			#remove from planet
+			get_parent().Planet.ResourceCount = min(get_parent().Planet.ResourceCount - 1, 0)
 		"Hazard":
-			print("TO DO handling hazard")
-			#apply effect
-			#do we remove?
-	print(ShipData.StarShip.Inventory)
+			ShipData.DeductCrew(1)
 
 func StoryResponse(choice):
 	GameNarrativeDisplay.disconnect("ChoiceSelected", self, "StoryResponse")

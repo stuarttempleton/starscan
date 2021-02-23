@@ -9,11 +9,13 @@ export var POITemplates = {
 export var poi_template_path = "res://planet_maps/POI.tscn"
 
 var poi_list = []
+var Planet
 
 func _generate(planet):
+	Planet = planet
 	ClearPOI()
 	var points = _generatePoints(10, planet.SurfaceSeednumber)
-	print(planet)
+	
 	var i = 0
 	
 	for point in planet.ArtifactCount:

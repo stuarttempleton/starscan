@@ -81,6 +81,7 @@ func Save(filename):
 	file.close()
 	SavedSinceLoad = true;
 
+
 func Nebulae() :
 	if !Loaded :
 		print("StarMap Not Loaded! FAILING ON PURPOSE FIX THIS")
