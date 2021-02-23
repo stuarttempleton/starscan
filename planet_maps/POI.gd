@@ -44,10 +44,10 @@ func CollectPOI(POIType):
 	match POIType:
 		"Artifact":
 			ShipData.GainInventoryItem("Artifacts", 1)
-			get_parent().Planet.ArtifactCount = min(get_parent().Planet.ArtifactCount - 1, 0)
+			get_parent().Planet.ArtifactCount = max(get_parent().Planet.ArtifactCount - 1, 0)
 		"Resource":
 			ShipData.GainInventoryItem("Resources", 1)
-			get_parent().Planet.ResourceCount = min(get_parent().Planet.ResourceCount - 1, 0)
+			get_parent().Planet.ResourceCount = max(get_parent().Planet.ResourceCount - 1, 0)
 		"Hazard":
 			ShipData.DeductCrew(1)
 
