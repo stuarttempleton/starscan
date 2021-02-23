@@ -92,6 +92,16 @@ func PayToVisitAStar():
 func PayToVisitAPlanet():
 	return PayResourcesDefaultToCrew(1, 1.0)
 
+
+func GetInventoryQTYFor(resourceName):
+	var qty = 0
+	for cargo in StarShip.Inventory:
+		if cargo.Type == resourceName:
+			return cargo.Quantity
+			break
+	return qty
+
+
 func GainInventoryItem(resourceName, resourcesToGain):
 	var updated = false
 	

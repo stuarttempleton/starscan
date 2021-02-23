@@ -34,22 +34,23 @@ func unhover():
 func selected():
 	if !exhausted:
 		exhausted = true
+		var qty = 1 #TODO: Adjust this for "severity"
 		get_parent().get_parent().get_parent().get_parent().POISelect(type)
-		CollectPOI(type)
+		CollectPOI(type, qty)
 		GameNarrativeDisplay.connect("ChoiceSelected", self, "StoryResponse")
-		GameNarrativeDisplay.DisplayText(StoryGenerator.POIStory(type),["OK"])
+		GameNarrativeDisplay.DisplayText(StoryGenerator.POIStory(type, qty),["OK"])
 	pass
 
-func CollectPOI(POIType):
+func CollectPOI(POIType, qty):
 	match POIType:
 		"Artifact":
-			ShipData.GainInventoryItem("Artifacts", 1)
-			get_parent().Planet.ArtifactCount = max(get_parent().Planet.ArtifactCount - 1, 0)
+			ShipData.GainInventoryItem("Artifacts", qty)
+			get_parent().Planet.ArtifactCount = max(get_parent().Planet.ArtifactCount - qty, 0)
 		"Resource":
-			ShipData.GainInventoryItem("Resources", 1)
-			get_parent().Planet.ResourceCount = max(get_parent().Planet.ResourceCount - 1, 0)
+			ShipData.GainInventoryItem("Resources", qty)
+			get_parent().Planet.ResourceCount = max(get_parent().Planet.ResourceCount - qty, 0)
 		"Hazard":
-			ShipData.DeductCrew(1)
+			ShipData.DeductCrew(qty)
 
 func StoryResponse(choice):
 	GameNarrativeDisplay.disconnect("ChoiceSelected", self, "StoryResponse")

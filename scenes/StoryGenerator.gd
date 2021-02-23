@@ -42,7 +42,7 @@ func PlanetStory(Planet):
 	pass
 
 
-func POIStory(POIType):
+func POIStory(POIType, qty):
 	#Told when looting a POI
 	
 	var main_boiler = "[b]%s[/b]\r\n\r\n%s"
@@ -50,7 +50,7 @@ func POIStory(POIType):
 	
 	var txt = ""
 	txt += main_boiler % ["A surface encounter...",_generate_poi_storylet(POIType)]
-	txt += stats_boiler % [_poi_item_detail(POIType)]
+	txt += stats_boiler % [_poi_item_detail(POIType, qty)]
 	
 	return txt
 
@@ -62,7 +62,7 @@ func _generate_poi_storylet(POIType):
 	return txt
 
 
-func _poi_item_detail(POIType):
+func _poi_item_detail(POIType, qty):
 	
 	var stat_pos_item_boiler = "[color=#00ff00]%s[/color]\r\n"
 	var stat_neg_item_boiler = "[color=#ff0000]%s[/color]\r\n"
@@ -71,11 +71,11 @@ func _poi_item_detail(POIType):
 	
 	match POIType:
 		"Artifact":
-			txt = stat_pos_item_boiler % ["You have found 1 artifact."]
+			txt = stat_pos_item_boiler % ["You have found " + str(qty) + " artifact" + str("s" if qty != 1 else '') + "."]
 		"Resource":
-			txt = stat_pos_item_boiler % ["You have gained 1 fuel."]
+			txt = stat_pos_item_boiler % ["You have gained " + str(qty) + " fuel."]
 		"Hazard":
-			txt = stat_neg_item_boiler % ["You have lost 1 crew."]
+			txt = stat_neg_item_boiler % ["You have lost " + str(qty) + " crew."]
 		"Empty":
 			txt = stat_pos_item_boiler % ["There is nothing here."]
 	
