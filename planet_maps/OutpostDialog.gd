@@ -21,7 +21,7 @@ func DialogPrompt():
 
 
 func ChoiceResponse(choice):
-	GameNarrativeDisplay.disconnect("ChoiceSelected", self, "ChoiceRsponses")
+	GameNarrativeDisplay.disconnect("ChoiceSelected", self, "ChoiceResponse")
 	match choice:
 		0: BackToLobbySelected()
 		1: RefuelSelected()

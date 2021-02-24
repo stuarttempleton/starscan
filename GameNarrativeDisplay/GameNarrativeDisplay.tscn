@@ -73,7 +73,17 @@ margin_left = 320.0
 margin_top = 64.0
 margin_right = 960.0
 margin_bottom = 512.0
-color = Color( 1, 1, 1, 0.0470588 )
+color = Color( 0.396078, 0.396078, 0.396078, 0.870588 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="GameNarrativeDisplay2"]
+margin_left = 322.0
+margin_top = 66.0
+margin_right = 958.0
+margin_bottom = 510.0
+color = Color( 0.0862745, 0.0862745, 0.0862745, 0.956863 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

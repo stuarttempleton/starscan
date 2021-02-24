@@ -33,7 +33,7 @@ func _ready():
 #	txt += "[color=#ff0000]You lost 10 resources.[/color]\r\n"
 #	txt += "[color=#ff0000]You lost half your crew (42 souls).[/color]\r\n"
 #	txt += "[/code][/indent]"
-#	DisplayText(txt, ["OK"])
+#	DisplayText(txt, ["OK", "Space Port"])
 
 
 func SetMessageNodeVisibility(newState):
