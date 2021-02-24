@@ -1,12 +1,11 @@
 extends Node2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+enum OUTPOST_STATE {LOBBY, FUEL, FUEL_FULL, TURN_IN, TURN_IN_EMPTY}
+var main_boiler = "[b]%s[/b]\r\n\r\n%s"
+var stats_boiler = "\r\n\r\n[indent][code]%s[/code][/indent]"
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
@@ -41,13 +40,29 @@ func PlanetStory(Planet):
 #	DisplayText(txt, ["OK"])
 	pass
 
+func OutpostStory(_state, planet):
+	var title = "Outpost " + planet.Name
+	var txt = ""
+	
+	match _state:
+		OUTPOST_STATE.LOBBY:
+			txt += "Welcome to the outpost."
+		OUTPOST_STATE.FUEL:
+			txt += "Refueling... \r\nYour fuel has been replenished."
+		OUTPOST_STATE.FUEL_FULL:
+			txt += "You do not need fuel."
+		OUTPOST_STATE.TURN_IN:
+			txt += "Giving your collected artifacts to the academics... \r\n"
+			txt += "You have turned in " + str(ShipData.StarShip.DeliveredArtifacts) + " artifacts."
+		OUTPOST_STATE.TURN_IN_EMPTY:
+			txt += "Giving your collected artifacts to the academics... \r\n"
+			txt += "Come back when you have gathered artifacts."
+	return main_boiler % [title, txt]
+
 
 func POIStory(POIType, qty):
 	#Told when looting a POI
-	
-	var main_boiler = "[b]%s[/b]\r\n\r\n%s"
-	var stats_boiler = "\r\n\r\n[indent][code]%s[/code][/indent]"
-	
+
 	var txt = ""
 	txt += main_boiler % ["A surface encounter...",_generate_poi_storylet(POIType)]
 	txt += stats_boiler % [_poi_item_detail(POIType, qty)]
