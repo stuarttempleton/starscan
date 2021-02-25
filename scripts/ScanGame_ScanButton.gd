@@ -1,7 +1,7 @@
 extends Button
 
 func _mouse_entered():
-	GameController.EnableDisableMovement(false)
+	GameController.EnableMovement(false)
 
 func _mouse_exited():
-	GameController.EnableDisableMovement(true)
+	GameController.EnableMovement(true)

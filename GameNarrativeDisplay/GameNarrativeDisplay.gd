@@ -40,7 +40,7 @@ func SetMessageNodeVisibility(newState):
 	for node in messageNodes:
 		print("Setting visibility on ", node.name)
 		node.visible = newState
-	GameController.EnableDisableMovement(!newState)
+	GameController.EnableMovement(!newState)
 
 
 func DisplayText(txt, array_buttons):

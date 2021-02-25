@@ -29,7 +29,7 @@ func EnterGameLoop(is_loop):
 	emit_signal("gameloop_state",is_gameloop)
 
 
-func EnableDisableMovement(toggle_movement):
+func EnableMovement(toggle_movement):
 	is_movement_enabled = toggle_movement
 		
 func _input(_event):

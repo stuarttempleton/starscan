@@ -42,7 +42,7 @@ font_data = ExtResource( 2 )
 font_path = "res://fonts/Montserrat-Medium.ttf"
 
 [sub_resource type="DynamicFont" id=11]
-size = 20
+size = 15
 font_data = SubResource( 10 )
 
 [node name="GameNarrativeDisplay" type="CanvasLayer"]

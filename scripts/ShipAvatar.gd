@@ -12,7 +12,7 @@ var mouseIsPressed = false
 func _ready():
 	self.position = Vector2(ShipData.Ship().X * MapScale, ShipData.Ship().Y * MapScale)
 	target = self.position
-	GameController.EnableDisableMovement(true)
+	GameController.EnableMovement(true)
 	TargetDebug = get_node(TargetDebug)
 	if not OS.is_debug_build():
 		TargetDebug.queue_free()
