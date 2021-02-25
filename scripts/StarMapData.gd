@@ -168,7 +168,7 @@ func ScanNearestSystem(quality):
 	for planet in NearestSystem.Planets:
 		ScanPlanet(planet, quality)
 	#print("Scanned star results: " + JSON.print(NearestSystem, "\t"))
-	
+
 func ScanPlanet(planet, quality):
 	var totalIcons = 10
 	var icons = []

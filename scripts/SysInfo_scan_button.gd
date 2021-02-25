@@ -6,6 +6,7 @@ export var additive_load_scene = true #additive or replacement
 signal minigameComplete
 
 var minigame
+var hoverflag = true #flag controls the stray mouse event for exit when you load a scene as an overlay
 
 func _ready():
 	connect("mouse_entered",self,"mouse_enter")
@@ -14,18 +15,22 @@ func _ready():
 
 func on_button_pressed () :
 	print("Load: %s" % [minigame_scene])
+	hoverflag = false
 	var loaded_scene = load(minigame_scene)
 	minigame = loaded_scene.instance()
 	add_child(minigame)
-	minigame.get_node("Scanner Minigame").connect("success", self, "scanPerformed")
-	minigame.get_node("Scanner Minigame").connect("fail", self, "scanPerformed")
-	minigame.get_node("Scanner Minigame").connect("complete", self, "hideMinigame")
+	minigame.get_node("CanvasLayer/SceneBackground/Scanner Minigame").connect("success", self, "scanPerformed")
+	minigame.get_node("CanvasLayer/SceneBackground/Scanner Minigame").connect("fail", self, "scanPerformed")
+#	minigame.get_node("Scanner Minigame").connect("complete", self, "hideMinigame")
 
 func mouse_enter():
+	print("mouse enter...")
+	hoverflag = true
 	GameController.EnableMovement(false)
 	
 func mouse_exit():
-	GameController.EnableMovement(true)
+	if hoverflag:
+		GameController.EnableMovement(true)
 
 func scanPerformed():
 	#print("Scan game ended")

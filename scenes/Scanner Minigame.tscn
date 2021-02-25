@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scripts/Scanner Minigame.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Oscillator.gd" type="Script" id=2]
@@ -7,6 +7,28 @@
 [ext_resource path="res://scenes/MenuButton_Normal.tres" type="StyleBox" id=5]
 [ext_resource path="res://scenes/MenuButton_HoverFocus.tres" type="StyleBox" id=6]
 [ext_resource path="res://scenes/MenuButton_Pressed.tres" type="StyleBox" id=7]
+[ext_resource path="res://GameNarrativeDisplay/blur_shader_material.tres" type="Material" id=8]
+[ext_resource path="res://shaders/white.png" type="Texture" id=9]
+
+[sub_resource type="DynamicFontData" id=8]
+font_path = "res://fonts/Montserrat-Medium.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 23
+font_data = SubResource( 8 )
+
+[sub_resource type="DynamicFontData" id=9]
+font_path = "res://fonts/Montserrat-Light.ttf"
+
+[sub_resource type="DynamicFont" id=10]
+font_data = SubResource( 9 )
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://fonts/Montserrat-Medium.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+size = 17
+font_data = SubResource( 3 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "LoseAnim"
@@ -14,7 +36,7 @@ resource_name = "LoseAnim"
 [sub_resource type="Animation" id=2]
 resource_name = "WinAnim"
 tracks/0/type = "value"
-tracks/0/path = NodePath("../ResultTextHandle/ResultText:rect_position")
+tracks/0/path = NodePath("ResultText:rect_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -26,7 +48,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, -100 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../ResultTextHandle/ResultText:modulate")
+tracks/1/path = NodePath("ResultText:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -52,7 +74,7 @@ tracks/2/keys = {
 } ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("../ResultTextHandle/ResultText:visible")
+tracks/3/path = NodePath("ResultText:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -68,54 +90,115 @@ tracks/3/keys = {
 z_index = 1000
 z_as_relative = false
 
-[node name="Scanner Minigame" type="Node2D" parent="."]
-position = Vector2( 83.4163, 79.7002 )
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 9
+
+[node name="SceneBackground" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Blur" type="TextureRect" parent="CanvasLayer/SceneBackground"]
+material = ExtResource( 8 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 720.0
+texture = ExtResource( 9 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Scanner Minigame" type="Node2D" parent="CanvasLayer/SceneBackground"]
+position = Vector2( 480, 384 )
+z_index = 2
 script = ExtResource( 1 )
-oscillator_path = NodePath("Oscillator")
-bg_path = NodePath("BG")
-targetZone_path = NodePath("TargetZone")
+oscillator_path = NodePath("../CanvasLayer/SceneBackground/Scanner Minigame/Oscillator")
+bg_path = NodePath("../CanvasLayer/SceneBackground/Scanner Minigame/BG")
+targetZone_path = NodePath("../CanvasLayer/SceneBackground/Scanner Minigame/TargetZone")
 speed = 1.0
 
-[node name="BG" type="ColorRect" parent="Scanner Minigame"]
-margin_left = -5.0
-margin_top = -25.0
-margin_right = 279.0
-margin_bottom = 25.0
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/SceneBackground/Scanner Minigame"]
+margin_top = -152.0
+margin_right = 320.0
+margin_bottom = -32.0
+color = Color( 0.396078, 0.396078, 0.396078, 0.870588 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/SceneBackground/Scanner Minigame"]
+margin_left = 2.0
+margin_top = -150.0
+margin_right = 318.0
+margin_bottom = -34.0
+color = Color( 0.0862745, 0.0862745, 0.0862745, 0.956863 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="CanvasLayer/SceneBackground/Scanner Minigame"]
+margin_top = -136.0
+margin_right = 320.0
+margin_bottom = -104.0
+custom_fonts/font = SubResource( 6 )
+text = "Scanning %s system"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Description" type="Label" parent="CanvasLayer/SceneBackground/Scanner Minigame"]
+margin_top = -96.0
+margin_right = 320.0
+margin_bottom = -47.0
+custom_fonts/font = SubResource( 10 )
+text = "Attenuating..."
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="ColorRect" parent="CanvasLayer/SceneBackground/Scanner Minigame"]
+margin_right = 320.0
+margin_bottom = 48.0
 color = Color( 0.443137, 0.443137, 0.443137, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TargetZone" type="ColorRect" parent="Scanner Minigame"]
-margin_top = -20.0
+[node name="TargetZone" type="ColorRect" parent="CanvasLayer/SceneBackground/Scanner Minigame"]
+margin_top = 4.0
 margin_right = 40.0
-margin_bottom = 20.0
+margin_bottom = 44.0
 color = Color( 0, 1, 0.552941, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Oscillator" type="ColorRect" parent="Scanner Minigame"]
-margin_top = -20.0
+[node name="Oscillator" type="ColorRect" parent="CanvasLayer/SceneBackground/Scanner Minigame"]
 margin_right = 40.0
-margin_bottom = 20.0
+margin_bottom = 48.0
 color = Color( 1, 1, 1, 0.494118 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScanButton" type="Button" parent="Scanner Minigame"]
-margin_left = 87.0566
-margin_top = 45.3371
-margin_right = 190.057
-margin_bottom = 65.3371
+[node name="ScanButton" type="Button" parent="CanvasLayer/SceneBackground/Scanner Minigame"]
+margin_left = 112.0
+margin_top = 64.0
+margin_right = 208.0
+margin_bottom = 89.0
 rect_min_size = Vector2( 0, 25 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 7 )
 custom_styles/focus = ExtResource( 6 )
 custom_styles/disabled = ExtResource( 6 )
 custom_styles/normal = ExtResource( 5 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
@@ -126,14 +209,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ResultTextHandle" type="Node2D" parent="Scanner Minigame"]
+[node name="ResultTextHandle" type="Node2D" parent="CanvasLayer/SceneBackground/Scanner Minigame"]
 position = Vector2( 117.466, -2.66968 )
 
-[node name="ResultTextAnimator" type="AnimationPlayer" parent="Scanner Minigame/ResultTextHandle"]
+[node name="ResultTextAnimator" type="AnimationPlayer" parent="CanvasLayer/SceneBackground/Scanner Minigame/ResultTextHandle"]
 anims/LoseAnim = SubResource( 1 )
 anims/WinAnim = SubResource( 2 )
 
-[node name="ResultText" type="Label" parent="Scanner Minigame/ResultTextHandle"]
+[node name="ResultText" type="Label" parent="CanvasLayer/SceneBackground/Scanner Minigame/ResultTextHandle"]
 visible = false
 margin_right = 50.0
 margin_bottom = 21.0
@@ -145,6 +228,6 @@ valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="mouse_entered" from="Scanner Minigame/ScanButton" to="Scanner Minigame/ScanButton" method="_mouse_entered"]
-[connection signal="mouse_exited" from="Scanner Minigame/ScanButton" to="Scanner Minigame/ScanButton" method="_mouse_exited"]
-[connection signal="pressed" from="Scanner Minigame/ScanButton" to="Scanner Minigame" method="_on_Button_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/SceneBackground/Scanner Minigame/ScanButton" to="CanvasLayer/SceneBackground/Scanner Minigame/ScanButton" method="_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/SceneBackground/Scanner Minigame/ScanButton" to="CanvasLayer/SceneBackground/Scanner Minigame/ScanButton" method="_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/SceneBackground/Scanner Minigame/ScanButton" to="CanvasLayer/SceneBackground/Scanner Minigame" method="_on_Button_pressed"]

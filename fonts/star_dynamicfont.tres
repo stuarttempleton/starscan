@@ -3,4 +3,7 @@
 [ext_resource path="res://fonts/star_dynamicfontdata.tres" type="DynamicFontData" id=1]
 
 [resource]
+size = 20
+outline_size = 1
+outline_color = Color( 0, 0, 0, 0.243137 )
 font_data = ExtResource( 1 )

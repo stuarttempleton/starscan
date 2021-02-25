@@ -23,9 +23,13 @@ var scanButtonPressed = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	oscillator = get_node(oscillator_path)
-	bg = get_node(bg_path)
-	targetZone = get_node(targetZone_path)
+	GameController.EnableMovement(false)
+	if (StarMapData.NearestSystem == null):
+		StarMapData.FindNearestSystem(Vector2(ShipData.Ship().X,ShipData.Ship().Y))
+	$Title.text = $Title.text % [StarMapData.NearestSystem.Name]
+	oscillator = $Oscillator
+	bg = $BG
+	targetZone = $TargetZone
 	
 	#Fit oscillator within bg assuming bg offset left of origin is margin
 	var bgMargin = -bg.rect_position.x
@@ -61,9 +65,14 @@ func reset():
 	scanButtonPressed = false
 	$ScanButton.disabled = false
 
+func updateText(percent, confidence):
+	$Description.text = "Scan complete: %s\r\nConfidence: %s" % [percent, confidence]
+	pass
+	
 func scanFailed():
 	var scanAccuracy = 0.5
 	$ResultTextHandle/ResultText.text = str(int(scanAccuracy * 10) * 10) + "%"
+	updateText(str(int(scanAccuracy * 10) * 10), "LOW")
 	$ResultTextHandle/ResultTextAnimator.play("WinAnim")
 	StarMapData.ScanNearestSystem(scanAccuracy)
 	emit_signal("fail")
@@ -71,9 +80,12 @@ func scanFailed():
 func scanSucceeded():
 	var scanAccuracy = 1.0
 	$ResultTextHandle/ResultText.text = str(int(scanAccuracy * 10) * 10) + "%"
+	updateText(str(int(scanAccuracy * 10) * 10), "HIGH")
 	$ResultTextHandle/ResultTextAnimator.play("WinAnim")
 	StarMapData.ScanNearestSystem(scanAccuracy)
 	emit_signal("success")
 
 func _on_endAnimComplete():
 	emit_signal("complete")
+	GameController.EnableMovement(true)
+	get_parent().get_parent().get_parent().queue_free()
