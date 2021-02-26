@@ -88,7 +88,7 @@ func _poi_item_detail(POIType, qty):
 		"Artifact":
 			txt = stat_pos_item_boiler % ["You have found " + str(qty) + " artifact" + str("s" if qty != 1 else '') + "."]
 		"Resource":
-			txt = stat_pos_item_boiler % ["You have gained " + str(qty) + " fuel."]
+			txt = stat_pos_item_boiler % ["You have gained " + str(qty) + " resource."]
 		"Hazard":
 			txt = stat_neg_item_boiler % ["You have lost " + str(qty) + " crew."]
 		"Empty":

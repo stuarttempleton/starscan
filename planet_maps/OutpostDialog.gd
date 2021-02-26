@@ -23,6 +23,7 @@ func DialogPrompt():
 func ChoiceResponse(choice):
 	GameNarrativeDisplay.disconnect("ChoiceSelected", self, "ChoiceResponse")
 	match choice:
+		-1: return
 		0: BackToLobbySelected()
 		1: RefuelSelected()
 		2: TurnInSeelected()
@@ -32,6 +33,7 @@ func ChoiceResponse(choice):
 
 func BackToLobbySelected():
 	State = StoryGenerator.OUTPOST_STATE.LOBBY
+	
 
 
 func RefuelSelected():

@@ -14,7 +14,7 @@ export var PlanetGradientMaps = {
 	"Ocean":"res://planet_maps/ocean_planet_surface_gradient.tres",
 	"Asteroid Belt":"res://planet_maps/asteroid_planet_surface_gradient.tres",
 	"Comet":"res://planet_maps/comet_planet_surface_gradient.tres",
-	"Outpost":"res://planet_maps/goldilocks_planet_surface_gradient.tres"
+	"Outpost":"res://planet_maps/asteroid_planet_surface_gradient.tres"
 }
 
 func _ready() -> void:
@@ -50,6 +50,7 @@ func _generate(planet):
 	material.set_shader_param("noise_minmax", heightmap_minmax)
 	material.set_shader_param("colormap", planet_texture_gradient)
 	if planet.Type == "Outpost":
+		$"../../PointsOfInterest".ClearPOI()
 		$"../../OutpostDialog".DialogBegin(planet)
 	else:
 		$"../../PointsOfInterest"._generate(planet)

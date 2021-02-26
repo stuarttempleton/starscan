@@ -41,11 +41,13 @@ func _process(delta):
 		if WinConditionMet():
 			print("WIN CONDITION MET")
 			handlingGameOver = true
+			GameNarrativeDisplay.CancelDialog()
 			GameNarrativeDisplay.connect("ChoiceSelected", self, "DialogTextDone")
 			GameNarrativeDisplay.DisplayText("Win",["RESTART","MENU","QUIT"])
 		elif LoseConditionMet():
 			print("LOSE CONDITION MET")
 			handlingGameOver = true
+			GameNarrativeDisplay.CancelDialog()
 			GameNarrativeDisplay.connect("ChoiceSelected", self, "DialogTextDone")
 			GameNarrativeDisplay.DisplayText("Lose",["RETRY", "MENU","QUIT"])
 
