@@ -21,7 +21,7 @@ func PlanetUnhover():
 func ViewPlanet(_planetID):
 	if (allow_planet_click):
 		ToggleView()
-		$CanvasLayer/PlanetSurface._generate_planet_map($SystemView/SolarSystem.system.Planets[_planetID])
+		$CanvasLayer/PlanetSurface._generate_planet_map($SystemView/SolarSystem.system.Planets[_planetID], $SystemView/SolarSystem.system.Scan)
 		$CanvasLayer/SystemViewUI/ActionButtons/LeaveOrbit.visible = true
 		$CanvasLayer/SystemViewUI/ActionButtons/LeaveSystem.visible = false
 

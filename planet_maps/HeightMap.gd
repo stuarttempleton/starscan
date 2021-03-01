@@ -21,8 +21,9 @@ func _ready() -> void:
 	pass
 
 
-func _generate(planet):
+func _generate(planet, scan):
 	print("Building map for ", planet.Name, " seed ", planet.SurfaceSeednumber)
+	print("Scan: ", scan)
 	
 	var planet_texture_gradient = GradientTexture.new()
 	planet_texture_gradient.gradient = load(PlanetGradientMaps[planet.Type])
@@ -53,7 +54,7 @@ func _generate(planet):
 		$"../../PointsOfInterest".ClearPOI()
 		$"../../OutpostDialog".DialogBegin(planet)
 	else:
-		$"../../PointsOfInterest"._generate(planet)
+		$"../../PointsOfInterest"._generate(planet, scan)
 	pass
 
 # gotta normalize the noise data to 0..1

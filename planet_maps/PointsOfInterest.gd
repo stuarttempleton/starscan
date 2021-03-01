@@ -10,29 +10,44 @@ export var poi_template_path = "res://planet_maps/POI.tscn"
 
 var poi_list = []
 var Planet
+var Scan
 
-func _generate(planet):
+func _generate(planet, scan):
 	Planet = planet
+	Scan = scan
 	ClearPOI()
 	var points = _generatePoints(10, planet.SurfaceSeednumber)
 	
 	var i = 0
-	
+	var perceived = ""
+	var actual = ""
 	for point in planet.ArtifactCount:
-		#print("Artifact: ", points[i])
-		AddPOIToMap(points[i],"Artifact")
+		actual = "Artifact"
+		perceived = actual
+		if i >= planet.ArtifactCount * Scan:
+			perceived = "Unknown"
+		AddPOIToMap(points[i],actual, perceived)
 		i += 1
 	for point in planet.ResourceCount:
-		#print("Resource: ", points[i])
-		AddPOIToMap(points[i],"Resource")
+		actual = "Resource"
+		perceived = actual
+		if i >= planet.ResourceCount * Scan:
+			perceived = "Unknown"
+		AddPOIToMap(points[i],actual, perceived)
 		i += 1
 	for point in planet.HazardCount:
-		#print("Hazard: ", points[i])
-		AddPOIToMap(points[i],"Hazard")
+		actual = "Hazard"
+		perceived = actual
+		if i >= planet.HazardCount * Scan:
+			perceived = "Unknown"
+		AddPOIToMap(points[i],actual, perceived)
 		i += 1
 	for point in range(i, points.size()):
-		#print("Empty: ", points[i])
-		AddPOIToMap(points[i],"Empty") 
+		actual = "Empty"
+		perceived = actual
+		if Scan < 1:
+			perceived = "Unknown"
+		AddPOIToMap(points[i],actual, perceived)
 		i += 1
 	pass
 
@@ -61,12 +76,12 @@ func _generatePoints(Quantity, seedNumber):
 	return points
 
 
-func AddPOIToMap( _position, _type ) :
+func AddPOIToMap( _position, _type, _perceived_type ) :
 	var loaded_scene = load(poi_template_path)
 	var poi = loaded_scene.instance()
 	add_child(poi)
 	poi_list.append(poi)
 	
 	poi.position = _position
-	poi.SetPOIInfo(_type)
+	poi.SetPOIInfo(_type, _perceived_type)
 

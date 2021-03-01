@@ -1,8 +1,7 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/Scanner Minigame.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Oscillator.gd" type="Script" id=2]
-[ext_resource path="res://scripts/ScanGame_ScanButton.gd" type="Script" id=3]
 [ext_resource path="res://fonts/star_dynamicfont.tres" type="DynamicFont" id=4]
 [ext_resource path="res://scenes/MenuButton_Normal.tres" type="StyleBox" id=5]
 [ext_resource path="res://scenes/MenuButton_HoverFocus.tres" type="StyleBox" id=6]
@@ -10,31 +9,29 @@
 [ext_resource path="res://GameNarrativeDisplay/blur_shader_material.tres" type="Material" id=8]
 [ext_resource path="res://shaders/white.png" type="Texture" id=9]
 
-[sub_resource type="DynamicFontData" id=8]
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://fonts/Montserrat-Medium.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 23
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://fonts/Montserrat-Light.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+font_data = SubResource( 3 )
+
+[sub_resource type="DynamicFontData" id=5]
 font_path = "res://fonts/Montserrat-Medium.ttf"
 
 [sub_resource type="DynamicFont" id=6]
-size = 23
-font_data = SubResource( 8 )
-
-[sub_resource type="DynamicFontData" id=9]
-font_path = "res://fonts/Montserrat-Light.ttf"
-
-[sub_resource type="DynamicFont" id=10]
-font_data = SubResource( 9 )
-
-[sub_resource type="DynamicFontData" id=3]
-font_path = "res://fonts/Montserrat-Medium.ttf"
-
-[sub_resource type="DynamicFont" id=4]
 size = 17
-font_data = SubResource( 3 )
+font_data = SubResource( 5 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "LoseAnim"
+[sub_resource type="Animation" id=7]
 
-[sub_resource type="Animation" id=2]
-resource_name = "WinAnim"
+[sub_resource type="Animation" id=8]
 tracks/0/type = "value"
 tracks/0/path = NodePath("ResultText:rect_position")
 tracks/0/interp = 1
@@ -143,7 +140,7 @@ __meta__ = {
 margin_top = -136.0
 margin_right = 320.0
 margin_bottom = -104.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 2 )
 text = "Scanning %s system"
 align = 1
 __meta__ = {
@@ -154,7 +151,7 @@ __meta__ = {
 margin_top = -96.0
 margin_right = 320.0
 margin_bottom = -47.0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 4 )
 text = "Attenuating..."
 align = 1
 __meta__ = {
@@ -198,13 +195,13 @@ custom_styles/pressed = ExtResource( 7 )
 custom_styles/focus = ExtResource( 6 )
 custom_styles/disabled = ExtResource( 6 )
 custom_styles/normal = ExtResource( 5 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+action_mode = 0
 text = "Scan!"
-script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -213,8 +210,8 @@ __meta__ = {
 position = Vector2( 117.466, -2.66968 )
 
 [node name="ResultTextAnimator" type="AnimationPlayer" parent="CanvasLayer/SceneBackground/Scanner Minigame/ResultTextHandle"]
-anims/LoseAnim = SubResource( 1 )
-anims/WinAnim = SubResource( 2 )
+anims/LoseAnim = SubResource( 7 )
+anims/WinAnim = SubResource( 8 )
 
 [node name="ResultText" type="Label" parent="CanvasLayer/SceneBackground/Scanner Minigame/ResultTextHandle"]
 visible = false
