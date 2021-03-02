@@ -55,6 +55,7 @@ func _generate(planet, scan):
 		$"../../OutpostDialog".DialogBegin(planet)
 	else:
 		$"../../PointsOfInterest"._generate(planet, scan)
+		$"../../PlanetDialog".DialogBegin(planet)
 	pass
 
 # gotta normalize the noise data to 0..1

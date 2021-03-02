@@ -113,6 +113,14 @@ func GetNearestOutpostSystem(origin):
 			
 	return NearestOutpostSystem
 
+func getPlanetID(planet, system):
+	var i = 0
+	for p in system.Planets:
+		if p.Name == planet.Name:
+			return i
+		i += 1
+	return i
+
 func GetPlanetsByType(planet_type):
 	var planets = []
 	

@@ -3,10 +3,15 @@ extends Node2D
 
 var State = StoryGenerator.OUTPOST_STATE.LOBBY
 var Planet
+var System
 var Options = ["Station Hub","Star Dock","Science Bay","Leave Orbit"]
 
 func _ready():
-	pass
+	if StarMapData.NearestSystem != null: 
+		System = StarMapData.NearestSystem
+	else:
+		StarMapData.FindNearestSystem(Vector2(ShipData.Ship().X,ShipData.Ship().Y))
+		System = StarMapData.NearestSystem
 
 
 func DialogBegin(planet):
@@ -17,7 +22,7 @@ func DialogBegin(planet):
 
 func DialogPrompt():
 	GameNarrativeDisplay.connect("ChoiceSelected", self, "ChoiceResponse")	
-	GameNarrativeDisplay.DisplayText(StoryGenerator.OutpostStory(State, Planet), Options)
+	GameNarrativeDisplay.DisplayText(StoryGenerator.OutpostStory(State, System, Planet), Options)
 
 
 func ChoiceResponse(choice):

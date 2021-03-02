@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://planet_maps/HeightMap.gd" type="Script" id=1]
 [ext_resource path="res://sprites/smokeparticle.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://planet_maps/gas_planet_surface_gradient.tres" type="Gradient" id=4]
 [ext_resource path="res://planet_maps/PlanetMapController.gd" type="Script" id=5]
 [ext_resource path="res://planet_maps/PointsOfInterest.gd" type="Script" id=6]
+[ext_resource path="res://planet_maps/PlanetDialog.gd" type="Script" id=7]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -151,3 +152,6 @@ script = ExtResource( 6 )
 
 [node name="OutpostDialog" type="Node2D" parent="."]
 script = ExtResource( 3 )
+
+[node name="PlanetDialog" type="Node2D" parent="."]
+script = ExtResource( 7 )
