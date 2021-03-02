@@ -125,7 +125,12 @@ func _poi_item_detail(POIType, qty):
 	return txt
 
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func LowFuel(outpost):
+	var title = "LOW FUEL RESPONDER"
+	var cptName = $WordGenerator.CreateWord().capitalize()
+	var shipName = $WordGenerator.CreateWord().capitalize()
+	var txt = "This is Captain %s of Rescue Vessel TUG-%s, responding to your low fuel beacon. Initiating tractor beam on your mark.\r\n\r\n" % [cptName, shipName]
+	
+	txt += "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+	txt += "\r\n\r\nYou can refuel and resume your journey at Outpost %s." % [outpost.Name]
+	return main_boiler % [title, txt]

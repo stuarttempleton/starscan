@@ -9,13 +9,14 @@ var MapScale = StarMapData.MapScale
 var MinCameraZoom = 0.5
 var MaxCameraZoom = 2
 var mouseIsPressed = false
+var ShipIsTowing = false
 
 func _ready():
-	print("AccelerationRate: ", ShipData.Ship().AccelerationRate)
 	self.position = Vector2(ShipData.Ship().X * MapScale, ShipData.Ship().Y * MapScale)
 	target = self.position
 	GameController.EnableMovement(true)
 	TargetDebug = get_node(TargetDebug)
+	ShipData.connect("FuelTanksEmpty", self, "_on_FuelTanksEmpty")
 	if not OS.is_debug_build():
 		TargetDebug.queue_free()
 	
@@ -34,7 +35,7 @@ func Zoom(amount) :
 
 
 func HandleThrusters():
-	if CurrentSpeed < 0.01:
+	if CurrentSpeed < 0.01 or ShipIsTowing:
 		$Thruster1.emitting = false
 		$Thruster1/Thruster2.emitting = false
 		$Thruster2.emitting = false
@@ -65,7 +66,7 @@ func HandleBoundary() :
 func _physics_process(_delta):
 	var ship = ShipData.Ship()
 	
-	if mouseIsPressed:
+	if mouseIsPressed and !ShipIsTowing:
 		target = get_global_mouse_position()
 		#CurrentSpeed = min(CurrentSpeed + _delta * ship.AccelerationRate, ship.TravelSpeed)
 	
@@ -81,28 +82,44 @@ func _physics_process(_delta):
 	var approachSpeed = ship.TravelSpeed * 0.3
 	var decelerate = (distanceToTarget - distanceToTravel < approachSpeed) and (CurrentSpeed > approachSpeed)
 	
-	if distanceToTravel > 0.001 && ship.Fuel > 0.001:
+	if distanceToTravel > 0.001 && ((ship.Fuel > 0.001) or ShipIsTowing):
 		if decelerate:
 			CurrentSpeed = max(CurrentSpeed - _delta * ship.AccelerationRate * distanceToTravel, approachSpeed)
-			print("DECEL")
-			print("distanceToTarget: ", distanceToTarget, ", ", distanceToTravel, ", ", CurrentSpeed)
 			
 		var fuelRequired = min(distanceToTravel * ship.FuelPerUnitDistance, ship.Fuel)
 		var availableFuelFraction = min(1.0, ship.Fuel / ship.FuelPerUnitDistance)
+		if ShipIsTowing:
+			availableFuelFraction = 1
 		var speedToHitTargetThisFrame = availableFuelFraction * distanceToTravel / _delta
 		
 		look_at(target)
 		velocity = position.direction_to(target) * speedToHitTargetThisFrame
 		velocity = move_and_slide(velocity)
-		ShipData.ConsumeFuel(fuelRequired)
+		if !ShipIsTowing:
+			ShipData.ConsumeFuel(fuelRequired)
 			
 	else:
 		
 		target = position
 		CurrentSpeed = 0
+		if ShipIsTowing:
+			TurnOffTow()
 	
 	TargetDebug.position = target
 	_setMapPosition(position)
+
+func TurnOffTow():
+	ShipIsTowing = false
+	print("Tow complete.")
+	$LSS_Transporter.hide()
+
+
+func TowShipTo(_outpost_position):
+	print("Towing ship to... " + str(_outpost_position))
+	ShipIsTowing = true
+	target = _outpost_position
+	$LSS_Transporter.show()
+
 
 func _setMapPosition(newPosition):
 	position = newPosition
@@ -113,3 +130,21 @@ func JumpToMapPosition(newPosition):
 	_setMapPosition(newPosition)
 	target = newPosition
 	mouseIsPressed = false
+
+func _on_FuelTanksEmpty():
+	if !ShipIsTowing:
+		var shipPos = Vector2(ShipData.Ship().X,ShipData.Ship().Y)
+		var nearestOutpostSystem = StarMapData.GetNearestOutpostSystem(shipPos)
+	
+		GameNarrativeDisplay.connect("ChoiceSelected", self, "DialogChoice")
+		GameNarrativeDisplay.DisplayText(StoryGenerator.LowFuel(nearestOutpostSystem),["OK"])
+
+
+func DialogChoice(choice):
+	GameNarrativeDisplay.disconnect("ChoiceSelected",self,"DialogChoice")
+	
+	var shipPos = Vector2(ShipData.Ship().X,ShipData.Ship().Y)
+	var nearestOutpostSystem = StarMapData.GetNearestOutpostSystem(shipPos)
+	var outpostSystemPos = Vector2(nearestOutpostSystem.X, nearestOutpostSystem.Y) * StarMapData.MapScale
+
+	TowShipTo(outpostSystemPos)

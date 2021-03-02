@@ -1,19 +1,26 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://StarField/StarField.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/ShipAvatar.gd" type="Script" id=2]
+[ext_resource path="res://sprites/LSS_Transporter.png" type="Texture" id=3]
 [ext_resource path="res://sprites/LSS_Science.png" type="Texture" id=4]
 
-[sub_resource type="Gradient" id=3]
-colors = PoolColorArray( 0, 0.859375, 1, 1, 0.382355, 0.483758, 0.523438, 0 )
-
-[sub_resource type="Gradient" id=4]
-colors = PoolColorArray( 0, 0.859375, 1, 1, 0.382355, 0.483758, 0.523438, 0 )
-
 [sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0, 0.859375, 1, 1, 0.382355, 0.483758, 0.523438, 0 )
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 0, 0.859375, 1, 1, 0.382355, 0.483758, 0.523438, 0 )
+
+[sub_resource type="Gradient" id=3]
 colors = PoolColorArray( 1, 1, 1, 1, 0.382355, 0.483758, 0.523438, 0 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="Gradient" id=5]
+colors = PoolColorArray( 1, 0.46875, 0, 1, 0.382355, 0.483758, 0.523438, 0 )
+
+[sub_resource type="Gradient" id=6]
+colors = PoolColorArray( 1, 0.796875, 0, 1, 0.382355, 0.483758, 0.523438, 0 )
+
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 30, 30 )
 
 [node name="ShipAvatarView" type="Node2D"]
@@ -41,7 +48,7 @@ gravity = Vector2( 0, 0 )
 initial_velocity = 5.0
 angular_velocity = 10.0
 scale_amount = 12.0
-color_ramp = SubResource( 3 )
+color_ramp = SubResource( 1 )
 
 [node name="Thruster2" type="CPUParticles2D" parent="ShipAvatar/Thruster2"]
 position = Vector2( -0.3337, 25.0283 )
@@ -55,7 +62,7 @@ initial_velocity = 5.0
 angular_velocity = 10.0
 scale_amount = 12.0
 scale_amount_random = 1.0
-color_ramp = SubResource( 4 )
+color_ramp = SubResource( 2 )
 
 [node name="Thruster1" type="CPUParticles2D" parent="ShipAvatar"]
 position = Vector2( -25.6957, -13.6821 )
@@ -69,7 +76,7 @@ initial_velocity = 5.0
 angular_velocity = 10.0
 scale_amount = 7.0
 scale_amount_random = 1.0
-color_ramp = SubResource( 1 )
+color_ramp = SubResource( 3 )
 
 [node name="Thruster2" type="CPUParticles2D" parent="ShipAvatar/Thruster1"]
 position = Vector2( -0.3337, 25.0283 )
@@ -83,14 +90,107 @@ initial_velocity = 5.0
 angular_velocity = 10.0
 scale_amount = 7.0
 scale_amount_random = 1.0
-color_ramp = SubResource( 1 )
+color_ramp = SubResource( 3 )
 
 [node name="LSS_Science" type="Sprite" parent="ShipAvatar"]
 rotation = -1.5708
 texture = ExtResource( 4 )
 
+[node name="LSS_Transporter" type="Sprite" parent="ShipAvatar"]
+position = Vector2( 160, 0 )
+rotation = 1.5708
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+
+[node name="Thruster3" type="CPUParticles2D" parent="ShipAvatar/LSS_Transporter"]
+position = Vector2( -20, 28 )
+rotation = -1.5708
+scale = Vector2( 0.5, 0.5 )
+amount = 50
+lifetime = 0.5
+preprocess = 1.0
+local_coords = false
+spread = 135.97
+gravity = Vector2( 0, 0 )
+initial_velocity = 5.0
+angular_velocity = 10.0
+scale_amount = 12.0
+scale_amount_random = 1.0
+color_ramp = SubResource( 3 )
+
+[node name="Thruster2" type="CPUParticles2D" parent="ShipAvatar/LSS_Transporter/Thruster3"]
+position = Vector2( 2.08616e-06, 80 )
+amount = 50
+lifetime = 0.5
+preprocess = 1.0
+local_coords = false
+spread = 135.97
+gravity = Vector2( 0, 0 )
+initial_velocity = 5.0
+angular_velocity = 10.0
+scale_amount = 12.0
+scale_amount_random = 1.0
+color_ramp = SubResource( 3 )
+
+[node name="Thruster3" type="CPUParticles2D" parent="ShipAvatar/LSS_Transporter/Thruster3"]
+position = Vector2( -8, 40 )
+amount = 50
+lifetime = 0.5
+preprocess = 1.0
+local_coords = false
+spread = 135.97
+gravity = Vector2( 0, 0 )
+initial_velocity = 5.0
+angular_velocity = 10.0
+scale_amount = 12.0
+scale_amount_random = 1.0
+color_ramp = SubResource( 3 )
+
+[node name="Thruster4" type="CPUParticles2D" parent="ShipAvatar/LSS_Transporter"]
+position = Vector2( -20, 28 )
+rotation = -1.5708
+scale = Vector2( 0.5, 0.5 )
+amount = 100
+lifetime = 0.1
+preprocess = 1.0
+local_coords = false
+spread = 135.97
+gravity = Vector2( 0, 0 )
+initial_velocity = 5.0
+angular_velocity = 10.0
+scale_amount = 17.0
+color_ramp = SubResource( 5 )
+
+[node name="Thruster2" type="CPUParticles2D" parent="ShipAvatar/LSS_Transporter/Thruster4"]
+position = Vector2( 2.08616e-06, 80 )
+amount = 100
+lifetime = 0.1
+preprocess = 1.0
+local_coords = false
+spread = 135.97
+gravity = Vector2( 0, 0 )
+initial_velocity = 5.0
+angular_velocity = 10.0
+scale_amount = 17.0
+scale_amount_random = 1.0
+color_ramp = SubResource( 5 )
+
+[node name="Thruster3" type="CPUParticles2D" parent="ShipAvatar/LSS_Transporter/Thruster4"]
+position = Vector2( -8, 40 )
+amount = 100
+lifetime = 0.1
+preprocess = 1.0
+local_coords = false
+spread = 135.97
+gravity = Vector2( 0, 0 )
+initial_velocity = 5.0
+angular_velocity = 10.0
+scale_amount = 17.0
+scale_amount_random = 1.0
+color_ramp = SubResource( 6 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipAvatar"]
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [node name="target-debug" type="Node2D" parent="."]
 
