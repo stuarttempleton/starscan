@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/ValueBarScale.gd" type="Script" id=1]
 [ext_resource path="res://scripts/NearestSystemText.gd" type="Script" id=2]
 [ext_resource path="res://scenes/qty_counter.gd" type="Script" id=3]
 [ext_resource path="res://sprites/artifact_100px.png" type="Texture" id=4]
 [ext_resource path="res://sprites/fuel_100px.png" type="Texture" id=5]
+[ext_resource path="res://scenes/TowNotification.gd" type="Script" id=6]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-Medium.ttf"
@@ -29,9 +30,17 @@ outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
 font_data = SubResource( 5 )
 
+[sub_resource type="DynamicFontData" id=7]
+font_path = "res://fonts/Montserrat-Medium.ttf"
+
+[sub_resource type="DynamicFont" id=8]
+size = 19
+font_data = SubResource( 7 )
+
 [node name="HUD" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -258,3 +267,39 @@ text = "x 2"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TowNotification" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -128.0
+margin_top = 152.0
+margin_right = 128.0
+margin_bottom = 212.0
+color = Color( 0.47451, 0.47451, 0.47451, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TowNotification2" type="ColorRect" parent="TowNotification"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -126.0
+margin_top = -28.0
+margin_right = 126.0
+margin_bottom = 28.0
+color = Color( 0.0862745, 0.0862745, 0.0862745, 0.956863 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TowDetails" type="Label" parent="TowNotification"]
+margin_right = 256.0
+margin_bottom = 60.0
+custom_fonts/font = SubResource( 8 )
+text = "Towing to %s"
+align = 1
+valign = 1

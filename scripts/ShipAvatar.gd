@@ -10,6 +10,7 @@ var MinCameraZoom = 0.5
 var MaxCameraZoom = 2
 var mouseIsPressed = false
 var ShipIsTowing = false
+signal TowingAlert(bool_is_towing)
 
 func _ready():
 	self.position = Vector2(ShipData.Ship().X * MapScale, ShipData.Ship().Y * MapScale)
@@ -32,6 +33,12 @@ func _input(event):
 
 func Zoom(amount) :
 	$Camera2D.zoom = Vector2(clamp($Camera2D.zoom.x + amount, MinCameraZoom, MaxCameraZoom), clamp($Camera2D.zoom.y + amount, MinCameraZoom, MaxCameraZoom) )
+
+func HandleShipTowing():
+	if ShipIsTowing:
+		$LSS_Transporter.show()
+	else:
+		$LSS_Transporter.hide()
 
 
 func HandleThrusters():
@@ -72,6 +79,7 @@ func _physics_process(_delta):
 	
 	HandleBoundary()
 	HandleThrusters()
+	HandleShipTowing()
 	
 	var distanceToTarget = position.distance_to(target)
 	
@@ -111,14 +119,16 @@ func _physics_process(_delta):
 func TurnOffTow():
 	ShipIsTowing = false
 	print("Tow complete.")
-	$LSS_Transporter.hide()
+	#$LSS_Transporter.hide()
+	emit_signal("TowingAlert", ShipIsTowing)
 
 
 func TowShipTo(_outpost_position):
 	print("Towing ship to... " + str(_outpost_position))
 	ShipIsTowing = true
 	target = _outpost_position
-	$LSS_Transporter.show()
+	#$LSS_Transporter.show()
+	emit_signal("TowingAlert", ShipIsTowing)
 
 
 func _setMapPosition(newPosition):
