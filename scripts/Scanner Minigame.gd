@@ -82,7 +82,9 @@ func scanSucceeded():
 	$ResultTextHandle/ResultText.text = str(int(scanAccuracy * 10) * 10) + "%"
 	updateText(str(int(scanAccuracy * 10) * 10), "HIGH")
 	$ResultTextHandle/ResultTextAnimator.play("WinAnim")
-	StarMapData.ScanNearestSystem(scanAccuracy)
+	if StarMapData.ScanNearestSystem(scanAccuracy):
+		print("adding scan data to inventory")
+		ShipData.GainInventoryItem("Scan Data", 1)
 	emit_signal("success")
 
 func _on_endAnimComplete():

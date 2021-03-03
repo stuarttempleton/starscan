@@ -172,10 +172,11 @@ func FindNearestSystem(origin):
 	NearestSystemDistance = previous_distance
 
 func ScanNearestSystem(quality):
+	var is_new_scan = (NearestSystem.Scan <= 0)
 	NearestSystem.Scan = quality
 	for planet in NearestSystem.Planets:
 		ScanPlanet(planet, quality)
-	#print("Scanned star results: " + JSON.print(NearestSystem, "\t"))
+	return is_new_scan
 
 func ScanPlanet(planet, quality):
 	var totalIcons = 10

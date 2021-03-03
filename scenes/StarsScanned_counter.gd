@@ -5,10 +5,10 @@ var lastpeek
 export(String) var inventory_type_key
 
 var boiler_plate = "x %s"
-var inventory
+var ship
 
 func _ready():
-	inventory = ShipData.StarShip.Inventory
+	ship = ShipData.Ship()
 	SetQTY(1.0)
 
 func SetQTY(qty) :

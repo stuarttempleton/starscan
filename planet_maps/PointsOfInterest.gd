@@ -53,7 +53,8 @@ func _generate(planet, scan):
 
 func ClearPOI():
 	for poi in poi_list:
-		remove_child(poi)
+		poi.queue_free()
+		#remove_child(poi)
 	poi_list.clear()
 	pass
 

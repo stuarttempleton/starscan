@@ -8,6 +8,10 @@ func _ready():
 	#_generate_planet_map(StarMapData.GetRandomPlanetByType("Comet"), 100)
 	pass
 
+func _clearPOI():
+	$PointsOfInterest.ClearPOI()
+	pass
+
 
 func _generate_planet_map(planet, scan):
 	

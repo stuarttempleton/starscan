@@ -28,6 +28,7 @@ func ViewPlanet(_planetID):
 
 func ViewSystem():
 	if(!allow_planet_click):
+		$CanvasLayer/PlanetSurface._clearPOI()
 		ToggleView()
 		$CanvasLayer/SystemViewUI/ActionButtons/LeaveOrbit.visible = false
 		$CanvasLayer/SystemViewUI/ActionButtons/LeaveSystem.visible = true

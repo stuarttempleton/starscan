@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scripts/ValueBarScale.gd" type="Script" id=1]
 [ext_resource path="res://scripts/NearestSystemText.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://sprites/artifact_100px.png" type="Texture" id=4]
 [ext_resource path="res://sprites/fuel_100px.png" type="Texture" id=5]
 [ext_resource path="res://scenes/TowNotification.gd" type="Script" id=6]
+[ext_resource path="res://sprites/planets/star_100px.png" type="Texture" id=7]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-Medium.ttf"
@@ -223,9 +224,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Artifacts" type="HBoxContainer" parent="Inventory"]
-margin_right = 192.0
+[node name="StarsScanned" type="HBoxContainer" parent="Inventory"]
+margin_right = 592.0
 margin_bottom = 100.0
+script = ExtResource( 3 )
+inventory_type_key = "Scan Data"
+
+[node name="Icon" type="TextureRect" parent="Inventory/StarsScanned"]
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 7 )
+
+[node name="QTY" type="Label" parent="Inventory/StarsScanned"]
+margin_left = 104.0
+margin_top = 12.0
+margin_right = 192.0
+margin_bottom = 87.0
+custom_fonts/font = SubResource( 6 )
+text = "x 2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Artifacts" type="HBoxContainer" parent="Inventory"]
+margin_top = 104.0
+margin_right = 592.0
+margin_bottom = 204.0
 script = ExtResource( 3 )
 inventory_type_key = "Artifacts"
 
@@ -246,9 +270,9 @@ __meta__ = {
 }
 
 [node name="Resources" type="HBoxContainer" parent="Inventory"]
-margin_top = 104.0
-margin_right = 192.0
-margin_bottom = 204.0
+margin_top = 208.0
+margin_right = 592.0
+margin_bottom = 308.0
 script = ExtResource( 3 )
 inventory_type_key = "Resources"
 
