@@ -17,6 +17,7 @@ func _ready():
 func DialogBegin(planet):
 	Planet = planet
 	State = StoryGenerator.OUTPOST_STATE.LOBBY
+	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_OUTPOST)
 	DialogPrompt()
 
 

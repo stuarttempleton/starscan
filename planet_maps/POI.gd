@@ -39,6 +39,7 @@ func selected():
 		var qty = 1 #TODO: Adjust this for "severity"
 		get_parent().get_parent().get_parent().get_parent().POISelect(type)
 		CollectPOI(type, qty)
+		AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_POI)
 		GameNarrativeDisplay.connect("ChoiceSelected", self, "StoryResponse")
 		GameNarrativeDisplay.DisplayText(StoryGenerator.POIStory(type, qty),["OK"])
 	pass

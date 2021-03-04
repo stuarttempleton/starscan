@@ -23,6 +23,7 @@ var scanButtonPressed = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	AudioPlayer.PlayBG(AudioPlayer.AUDIO_KEY.SCAN_OSCILLATOR)
 	GameController.EnableMovement(false)
 	if (StarMapData.NearestSystem == null):
 		StarMapData.FindNearestSystem(Vector2(ShipData.Ship().X,ShipData.Ship().Y))
@@ -50,7 +51,6 @@ func _process(delta):
 		oscillator.targetT = abs(x - 1.0)
 
 func _on_Button_pressed():
-	AudioPlayer._play_UI_Button_Select()
 	scanButtonPressed = true
 	$ScanButton.disabled = true
 	var score = abs(x - 1.0)
@@ -71,6 +71,7 @@ func updateText(percent, confidence):
 	pass
 	
 func scanFailed():
+	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.SCAN_LOSE)
 	var scanAccuracy = 0.5
 	$ResultTextHandle/ResultText.text = str(int(scanAccuracy * 10) * 10) + "%"
 	updateText(str(int(scanAccuracy * 10) * 10), "LOW")
@@ -79,6 +80,7 @@ func scanFailed():
 	emit_signal("fail")
 	
 func scanSucceeded():
+	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.SCAN_WIN)
 	var scanAccuracy = 1.0
 	$ResultTextHandle/ResultText.text = str(int(scanAccuracy * 10) * 10) + "%"
 	updateText(str(int(scanAccuracy * 10) * 10), "HIGH")

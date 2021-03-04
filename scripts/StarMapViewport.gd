@@ -20,6 +20,7 @@ func _on_FirstPlay():
 	$ShipAvatarView/ShipAvatar.JumpToMapPosition(outpostSystemPos)
 	
 	#display start up dialog "greetings, nomad!"
+	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_HAIL)
 	GameNarrativeDisplay.connect("ChoiceSelected", self, "StartingTextDone")
 	GameNarrativeDisplay.DisplayText("Greeting",["Begin"])
 

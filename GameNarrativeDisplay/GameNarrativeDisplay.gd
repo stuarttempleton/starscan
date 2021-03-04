@@ -53,7 +53,6 @@ func DisplayText(txt, array_buttons):
 	SetMessageNodeVisibility(true)
 	$GameNarrativeDisplay2/Message.percent_visible = 0
 	
-	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_APPEAR)
 	for btn in buttons:
 		btn.visible = false
 	
