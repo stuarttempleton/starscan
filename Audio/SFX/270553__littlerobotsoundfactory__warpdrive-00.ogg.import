@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/270553__littlerobotsoundfactory__warpdrive-00.ogg-4c56f7933eb26cac209ea4311852269a.oggstr"
+
+[deps]
+
+source_file="res://Audio/SFX/270553__littlerobotsoundfactory__warpdrive-00.ogg"
+dest_files=[ "res://.import/270553__littlerobotsoundfactory__warpdrive-00.ogg-4c56f7933eb26cac209ea4311852269a.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

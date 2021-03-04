@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/270520__littlerobotsoundfactory__ambience-alienhive-00.ogg-665af7556d80d3c7bb14b6bc2a4e273c.oggstr"
+
+[deps]
+
+source_file="res://Audio/BG/270520__littlerobotsoundfactory__ambience-alienhive-00.ogg"
+dest_files=[ "res://.import/270520__littlerobotsoundfactory__ambience-alienhive-00.ogg-665af7556d80d3c7bb14b6bc2a4e273c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

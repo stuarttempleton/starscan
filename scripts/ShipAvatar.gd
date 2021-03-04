@@ -11,6 +11,7 @@ var MaxCameraZoom = 2
 var mouseIsPressed = false
 var ShipIsTowing = false
 signal TowingAlert(bool_is_towing)
+var playedWarpOnce = false
 
 func _ready():
 	self.position = Vector2(ShipData.Ship().X * MapScale, ShipData.Ship().Y * MapScale)
@@ -37,26 +38,45 @@ func Zoom(amount) :
 func HandleShipTowing():
 	if ShipIsTowing:
 		$LSS_Transporter.show()
+		if !$LSS_Transporter/Audio.playing:
+			$LSS_Transporter/Audio.play()
 	else:
 		$LSS_Transporter.hide()
+		if $LSS_Transporter/Audio.playing:
+			$LSS_Transporter/Audio.stop()
 
 
 func HandleThrusters():
 	if CurrentSpeed < 0.01 or ShipIsTowing:
-		$Thruster1.emitting = false
-		$Thruster1/Thruster2.emitting = false
-		$Thruster2.emitting = false
-		$Thruster2/Thruster2.emitting = false
+		$Thruster.emitting = false
+		$Thruster/Thruster2.emitting = false
+		$Warpdrive.emitting = false
+		$Warpdrive/Thruster2.emitting = false
+		$Thruster/Audio.stop()
+		$Warpdrive/Audio.stop()
 	elif CurrentSpeed < ShipData.Ship().TravelSpeed / 2:
-		$Thruster1.emitting = true
-		$Thruster1/Thruster2.emitting = true
-		$Thruster2.emitting = false
-		$Thruster2/Thruster2.emitting = false
+		playedWarpOnce = false #since dropping speed, we have not played it.
+		$Thruster.emitting = true
+		$Thruster/Thruster2.emitting = true
+		$Warpdrive.emitting = false
+		$Warpdrive/Thruster2.emitting = false
+		if !$Thruster/Audio.playing:
+			$Thruster/Audio.play()
+		if $Warpdrive/Audio.playing:
+			$Warpdrive/Audio.stop()
 	elif CurrentSpeed < ShipData.Ship().TravelSpeed:
-		$Thruster1.emitting = true
-		$Thruster1/Thruster2.emitting = true
-		$Thruster2.emitting = true
-		$Thruster2/Thruster2.emitting = true
+		$Thruster.emitting = true
+		$Thruster/Thruster2.emitting = true
+		$Warpdrive.emitting = true
+		$Warpdrive/Thruster2.emitting = true
+		if $Thruster/Audio.playing:
+			$Thruster/Audio.stop()
+		if !$Warpdrive/Audio.playing:
+			$Warpdrive/Audio.play()
+		if !$Warpdrive/SpeedShift.playing and !playedWarpOnce:
+			$Warpdrive/SpeedShift.play()
+		playedWarpOnce = true #you played it if it wasn't playing. move on.
+			
 	pass
 
 

@@ -10,6 +10,7 @@ func _ready():
 
 func on_button_pressed () :
 	if (scene_to_load != "") :
+		AudioPlayer._play_UI_Button_Select()
 		StarMapData.ResetMap()
 		ShipData.ResetShip()
 		get_tree().change_scene(scene_to_load)

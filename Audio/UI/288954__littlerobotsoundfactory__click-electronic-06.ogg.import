@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/288954__littlerobotsoundfactory__click-electronic-06.ogg-6d7d665adc47fa756777bae4763eec1d.oggstr"
+
+[deps]
+
+source_file="res://Audio/UI/288954__littlerobotsoundfactory__click-electronic-06.ogg"
+dest_files=[ "res://.import/288954__littlerobotsoundfactory__click-electronic-06.ogg-6d7d665adc47fa756777bae4763eec1d.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

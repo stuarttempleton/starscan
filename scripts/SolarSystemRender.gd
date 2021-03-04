@@ -28,6 +28,8 @@ func _ready():
 		print (distance_scaling)
 		$"../../Nebula".scale = Vector2($"../../Nebula".scale.x * distance_scaling, $"../../Nebula".scale.y * distance_scaling)
 	else:
+		print("NOT close to nebula")
+		$"../../Nebula/BGAudio".stop()
 		$"../../Nebula".visible = false
 
 func _draw():

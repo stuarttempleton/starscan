@@ -1,6 +1,7 @@
 extends Node2D
 
 func _ready():
+	AudioPlayer.PlayBG(AudioPlayer.AUDIO_KEY.BG_SPACE)
 	if ShipData.Ship().FirstRun:
 		_on_FirstPlay()
 

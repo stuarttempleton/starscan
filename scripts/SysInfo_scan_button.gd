@@ -14,6 +14,7 @@ func _ready():
 	connect("pressed", self, "on_button_pressed")
 
 func on_button_pressed () :
+	AudioPlayer._play_UI_Button_Select()
 	print("Load: %s" % [minigame_scene])
 	hoverflag = false
 	var loaded_scene = load(minigame_scene)

@@ -53,6 +53,7 @@ func DisplayText(txt, array_buttons):
 	SetMessageNodeVisibility(true)
 	$GameNarrativeDisplay2/Message.percent_visible = 0
 	
+	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_APPEAR)
 	for btn in buttons:
 		btn.visible = false
 	
@@ -81,16 +82,20 @@ func CloseWithPress(int_button):
 
 
 func _on_Button1_pressed():
+	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_SELECT)
 	CloseWithPress(0)
 
 
 func _on_Button2_pressed():
+	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_SELECT)
 	CloseWithPress(1)
 
 
 func _on_Button3_pressed():
+	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_SELECT)
 	CloseWithPress(2)
 
 
 func _on_Button4_pressed():
+	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_SELECT)
 	CloseWithPress(3)

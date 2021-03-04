@@ -50,6 +50,7 @@ func _process(delta):
 		oscillator.targetT = abs(x - 1.0)
 
 func _on_Button_pressed():
+	AudioPlayer._play_UI_Button_Select()
 	scanButtonPressed = true
 	$ScanButton.disabled = true
 	var score = abs(x - 1.0)

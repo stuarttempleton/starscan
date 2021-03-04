@@ -5,6 +5,8 @@ var allow_planet_click = false # this is a toggle for what you're viewing.
 var allow_poi_click = true #
 
 func _ready():
+	
+	AudioPlayer.PlayBG(AudioPlayer.AUDIO_KEY.BG_SPACE_ANOMALY_2)
 	ToggleView()
 	pass # Replace with function body.
 
@@ -20,6 +22,7 @@ func PlanetUnhover():
 	
 func ViewPlanet(_planetID):
 	if (allow_planet_click):
+		AudioPlayer._play_UI_Button_Select()
 		ToggleView()
 		$CanvasLayer/PlanetSurface._generate_planet_map($SystemView/SolarSystem.system.Planets[_planetID], $SystemView/SolarSystem.system.Scan)
 		$CanvasLayer/SystemViewUI/ActionButtons/LeaveOrbit.visible = true
@@ -28,6 +31,8 @@ func ViewPlanet(_planetID):
 
 func ViewSystem():
 	if(!allow_planet_click):
+		AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_SELECT)
+		#AudioPlayer._play_UI_Button_Select()
 		$CanvasLayer/PlanetSurface._clearPOI()
 		ToggleView()
 		$CanvasLayer/SystemViewUI/ActionButtons/LeaveOrbit.visible = false

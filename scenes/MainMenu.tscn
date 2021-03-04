@@ -79,14 +79,14 @@ stretch_mode = 4
 [node name="Buttons" type="VBoxContainer" parent="MenuUIContainer/Menu"]
 margin_top = 87.0
 margin_right = 880.0
-margin_bottom = 414.0
+margin_bottom = 278.0
 size_flags_vertical = 3
 alignment = 1
 
 [node name="Play" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
 margin_right = 880.0
-margin_bottom = 62.0
+margin_bottom = 35.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/hover = ExtResource( 9 )
@@ -105,9 +105,9 @@ scene_to_load = "res://scenes/StarMapViewport.tscn"
 
 [node name="Restart" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 66.0
+margin_top = 39.0
 margin_right = 880.0
-margin_bottom = 128.0
+margin_bottom = 74.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/hover = ExtResource( 9 )
@@ -126,9 +126,9 @@ scene_to_load = "res://scenes/StarMapViewport.tscn"
 
 [node name="Continue" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 132.0
+margin_top = 78.0
 margin_right = 880.0
-margin_bottom = 194.0
+margin_bottom = 113.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/hover = ExtResource( 9 )
@@ -146,9 +146,9 @@ script = ExtResource( 7 )
 
 [node name="Back To Menu" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 198.0
+margin_top = 117.0
 margin_right = 880.0
-margin_bottom = 260.0
+margin_bottom = 152.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/hover = ExtResource( 9 )
@@ -167,9 +167,9 @@ scene_to_load = "res://scenes/Title.tscn"
 
 [node name="Exit" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 264.0
+margin_top = 156.0
 margin_right = 880.0
-margin_bottom = 327.0
+margin_bottom = 191.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/hover = ExtResource( 9 )

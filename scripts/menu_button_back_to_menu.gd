@@ -8,6 +8,7 @@ func _ready():
 
 func on_button_pressed () :
 	if (scene_to_load != "") :
+		AudioPlayer._play_UI_Button_Select()
 		StarMapData.SaveMap()
 		ShipData.SaveShip()
 		GameNarrativeDisplay.CancelDialog()

@@ -7,5 +7,6 @@ func _ready():
 func on_button_pressed () :
 	StarMapData.SaveMap()
 	ShipData.SaveShip()
+	AudioPlayer._play_UI_Button_Select()
 	get_tree().quit()
 

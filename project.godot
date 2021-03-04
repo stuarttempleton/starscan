@@ -31,6 +31,7 @@ StarMapData="*res://scenes/StarMapData.tscn"
 GameController="*res://scenes/GameController.tscn"
 GameNarrativeDisplay="*res://GameNarrativeDisplay/GameNarrativeDisplay.tscn"
 StoryGenerator="*res://scenes/StoryGenerator.tscn"
+AudioPlayer="*res://AudioPlayer/AudioPlayer.tscn"
 
 [display]
 
