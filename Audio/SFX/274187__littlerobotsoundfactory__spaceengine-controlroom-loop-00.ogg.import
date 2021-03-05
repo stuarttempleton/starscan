@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/274187__littlerobotsoundfactory__spaceengine-controlroom-loop-00.ogg-05208f801ae998db930732d7715c9fbc.oggstr"
+
+[deps]
+
+source_file="res://Audio/SFX/274187__littlerobotsoundfactory__spaceengine-controlroom-loop-00.ogg"
+dest_files=[ "res://.import/274187__littlerobotsoundfactory__spaceengine-controlroom-loop-00.ogg-05208f801ae998db930732d7715c9fbc.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

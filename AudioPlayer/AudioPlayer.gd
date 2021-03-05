@@ -10,7 +10,10 @@ enum AUDIO_KEY {
 	
 	DIALOG_HAIL,
 	DIALOG_OUTPOST,
-	DIALOG_POI,
+	DIALOG_POI_DEFAULT,
+	DIALOG_POI_ARTIFACT,
+	DIALOG_POI_RESOURCE,
+	DIALOG_POI_HAZARD,
 	DIALOG_WIN,
 	DIALOG_LOSE,
 	DIALOG_SELECT,
@@ -35,7 +38,10 @@ export var Audio = {
 	
 	AUDIO_KEY.DIALOG_HAIL:"res://Audio/UI/288953__littlerobotsoundfactory__click-electronic-07.ogg",
 	AUDIO_KEY.DIALOG_OUTPOST:"res://Audio/UI/288953__littlerobotsoundfactory__click-electronic-07.ogg",
-	AUDIO_KEY.DIALOG_POI:"res://Audio/UI/288953__littlerobotsoundfactory__click-electronic-07.ogg",
+	AUDIO_KEY.DIALOG_POI_DEFAULT:"res://Audio/UI/288953__littlerobotsoundfactory__click-electronic-07.ogg",
+	AUDIO_KEY.DIALOG_POI_ARTIFACT:"res://Audio/UI/288953__littlerobotsoundfactory__click-electronic-07.ogg",
+	AUDIO_KEY.DIALOG_POI_RESOURCE:"res://Audio/UI/288953__littlerobotsoundfactory__click-electronic-07.ogg",
+	AUDIO_KEY.DIALOG_POI_HAZARD:"res://Audio/UI/288953__littlerobotsoundfactory__click-electronic-07.ogg",
 	AUDIO_KEY.DIALOG_WIN:"res://Audio/UI/288953__littlerobotsoundfactory__click-electronic-07.ogg",
 	AUDIO_KEY.DIALOG_LOSE:"res://Audio/UI/288953__littlerobotsoundfactory__click-electronic-07.ogg",
 	AUDIO_KEY.DIALOG_SELECT:"res://Audio/UI/288957__littlerobotsoundfactory__click-electronic-09.ogg",

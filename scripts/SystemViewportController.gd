@@ -6,7 +6,7 @@ var allow_poi_click = true #
 
 func _ready():
 	
-	AudioPlayer.PlayBG(AudioPlayer.AUDIO_KEY.BG_SPACE_ANOMALY_2)
+	AudioPlayer.PlayBG(AudioPlayer.AUDIO_KEY.BG_SPACE)
 	ToggleView()
 	pass # Replace with function body.
 

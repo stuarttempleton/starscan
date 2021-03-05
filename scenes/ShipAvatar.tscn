@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://StarField/StarField.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/ShipAvatar.gd" type="Script" id=2]
 [ext_resource path="res://sprites/LSS_Transporter.png" type="Texture" id=3]
 [ext_resource path="res://sprites/LSS_Science.png" type="Texture" id=4]
 [ext_resource path="res://Audio/SFX/270553__littlerobotsoundfactory__warpdrive-00.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Audio/SFX/274187__littlerobotsoundfactory__spaceengine-controlroom-loop-00.ogg" type="AudioStream" id=6]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0, 0.859375, 1, 1, 0.382355, 0.483758, 0.523438, 0 )
@@ -198,6 +199,7 @@ scale_amount_random = 1.0
 color_ramp = SubResource( 5 )
 
 [node name="Audio" type="AudioStreamPlayer2D" parent="ShipAvatar/LSS_Transporter"]
+stream = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipAvatar"]
 shape = SubResource( 6 )

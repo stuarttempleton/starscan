@@ -69,8 +69,8 @@ func HandleThrusters():
 		$Thruster/Thruster2.emitting = true
 		$Warpdrive.emitting = true
 		$Warpdrive/Thruster2.emitting = true
-		if $Thruster/Audio.playing:
-			$Thruster/Audio.stop()
+#		if $Thruster/Audio.playing:
+#			$Thruster/Audio.stop()
 		if !$Warpdrive/Audio.playing:
 			$Warpdrive/Audio.play()
 		if !$Warpdrive/SpeedShift.playing and !playedWarpOnce:
