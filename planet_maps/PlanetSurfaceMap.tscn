@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://planet_maps/HeightMap.gd" type="Script" id=1]
 [ext_resource path="res://sprites/smokeparticle.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://planet_maps/PlanetMapController.gd" type="Script" id=5]
 [ext_resource path="res://planet_maps/PointsOfInterest.gd" type="Script" id=6]
 [ext_resource path="res://planet_maps/PlanetDialog.gd" type="Script" id=7]
+[ext_resource path="res://sprites/grid_square.png" type="Texture" id=8]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -109,6 +110,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 colormap = SubResource( 6 )
+
+[node name="Grid" type="TextureRect" parent="PlanetSurfaceMap"]
+self_modulate = Color( 1, 1, 1, 0.207843 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 40.0
+margin_top = 72.0
+margin_right = 2440.0
+margin_bottom = 1272.0
+rect_scale = Vector2( 0.5, 0.5 )
+mouse_filter = 2
+texture = ExtResource( 8 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PlanetName" type="Label" parent="PlanetSurfaceMap"]
 margin_left = 32.0
