@@ -10,20 +10,40 @@ func _ready():
 	pass # Replace with function body.
 
 
-func SystemStory(Planet):
-	#Told when entering a system.
-	#var txt = "[b]A surface encounter...[/b]\r\n\r\n"
-#	txt += "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
-#	txt += "\r\n\r\n"
-#	txt += "[indent][code]"
-#	txt += "[color=#00ff00]You found 1 artifact.[/color]\r\n"
-#	txt += "[color=#00ff00]You gained 1 fuel.[/color]\r\n"
-#	txt += "[color=#ff0000]You lost 10 resources.[/color]\r\n"
-#	txt += "[color=#ff0000]You lost half your crew (42 souls).[/color]\r\n"
-#	txt += "[/code][/indent]"
-#	DisplayText(txt, ["OK"])
-	pass
+func SystemStory(System, Cost):
+	var title = "Entering " + System.Name
+	var system_boiler_plate = "%s\r\n"
+	var planet_sub_boiler_plate = "%s: %s, %s"
+	var details = system_boiler_plate % [LoremIpsum(1)] #, ScanConfidence(System.Scan), System.Planets.size()]
+	var stats = ReportSystemEntryCost(Cost)
+	stats += "\r\n" + ScanConfidence(System.Scan)
+	
+#	for planet in System.Planets:
+#		var planetText = planet_sub_boiler_plate % [planet.Name, planet.Type, planet.Size]
+#		details = "%s\r\n%s" % [details, planetText]
+	
+	details += stats_boiler % [stats]
+	return main_boiler % [title, details]
 
+func ReportSystemEntryCost(cost):
+	var report = ""
+	
+	if cost.Resources > 0:
+		report = "[color=#ff0000]You expended %d resources.[/color]\r\n" % [cost.Resources]
+	elif cost.Crew > 0:
+		report = "[color=#ff0000]You lost %d crew due to lack of resources.[/color]\r\n" % [cost.Crew]	
+	elif cost.Crew <= 0:
+		return "[color=#00ff00]Interstellar travel is free.[/color]\r\n"
+	
+	var remainingResources = null
+	for cargo in ShipData.StarShip.Inventory:
+		if cargo.Type == "Resources":
+			remainingResources = cargo
+			break
+	if remainingResources == null || remainingResources.Quantity == 0:
+		report = "%s[color=#ff0000]WARNING: resources depleted![/color]\r\n" % [report]
+	
+	return report
 
 func ScanConfidence(scan):
 	var stat_pos_item_boiler = "[color=#00ff00]%s[/color]\r\n"
@@ -44,7 +64,6 @@ func RomanNumeral(num):
 	var intToroman = { 1: 'I', 4: 'IV', 5: 'V', 9: 'IX', 10: 'X', 40: 'XL', 50: 'L', 90: 'XC', 100: 'C', 400: 'XD', 500: 'D', 900: 'CM', 1000: 'M'}
 	var print_order = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
 	var roman_num = ''
-	#var quotient
 	
 	for x in print_order:
 		if num != 0:
@@ -63,7 +82,7 @@ func PlanetStory(System, Planet):
 	var txt = ""
 	
 	var scan_txt = "System scans are currently at %s percent." % [System.Scan]
-	txt += "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+	txt += LoremIpsum(1)
 	txt += stats_boiler % [ScanConfidence(System.Scan)]
 	return main_boiler % [title, txt]
 
@@ -100,8 +119,7 @@ func POIStory(POIType, qty):
 
 func _generate_poi_storylet(POIType):
 	var txt = ""
-	txt += "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
-	
+	txt += LoremIpsum(1)
 	return txt
 
 
@@ -131,6 +149,15 @@ func LowFuel(outpost):
 	var shipName = $WordGenerator.CreateWord().capitalize()
 	var txt = "This is Captain %s of Rescue Vessel TUG-%s, responding to your low fuel beacon. Initiating tractor beam on your mark.\r\n\r\n" % [cptName, shipName]
 	
-	txt += "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+	txt += LoremIpsum(1)
 	txt += "\r\n\r\nYou can refuel and resume your journey at Outpost %s." % [outpost.Name]
 	return main_boiler % [title, txt]
+
+func LoremIpsum(_size):
+	var txt = ""
+	for i in _size:
+		txt += "Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
+		txt += "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+		txt += "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut "
+		txt += "aliquip ex ea commodo consequat. "
+	return txt

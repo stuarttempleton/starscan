@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scripts/SysView_Leave_Button.gd" type="Script" id=1]
 [ext_resource path="res://scripts/SolarSystemRender.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/MenuButton_Pressed.tres" type="StyleBox" id=5]
 [ext_resource path="res://scenes/VFX Scene.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/SystemNameLabel.gd" type="Script" id=7]
+[ext_resource path="res://scenes/EnterSystemEvent.gd" type="Script" id=8]
 [ext_resource path="res://scripts/SystemDetailLabel.gd" type="Script" id=9]
 [ext_resource path="res://scripts/SystemViewportController.gd" type="Script" id=10]
 [ext_resource path="res://planet_maps/PlanetSurfaceMap.tscn" type="PackedScene" id=11]
@@ -197,5 +198,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 StarMapViewport_scene = "res://scenes/StarMapViewport.tscn"
+
+[node name="EnterSystemEvent" type="Node2D" parent="."]
+script = ExtResource( 8 )
 [connection signal="button_down" from="CanvasLayer/SystemViewUI/ActionButtons/LeaveOrbit" to="." method="ViewSystem"]
 [connection signal="button_down" from="CanvasLayer/SystemViewUI/ActionButtons/LeaveSystem" to="CanvasLayer/SystemViewUI/ActionButtons/LeaveSystem" method="_on_button_down"]

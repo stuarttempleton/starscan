@@ -5,7 +5,7 @@ extends Label
 # var a = 2
 # var b = "text"
 
-export var main_boiler_plate = "%s\r\nEntering %s...\r\nScan confidence: %s\r\nKnown planets: %d\r\n"
+export var main_boiler_plate = "System %s...\r\nScan confidence: %s\r\nKnown planets: %d\r\n"
 export var planet_sub_boiler_plate = "%s: %s, %s"
 # Called when the node enters the scene tree for the first time.
 var display_speed = 0.5
@@ -24,7 +24,7 @@ func _ready():
 	if (StarMapData.NearestSystem == null):
 		StarMapData.FindNearestSystem(Vector2(ShipData.Ship().X,ShipData.Ship().Y))
 	var system = StarMapData.NearestSystem
-	var details = main_boiler_plate % [ReportSystemEntryCost(), system.Name, ScanConfidence(system.Scan), system.Planets.size()]
+	var details = main_boiler_plate % [system.Name, ScanConfidence(system.Scan), system.Planets.size()]
 	for planet in system.Planets:
 		var planetText = planet_sub_boiler_plate % [planet.Name, planet.Type, planet.Size]
 		details = "%s\r\n%s" % [details, planetText]
@@ -37,25 +37,3 @@ func _process(delta):
 	else:
 		percent_visible += display_speed * delta
 	pass
-
-func ReportSystemEntryCost():
-	var cost = ShipData.PayToVisitAStar()
-	var report = ""
-	
-	if cost.Resources > 0:
-		report = "%d resources expended." % [cost.Resources]
-	elif cost.Crew <= 0:
-		return "Interstellar travel is free."
-	
-	var remainingResources = null
-	for cargo in ShipData.StarShip.Inventory:
-		if cargo.Type == "Resources":
-			remainingResources = cargo
-			break
-	if remainingResources == null || remainingResources.Quantity == 0:
-		report = "%s\r\nWARNING: resources depleted!" % [report]
-	
-	if cost.Crew > 0:
-		report = "%s\r\nALERT: casualties reported!\r\n%d crew lost." % [report, cost.Crew]	
-	
-	return report
