@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scripts/GameController.gd" type="Script" id=1]
-[ext_resource path="res://scenes/WinLoseCheck.gd" type="Script" id=2]
+[ext_resource path="res://scripts/WinLoseCheck.gd" type="Script" id=2]
+
 
 [node name="GameController" type="Node2D"]
 pause_mode = 2

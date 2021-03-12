@@ -2,11 +2,13 @@
 
 [ext_resource path="res://scripts/ValueBarScale.gd" type="Script" id=1]
 [ext_resource path="res://scripts/NearestSystemText.gd" type="Script" id=2]
-[ext_resource path="res://scenes/qty_counter.gd" type="Script" id=3]
+[ext_resource path="res://scripts/qty_counter.gd" type="Script" id=3]
 [ext_resource path="res://sprites/artifact_100px.png" type="Texture" id=4]
 [ext_resource path="res://sprites/fuel_100px.png" type="Texture" id=5]
-[ext_resource path="res://scenes/TowNotification.gd" type="Script" id=6]
+[ext_resource path="res://scripts/TowNotification.gd" type="Script" id=6]
 [ext_resource path="res://sprites/planets/star_100px.png" type="Texture" id=7]
+
+
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-Medium.ttf"

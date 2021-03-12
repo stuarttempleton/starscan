@@ -2,11 +2,12 @@
 
 [ext_resource path="res://GameNarrativeDisplay/GameNarrativeDisplay.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Montserrat-Light.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://scenes/MenuButton_HoverFocus.tres" type="StyleBox" id=3]
-[ext_resource path="res://scenes/MenuButton_Normal.tres" type="StyleBox" id=4]
-[ext_resource path="res://scenes/MenuButton_Pressed.tres" type="StyleBox" id=5]
+[ext_resource path="res://styles/MenuButton_HoverFocus.tres" type="StyleBox" id=3]
+[ext_resource path="res://styles/MenuButton_Normal.tres" type="StyleBox" id=4]
+[ext_resource path="res://styles/MenuButton_Pressed.tres" type="StyleBox" id=5]
 [ext_resource path="res://shaders/white.png" type="Texture" id=6]
 [ext_resource path="res://GameNarrativeDisplay/blur_shader_material.tres" type="Material" id=7]
+
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-Regular.ttf"

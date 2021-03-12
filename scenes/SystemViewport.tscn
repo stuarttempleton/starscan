@@ -2,18 +2,20 @@
 
 [ext_resource path="res://scripts/SysView_Leave_Button.gd" type="Script" id=1]
 [ext_resource path="res://scripts/SolarSystemRender.gd" type="Script" id=2]
-[ext_resource path="res://scenes/MenuButton_Normal.tres" type="StyleBox" id=3]
-[ext_resource path="res://scenes/MenuButton_HoverFocus.tres" type="StyleBox" id=4]
-[ext_resource path="res://scenes/MenuButton_Pressed.tres" type="StyleBox" id=5]
+[ext_resource path="res://styles/MenuButton_Normal.tres" type="StyleBox" id=3]
+[ext_resource path="res://styles/MenuButton_HoverFocus.tres" type="StyleBox" id=4]
+[ext_resource path="res://styles/MenuButton_Pressed.tres" type="StyleBox" id=5]
 [ext_resource path="res://scenes/VFX Scene.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/SystemNameLabel.gd" type="Script" id=7]
-[ext_resource path="res://scenes/EnterSystemEvent.gd" type="Script" id=8]
+[ext_resource path="res://scripts/EnterSystemEvent.gd" type="Script" id=8]
 [ext_resource path="res://scripts/SystemDetailLabel.gd" type="Script" id=9]
 [ext_resource path="res://scripts/SystemViewportController.gd" type="Script" id=10]
 [ext_resource path="res://planet_maps/PlanetSurfaceMap.tscn" type="PackedScene" id=11]
 [ext_resource path="res://sprites/UI_planet_hover_border.png" type="Texture" id=12]
 [ext_resource path="res://StarField/StarField.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/background space dust.tscn" type="PackedScene" id=14]
+
+
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-Regular.ttf"
