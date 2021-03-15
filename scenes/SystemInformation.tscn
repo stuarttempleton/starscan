@@ -7,7 +7,6 @@
 [ext_resource path="res://styles/MenuButton_HoverFocus.tres" type="StyleBox" id=5]
 [ext_resource path="res://styles/MenuButton_Pressed.tres" type="StyleBox" id=6]
 
-
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-Black.ttf"
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://planet_maps/HeightMap.gd" type="Script" id=1]
 [ext_resource path="res://sprites/smokeparticle.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://planet_maps/PointsOfInterest.gd" type="Script" id=6]
 [ext_resource path="res://planet_maps/PlanetDialog.gd" type="Script" id=7]
 [ext_resource path="res://sprites/grid_square.png" type="Texture" id=8]
+[ext_resource path="res://scenes/PlayerStats.tscn" type="PackedScene" id=9]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -84,12 +85,23 @@ scale = 3.0
 scale_random = 1.0
 color_ramp = SubResource( 12 )
 
-[node name="PlanetSurface" type="Node2D"]
+[node name="PlanetSurface" type="Container"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PointsOfInterest" type="Node2D" parent="."]
+z_index = 2
+script = ExtResource( 6 )
 
 [node name="PlanetSurfaceMap" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -98,8 +110,6 @@ __meta__ = {
 material = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 1280.0
-margin_bottom = 720.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -117,8 +127,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 40.0
 margin_top = 72.0
-margin_right = 2440.0
-margin_bottom = 1272.0
+margin_right = 1160.0
+margin_bottom = 504.0
 rect_scale = Vector2( 0.5, 0.5 )
 mouse_filter = 2
 texture = ExtResource( 8 )
@@ -127,13 +137,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="PlayerStats" parent="PlanetSurfaceMap" instance=ExtResource( 9 )]
+visible = false
+
 [node name="PlanetName" type="Label" parent="PlanetSurfaceMap"]
-margin_left = 32.0
+anchor_left = 1.0
+anchor_right = 1.0
 margin_top = 32.0
-margin_right = 151.0
+margin_right = -40.0
 margin_bottom = 69.0
+grow_horizontal = 0
 custom_fonts/font = SubResource( 8 )
 text = "PLANET"
+align = 2
 valign = 2
 uppercase = true
 __meta__ = {
@@ -141,14 +157,17 @@ __meta__ = {
 }
 
 [node name="PlanetInformation" type="Label" parent="PlanetSurfaceMap"]
-margin_left = 32.0
+anchor_left = 1.0
+anchor_right = 1.0
 margin_top = 72.0
-margin_right = 216.0
+margin_right = -40.0
 margin_bottom = 200.0
+grow_horizontal = 0
 custom_fonts/font = SubResource( 10 )
 text = "Type: Gas
 Size: Huge
 Orbital Debris: Yes"
+align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -162,10 +181,6 @@ lifetime = 20.0
 preprocess = 10.0
 process_material = SubResource( 13 )
 texture = ExtResource( 2 )
-
-[node name="PointsOfInterest" type="Node2D" parent="."]
-z_index = 2
-script = ExtResource( 6 )
 
 [node name="OutpostDialog" type="Node2D" parent="."]
 script = ExtResource( 3 )

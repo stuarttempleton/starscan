@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scripts/SysView_Leave_Button.gd" type="Script" id=1]
 [ext_resource path="res://scripts/SolarSystemRender.gd" type="Script" id=2]
@@ -14,8 +14,7 @@
 [ext_resource path="res://sprites/UI_planet_hover_border.png" type="Texture" id=12]
 [ext_resource path="res://StarField/StarField.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/background space dust.tscn" type="PackedScene" id=14]
-
-
+[ext_resource path="res://scenes/PlayerStats.tscn" type="PackedScene" id=15]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-Regular.ttf"
@@ -125,6 +124,10 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="PlayerStats" parent="." instance=ExtResource( 15 )]
+margin_right = 70.9709
+margin_bottom = 77.7715
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
