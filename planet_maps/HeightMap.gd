@@ -1,5 +1,7 @@
 extends TextureRect
 
+export(NodePath) var PointsOfInterest_path
+var PointsOfInterest
 
 export var colormap: GradientTexture
 const L8_MAX := 255 #8 bit max color
@@ -18,7 +20,7 @@ export var PlanetGradientMaps = {
 }
 
 func _ready() -> void:
-	pass
+	PointsOfInterest = get_node(PointsOfInterest_path)
 
 
 func _generate(planet, scan):
@@ -51,10 +53,10 @@ func _generate(planet, scan):
 	material.set_shader_param("noise_minmax", heightmap_minmax)
 	material.set_shader_param("colormap", planet_texture_gradient)
 	if planet.Type == "Outpost":
-		$"../../PointsOfInterest".ClearPOI()
+		PointsOfInterest.ClearPOI()
 		$"../../OutpostDialog".DialogBegin(planet)
 	else:
-		$"../../PointsOfInterest"._generate(planet, scan)
+		PointsOfInterest._generate(planet, scan)
 		$"../../PlanetDialog".DialogBegin(planet)
 	pass
 

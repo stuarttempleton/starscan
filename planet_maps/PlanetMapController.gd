@@ -1,4 +1,4 @@
-extends Container
+extends Node2D
 
 
 export var PlanetDetailBoilerPlate = "Type: %s\r\nSize: %s\r\nOrbital Debris: %s"

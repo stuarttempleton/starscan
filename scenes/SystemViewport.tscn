@@ -125,10 +125,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayerStats" parent="." instance=ExtResource( 15 )]
-margin_right = 70.9709
-margin_bottom = 77.7715
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PlanetSurface" parent="CanvasLayer" instance=ExtResource( 11 )]
@@ -203,6 +199,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 StarMapViewport_scene = "res://scenes/StarMapViewport.tscn"
+
+[node name="PlayerStats" parent="." instance=ExtResource( 15 )]
+margin_right = 70.9709
+margin_bottom = 77.7715
 
 [node name="EnterSystemEvent" type="Node2D" parent="."]
 script = ExtResource( 8 )

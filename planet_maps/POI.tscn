@@ -25,6 +25,7 @@ script = ExtResource( 4 )
 script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea"]
+z_index = 3
 shape = SubResource( 1 )
 
 [node name="Hover" type="Label" parent="."]

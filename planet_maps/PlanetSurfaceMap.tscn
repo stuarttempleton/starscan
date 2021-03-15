@@ -85,23 +85,21 @@ scale = 3.0
 scale_random = 1.0
 color_ramp = SubResource( 12 )
 
-[node name="PlanetSurface" type="Container"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="PlanetSurface" type="Node2D"]
 script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PointsOfInterest" type="Node2D" parent="."]
 z_index = 2
 script = ExtResource( 6 )
 
 [node name="PlanetSurfaceMap" type="Control" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1273.0
+margin_bottom = 713.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -119,6 +117,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+PointsOfInterest_path = NodePath("../../PointsOfInterest")
 colormap = SubResource( 6 )
 
 [node name="Grid" type="TextureRect" parent="PlanetSurfaceMap"]
@@ -138,7 +137,6 @@ __meta__ = {
 }
 
 [node name="PlayerStats" parent="PlanetSurfaceMap" instance=ExtResource( 9 )]
-visible = false
 
 [node name="PlanetName" type="Label" parent="PlanetSurfaceMap"]
 anchor_left = 1.0

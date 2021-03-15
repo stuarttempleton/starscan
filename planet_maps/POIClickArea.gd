@@ -10,8 +10,14 @@ func _ready():
 	connect("mouse_exited",self,"mouse_exit")
 	
 func _process(_delta):
-	if (Input.is_mouse_button_pressed(BUTTON_LEFT)):
-		pass
+#	if (Input.is_mouse_button_pressed(BUTTON_LEFT)):
+#		print("LMB")
+	pass
+
+func _unhandled_input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_LEFT and event.pressed:
+			print("%s registered click: %s" % [self, event.as_text()])
 
 func _input_event(viewport, event, shape_idx):
 	print("POI input event")
