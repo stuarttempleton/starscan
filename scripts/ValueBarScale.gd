@@ -5,39 +5,44 @@ export(String) var ship_capacity_key
 export(float) var warn_fraction
 export(Color) var normal_color
 export(Color) var warn_color
-export(float) var Lerp_Rate = 0.9
+export(float) var Lerp_Rate
 
-var targetScaleX = 1.0
+var targetScaleX
 var currentState = State.Normal
 
 func _ready():
 	print("%s %f, %s %f" % [ship_value_key, ShipData.StarShip[ship_value_key], ship_capacity_key, ShipData.StarShip[ship_capacity_key]])
-	#Refresh()
+	DisplayFraction(GetModelFraction())
 
 func _process(_delta):
 	Refresh()
 
 func Refresh():
-	var value = ShipData.StarShip[ship_value_key]
-	var capacity = ShipData.StarShip[ship_capacity_key]
-	SetPercent(value / capacity)
+	SetPercent(GetModelFraction())
 	LerpToTarget()
 		
 func LerpToTarget():
 	var fractionDiff = rect_scale.x - targetScaleX
 	if (abs(fractionDiff) > 0.001) :
 		var fractionDelta = fractionDiff * Lerp_Rate
-		var newX = rect_scale.x - fractionDelta
-		rect_scale = Vector2(newX, 1)
+		var newFraction = rect_scale.x - fractionDelta
+		DisplayFraction(newFraction)
+		
+func GetModelFraction() -> float:
+	var value = ShipData.StarShip[ship_value_key]
+	var capacity = ShipData.StarShip[ship_capacity_key]
+	return value / capacity
+	
+func DisplayFraction(newFraction):
+	rect_scale = Vector2(newFraction, 1)
 	
 func SetPercent(fraction) :
 	if (fraction > 1.0):
 		print("%s fraction %f is too high, clamping to 1.0" % [ship_value_key, fraction])
 		fraction = 1.0
 		
-	if (fraction != targetScaleX):
+#	if (fraction != targetScaleX):
 		#TODO: value just changed, trigger attention-grabbing effects?
-		pass
 	targetScaleX = fraction
 	
 	HandleState()

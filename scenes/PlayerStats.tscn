@@ -108,6 +108,7 @@ ship_capacity_key = "CrewCapacity"
 warn_fraction = 0.2
 normal_color = Color( 0, 0.721569, 0.129412, 1 )
 warn_color = Color( 1, 0, 0, 1 )
+Lerp_Rate = 0.1
 
 [node name="FuelEnergy2" type="MarginContainer" parent="Vitals"]
 margin_top = 19.0
@@ -179,6 +180,7 @@ ship_capacity_key = "FuelCapacity"
 warn_fraction = 0.2
 normal_color = Color( 0, 0.623529, 1, 1 )
 warn_color = Color( 1, 0, 0, 1 )
+Lerp_Rate = 0.1
 
 [node name="Inventory" type="VBoxContainer" parent="."]
 margin_left = 64.0
