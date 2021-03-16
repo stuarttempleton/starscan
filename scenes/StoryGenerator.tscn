@@ -3,7 +3,6 @@
 [ext_resource path="res://scripts/StoryGenerator.gd" type="Script" id=1]
 [ext_resource path="res://name_generation/WordGenerator.tscn" type="PackedScene" id=2]
 
-
 [node name="SystemStoryteller" type="Node2D"]
 script = ExtResource( 1 )
 

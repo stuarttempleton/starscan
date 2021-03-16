@@ -9,6 +9,24 @@ var stats_boiler = "\r\n\r\n[indent][code]%s[/code][/indent]"
 func _ready():
 	pass # Replace with function body.
 
+func Greeting(Planet):
+	var title = "Greetings, Nomad!"
+	var details = "You have been recruited by the Supercluster Federation to acquire scientific and archaeological data from the remnants of ancient civilizations for study.\r\n\r\n"
+	
+	details += "The Milky Way Superintelligence has predicted a new filter that our societies must understand to survive. "
+	details += "Your colony ship Starscan is uniquely suited to deep space exploration. "
+	details += "Please search for ancient civilizations and evidence of their final days. "
+	details += "Bring " + str($"/root/GameController/WinLoseCheck".ArtifactsRequiredToWin) + " of these important artifacts to scientists at Federation Outposts around your galaxy for further study. "
+	details += "Visit Star Dock at Outpost " + Planet.Name + " to refuel and begin your adventure.\r\n\r\n"
+	#details += "\r\n\r\n"
+	details += "[indent][code]"
+	#details += "[color=#0080ff]Visit Star Dock at Outpost " + Planet.Name + " to refuel.[/color]\r\n"
+	#details += "[color=#0080ff]Collect artifacts throughout the sector.[/color]\r\n\r\n"
+	details += "[color=#ff0000]You are low on fuel.[/color]\r\n"
+	details += "[/code][/indent]\r\n"
+	
+	
+	return main_boiler % [title, details]
 
 func SystemStory(System, Cost):
 	var title = "Entering " + System.Name
