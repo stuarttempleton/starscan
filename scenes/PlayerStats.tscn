@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://scripts/ValueBarScale.gd" type="Script" id=1]
+[ext_resource path="res://scripts/ValueBar.gd" type="Script" id=1]
 [ext_resource path="res://scripts/qty_counter.gd" type="Script" id=2]
 [ext_resource path="res://sprites/planets/star_100px.png" type="Texture" id=3]
 [ext_resource path="res://sprites/artifact_100px.png" type="Texture" id=4]
@@ -30,43 +30,35 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Vitals" type="VBoxContainer" parent="."]
+[node name="Vitals" type="Control" parent="."]
+margin_left = 64.0
 margin_top = 22.0
 margin_right = 350.0
-margin_bottom = 34.0
+margin_bottom = 57.0
 size_flags_vertical = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="CrewHealth" type="MarginContainer" parent="Vitals"]
-margin_right = 350.0
+[node name="Crew Bar" type="Control" parent="Vitals"]
+margin_right = 250.0
 margin_bottom = 15.0
 mouse_filter = 1
 size_flags_vertical = 0
+script = ExtResource( 1 )
+ship_value_key = "Crew"
+ship_capacity_key = "CrewCapacity"
+warn_fraction = 0.2
+normal_color = Color( 0, 0.721569, 0.129412, 1 )
+warn_color = Color( 1, 0, 0, 1 )
+Lerp_Rate = 0.1
+scale_bar_path = NodePath("Scale Bar")
+bar_particles_path = NodePath("Scale Bar/Particle Emitter Control/Scale Bar Particle Emitter")
+fill_colorrect_path = NodePath("Scale Bar/Fill Rect")
 
-[node name="ColorRect" type="ColorRect" parent="Vitals/CrewHealth"]
-margin_right = 350.0
-margin_bottom = 15.0
-rect_min_size = Vector2( 350, 15 )
-mouse_filter = 1
-size_flags_horizontal = 0
-size_flags_vertical = 0
-color = Color( 0.847059, 0.847059, 0.847059, 0 )
-
-[node name="ColorRect" type="ColorRect" parent="Vitals/CrewHealth/ColorRect"]
-margin_left = 100.0
-margin_right = 346.0
-margin_bottom = 15.0
-mouse_filter = 1
-color = Color( 0.847059, 0.847059, 0.847059, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Vitals/CrewHealth/ColorRect"]
-margin_right = 95.0
-margin_bottom = 16.0
+[node name="Label" type="Label" parent="Vitals/Crew Bar"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_right = -5.0
+grow_horizontal = 0
+grow_vertical = 2
 mouse_filter = 1
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.847059, 0.847059, 0.847059, 1 )
@@ -77,83 +69,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ProgressBackground" type="ColorRect" parent="Vitals/CrewHealth/ColorRect"]
-margin_left = 101.0
-margin_top = 1.0
-margin_right = 345.0
-margin_bottom = 14.0
-mouse_filter = 1
-size_flags_horizontal = 0
-size_flags_vertical = 0
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ValueBar" type="ColorRect" parent="Vitals/CrewHealth/ColorRect"]
-margin_left = 102.0
-margin_top = 2.0
-margin_right = 344.0
-margin_bottom = 13.0
-mouse_filter = 1
-size_flags_horizontal = 0
-size_flags_vertical = 0
-color = Color( 0, 0.721569, 0.129412, 1 )
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-ship_value_key = "Crew"
-ship_capacity_key = "CrewCapacity"
-warn_fraction = 0.2
-normal_color = Color( 0, 0.721569, 0.129412, 1 )
-warn_color = Color( 1, 0, 0, 1 )
-Lerp_Rate = 0.1
-
-[node name="FuelEnergy2" type="MarginContainer" parent="Vitals"]
-margin_top = 19.0
-margin_right = 350.0
-margin_bottom = 34.0
-mouse_filter = 1
-size_flags_vertical = 0
-
-[node name="ColorRect" type="ColorRect" parent="Vitals/FuelEnergy2"]
-margin_right = 350.0
-margin_bottom = 15.0
-rect_min_size = Vector2( 350, 15 )
-mouse_filter = 1
-size_flags_horizontal = 0
-size_flags_vertical = 0
-color = Color( 0.847059, 0.847059, 0.847059, 0 )
-
-[node name="ColorRect" type="ColorRect" parent="Vitals/FuelEnergy2/ColorRect"]
-margin_left = 100.0
-margin_right = 306.0
-margin_bottom = 15.0
+[node name="Border Rect" type="ColorRect" parent="Vitals/Crew Bar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 mouse_filter = 1
 color = Color( 0.847059, 0.847059, 0.847059, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Vitals/FuelEnergy2/ColorRect"]
-margin_right = 95.0
-margin_bottom = 16.0
-mouse_filter = 1
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.847059, 0.847059, 0.847059, 1 )
-text = "FUEL"
-align = 2
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ProgressBackground" type="ColorRect" parent="Vitals/FuelEnergy2/ColorRect"]
-margin_left = 101.0
+[node name="Background Rect" type="ColorRect" parent="Vitals/Crew Bar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
 margin_top = 1.0
-margin_right = 305.0
-margin_bottom = 14.0
+margin_right = -1.0
+margin_bottom = -1.0
 mouse_filter = 1
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -162,15 +93,40 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ValueBar" type="ColorRect" parent="Vitals/FuelEnergy2/ColorRect"]
-margin_left = 102.0
+[node name="Scale Bar" type="Control" parent="Vitals/Crew Bar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
 margin_top = 2.0
-margin_right = 304.0
-margin_bottom = 13.0
+margin_right = -2.0
+margin_bottom = -2.0
+
+[node name="Fill Rect" type="ColorRect" parent="Vitals/Crew Bar/Scale Bar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 mouse_filter = 1
 size_flags_horizontal = 0
 size_flags_vertical = 0
-color = Color( 0, 0.623529, 1, 1 )
+color = Color( 0, 0.721569, 0.129412, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Particle Emitter Control" type="Control" parent="Vitals/Crew Bar/Scale Bar"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+
+[node name="Scale Bar Particle Emitter" type="CPUParticles2D" parent="Vitals/Crew Bar/Scale Bar/Particle Emitter Control"]
+local_coords = false
+
+[node name="Fuel Bar" type="Control" parent="Vitals"]
+margin_top = 19.0
+margin_right = 200.0
+margin_bottom = 34.0
+mouse_filter = 1
+size_flags_vertical = 0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -181,6 +137,79 @@ warn_fraction = 0.2
 normal_color = Color( 0, 0.623529, 1, 1 )
 warn_color = Color( 1, 0, 0, 1 )
 Lerp_Rate = 0.1
+scale_bar_path = NodePath("Scale Bar")
+bar_particles_path = NodePath("Scale Bar/Particle Emitter Control/Scale Bar Particle Emitter")
+fill_colorrect_path = NodePath("Scale Bar/Fill Rect")
+
+[node name="Label" type="Label" parent="Vitals/Fuel Bar"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_right = -5.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 1
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.847059, 0.847059, 0.847059, 1 )
+text = "FUEL"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Border Rect" type="ColorRect" parent="Vitals/Fuel Bar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+color = Color( 0.847059, 0.847059, 0.847059, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background Rect" type="ColorRect" parent="Vitals/Fuel Bar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = -1.0
+margin_bottom = -1.0
+mouse_filter = 1
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Scale Bar" type="Control" parent="Vitals/Fuel Bar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -2.0
+margin_bottom = -2.0
+
+[node name="Fill Rect" type="ColorRect" parent="Vitals/Fuel Bar/Scale Bar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+size_flags_horizontal = 0
+size_flags_vertical = 0
+color = Color( 0, 0.623529, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Particle Emitter Control" type="Control" parent="Vitals/Fuel Bar/Scale Bar"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_right = 200.0
+margin_bottom = 13.0
+
+[node name="Scale Bar Particle Emitter" type="CPUParticles2D" parent="Vitals/Fuel Bar/Scale Bar/Particle Emitter Control"]
+local_coords = false
 
 [node name="Inventory" type="VBoxContainer" parent="."]
 margin_left = 64.0
