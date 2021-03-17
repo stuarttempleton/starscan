@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/ValueBar.gd" type="Script" id=1]
 [ext_resource path="res://scripts/qty_counter.gd" type="Script" id=2]
 [ext_resource path="res://sprites/planets/star_100px.png" type="Texture" id=3]
 [ext_resource path="res://sprites/artifact_100px.png" type="Texture" id=4]
 [ext_resource path="res://sprites/fuel_100px.png" type="Texture" id=5]
+[ext_resource path="res://sprites/redshirt.png" type="Texture" id=6]
+[ext_resource path="res://sprites/droplet.png" type="Texture" id=7]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-Medium.ttf"
@@ -12,6 +14,43 @@ font_path = "res://fonts/Montserrat-Medium.ttf"
 [sub_resource type="DynamicFont" id=2]
 size = 10
 font_data = SubResource( 1 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "WarnFlash"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0.64, 0, 0, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.222222, 0.515873 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="Animation" id=6]
+resource_name = "WarnFlash"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0.64, 0, 0, 1 ), Color( 0, 0, 0, 1 ) ]
+}
 
 [sub_resource type="DynamicFontData" id=3]
 font_path = "res://fonts/Montserrat-BoldItalic.ttf"
@@ -43,12 +82,16 @@ margin_bottom = 15.0
 mouse_filter = 1
 size_flags_vertical = 0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 ship_value_key = "Crew"
 ship_capacity_key = "CrewCapacity"
 warn_fraction = 0.2
 normal_color = Color( 0, 0.721569, 0.129412, 1 )
 warn_color = Color( 1, 0, 0, 1 )
 Lerp_Rate = 0.1
+bg_animator_path = NodePath("Background Rect/Background Animation Player")
 scale_bar_path = NodePath("Scale Bar")
 bar_particles_path = NodePath("Scale Bar/Particle Emitter Control/Scale Bar Particle Emitter")
 fill_colorrect_path = NodePath("Scale Bar/Fill Rect")
@@ -93,6 +136,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Background Animation Player" type="AnimationPlayer" parent="Vitals/Crew Bar/Background Rect"]
+anims/WarnFlash = SubResource( 7 )
+
 [node name="Scale Bar" type="Control" parent="Vitals/Crew Bar"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -117,9 +163,21 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Scale Bar Particle Emitter" type="CPUParticles2D" parent="Vitals/Crew Bar/Scale Bar/Particle Emitter Control"]
+emitting = false
+amount = 2
 local_coords = false
+texture = ExtResource( 6 )
+direction = Vector2( 0, -1 )
+gravity = Vector2( 0, 200 )
+initial_velocity = 91.05
+angular_velocity = 171.4
+angular_velocity_random = 1.0
+color_ramp = SubResource( 5 )
 
 [node name="Fuel Bar" type="Control" parent="Vitals"]
 margin_top = 19.0
@@ -137,6 +195,7 @@ warn_fraction = 0.2
 normal_color = Color( 0, 0.623529, 1, 1 )
 warn_color = Color( 1, 0, 0, 1 )
 Lerp_Rate = 0.1
+bg_animator_path = NodePath("Background Rect/Background Animation Player")
 scale_bar_path = NodePath("Scale Bar")
 bar_particles_path = NodePath("Scale Bar/Particle Emitter Control/Scale Bar Particle Emitter")
 fill_colorrect_path = NodePath("Scale Bar/Fill Rect")
@@ -181,6 +240,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Background Animation Player" type="AnimationPlayer" parent="Vitals/Fuel Bar/Background Rect"]
+anims/WarnFlash = SubResource( 6 )
+
 [node name="Scale Bar" type="Control" parent="Vitals/Fuel Bar"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -205,11 +267,23 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_right = 200.0
-margin_bottom = 13.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Scale Bar Particle Emitter" type="CPUParticles2D" parent="Vitals/Fuel Bar/Scale Bar/Particle Emitter Control"]
+emitting = false
+amount = 2
 local_coords = false
+texture = ExtResource( 7 )
+direction = Vector2( 0, 1 )
+spread = 10.0
+gravity = Vector2( 0, 200 )
+initial_velocity = 91.05
+color_ramp = SubResource( 5 )
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="Inventory" type="VBoxContainer" parent="."]
 margin_left = 64.0
