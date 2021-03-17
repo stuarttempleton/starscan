@@ -17,28 +17,27 @@ func _generate(planet, scan):
 	Scan = scan
 	ClearPOI()
 	var points = _generatePoints(10, planet.SurfaceSeednumber)
-	
 	var i = 0
 	var perceived = ""
 	var actual = ""
 	for point in planet.ArtifactCount:
 		actual = "Artifact"
 		perceived = actual
-		if i >= planet.ArtifactCount * Scan:
+		if point >= planet.ArtifactCount * Scan:
 			perceived = "Unknown"
 		AddPOIToMap(points[i],actual, perceived)
 		i += 1
 	for point in planet.ResourceCount:
 		actual = "Resource"
 		perceived = actual
-		if i >= planet.ResourceCount * Scan:
+		if point >= planet.ResourceCount * Scan:
 			perceived = "Unknown"
 		AddPOIToMap(points[i],actual, perceived)
 		i += 1
 	for point in planet.HazardCount:
 		actual = "Hazard"
 		perceived = actual
-		if i >= round(planet.HazardCount * Scan):
+		if point >= planet.HazardCount * Scan:
 			perceived = "Unknown"
 		AddPOIToMap(points[i],actual, perceived)
 		i += 1
