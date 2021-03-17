@@ -2,9 +2,9 @@
 
 [ext_resource path="res://scripts/ValueBar.gd" type="Script" id=1]
 [ext_resource path="res://scripts/qty_counter.gd" type="Script" id=2]
-[ext_resource path="res://sprites/planets/star_100px.png" type="Texture" id=3]
-[ext_resource path="res://sprites/artifact_100px.png" type="Texture" id=4]
-[ext_resource path="res://sprites/fuel_100px.png" type="Texture" id=5]
+[ext_resource path="res://sprites/system_100px_outlined.png" type="Texture" id=3]
+[ext_resource path="res://sprites/artifact_100px_outlined.png" type="Texture" id=4]
+[ext_resource path="res://sprites/fuel_100px_outlined.png" type="Texture" id=5]
 [ext_resource path="res://sprites/redshirt.png" type="Texture" id=6]
 [ext_resource path="res://sprites/droplet.png" type="Texture" id=7]
 
@@ -15,7 +15,7 @@ font_path = "res://fonts/Montserrat-Medium.ttf"
 size = 10
 font_data = SubResource( 1 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=3]
 resource_name = "WarnFlash"
 length = 2.0
 tracks/0/type = "value"
@@ -31,11 +31,11 @@ tracks/0/keys = {
 "values": [ Color( 0, 0, 0, 1 ), Color( 0.64, 0, 0, 1 ), Color( 0, 0, 0, 1 ) ]
 }
 
-[sub_resource type="Gradient" id=5]
+[sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0, 0.222222, 0.515873 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "WarnFlash"
 length = 2.0
 loop = true
@@ -52,14 +52,14 @@ tracks/0/keys = {
 "values": [ Color( 0, 0, 0, 1 ), Color( 0.64, 0, 0, 1 ), Color( 0, 0, 0, 1 ) ]
 }
 
-[sub_resource type="DynamicFontData" id=3]
+[sub_resource type="DynamicFontData" id=6]
 font_path = "res://fonts/Montserrat-BoldItalic.ttf"
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=7]
 size = 60
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 3 )
+font_data = SubResource( 6 )
 
 [node name="PlayerStats" type="Control"]
 margin_right = 40.0
@@ -137,7 +137,7 @@ __meta__ = {
 }
 
 [node name="Background Animation Player" type="AnimationPlayer" parent="Vitals/Crew Bar/Background Rect"]
-anims/WarnFlash = SubResource( 7 )
+anims/WarnFlash = SubResource( 3 )
 
 [node name="Scale Bar" type="Control" parent="Vitals/Crew Bar"]
 anchor_right = 1.0
@@ -177,7 +177,7 @@ gravity = Vector2( 0, 200 )
 initial_velocity = 91.05
 angular_velocity = 171.4
 angular_velocity_random = 1.0
-color_ramp = SubResource( 5 )
+color_ramp = SubResource( 4 )
 
 [node name="Fuel Bar" type="Control" parent="Vitals"]
 margin_top = 19.0
@@ -241,7 +241,7 @@ __meta__ = {
 }
 
 [node name="Background Animation Player" type="AnimationPlayer" parent="Vitals/Fuel Bar/Background Rect"]
-anims/WarnFlash = SubResource( 6 )
+anims/WarnFlash = SubResource( 5 )
 
 [node name="Scale Bar" type="Control" parent="Vitals/Fuel Bar"]
 anchor_right = 1.0
@@ -280,7 +280,7 @@ direction = Vector2( 0, 1 )
 spread = 10.0
 gravity = Vector2( 0, 200 )
 initial_velocity = 91.05
-color_ramp = SubResource( 5 )
+color_ramp = SubResource( 4 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -311,7 +311,7 @@ margin_left = 104.0
 margin_top = 12.0
 margin_right = 192.0
 margin_bottom = 87.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 7 )
 text = "x 2"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -334,7 +334,7 @@ margin_left = 104.0
 margin_top = 12.0
 margin_right = 192.0
 margin_bottom = 87.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 7 )
 text = "x 2"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -357,7 +357,7 @@ margin_left = 104.0
 margin_top = 12.0
 margin_right = 192.0
 margin_bottom = 87.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 7 )
 text = "x 2"
 __meta__ = {
 "_edit_use_anchors_": false

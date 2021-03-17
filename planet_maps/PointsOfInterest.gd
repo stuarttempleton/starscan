@@ -38,7 +38,7 @@ func _generate(planet, scan):
 	for point in planet.HazardCount:
 		actual = "Hazard"
 		perceived = actual
-		if i >= planet.HazardCount * Scan:
+		if i >= round(planet.HazardCount * Scan):
 			perceived = "Unknown"
 		AddPOIToMap(points[i],actual, perceived)
 		i += 1
