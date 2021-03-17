@@ -37,11 +37,11 @@ func Refresh():
 		
 func EaseToTarget():
 	var fractionDiff = scale_bar.rect_scale.x - targetScaleX
+	bar_particles.set_emitting(fractionDiff > 0.001)
 	if (abs(fractionDiff) > 0.001) :
 		var fractionDelta = fractionDiff * Lerp_Rate
 		var newFraction = scale_bar.rect_scale.x - fractionDelta
 		DisplayFraction(newFraction)
-		bar_particles.set_emitting(fractionDiff > 0)
 		
 func GetModelFraction() -> float:
 	var value = ShipData.StarShip[ship_value_key]
