@@ -1,18 +1,20 @@
 extends Node
 
 export(NodePath) var oscillator_path
-var oscillator
+onready var oscillator = get_node(oscillator_path)
 
 export(NodePath) var bg_path
-var bg
+onready var bg = get_node(bg_path)
 
-export(NodePath) var targetZone_path
-var targetZone
+export(NodePath) var sweetSpot_path
+onready var sweetSpot = get_node(sweetSpot_path)
 
 signal success
 signal fail
 signal complete
 
+export(Curve) var success_curve
+export(Curve) var speed_curve
 export var speed = 0.5
 export var greenMin = 0.4
 export var greenMax = 0.6
@@ -28,17 +30,14 @@ func _ready():
 	if (StarMapData.NearestSystem == null):
 		StarMapData.FindNearestSystem(Vector2(ShipData.Ship().X,ShipData.Ship().Y))
 	$Title.text = $Title.text % [StarMapData.NearestSystem.Name]
-	oscillator = $Oscillator
-	bg = $BG
-	targetZone = $TargetZone
 	
 	#Fit oscillator within bg assuming bg offset left of origin is margin
 	var bgMargin = -bg.rect_position.x
 	oscillator.maxSize = bg.rect_size.x - bgMargin * 2
 	
 	#Place target zone as a fraction of max oscillator size
-	targetZone.rect_position.x = oscillator.maxSize * greenMin
-	targetZone.rect_size.x = oscillator.maxSize * (greenMax - greenMin)
+	sweetSpot.rect_position.x = oscillator.maxSize * greenMin
+	sweetSpot.rect_size.x = oscillator.maxSize * (greenMax - greenMin)
 	
 	#These lines only exist for diagnostic purposes, remove them
 	#self.connect("success", self, "_reset")
