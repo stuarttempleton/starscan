@@ -35,9 +35,7 @@ func _ready():
 	var bgMargin = -bg.rect_position.x
 	oscillator.maxSize = bg.rect_size.x - bgMargin * 2
 	
-	#Place target zone as a fraction of max oscillator size
-	sweetSpot.rect_position.x = oscillator.maxSize * greenMin
-	sweetSpot.rect_size.x = oscillator.maxSize * (greenMax - greenMin)
+	SetupSweetSpot()
 	
 	#These lines only exist for diagnostic purposes, remove them
 	#self.connect("success", self, "_reset")
@@ -52,18 +50,32 @@ func _process(delta):
 func _on_Button_pressed():
 	scanButtonPressed = true
 	$ScanButton.disabled = true
-	var score = abs(x - 1.0)
+	var score = success_curve.interpolate(abs(x - 1.0))
 	var success = (score >= greenMin and score <= greenMax)
 	print("Scanned! x=" + str(x) + ", max=" + str(amplitude) + ", scored " + str(score) + ", goal range=" + str(greenMin) + "..." + str(greenMax) + ". Result: " + ("Success." if success else "Fail."))
-	if success:
-		scanSucceeded()
-	else:
-		scanFailed()
-	#emit_signal("success" if success else "fail")
+	handleScanResult(success, score)
 
 func reset():
 	scanButtonPressed = false
 	$ScanButton.disabled = false
+
+func SetupSweetSpot():
+	assert(success_curve.get_point_count() == 4, "Scanner minigame success curve must have exactly 4 points")
+	var leftMin = success_curve.get_point_position(0)
+	var leftMax = success_curve.get_point_position(1)
+	var rightMax = success_curve.get_point_position(2)
+	var rightMin = success_curve.get_point_position(3)
+	
+	var gradient = sweetSpot.texture.gradient
+	assert(gradient.get_point_count() == 4, "Scanner minigame sweet spot gradient must have exactly 4 points")
+	gradient.set_offset(0, leftMin.x)
+	gradient.set_offset(1, leftMax.x)
+	gradient.set_offset(2, rightMax.x)
+	gradient.set_offset(3, rightMin.x)
+	
+	#Place target zone as a fraction of max oscillator size
+	sweetSpot.rect_position.x = oscillator.maxSize * leftMin.x
+	sweetSpot.rect_size.x = oscillator.maxSize * (rightMin.x - leftMin.x)
 
 func updateText(percent, confidence):
 	$Description.text = "Scan complete: %s\r\nConfidence: %s" % [percent, confidence]
@@ -88,6 +100,16 @@ func scanSucceeded():
 		print("adding scan data to inventory")
 		ShipData.GainInventoryItem("Scan Data", 1)
 	emit_signal("success")
+
+func handleScanResult(isSuccess, accuracy):
+	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.SCAN_WIN if isSuccess else AudioPlayer.AUDIO_KEY.SCAN_LOSE)
+	$ResultTextHandle/ResultText.text = str(int(accuracy * 10) * 10) + "%"
+	updateText(str(int(accuracy * 10) * 10), "HIGH" if accuracy > 0.5 else "LOW")
+	$ResultTextHandle/ResultTextAnimator.play("WinAnim")
+	if StarMapData.ScanNearestSystem(accuracy) && isSuccess:
+		print("adding scan data to inventory")
+		ShipData.GainInventoryItem("Scan Data", 1)
+	emit_signal("success" if isSuccess else "fail")
 
 func _on_endAnimComplete():
 	emit_signal("complete")

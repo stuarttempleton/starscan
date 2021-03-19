@@ -10,7 +10,7 @@
 [ext_resource path="res://shaders/white.png" type="Texture" id=9]
 
 [sub_resource type="Curve" id=9]
-_data = [ Vector2( 0.371025, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.477032, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.537102, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.65371, 0 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0.243816, 0 ), 0.0, 4.35385, 0, 1, Vector2( 0.473498, 1 ), 4.35385, 0.0, 1, 1, Vector2( 0.522968, 1 ), 0.0, -4.49206, 1, 1, Vector2( 0.745583, 0 ), -4.49206, 0.0, 1, 0 ]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-Medium.ttf"
@@ -26,7 +26,7 @@ font_path = "res://fonts/Montserrat-Light.ttf"
 font_data = SubResource( 3 )
 
 [sub_resource type="Gradient" id=10]
-offsets = PoolRealArray( 0, 0.398438, 0.644531, 1 )
+offsets = PoolRealArray( 0.253906, 0.398438, 0.644531, 0.796875 )
 colors = PoolColorArray( 0.458824, 1, 0.501961, 0, 0.458824, 1, 0.501961, 1, 0.458824, 1, 0.501961, 1, 0.458824, 1, 0.501961, 0 )
 
 [sub_resource type="GradientTexture" id=11]
