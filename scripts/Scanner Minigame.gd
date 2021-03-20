@@ -9,6 +9,12 @@ onready var bg = get_node(bg_path)
 export(NodePath) var sweetSpot_path
 onready var sweetSpot = get_node(sweetSpot_path)
 
+export(NodePath) var resultTextLabel_path
+onready var resultTextLabel = get_node(resultTextLabel_path)
+
+export(NodePath) var resultTextAnimator_path
+onready var resultTextAnimator = get_node(resultTextAnimator_path)
+
 signal success
 signal fail
 signal complete
@@ -18,8 +24,9 @@ export(Curve) var speed_curve
 export var speed = 0.5
 export var greenMin = 0.4
 export var greenMax = 0.6
+
 const amplitude = 2.0
-var x = amplitude #starting at maxX ensures the bar always starts at the left end
+var x = amplitude / 2 #this initial value starts the oscillator on the left end
 
 var scanButtonPressed = false
 
@@ -80,32 +87,12 @@ func SetupSweetSpot():
 func updateText(percent, confidence):
 	$Description.text = "Scan complete: %s\r\nConfidence: %s" % [percent, confidence]
 	pass
-	
-func scanFailed():
-	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.SCAN_LOSE)
-	var scanAccuracy = 0.5
-	$ResultTextHandle/ResultText.text = str(int(scanAccuracy * 10) * 10) + "%"
-	updateText(str(int(scanAccuracy * 10) * 10), "LOW")
-	$ResultTextHandle/ResultTextAnimator.play("WinAnim")
-	StarMapData.ScanNearestSystem(scanAccuracy)
-	emit_signal("fail")
-	
-func scanSucceeded():
-	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.SCAN_WIN)
-	var scanAccuracy = 1.0
-	$ResultTextHandle/ResultText.text = str(int(scanAccuracy * 10) * 10) + "%"
-	updateText(str(int(scanAccuracy * 10) * 10), "HIGH")
-	$ResultTextHandle/ResultTextAnimator.play("WinAnim")
-	if StarMapData.ScanNearestSystem(scanAccuracy):
-		print("adding scan data to inventory")
-		ShipData.GainInventoryItem("Scan Data", 1)
-	emit_signal("success")
 
 func handleScanResult(isSuccess, accuracy):
 	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.SCAN_WIN if isSuccess else AudioPlayer.AUDIO_KEY.SCAN_LOSE)
-	$ResultTextHandle/ResultText.text = str(int(accuracy * 10) * 10) + "%"
+	resultTextLabel.text = str(int(accuracy * 10) * 10) + "%"
 	updateText(str(int(accuracy * 10) * 10), "HIGH" if accuracy > 0.5 else "LOW")
-	$ResultTextHandle/ResultTextAnimator.play("WinAnim")
+	resultTextAnimator.play("WinAnim")
 	if StarMapData.ScanNearestSystem(accuracy) && isSuccess:
 		print("adding scan data to inventory")
 		ShipData.GainInventoryItem("Scan Data", 1)

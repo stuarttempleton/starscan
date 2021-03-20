@@ -9,71 +9,52 @@
 [ext_resource path="res://GameNarrativeDisplay/blur_shader_material.tres" type="Material" id=8]
 [ext_resource path="res://shaders/white.png" type="Texture" id=9]
 
-[sub_resource type="Curve" id=9]
+[sub_resource type="Curve" id=1]
 _data = [ Vector2( 0.243816, 0 ), 0.0, 4.35385, 0, 1, Vector2( 0.473498, 1 ), 4.35385, 0.0, 1, 1, Vector2( 0.522968, 1 ), 0.0, -4.49206, 1, 1, Vector2( 0.745583, 0 ), -4.49206, 0.0, 1, 0 ]
 
-[sub_resource type="DynamicFontData" id=1]
+[sub_resource type="DynamicFontData" id=2]
 font_path = "res://fonts/Montserrat-Medium.ttf"
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 23
-font_data = SubResource( 1 )
+font_data = SubResource( 2 )
 
-[sub_resource type="DynamicFontData" id=3]
+[sub_resource type="DynamicFontData" id=4]
 font_path = "res://fonts/Montserrat-Light.ttf"
 
-[sub_resource type="DynamicFont" id=4]
-font_data = SubResource( 3 )
+[sub_resource type="DynamicFont" id=5]
+font_data = SubResource( 4 )
 
-[sub_resource type="Gradient" id=10]
+[sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0.253906, 0.398438, 0.644531, 0.796875 )
 colors = PoolColorArray( 0.458824, 1, 0.501961, 0, 0.458824, 1, 0.501961, 1, 0.458824, 1, 0.501961, 1, 0.458824, 1, 0.501961, 0 )
 
-[sub_resource type="GradientTexture" id=11]
-gradient = SubResource( 10 )
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
 width = 32
 
-[sub_resource type="DynamicFontData" id=5]
-font_path = "res://fonts/Montserrat-Medium.ttf"
+[sub_resource type="Animation" id=10]
 
-[sub_resource type="DynamicFont" id=6]
-size = 17
-font_data = SubResource( 5 )
-
-[sub_resource type="Animation" id=7]
-
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=11]
 tracks/0/type = "value"
-tracks/0/path = NodePath("ResultText:rect_position")
+tracks/0/path = NodePath("ResultTextLabel:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, -100 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("ResultText:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0, 0.6, 1 ),
 "transitions": PoolRealArray( 1, 2.82842, 4.75683 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
-tracks/2/type = "method"
-tracks/2/path = NodePath("..")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 1 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -81,8 +62,20 @@ tracks/2/keys = {
 "method": "_on_endAnimComplete"
 } ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("ResultTextLabel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
 tracks/3/type = "value"
-tracks/3/path = NodePath("ResultText:visible")
+tracks/3/path = NodePath(".:rect_position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -90,9 +83,16 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, true ]
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -100 ) ]
 }
+
+[sub_resource type="DynamicFontData" id=8]
+font_path = "res://fonts/Montserrat-Medium.ttf"
+
+[sub_resource type="DynamicFont" id=9]
+size = 17
+font_data = SubResource( 8 )
 
 [node name="Node2D" type="Node2D"]
 z_index = 1000
@@ -126,7 +126,9 @@ script = ExtResource( 1 )
 oscillator_path = NodePath("Oscillator")
 bg_path = NodePath("BG")
 sweetSpot_path = NodePath("Sweet Spot")
-success_curve = SubResource( 9 )
+resultTextLabel_path = NodePath("Oscillator/ResultTextHandle/ResultTextLabel")
+resultTextAnimator_path = NodePath("Oscillator/ResultTextHandle/ResultTextAnimator")
+success_curve = SubResource( 1 )
 speed = 1.0
 
 [node name="Text Border" type="ColorRect" parent="CanvasLayer/SceneBackground/Scanner Minigame"]
@@ -152,7 +154,7 @@ __meta__ = {
 margin_top = -136.0
 margin_right = 320.0
 margin_bottom = -104.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Scanning %s system"
 align = 1
 __meta__ = {
@@ -163,7 +165,7 @@ __meta__ = {
 margin_top = -96.0
 margin_right = 320.0
 margin_bottom = -47.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "Attenuating..."
 align = 1
 __meta__ = {
@@ -171,7 +173,8 @@ __meta__ = {
 }
 
 [node name="BG" type="ColorRect" parent="CanvasLayer/SceneBackground/Scanner Minigame"]
-margin_right = 320.0
+margin_left = -3.0
+margin_right = 323.0
 margin_bottom = 48.0
 color = Color( 0.443137, 0.443137, 0.443137, 1 )
 __meta__ = {
@@ -183,7 +186,7 @@ margin_top = 4.0
 margin_right = 149.0
 margin_bottom = 44.0
 mouse_filter = 0
-texture = SubResource( 11 )
+texture = SubResource( 7 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false,
@@ -191,10 +194,36 @@ __meta__ = {
 }
 
 [node name="Oscillator" type="ColorRect" parent="CanvasLayer/SceneBackground/Scanner Minigame"]
-margin_right = 40.0
+margin_left = -3.0
+margin_right = 3.0
 margin_bottom = 48.0
 color = Color( 1, 1, 1, 0.494118 )
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResultTextHandle" type="Control" parent="CanvasLayer/SceneBackground/Scanner Minigame/Oscillator"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResultTextAnimator" type="AnimationPlayer" parent="CanvasLayer/SceneBackground/Scanner Minigame/Oscillator/ResultTextHandle"]
+anims/LoseAnim = SubResource( 10 )
+anims/WinAnim = SubResource( 11 )
+
+[node name="ResultTextLabel" type="Label" parent="CanvasLayer/SceneBackground/Scanner Minigame/Oscillator/ResultTextHandle"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 4 )
+text = "100%"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -210,33 +239,13 @@ custom_styles/pressed = ExtResource( 7 )
 custom_styles/focus = ExtResource( 6 )
 custom_styles/disabled = ExtResource( 6 )
 custom_styles/normal = ExtResource( 5 )
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 9 )
 custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 action_mode = 0
 text = "Scan!"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ResultTextHandle" type="Node2D" parent="CanvasLayer/SceneBackground/Scanner Minigame"]
-position = Vector2( 117.466, -2.66968 )
-
-[node name="ResultTextAnimator" type="AnimationPlayer" parent="CanvasLayer/SceneBackground/Scanner Minigame/ResultTextHandle"]
-anims/LoseAnim = SubResource( 7 )
-anims/WinAnim = SubResource( 8 )
-
-[node name="ResultText" type="Label" parent="CanvasLayer/SceneBackground/Scanner Minigame/ResultTextHandle"]
-visible = false
-margin_right = 50.0
-margin_bottom = 21.0
-grow_horizontal = 2
-custom_fonts/font = ExtResource( 4 )
-text = "+100%"
-align = 1
-valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
