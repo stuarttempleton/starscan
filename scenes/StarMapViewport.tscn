@@ -9,7 +9,6 @@
 [ext_resource path="res://scripts/Grid.gd" type="Script" id=7]
 [ext_resource path="res://sprites/grid_square.png" type="Texture" id=8]
 
-
 [node name="StarMapView" type="Node2D"]
 light_mask = -2147483647
 script = ExtResource( 6 )

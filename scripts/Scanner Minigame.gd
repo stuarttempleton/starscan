@@ -15,6 +15,9 @@ onready var resultTextLabel = get_node(resultTextLabel_path)
 export(NodePath) var resultTextAnimator_path
 onready var resultTextAnimator = get_node(resultTextAnimator_path)
 
+export(NodePath) var minigameRoot_path
+onready var minigameRoot = get_node(minigameRoot_path)
+
 signal success
 signal fail
 signal complete
@@ -27,6 +30,7 @@ export var greenMax = 0.6
 
 const amplitude = 2.0
 var x = amplitude / 2 #this initial value starts the oscillator on the left end
+var oscillatorRange
 
 var scanButtonPressed = false
 
@@ -40,19 +44,15 @@ func _ready():
 	
 	#Fit oscillator within bg assuming bg offset left of origin is margin
 	var bgMargin = -bg.rect_position.x
-	oscillator.maxSize = bg.rect_size.x - bgMargin * 2
+	oscillatorRange = bg.rect_size.x - bgMargin * 2
 	
 	SetupSweetSpot()
-	
-	#These lines only exist for diagnostic purposes, remove them
-	#self.connect("success", self, "_reset")
-	#self.connect("fail", self, "_reset")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if not scanButtonPressed:
 		x = fmod(x + delta * speed, amplitude)
-		oscillator.targetT = abs(x - 1.0)
+		oscillator.rect_position.x = oscillatorRange * abs(x - 1.0)
 
 func _on_Button_pressed():
 	scanButtonPressed = true
@@ -81,8 +81,8 @@ func SetupSweetSpot():
 	gradient.set_offset(3, rightMin.x)
 	
 	#Place target zone as a fraction of max oscillator size
-	sweetSpot.rect_position.x = oscillator.maxSize * leftMin.x
-	sweetSpot.rect_size.x = oscillator.maxSize * (rightMin.x - leftMin.x)
+	sweetSpot.rect_position.x = oscillatorRange * leftMin.x
+	sweetSpot.rect_size.x = oscillatorRange * (rightMin.x - leftMin.x)
 
 func updateText(percent, confidence):
 	$Description.text = "Scan complete: %s\r\nConfidence: %s" % [percent, confidence]
@@ -96,9 +96,11 @@ func handleScanResult(isSuccess, accuracy):
 	if StarMapData.ScanNearestSystem(accuracy) && isSuccess:
 		print("adding scan data to inventory")
 		ShipData.GainInventoryItem("Scan Data", 1)
-	emit_signal("success" if isSuccess else "fail")
+	var resultSignal = "success" if isSuccess else "fail"
+	print("Scan result signal: %s" % resultSignal)
+	emit_signal(resultSignal)
 
 func _on_endAnimComplete():
 	emit_signal("complete")
 	GameController.EnableMovement(true)
-	get_parent().get_parent().get_parent().queue_free()
+	minigameRoot.queue_free()

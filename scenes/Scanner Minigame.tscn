@@ -1,7 +1,6 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scripts/Scanner Minigame.gd" type="Script" id=1]
-[ext_resource path="res://scripts/Oscillator.gd" type="Script" id=2]
 [ext_resource path="res://fonts/star_dynamicfont.tres" type="DynamicFont" id=4]
 [ext_resource path="res://styles/MenuButton_Normal.tres" type="StyleBox" id=5]
 [ext_resource path="res://styles/MenuButton_HoverFocus.tres" type="StyleBox" id=6]
@@ -48,22 +47,20 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
-tracks/1/type = "method"
-tracks/1/path = NodePath("..")
+tracks/1/type = "value"
+tracks/1/path = NodePath("ResultTextLabel:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "_on_endAnimComplete"
-} ]
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("ResultTextLabel:visible")
+tracks/2/path = NodePath(".:rect_position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -71,20 +68,22 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, true ]
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -100 ) ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath(".:rect_position")
+tracks/3/type = "method"
+tracks/3/path = NodePath("../..")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, -100 ) ]
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_endAnimComplete"
+} ]
 }
 
 [sub_resource type="DynamicFontData" id=8]
@@ -128,6 +127,7 @@ bg_path = NodePath("BG")
 sweetSpot_path = NodePath("Sweet Spot")
 resultTextLabel_path = NodePath("Oscillator/ResultTextHandle/ResultTextLabel")
 resultTextAnimator_path = NodePath("Oscillator/ResultTextHandle/ResultTextAnimator")
+minigameRoot_path = NodePath("../../..")
 success_curve = SubResource( 1 )
 speed = 1.0
 
@@ -198,7 +198,6 @@ margin_left = -3.0
 margin_right = 3.0
 margin_bottom = 48.0
 color = Color( 1, 1, 1, 0.494118 )
-script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
