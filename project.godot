@@ -33,6 +33,7 @@ GameNarrativeDisplay="*res://GameNarrativeDisplay/GameNarrativeDisplay.tscn"
 StoryGenerator="*res://scenes/StoryGenerator.tscn"
 AudioPlayer="*res://AudioPlayer/AudioPlayer.tscn"
 Console="*res://addons/quentincaffeino-console/src/Console.tscn"
+Cheat="*res://scenes/Cheat.tscn"
 
 [display]
 

@@ -78,6 +78,8 @@ func Ship() :
 		return StarShip
 		
 func ConsumeFuel(amount):
+	if Cheat.godmode_enabled: return
+	
 	StarShip.Fuel -= amount
 	if StarShip.Fuel < 0.001:
 		StarShip.Fuel = 0
@@ -157,5 +159,5 @@ func PayResourcesDefaultToCrew(resourcesToPay, crewLostPerUnpaidResource):
 	return paid
 
 func DeductCrew(crewLost):
+	if Cheat.godmode_enabled: return
 	StarShip.Crew -= crewLost
-	#TODO: report new crew count to GameController for game over check
