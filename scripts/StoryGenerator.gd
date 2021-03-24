@@ -94,13 +94,42 @@ func RomanNumeral(num):
 	
 	return roman_num
 
+var PlanetHints = {
+	"Civilization": { 
+		true: ["We have detected signs of sentient life. "],
+		false: ["We have detected no signs of sentient life. "]
+	},
+	"Resource": { 
+		true: ["This planet appears to be resource rich. "],
+		false: ["This planet has no interesting resources. "]
+	},
+	"Danger": { 
+		true: ["This planet has danger geological activity. "],
+		false: ["This planet is inert. "]
+	},
+}
+func PlanetHint( Planet ):
+	var hasCivilzation = (Planet.ArtifactCount > 0)
+	var hasResources = (Planet.ResourceCount > 0)
+	var hasDanger = (Planet.HazardCount > 0)
+	#var Hint = ""
+	var rng = RandomNumberGenerator.new()
+	rng.seed = Planet.SurfaceSeednumber
+	
+	var Hint = PlanetHints["Civilization"][hasCivilzation][rng.randi_range(0, PlanetHints["Civilization"][hasCivilzation].size()-1)] + " "
+	Hint += PlanetHints["Resource"][hasResources][rng.randi_range(0, PlanetHints["Resource"][hasResources].size()-1)] + " "
+	Hint += PlanetHints["Danger"][hasDanger][rng.randi_range(0, PlanetHints["Danger"][hasDanger].size()-1)] + " "
+	return Hint
 
 func PlanetStory(System, Planet):
 	var title = "%s (%s %s)" % [Planet.Name, System.Name, RomanNumeral(StarMapData.getPlanetID(Planet, System) + 1)]
 	var txt = ""
 	
+	txt += "Captain, %s has entered orbit around %s and we are ready to begin Planetary Operations. \r\n\r\n " % [ ShipData.Ship().Name, Planet.Name]
+	txt += PlanetHint(Planet) + "\r\n\r\n"
+	txt += "You have the console. "
+	
 	var scan_txt = "System scans are currently at %s percent." % [System.Scan]
-	txt += LoremIpsum(1)
 	txt += stats_boiler % [ScanConfidence(System.Scan)]
 	return main_boiler % [title, txt]
 
