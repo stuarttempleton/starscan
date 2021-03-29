@@ -53,7 +53,7 @@ func _generate(planet, scan):
 	material.set_shader_param("noise_minmax", heightmap_minmax)
 	material.set_shader_param("colormap", planet_texture_gradient)
 	if planet.Type == "Outpost":
-		PointsOfInterest.ClearPOI()
+		PointsOfInterest.ClearPOINodes()
 		$"../../OutpostDialog".DialogBegin(planet)
 	else:
 		PointsOfInterest._generate(planet, scan)

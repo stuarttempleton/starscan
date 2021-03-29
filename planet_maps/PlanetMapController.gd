@@ -9,7 +9,7 @@ func _ready():
 	pass
 
 func _clearPOI():
-	$PointsOfInterest.ClearPOI()
+	$PointsOfInterest.ClearPOINodes()
 	pass
 
 

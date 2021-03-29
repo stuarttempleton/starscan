@@ -1,16 +1,15 @@
 extends Node2D
 
+const poi_types = ["Artifact","Resource","Hazard", "Empty", "Exhausted", "Unknown"]
 
-var poi_types = ["Artifact","Resource","Hazard", "Empty", "Exhausted", "Unknown"]
+var POIModel setget set_POIModel, get_POIModel
 var poi_node = ""
 var type = "Empty"
 var preceived_type = "Empty"
-var exhausted = false
 var defaultScale
 var bigScale = Vector2(0.35,0.35)
 var ScaleToVector = Vector2(0,0)
 var lerpSpeed = 10
-
 
 func _ready():
 	$Hover.hide()
@@ -18,13 +17,11 @@ func _ready():
 	$ClickArea.connect("hover", self, "hover")
 	$ClickArea.connect("unhover", self, "unhover")
 
-
 func hover(hover_position):
 	ScaleToVector = bigScale
 	$Hover.show()
 	get_parent().get_parent().get_parent().get_parent().POIHover(hover_position)
 	pass
-
 
 func unhover():
 	ScaleToVector = defaultScale
@@ -32,10 +29,9 @@ func unhover():
 	get_parent().get_parent().get_parent().get_parent().POIUnhover()
 	pass
 
-
 func selected():
-	if !exhausted:
-		exhausted = true
+	if !POIModel.IsExhausted:
+		POIModel.IsExhausted = true
 		var qty = 1 #TODO: Adjust this for "severity"
 		get_parent().get_parent().get_parent().get_parent().POISelect(type)
 		CollectPOI(type, qty)
@@ -43,6 +39,7 @@ func selected():
 		GameNarrativeDisplay.connect("ChoiceSelected", self, "StoryResponse")
 		GameNarrativeDisplay.DisplayText(StoryGenerator.POIStory(type, qty),["OK"])
 	pass
+	
 func GetAudioKeyForPOI(POIType):
 	match POIType:
 		"Artifact":
@@ -66,9 +63,8 @@ func CollectPOI(POIType, qty):
 
 func StoryResponse(choice):
 	GameNarrativeDisplay.disconnect("ChoiceSelected", self, "StoryResponse")
-	SetPOIInfo("Exhausted", "Exhausted")
+	_setPOIInfo("Exhausted", "Exhausted")
 	pass
-
 
 func _process(delta):
 	if poi_node.scale.distance_to(ScaleToVector) <= 0.01:
@@ -76,15 +72,23 @@ func _process(delta):
 	else:
 		poi_node.scale = poi_node.scale.linear_interpolate(ScaleToVector, lerpSpeed * delta)
 
-
-func SetPOIInfo(poi_type, perceived):
+func get_POIModel():
+	return POIModel
+	
+func set_POIModel(newModel):
+	POIModel = newModel
+	_refresh()
+	
+func _refresh():
 	for _p in poi_types:
 		get_node(_p).visible = false
-	poi_node = get_node(perceived)
+	poi_node = get_node(POIModel.PerceivedType)
 	poi_node.visible = true
-	type = poi_type
-	preceived_type = perceived
-	
 	defaultScale = poi_node.scale
 	ScaleToVector = defaultScale
-	$Hover.text = preceived_type
+	$Hover.text = POIModel.PerceivedType
+
+func _setPOIInfo(poi_type, perceived):
+	POIModel.ActualType = poi_type
+	POIModel.PerceivedType = perceived
+	_refresh()

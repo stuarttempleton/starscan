@@ -20,7 +20,7 @@ func _unhandled_input(event):
 			print("%s registered click: %s" % [self, event.as_text()])
 
 func _input_event(viewport, event, shape_idx):
-	print("POI input event")
+	#print("POI input event")
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
 			print("POI selected")
