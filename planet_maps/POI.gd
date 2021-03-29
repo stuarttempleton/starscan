@@ -4,8 +4,6 @@ const poi_types = ["Artifact","Resource","Hazard", "Empty", "Exhausted", "Unknow
 
 var POIModel setget set_POIModel, get_POIModel
 var poi_node = ""
-var type = "Empty"
-var preceived_type = "Empty"
 var defaultScale
 var bigScale = Vector2(0.35,0.35)
 var ScaleToVector = Vector2(0,0)
@@ -33,11 +31,11 @@ func selected():
 	if !POIModel.IsExhausted:
 		POIModel.IsExhausted = true
 		var qty = 1 #TODO: Adjust this for "severity"
-		get_parent().get_parent().get_parent().get_parent().POISelect(type)
-		CollectPOI(type, qty)
-		AudioPlayer.PlaySFX(GetAudioKeyForPOI(type))
+		get_parent().get_parent().get_parent().get_parent().POISelect(POIModel.ActualType)
+		CollectPOI(POIModel.ActualType, qty)
+		AudioPlayer.PlaySFX(GetAudioKeyForPOI(POIModel.ActualType))
 		GameNarrativeDisplay.connect("ChoiceSelected", self, "StoryResponse")
-		GameNarrativeDisplay.DisplayText(StoryGenerator.POIStory(type, qty),["OK"])
+		GameNarrativeDisplay.DisplayText(StoryGenerator.POIStory(POIModel.ActualType, qty),["OK"])
 	pass
 	
 func GetAudioKeyForPOI(POIType):
