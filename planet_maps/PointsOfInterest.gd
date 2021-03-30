@@ -46,7 +46,8 @@ func _generatePOIsOfType(poiType, count, rng): #scannedFraction, rng):
 		#var perceived = actual if i < scannedCount else "Unknown"
 		var poiPos = Vector2(rng.randf_range(0, 1), rng.randf_range(0, 1))
 		var poiData = Dictionary()
-		poiData.NormalizedPosition = poiPos
+		poiData.X = poiPos.x
+		poiData.Y = poiPos.y
 		poiData.ActualType = poiType #actual
 		poiData.PerceivedType = "Unknown" #perceived
 		poiData.IsExhausted = false
@@ -81,7 +82,7 @@ func _addPOINodes():
 	maxPos *= margin
 	
 	for poiData in Planet.POIs:
-		var poiScreenPos = _convertToScreenPos(poiData.NormalizedPosition, maxPos, offset)
+		var poiScreenPos = _convertToScreenPos(Vector2(poiData.X, poiData.Y), maxPos, offset)
 		_addPOINode(poiScreenPos, poiData)
 
 func _addPOINode( poiScreenPos, poiData ) :
