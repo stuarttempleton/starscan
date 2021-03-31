@@ -13,6 +13,14 @@ var Planet
 var Scan
 var poi_nodes = []
 
+func _ready():
+	Cheat.connect("cheat_resetpois", self, "_reset")
+	Cheat.connect("cheat_setscan", self, "_reset")
+
+func _reset():
+	print("Resetting POIs")
+	_generate(Planet, Scan)
+
 func _generate(planet, scan):
 	Planet = planet
 	Scan = scan
@@ -29,46 +37,30 @@ func ClearPOINodes():
 	for poi in poi_nodes:
 		poi.queue_free()
 	poi_nodes.clear()
+	print("POI nodes cleared")
 	pass
 
 func _generatePOIData(rng):
 	Planet.POIs = []
-	_generatePOIsOfType("Artifact", Planet.ArtifactCount, rng) #Scan, rng)
-	_generatePOIsOfType("Resource", Planet.ResourceCount, rng) #Scan, rng)
-	_generatePOIsOfType("Hazard", Planet.HazardCount, rng) #Scan, rng)
+	_generatePOIsOfType("Artifact", Planet.ArtifactCount, rng)
+	_generatePOIsOfType("Resource", Planet.ResourceCount, rng)
+	_generatePOIsOfType("Hazard", Planet.HazardCount, rng)
 	var emptyCount = TotalPOIsPerPlanet - Planet.ArtifactCount - Planet.ResourceCount - Planet.HazardCount
-	_generatePOIsOfType("Empty", emptyCount, rng) #0, rng)
+	_generatePOIsOfType("Empty", emptyCount, rng)
 	
-func _generatePOIsOfType(poiType, count, rng): #scannedFraction, rng):
-	#var scannedCount = count * scannedFraction
+func _generatePOIsOfType(poiType, count, rng):
 	for i in count:
-		#var actual = poiType
-		#var perceived = actual if i < scannedCount else "Unknown"
 		var poiPos = Vector2(rng.randf_range(0, 1), rng.randf_range(0, 1))
 		var poiData = Dictionary()
 		poiData.X = poiPos.x
 		poiData.Y = poiPos.y
-		poiData.ActualType = poiType #actual
-		poiData.PerceivedType = "Unknown" #perceived
+		poiData.ActualType = poiType
+		poiData.PerceivedType = "Unknown"
 		poiData.IsExhausted = false
 		poiData.ScanDifficulty = rng.randf_range(0, 1)
 		Planet.POIs.append(poiData)
 	
 func _applyScanToPOIs():
-#	var POIList = []
-	
-#	#shuffle POIs:
-#	rng.seed = 0 #need to reset seed to ensure repeatable shuffle
-#	for poi in Planet.POIs:
-#		POIList.insert(rng.randi_range(0,POIList.count()), poi)
-	
-#	#update perceived types in order:
-#	for i in POIList.count():
-#		var poi = POIList[i]
-#		if i / POIList.count() < Scan:
-#			poi.PerceivedType = poi.ActualType if !poi.IsEmpty else "Empty"
-#		else:
-#			POIList[i].PerceivedType = "Unknown"
 	for poi in Planet.POIs:
 		if Scan >= poi.ScanDifficulty:
 			poi.PerceivedType = poi.ActualType if !poi.IsExhausted else "Exhausted"
@@ -78,7 +70,7 @@ func _applyScanToPOIs():
 func _addPOINodes():
 	var margin = 0.75
 	var maxPos = get_viewport().get_visible_rect().size
-	var offset = maxPos * ((1 - margin) / 2) #Vector2((maxPos.x * (1 - margin)) / 2, (maxPos.y * (1 - margin)) / 2)
+	var offset = maxPos * ((1 - margin) / 2)
 	maxPos *= margin
 	
 	for poiData in Planet.POIs:

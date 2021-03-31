@@ -97,6 +97,9 @@ func generatePlanets(rng, starName):
 		planet.ArtifactCount = randomArtifactCount(rng.randf())
 		planet.HazardCount = randomHazardCount(rng.randf())
 		planet.ResourceCount = randomResourceCount(rng.randf())
+		planet.OriginalArtifactCount = planet.ArtifactCount
+		planet.OriginalHazardCount = planet.HazardCount
+		planet.OriginalResourceCount = planet.ResourceCount
 		planet.PerceivedArtifactCount = -1
 		planet.PerceivedHazardCount = -1
 		planet.PerceivedResourceCount = -1

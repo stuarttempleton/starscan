@@ -5,7 +5,7 @@ var StarMap
 var MapScale = 10000
 var Loaded = false
 var SavedSinceLoad = false
-export var DatabaseFileName = "res://starmap_data/generated/Generated_2021-1-15_0-5-35_-6022814405790740079.json"
+export var DatabaseFileName = "res://starmap_data/generated/Generated_2021-3-31_6-32-20_6527443740791628228.json"
 export var SavedDatabaseFileName = "user://testdata_PLAYERSAVE.json"
 
 var NearestSystem = null
@@ -66,6 +66,7 @@ func SaveExists():
 	return save_file.file_exists(SavedDatabaseFileName)
 	
 func LoadMapData(filename):
+	print("Loading map data from %s" % filename)
 	var starmapdata_file = File.new()
 	starmapdata_file.open(filename, File.READ)
 	var starmapdata_json = JSON.parse(starmapdata_file.get_as_text())

@@ -42,7 +42,7 @@ func _ready():
 		StarMapData.FindNearestSystem(Vector2(ShipData.Ship().X,ShipData.Ship().Y))
 	$Title.text = $Title.text % [StarMapData.NearestSystem.Name]
 	
-	#Fit oscillator within bg assuming bg offset left of origin is margin
+	#Fit oscillator within bg assuming sbg offset left of origin is margin
 	var bgMargin = -bg.rect_position.x
 	oscillatorRange = bg.rect_size.x - bgMargin * 2
 	
