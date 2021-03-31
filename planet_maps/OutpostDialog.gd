@@ -5,6 +5,7 @@ var State = StoryGenerator.OUTPOST_STATE.LOBBY
 var Planet
 var System
 var Options = ["Station Hub","Star Dock","Science Bay","Leave Orbit"]
+var Qty = 0
 
 func _ready():
 	if StarMapData.NearestSystem != null: 
@@ -23,7 +24,7 @@ func DialogBegin(planet):
 
 func DialogPrompt():
 	GameNarrativeDisplay.connect("ChoiceSelected", self, "ChoiceResponse")	
-	GameNarrativeDisplay.DisplayText(StoryGenerator.OutpostStory(State, System, Planet), Options)
+	GameNarrativeDisplay.DisplayText(StoryGenerator.OutpostStory(State, System, Planet, Qty), Options)
 
 
 func ChoiceResponse(choice):
@@ -46,13 +47,14 @@ func RefuelSelected():
 	State = StoryGenerator.OUTPOST_STATE.FUEL_FULL
 	if ShipData.StarShip.Fuel < ShipData.StarShip.FuelCapacity:
 		State = StoryGenerator.OUTPOST_STATE.FUEL
+	Qty = ShipData.StarShip.FuelCapacity - ShipData.StarShip.Fuel
 	ShipData.Refuel()
 
 
 func TurnInSeelected():
-	var qty = ShipData.TurnInArtifacts()
+	Qty = ShipData.TurnInArtifacts()
 	State = StoryGenerator.OUTPOST_STATE.TURN_IN_EMPTY
-	if qty > 0:
+	if Qty > 0:
 		State = StoryGenerator.OUTPOST_STATE.TURN_IN
 
 

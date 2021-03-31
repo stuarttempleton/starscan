@@ -104,7 +104,7 @@ var PlanetHints = {
 		false: ["This planet has no interesting resources. "]
 	},
 	"Danger": { 
-		true: ["This planet has danger geological activity. "],
+		true: ["This planet has dangerous geological activity. "],
 		false: ["This planet is inert. "]
 	},
 }
@@ -133,24 +133,62 @@ func PlanetStory(System, Planet):
 	txt += stats_boiler % [ScanConfidence(System.Scan)]
 	return main_boiler % [title, txt]
 
+func Outpost_Promenade(system, planet):
+	var txt = "Captain, %s is docked and secure. Word of your mission has reached us and we are honored to host you and your crew. \r\n\r\n " % [ ShipData.Ship().Name]
+	txt += "The Station Hub is a cultural nexus of %s, the meeting place of travelers and the people of this system. " % [system.Name]
+	txt += "You may refuel and repair your vessel at the Space Port and you may deliver any artifacts in your cargo hold to the Supercluster Federation in the Science Bay. "
+	txt += "\r\n\r\n"
+	txt += "Welcome to Outpost %s. You are free to roam the facility. " % [ planet.Name]
+	txt += "\r\n\r\n"
+	return txt
 
-func OutpostStory(_state, system, planet):
-	var title = "Outpost " + planet.Name
+func Outpost_Refuel(system, planet, qty):
+	var txt = "%s is currently docked. Maintenance scans and refueling have completed. \r\n\r\n " % [ ShipData.Ship().Name]
+	if qty > 0:
+		txt += "It looks like you've seen some time in space. All costs are covered by the Supercluster Federation. "
+	else:
+		txt += "%s is fully fueled and repaired. You are ready to go. " % [ ShipData.Ship().Name]
+	txt += "You may re-enter %s System Space when you are ready." % [system.Name]
+	
+	txt += "\r\n\r\n"
+	if qty > 0:
+		txt += "[indent][code][color=#00ff00]You have gained %s fuel.[/color][/code][/indent]" % [str(qty)]
+	txt += "\r\n\r\n"
+	return txt
+
+func Outpost_ScienceBay(system, planet, qty):
+	var txt = ""
+	if qty > 0:
+		txt += "Captain, we have received your latest  %s contributions and will begin researching them immediately. " % [str(qty)]
+	else:
+		txt += "We couldn't find any artifacts in your cargo hold. Your mission is vital to the survival of humankind. "
+	if ShipData.StarShip.DeliveredArtifacts > 0:
+		txt += "You have brought us a total of %s artifacts to study. Humanity owes you a debt of gratitude." % [str(ShipData.StarShip.DeliveredArtifacts)]
+	
+	txt += "\r\n\r\n"
+	txt += "Come back when you have gathered more artifacts. You can bring them to us or any Supercluster Outpost."
+		
+	txt += "\r\n\r\n"
+	if qty > 0:
+		txt += "[indent][code][color=#00ff00]You have turned in %s artifacts.[/color][/code][/indent]" % [str(qty)]
+	txt += "\r\n\r\n"
+	return txt
+
+func OutpostStory(_state, system, planet, qty):
+	var title = "Outpost %s" % [planet.Name]
 	var txt = ""
 	
 	match _state:
 		OUTPOST_STATE.LOBBY:
-			txt += "Welcome to the outpost."
+			txt += Outpost_Promenade(system, planet)
 		OUTPOST_STATE.FUEL:
-			txt += "Refueling... \r\nYour fuel has been replenished."
+			txt += Outpost_Refuel(system, planet, qty)
 		OUTPOST_STATE.FUEL_FULL:
-			txt += "You do not need fuel."
+			txt += Outpost_Refuel(system, planet, qty)
 		OUTPOST_STATE.TURN_IN:
-			txt += "Giving your collected artifacts to the academics... \r\n"
-			txt += "You have turned in " + str(ShipData.StarShip.DeliveredArtifacts) + " artifacts."
+			txt += Outpost_ScienceBay(system, planet, qty)
 		OUTPOST_STATE.TURN_IN_EMPTY:
-			txt += "Giving your collected artifacts to the academics... \r\n"
-			txt += "Come back when you have gathered artifacts."
+			txt += Outpost_ScienceBay(system, planet, qty)
 	return main_boiler % [title, txt]
 
 
