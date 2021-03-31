@@ -32,9 +32,9 @@ colors = PoolColorArray( 0.458824, 1, 0.501961, 0, 0.458824, 1, 0.501961, 1, 0.4
 gradient = SubResource( 6 )
 width = 32
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=8]
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=9]
 tracks/0/type = "value"
 tracks/0/path = NodePath("ResultTextLabel:modulate")
 tracks/0/interp = 1
@@ -86,12 +86,12 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="DynamicFontData" id=8]
+[sub_resource type="DynamicFontData" id=10]
 font_path = "res://fonts/Montserrat-Medium.ttf"
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=11]
 size = 17
-font_data = SubResource( 8 )
+font_data = SubResource( 10 )
 
 [node name="Node2D" type="Node2D"]
 z_index = 1000
@@ -208,8 +208,8 @@ __meta__ = {
 }
 
 [node name="ResultTextAnimator" type="AnimationPlayer" parent="CanvasLayer/SceneBackground/Scanner Minigame/Oscillator/ResultTextHandle"]
-anims/LoseAnim = SubResource( 10 )
-anims/WinAnim = SubResource( 11 )
+anims/LoseAnim = SubResource( 8 )
+anims/WinAnim = SubResource( 9 )
 
 [node name="ResultTextLabel" type="Label" parent="CanvasLayer/SceneBackground/Scanner Minigame/Oscillator/ResultTextHandle"]
 visible = false
@@ -238,7 +238,7 @@ custom_styles/pressed = ExtResource( 7 )
 custom_styles/focus = ExtResource( 6 )
 custom_styles/disabled = ExtResource( 6 )
 custom_styles/normal = ExtResource( 5 )
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 11 )
 custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )

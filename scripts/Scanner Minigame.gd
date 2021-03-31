@@ -58,7 +58,7 @@ func _on_Button_pressed():
 	scanButtonPressed = true
 	$ScanButton.disabled = true
 	var score = success_curve.interpolate(abs(x - 1.0))
-	var success = (score >= greenMin and score <= greenMax)
+	var success = score > 0.5
 	print("Scanned! x=" + str(x) + ", max=" + str(amplitude) + ", scored " + str(score) + ", goal range=" + str(greenMin) + "..." + str(greenMax) + ". Result: " + ("Success." if success else "Fail."))
 	handleScanResult(success, score)
 
@@ -91,7 +91,7 @@ func updateText(percent, confidence):
 func handleScanResult(isSuccess, accuracy):
 	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.SCAN_WIN if isSuccess else AudioPlayer.AUDIO_KEY.SCAN_LOSE)
 	resultTextLabel.text = str(int(accuracy * 10) * 10) + "%"
-	updateText(str(int(accuracy * 10) * 10), "HIGH" if accuracy > 0.5 else "LOW")
+	updateText(str(int(accuracy * 10) * 10), "HIGH" if isSuccess else "LOW")
 	resultTextAnimator.play("WinAnim")
 	if StarMapData.ScanNearestSystem(accuracy) && isSuccess:
 		print("adding scan data to inventory")
