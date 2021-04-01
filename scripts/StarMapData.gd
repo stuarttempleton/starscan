@@ -94,7 +94,13 @@ func Systems() :
 		print("StarMap Not Loaded! FAILING ON PURPOSE FIX THIS")
 	else:
 		return StarMap.Systems
-		
+
+func GetOutpost(system):
+	for planet in system.Planets:
+		if "Outpost" == planet.Type:
+			return planet
+	return false
+
 func SystemHasOutpost(system):
 	for planet in system.Planets:
 		if PlanetTypes[8] == planet.Type:

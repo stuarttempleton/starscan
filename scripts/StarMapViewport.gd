@@ -22,13 +22,13 @@ func _on_FirstPlay():
 	#display start up dialog "greetings, nomad!"
 	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_HAIL)
 	GameNarrativeDisplay.connect("ChoiceSelected", self, "StartingTextDone")
-	GameNarrativeDisplay.DisplayText(StoryGenerator.Greeting(GetOutpost(nearestOutpostSystem)),["Begin"])
+	GameNarrativeDisplay.DisplayText(StoryGenerator.Greeting(StarMapData.GetOutpost(nearestOutpostSystem)),["Begin"])
 
-func GetOutpost(system):
-	for planet in system.Planets:
-		if "Outpost" == planet.Type:
-			return planet
-	return false
+#func GetOutpost(system):
+#	for planet in system.Planets:
+#		if "Outpost" == planet.Type:
+#			return planet
+#	return false
 	
 func StartingTextDone(choice):
 	ShipData.Ship().FirstRun = false
