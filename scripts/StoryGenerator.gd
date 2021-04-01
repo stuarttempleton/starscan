@@ -166,7 +166,7 @@ func Outpost_ScienceBay(system, planet, qty):
 		txt += "You have brought us a total of %s artifacts to study. Humanity owes you a debt of gratitude." % [str(ShipData.StarShip.DeliveredArtifacts)]
 	
 	txt += "\r\n\r\n"
-	txt += "Come back when you have gathered more artifacts. You can bring them to us or any Supercluster Outpost."
+	txt += "Come back when you have gathered more artifacts. We require currently %s to study. You can bring them to us or any Supercluster Outpost." % [ str($"/root/GameController/WinLoseCheck".ArtifactsRequiredToWin - ShipData.StarShip.DeliveredArtifacts)]
 		
 	txt += "\r\n\r\n"
 	if qty > 0:
