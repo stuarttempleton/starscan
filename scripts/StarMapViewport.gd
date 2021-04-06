@@ -22,6 +22,7 @@ func _on_FirstPlay():
 	#display start up dialog "greetings, nomad!"
 	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_HAIL)
 	GameNarrativeDisplay.connect("ChoiceSelected", self, "StartingTextDone")
+	#GameNarrativeDisplay.DisplayText(StoryGenerator.Win(),["Begin"])
 	GameNarrativeDisplay.DisplayText(StoryGenerator.Greeting(StarMapData.GetOutpost(nearestOutpostSystem)),["Begin"])
 
 #func GetOutpost(system):

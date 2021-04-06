@@ -45,7 +45,7 @@ func _process(delta):
 			AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_WIN)
 			AudioPlayer.PlayMusic(AudioPlayer.AUDIO_KEY.MUSIC_WIN)
 			GameNarrativeDisplay.connect("ChoiceSelected", self, "DialogTextDone")
-			GameNarrativeDisplay.DisplayText("Win",["RESTART","MENU","QUIT"])
+			GameNarrativeDisplay.DisplayText(StoryGenerator.Win(),["RESTART","MENU","QUIT"])
 		elif LoseConditionMet():
 			print("LOSE CONDITION MET")
 			handlingGameOver = true
@@ -53,5 +53,5 @@ func _process(delta):
 			AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_LOSE)
 			AudioPlayer.PlayMusic(AudioPlayer.AUDIO_KEY.MUSIC_LOSE)
 			GameNarrativeDisplay.connect("ChoiceSelected", self, "DialogTextDone")
-			GameNarrativeDisplay.DisplayText("Lose",["RETRY", "MENU","QUIT"])
+			GameNarrativeDisplay.DisplayText(StoryGenerator.Lose(),["RETRY", "MENU","QUIT"])
 

@@ -239,6 +239,32 @@ func LowFuel(outpostSystem):
 	txt += "\r\n\r\nInitiating tractor beam on your mark."
 	return main_boiler % [title, txt]
 
+func Win():
+	var title = "Congratulations, Nomad!"
+	var SectorLeaderName = $WordGenerator.CreateWord().capitalize()
+	var txt = "You have delivered the " + str($"/root/GameController/WinLoseCheck".ArtifactsRequiredToWin) + " required artifacts to the Supercluster Federation outposts spread around your sector. "
+	txt += "Thanks to you and other captains like you throughout the galaxy, " 
+	txt += "we are now able to study these ancient civilizations and find a path of our own through the next Great Filter. "
+	txt += "All of humanity owes you a debt of gratitude. " 
+	txt += "\r\n\r\n"
+	
+	txt += "The Supercluster AI has begun corellating all of the new information and the next phase of work is under way "
+	txt += "-- all thanks to the hard work of you and your crew." 
+	txt += "\r\n\r\n"
+		
+	txt += "I wonder what we could have learned if we had started down this path sooner. "
+	txt += "\r\n\r\n"
+	txt += "Sincerely,\r\nSector Leader, %s" % [SectorLeaderName]
+	return main_boiler % [title, txt]
+
+func Lose():
+	var title = "GAME OVER, Nomad!"
+	var SectorLeaderName = $WordGenerator.CreateWord().capitalize()
+	var txt = "You have lost the game and everything is now terrible. Your entire crew got Space Dysentery. I hope you're happy with what you've done. " 
+	txt += "\r\n\r\n"
+	txt += "Sincerely,\r\nSector Leader, %s" % [SectorLeaderName]
+	return main_boiler % [title, txt]
+	
 func LoremIpsum(_size):
 	var txt = ""
 	for i in _size:
