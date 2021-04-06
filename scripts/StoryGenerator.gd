@@ -260,9 +260,15 @@ func Win():
 func Lose():
 	var title = "GAME OVER, Nomad!"
 	var SectorLeaderName = $WordGenerator.CreateWord().capitalize()
-	var txt = "You have lost the game and everything is now terrible. Your entire crew got Space Dysentery. I hope you're happy with what you've done. " 
+	var txt = "The tragedy that has befallen the crew of %s will ripple through the sector. " % [ ShipData.Ship().Name]
+	txt += "The complete and total loss of your crew will not be in vain, though, "
+	txt += "as new captains throughout the galaxy step forward to take on the grim task of exploring ancient civilizations. "
 	txt += "\r\n\r\n"
-	txt += "Sincerely,\r\nSector Leader, %s" % [SectorLeaderName]
+	txt += "Your ship and crew will be memorialized in the Hall of Memory of the Supercluster AI as it continues to peer into the future of humanity. "
+	txt += "\r\n\r\n"
+	txt += "The job is not yet done. Who will step forward next?"
+	txt += "\r\n\r\n"
+	txt += "May the solar winds be forever at your back,\r\nSector Leader, %s" % [SectorLeaderName]
 	return main_boiler % [title, txt]
 	
 func LoremIpsum(_size):
