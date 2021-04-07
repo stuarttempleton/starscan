@@ -148,6 +148,7 @@ func TowShipTo(_outpost_position):
 	ShipIsTowing = true
 	target = _outpost_position
 	#$LSS_Transporter.show()
+	ShipData.UpdatePlayStat("Tows",1)
 	emit_signal("TowingAlert", ShipIsTowing)
 
 

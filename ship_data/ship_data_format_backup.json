@@ -1,8 +1,14 @@
 {
+    "Name":"Starscan",
     "X":0.5,
     "Y":0.5,
-    "TravelRange":0.1,
-    "Crew":100,
+    "Fuel":0,
+	"FuelCapacity":100,
+    "FuelPerUnitDistance":0.03,
+	"TravelSpeed":500.0,
+    "AccelerationRate":200.0,
+    "Crew":20,
+	"CrewCapacity":20,
     "MaxInventory":10,
     "Inventory":[
         {
@@ -10,6 +16,16 @@
             "Quantity":0
         }
     ],
+    "PlayStats":{
+        "SystemsScanned":0,
+        "ArtifactsTurnedIn":0,
+        "PlanetsVisited":0,
+        "PeopleMet":0,
+        "SystemsCompleted":0,
+        "CivilizationsDiscovered":0,
+        "UnknownsLooted":0,
+        "Tows":0
+    },
     "DeliveredArtifacts":0,
     "FirstRun":true
 }

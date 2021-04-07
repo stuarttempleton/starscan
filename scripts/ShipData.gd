@@ -98,6 +98,7 @@ func TurnInArtifacts():
 	var qty = TurnInCargoType("Artifacts",0)
 	StarShip.DeliveredArtifacts += qty
 	print("Turned in " + str(qty) + " artifacts.")
+	UpdatePlayStat("ArtifactsTurnedIn", qty)
 	return qty #report how many we turned in for displayor whatever
 
 
@@ -161,3 +162,17 @@ func PayResourcesDefaultToCrew(resourcesToPay, crewLostPerUnpaidResource):
 func DeductCrew(crewLost):
 	if Cheat.godmode_enabled: return
 	StarShip.Crew -= crewLost
+
+func UpdatePlayStat(stat, qty):
+	if StarShip.PlayStats.has(stat):
+		StarShip.PlayStats[stat] += qty
+	else:
+		StarShip.PlayStats[stat] = qty
+
+func GetPlayStat(stat):
+	var qty = 0
+	if StarShip.PlayStats.has(stat):
+		qty = StarShip.PlayStats[stat]
+	return qty
+
+

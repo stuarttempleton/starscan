@@ -96,6 +96,7 @@ func handleScanResult(isSuccess, accuracy):
 	if StarMapData.ScanNearestSystem(accuracy) && isSuccess:
 		print("adding scan data to inventory")
 		ShipData.GainInventoryItem("Scan Data", 1)
+		ShipData.UpdatePlayStat("SystemsScanned",1)
 	var resultSignal = "success" if isSuccess else "fail"
 	print("Scan result signal: %s" % resultSignal)
 	emit_signal(resultSignal)
