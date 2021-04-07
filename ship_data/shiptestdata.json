@@ -22,10 +22,11 @@
     ],
     "PlayStats":{
         "SystemsScanned":0,
-        "ArtifactsTurnedIn":0,
-        "PlanetsVisited":0,
-        "PeopleMet":0,
+        "SystemsVisited":0,
         "SystemsCompleted":0,
+        "PlanetsVisited":0,
+        "ArtifactsTurnedIn":0,
+        "PeopleMet":0,
         "CivilizationsDiscovered":0,
         "UnknownsLooted":0,
         "Tows":0

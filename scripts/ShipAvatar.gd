@@ -148,7 +148,6 @@ func TowShipTo(_outpost_position):
 	ShipIsTowing = true
 	target = _outpost_position
 	#$LSS_Transporter.show()
-	ShipData.UpdatePlayStat("Tows",1)
 	emit_signal("TowingAlert", ShipIsTowing)
 
 
@@ -163,7 +162,7 @@ func JumpToMapPosition(newPosition):
 	mouseIsPressed = false
 
 func _on_FuelTanksEmpty():
-	if !ShipIsTowing:
+	if !ShipIsTowing && !ShipData.Ship().FirstRun:
 		var shipPos = Vector2(ShipData.Ship().X,ShipData.Ship().Y)
 		var nearestOutpostSystem = StarMapData.GetNearestOutpostSystem(shipPos)
 	
@@ -178,4 +177,5 @@ func DialogChoice(choice):
 	var nearestOutpostSystem = StarMapData.GetNearestOutpostSystem(shipPos)
 	var outpostSystemPos = Vector2(nearestOutpostSystem.X, nearestOutpostSystem.Y) * StarMapData.MapScale
 
+	ShipData.UpdatePlayStat("Tows",1)
 	TowShipTo(outpostSystemPos)

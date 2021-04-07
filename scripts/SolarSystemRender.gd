@@ -11,7 +11,10 @@ func _ready():
 	if (StarMapData.NearestSystem == null):
 		StarMapData.FindNearestSystem(Vector2(ShipData.Ship().X,ShipData.Ship().Y))
 	system = StarMapData.NearestSystem
-	
+	if !StarMapData.IsVisited(system):
+		print("visiting system.")
+		StarMapData.SetVisited(system)
+		ShipData.UpdatePlayStat("SystemsVisited",1)
 	StarMapData.DistanceToNearestNebula(Vector2(system.X, system.Y))
 	var nebuladistance = StarMapData.NearestNebulaDistance
 	var nebula = StarMapData.NearestNebula

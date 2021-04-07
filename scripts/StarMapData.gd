@@ -185,6 +185,22 @@ func ScanNearestSystem(quality):
 		ScanPlanet(planet, quality)
 	return is_new_scan
 
+func IsVisited(SystemOrPlanet):
+	if SystemOrPlanet.has("Visited"):
+		return SystemOrPlanet["Visited"]
+	return false
+
+func SetVisited(SystemOrPlanet):
+	SystemOrPlanet["Visited"] = true
+
+func AllPlanetsVisited(system):
+	var visited = true
+	for planet in system.Planets:
+		if !IsVisited(planet):
+			visited = false
+	return visited
+
+
 func ScanPlanet(planet, quality):
 	var totalIcons = 10
 	var icons = []

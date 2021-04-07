@@ -24,6 +24,14 @@ func ViewPlanet(_planetID):
 	if (allow_planet_click):
 		AudioPlayer._play_UI_Button_Select()
 		ToggleView()
+		var planet = $SystemView/SolarSystem.system.Planets[_planetID]
+		if !StarMapData.IsVisited(planet):
+			print("visiting planet.")
+			StarMapData.SetVisited(planet)
+			ShipData.UpdatePlayStat("PlanetsVisited",1)
+			if StarMapData.AllPlanetsVisited($SystemView/SolarSystem.system):
+				print("System completed!")
+				ShipData.UpdatePlayStat("SystemsCompleted",1)
 		$CanvasLayer/PlanetSurface._generate_planet_map($SystemView/SolarSystem.system.Planets[_planetID], $SystemView/SolarSystem.system.Scan)
 		$CanvasLayer/SystemViewUI/ActionButtons/LeaveOrbit.visible = true
 		$CanvasLayer/SystemViewUI/ActionButtons/LeaveSystem.visible = false
