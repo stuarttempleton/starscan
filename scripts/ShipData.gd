@@ -161,6 +161,7 @@ func PayResourcesDefaultToCrew(resourcesToPay, crewLostPerUnpaidResource):
 
 func DeductCrew(crewLost):
 	if Cheat.godmode_enabled: return
+	UpdatePlayStat("CrewLost", crewLost)
 	StarShip.Crew -= crewLost
 
 func UpdatePlayStat(stat, qty):

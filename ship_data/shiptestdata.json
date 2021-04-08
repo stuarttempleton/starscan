@@ -29,7 +29,8 @@
         "PeopleMet":0,
         "CivilizationsDiscovered":0,
         "UnknownsLooted":0,
-        "Tows":0
+        "Tows":0,
+        "CrewLost":0
     },
     "DeliveredArtifacts":0,
     "FirstRun":true

@@ -270,7 +270,47 @@ func Lose():
 	txt += "\r\n\r\n"
 	txt += "May the solar winds be forever at your back,\r\nSector Leader, %s" % [SectorLeaderName]
 	return main_boiler % [title, txt]
+
+func PlayStats():
+	var stats = ShipData.StarShip.PlayStats
 	
+	var title = "Your Stats"
+	var SectorLeaderName = $WordGenerator.CreateWord().capitalize()
+	var stat_boiler = "[indent][code][color=#00ff00]%s[/color][/code][/indent]\r\n"
+	var txt = "During your journey, you..."
+	txt += "\r\n\r\n"
+	
+	if ShipData.GetPlayStat("SystemsCompleted") > 0 && ShipData.GetPlayStat("SystemsCompleted") / ShipData.GetPlayStat("SystemsVisited") > 0.9:
+		txt += stat_boiler % ["You were AN EXPLORER"]
+	if ShipData.GetPlayStat("UnknownsLooted") < 3:
+		txt += stat_boiler % ["You were CAUTIOUS"]
+	if ShipData.GetPlayStat("Tows") < 2:
+		txt += stat_boiler % ["You were FUEL EFFICIENT"]
+	if ShipData.GetPlayStat("PeopleMet") > 15:
+		txt += stat_boiler % ["You were SOCIAL"]
+	if ShipData.GetPlayStat("CivilizationsDiscovered") < 2:
+		txt += stat_boiler % ["You were A DIPLOMAT"]
+	if ShipData.GetPlayStat("ArtifactsTurnedIn") > $"/root/GameController/WinLoseCheck".ArtifactsRequiredToWin:
+		txt += stat_boiler % ["You were AN OVERACHIEVER"]
+		
+	if ShipData.GetPlayStat("ArtifactsTurnedIn") > 0:
+		txt += stat_boiler % ["You turned in %s artifacts" % [ShipData.GetPlayStat("ArtifactsTurnedIn")]]
+	if ShipData.GetPlayStat("SystemsScanned") > 0:
+		txt += stat_boiler % ["You scanned %s star systems" % [ShipData.GetPlayStat("SystemsScanned")]]
+	if ShipData.GetPlayStat("SystemsVisited") > 0:
+		txt += stat_boiler % ["You visited %s systems" % [ShipData.GetPlayStat("SystemsVisited")]]
+	if ShipData.GetPlayStat("PlanetsVisited") > 0:
+		txt += stat_boiler % ["You visited %s planets" % [ShipData.GetPlayStat("PlanetsVisited")]]
+	if ShipData.GetPlayStat("CrewLost") > 0:
+		txt += stat_boiler % ["You lost %s souls" % [ShipData.GetPlayStat("CrewLost")]]
+	if ShipData.GetPlayStat("CivilizationsDiscovered") > 0:
+		txt += stat_boiler % ["You discovered %s civilizations" % [ShipData.GetPlayStat("CivilizationsDiscovered")]]
+	if ShipData.GetPlayStat("PeopleMet") > 0:
+		txt += stat_boiler % ["You met %s people" % [ShipData.GetPlayStat("PeopleMet")]]
+	
+	txt += "\r\n"
+	return main_boiler % [title, txt]
+
 func LoremIpsum(_size):
 	var txt = ""
 	for i in _size:

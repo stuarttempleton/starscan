@@ -10,4 +10,4 @@ pause_menu_path = "res://scenes/MainMenu.tscn"
 
 [node name="WinLoseCheck" type="Node2D" parent="."]
 script = ExtResource( 2 )
-ArtifactsRequiredToWin = 50
+ArtifactsRequiredToWin = 2
