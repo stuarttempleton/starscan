@@ -277,7 +277,7 @@ func PlayStats():
 	var title = "Your Stats"
 	var SectorLeaderName = $WordGenerator.CreateWord().capitalize()
 	var stat_boiler = "[indent][code][color=#00ff00]%s[/color][/code][/indent]\r\n"
-	var txt = "During your journey, you..."
+	var txt = "During your journey..."
 	txt += "\r\n\r\n"
 	
 	if ShipData.GetPlayStat("SystemsCompleted") > 0 && ShipData.GetPlayStat("SystemsCompleted") / ShipData.GetPlayStat("SystemsVisited") > 0.9:
@@ -292,7 +292,9 @@ func PlayStats():
 		txt += stat_boiler % ["You were A DIPLOMAT"]
 	if ShipData.GetPlayStat("ArtifactsTurnedIn") > $"/root/GameController/WinLoseCheck".ArtifactsRequiredToWin:
 		txt += stat_boiler % ["You were AN OVERACHIEVER"]
-		
+	
+	txt += "\r\n\r\n"
+	
 	if ShipData.GetPlayStat("ArtifactsTurnedIn") > 0:
 		txt += stat_boiler % ["You turned in %s artifacts" % [ShipData.GetPlayStat("ArtifactsTurnedIn")]]
 	if ShipData.GetPlayStat("SystemsScanned") > 0:
