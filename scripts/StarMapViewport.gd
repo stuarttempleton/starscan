@@ -10,6 +10,8 @@ func _on_FirstPlay():
 	ShipData.Ship().X = 0.5
 	ShipData.Ship().Y = 0.5
 	
+	ShipData.StarShip.Captain = $"/root/StoryGenerator/WordGenerator".CreateWord().capitalize()
+	
 	#deplete fuel to force education about refueling
 	ShipData.ConsumeFuel(ShipData.Ship().Fuel)
 	
@@ -19,7 +21,6 @@ func _on_FirstPlay():
 	
 	$ShipAvatarView/ShipAvatar.JumpToMapPosition(outpostSystemPos)
 	
-	#display start up dialog "greetings, nomad!"
 	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_HAIL)
 	GameNarrativeDisplay.connect("ChoiceSelected", self, "StartingTextDone")
 	#GameNarrativeDisplay.DisplayText(StoryGenerator.Lose(),["Begin"])

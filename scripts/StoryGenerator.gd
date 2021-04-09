@@ -10,7 +10,7 @@ func _ready():
 	pass # Replace with function body.
 
 func Greeting(Planet):
-	var title = "Greetings, Nomad!"
+	var title = "Greetings, Captain %s!" %[ShipData.StarShip.Captain]
 	var details = "You have been recruited by the Supercluster Federation to acquire scientific and archaeological data from the remnants of ancient civilizations for study.\r\n\r\n"
 	
 	details += "The Milky Way Superintelligence has predicted a new filter that our societies must understand to survive. "
@@ -30,9 +30,21 @@ func Greeting(Planet):
 
 func SystemStory(System, Cost):
 	var title = "Entering " + System.Name
-	var system_boiler_plate = "%s\r\n"
 	var planet_sub_boiler_plate = "%s: %s, %s"
-	var details = system_boiler_plate % [LoremIpsum(1)] #, ScanConfidence(System.Scan), System.Planets.size()]
+	var txt = "Captain, we are entering system %s. There are %s orbital bodies to explore. " % [System.Name, System.Planets.size()]
+	if Cost.Crew > 0:
+		txt += "We lack the resources for a safe entry and have reports of casualties throughout the ship. "
+	if StarMapData.SystemHasOutpost(System):
+		txt += "We can replenish fuel and turn in artifacts at %s Station. " % [StarMapData.GetOutpost(System).Name]
+	if StarMapData.SystemHasPlanetWithArtifacts(System):
+		txt += "There are faint signs of sentient life emanating from this system. "
+	else:
+		txt += "This system appears otherwise quiet. "
+#	if StarMapData.SystemHasPlanetWithResources(System):
+#		txt += "This system has mineral signatures consistent with our resource needs. "
+#	if StarMapData.SystemHasPlanetWithHazards(System):
+#		txt += "This system is active. Proceed with extreme caution. "
+	txt += "\r\n\r\nThe system map is being forwarded to your console. \r\n\r\n"
 	var stats = ReportSystemEntryCost(Cost)
 	stats += "\r\n" + ScanConfidence(System.Scan)
 	
@@ -40,8 +52,8 @@ func SystemStory(System, Cost):
 #		var planetText = planet_sub_boiler_plate % [planet.Name, planet.Type, planet.Size]
 #		details = "%s\r\n%s" % [details, planetText]
 	
-	details += stats_boiler % [stats]
-	return main_boiler % [title, details]
+	txt += stats_boiler % [stats]
+	return main_boiler % [title, txt]
 
 func ReportSystemEntryCost(cost):
 	var report = ""
@@ -96,7 +108,7 @@ func RomanNumeral(num):
 
 var PlanetHints = {
 	"Civilization": { 
-		true: ["We have detected signs of sentient life. "],
+		true: ["We have detected feint signs of sentient life. "],
 		false: ["We have detected no signs of sentient life. "]
 	},
 	"Resource": { 
@@ -105,7 +117,7 @@ var PlanetHints = {
 	},
 	"Danger": { 
 		true: ["This planet has dangerous geological activity. "],
-		false: ["This planet is inert. "]
+		false: ["This planet is geologically inert. "]
 	},
 }
 func PlanetHint( Planet ):
@@ -240,7 +252,7 @@ func LowFuel(outpostSystem):
 	return main_boiler % [title, txt]
 
 func Win():
-	var title = "Congratulations, Nomad!"
+	var title = "Congratulations, Captain %s!" %[ShipData.StarShip.Captain]
 	var SectorLeaderName = $WordGenerator.CreateWord().capitalize()
 	var txt = "You have delivered the " + str($"/root/GameController/WinLoseCheck".ArtifactsRequiredToWin) + " required artifacts to the Supercluster Federation outposts spread around your sector. "
 	txt += "Thanks to you and other captains like you throughout the galaxy, " 
@@ -258,7 +270,7 @@ func Win():
 	return main_boiler % [title, txt]
 
 func Lose():
-	var title = "GAME OVER, Nomad!"
+	var title = "GAME OVER, Captain %s!" %[ShipData.StarShip.Captain]
 	var SectorLeaderName = $WordGenerator.CreateWord().capitalize()
 	var txt = "The tragedy that has befallen the crew of %s will ripple through the sector. " % [ ShipData.Ship().Name]
 	txt += "The complete and total loss of your crew will not be in vain, though, "
