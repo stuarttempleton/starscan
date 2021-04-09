@@ -18,7 +18,7 @@ func ScanTextHelper(scan):
 	if scan < 0.001:
 		return "Unknown"
 	else:
-		return str(int(scan * 10) * 10) + "% identified"
+		return str(int(scan * 100)) + "% identified"
 
 func OutpostTextHelper(system):
 	if StarMapData.SystemHasOutpost(system):

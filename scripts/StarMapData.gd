@@ -102,17 +102,17 @@ func GetOutpost(system):
 	return false
 func SystemHasPlanetWithArtifacts(system):
 	for planet in system.Planets:
-		if planet.ArtifactCount > 0:
+		if planet.ArtifactCount > 0 && "Outpost" != planet.Type:
 			return true
 	return false
 func SystemHasPlanetWithResources(system):
 	for planet in system.Planets:
-		if planet.ResourceCount > 0:
+		if planet.ResourceCount > 0 && "Outpost" != planet.Type:
 			return true
 	return false
 func SystemHasPlanetWithHazards(system):
 	for planet in system.Planets:
-		if planet.HazardCount > 0:
+		if planet.HazardCount > 0 && "Outpost" != planet.Type:
 			return true
 	return false
 

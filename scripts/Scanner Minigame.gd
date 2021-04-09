@@ -85,13 +85,13 @@ func SetupSweetSpot():
 	sweetSpot.rect_size.x = oscillatorRange * (rightMin.x - leftMin.x)
 
 func updateText(percent, confidence):
-	$Description.text = "Scan complete: %s\r\nConfidence: %s" % [percent, confidence]
+	$Description.text = "Scan complete: %s%%\r\nConfidence: %s" % [percent, confidence]
 	pass
 
 func handleScanResult(isSuccess, accuracy):
 	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.SCAN_WIN if isSuccess else AudioPlayer.AUDIO_KEY.SCAN_LOSE)
-	resultTextLabel.text = str(int(accuracy * 10) * 10) + "%"
-	updateText(str(int(accuracy * 10) * 10), "HIGH" if isSuccess else "LOW")
+	resultTextLabel.text = str(int(accuracy * 100)) + "%"
+	updateText(str(int(accuracy * 100)), "HIGH" if isSuccess else "LOW")
 	resultTextAnimator.play("WinAnim")
 	if StarMapData.ScanNearestSystem(accuracy) && isSuccess:
 		print("adding scan data to inventory")

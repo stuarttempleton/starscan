@@ -216,7 +216,23 @@ func POIStory(POIType, qty):
 
 func _generate_poi_storylet(POIType):
 	var txt = ""
-	txt += LoremIpsum(1)
+	match POIType:
+		"Artifact":
+			txt = "Captain, the Away Team has returned successfully from the point of interest and deposited an artifact in our cargo hold. "
+			txt += "\r\n\r\n"
+			txt += "The artifact is a %s and has text that reads: \r\n\"%s\" " % ["THINGY", LoremIpsum(1)]
+		"Resource":
+			txt = "Captain, the Away Team has returned successfully from the point of interest and deposited additional resources for system entry in our cargo hold. "
+		"Hazard":
+			txt = "Captain, a member of the Away Team has perished due to surface and atmospheric instability. "
+			var fname = $WordGenerator.CreateWord().capitalize()
+			var lname = $WordGenerator.CreateWord().capitalize()
+			var fname2 = $WordGenerator.CreateWord().capitalize()
+			var fname3 = $WordGenerator.CreateWord().capitalize()
+			txt += "Their name was %s %s. They are survived by %s and %s %s. I will begin notifying next of kin. " % [fname, lname, fname2, fname3, lname]
+		"Empty":
+			txt = "Captain, the Away Team has returned from the point of interest empty handed. It appears that this node was a false positive. "
+	
 	return txt
 
 
