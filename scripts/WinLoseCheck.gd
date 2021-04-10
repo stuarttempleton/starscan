@@ -32,7 +32,7 @@ func DialogTextDone(choice):
 		if viewing_stats:
 			GameNarrativeDisplay.DisplayText(StoryGenerator.PlayStats(),["MESSAGE","MENU","QUIT"])
 		else:
-			GameNarrativeDisplay.DisplayText(GetStoryText(),["STATS","MENU","QUIT"])
+			GameNarrativeDisplay.DisplayText(GetStoryText(),["ATTRIBUTES","MENU","QUIT"])
 	elif choice == 1:
 		print("returning to menu...")
 		Reset()

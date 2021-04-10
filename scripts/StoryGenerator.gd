@@ -220,7 +220,7 @@ func _generate_poi_storylet(POIType):
 		"Artifact":
 			txt = "Captain, the Away Team has returned successfully from the point of interest and deposited an artifact in our cargo hold. "
 			txt += "\r\n\r\n"
-			txt += "The artifact is a %s and has text that reads: \r\n\"%s\" " % ["THINGY", LoremIpsum(1)]
+			txt += "The artifact is a %s and has text that reads: \r\n\r\n\"%s\" " % ["THINGY", LoremIpsum(1)]
 		"Resource":
 			txt = "Captain, the Away Team has returned successfully from the point of interest and deposited additional resources for system entry in our cargo hold. "
 		"Hazard":
@@ -302,7 +302,7 @@ func Lose():
 func PlayStats():
 	var stats = ShipData.StarShip.PlayStats
 	
-	var title = "Your Stats"
+	var title = "Your Attributes"
 	var SectorLeaderName = $WordGenerator.CreateWord().capitalize()
 	var stat_boiler = "[indent][code][color=#00ff00]%s[/color][/code][/indent]\r\n"
 	var txt = "During your journey..."
