@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://name_generation/WordGenerator.tscn" type="PackedScene" id=1]
 [ext_resource path="res://name_generation/NameGenerationTest.gd" type="Script" id=2]
@@ -9,13 +9,6 @@ font_path = "res://fonts/Montserrat-Regular.ttf"
 [sub_resource type="DynamicFont" id=2]
 size = 30
 font_data = SubResource( 1 )
-
-[sub_resource type="DynamicFontData" id=3]
-font_path = "res://fonts/Montserrat-Regular.ttf"
-
-[sub_resource type="DynamicFont" id=4]
-size = 20
-font_data = SubResource( 3 )
 
 [node name="NameGenerationTest" type="Control"]
 anchor_right = 1.0
@@ -49,31 +42,33 @@ margin_top = 42.0
 margin_right = 768.0
 margin_bottom = 46.0
 
-[node name="Quote" type="Label" parent="VBoxContainer"]
+[node name="Quote" type="RichTextLabel" parent="VBoxContainer"]
 margin_top = 50.0
 margin_right = 768.0
-margin_bottom = 76.0
-custom_fonts/font = SubResource( 4 )
-text = "Additional text."
+margin_bottom = 65.0
+bbcode_enabled = true
+bbcode_text = "This is a big ole test."
+text = "This is a big ole test."
+fit_content_height = true
 
 [node name="ColorRect" type="ColorRect" parent="VBoxContainer"]
-margin_top = 80.0
+margin_top = 69.0
 margin_right = 768.0
-margin_bottom = 180.0
+margin_bottom = 169.0
 rect_min_size = Vector2( 0, 100 )
 color = Color( 1, 1, 1, 0 )
 
 [node name="GenerateSystem" type="Button" parent="VBoxContainer"]
-margin_top = 184.0
+margin_top = 173.0
 margin_right = 768.0
-margin_bottom = 234.0
+margin_bottom = 223.0
 rect_min_size = Vector2( 0, 50 )
 text = "GENERATE SYSTEM"
 
 [node name="GenerateArtifacts" type="Button" parent="VBoxContainer"]
-margin_top = 238.0
+margin_top = 227.0
 margin_right = 768.0
-margin_bottom = 288.0
+margin_bottom = 277.0
 rect_min_size = Vector2( 0, 50 )
 text = "GENERATE ARTIFACTS"
 

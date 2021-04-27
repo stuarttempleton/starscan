@@ -220,7 +220,7 @@ func _generate_poi_storylet(POIType):
 		"Artifact":
 			txt = "Captain, the Away Team has returned successfully from the Resource Extraction Point and deposited an artifact in our cargo hold. "
 			txt += "\r\n\r\n"
-			txt += "You have uncovered: [color=#FFBF00]%s[/color] \r\n\r\nWith it, your science team discovers a message: \r\n\r\n\"%s\" " % [$WordGenerator/Artifact.Create(), LoremIpsum(1)]
+			txt += "You have uncovered: %s \r\n\r\nWith it, your science team discovers a message: \r\n\r\n\"%s\" " % [$WordGenerator/Artifact.Create(-1, true), LoremIpsum(1)]
 		"Resource":
 			txt = "Captain, the Away Team has returned successfully from the Resource Extraction Point and deposited additional resources for system entry in our cargo hold. "
 		"Hazard":

@@ -5,11 +5,11 @@ func _on_GenerateArtifacts_pressed():
 	var list = ""
 	var qty = $WordGenerator.NewRand(8) + 1
 	var i = 1
-	for w in $WordGenerator/Artifact.CreateList(qty):
+	for w in $WordGenerator/Artifact.CreateList(qty, true):
 		list += "%d. %s\r\n" % [i, w]
 		i += 1
 	$VBoxContainer/Name.text = "Artifacts"
-	$VBoxContainer/Quote.text = list
+	$VBoxContainer/Quote.bbcode_text = list
 
 
 func _on_GenerateSystem_pressed():
@@ -21,4 +21,4 @@ func _on_GenerateSystem_pressed():
 		PlanetList += "%d. %s\r\n" % [i, w.capitalize()]
 		i += 1
 	$VBoxContainer/Name.text = SystemName
-	$VBoxContainer/Quote.text = PlanetList
+	$VBoxContainer/Quote.bbcode_text = PlanetList
