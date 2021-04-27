@@ -6,7 +6,7 @@ var RarityColor = {
 }
 
 var Patterns = {
-	"Rare": ["%name's %noun", "%noun of %name", "The %name %noun", "%name %noun"],
+	"Rare": ["%name's %Noun", "%Noun of %name", "The %name %Noun", "%name %Noun"],
 	"Common": [
 		"A %adjective %noun",
 		"A %size %noun",
@@ -22,20 +22,41 @@ var Words = {
 }
 var Nouns = ["Hammer"]
 
+func GetUpperKey(key):
+	var newKey = key
+	newKey[1] = newKey[1].to_upper()
+	print("%s -> %s" % [key, newKey])
+	return newKey
+
+func GetLowerKey(key):
+	var newKey = key
+	newKey[1] = newKey[1].to_lower()
+	print("%s -> %s" % [key, newKey])
+	return newKey
+
+func GetWordWithCaps(key):
+	var lowKey = GetLowerKey(key)
+	var word = Words[lowKey][NewRand(Words[lowKey].size())]
+	if key[1] == key[1].to_upper():
+		word = word.capitalize()
+	return word
+
 func SwapBoilerPlate(txt, key):
 	var swapped = ""
 	var split = txt.split(key, true)
 	for i in range(0, split.size()):
 		swapped += split[i]
 		if i < split.size() - 1 :
-			swapped += Words[key][NewRand(Words[key].size())]
+			swapped += GetWordWithCaps(key)
 	return swapped
 
 
 func ExpandPattern(pat):
 	var item = pat
 	item = item.replace("%name", get_parent().CreateWord().capitalize())
+	item = item.replace("%Name", get_parent().CreateWord().capitalize())
 	for key in Words.keys():
+		item = SwapBoilerPlate(item, GetUpperKey(key))
 		item = SwapBoilerPlate(item, key)
 	return item
 
