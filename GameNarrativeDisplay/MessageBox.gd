@@ -7,11 +7,7 @@ var Texts = {
 	"Greeting":"[b]Greetings, Nomad![/b]\r\nYou have been selected... etc....\r\n\r\nREFUEL and BEGIN your journey.",
 	"Lose":"[b]You lose, Nomad.[/b]\r\nYour entire crew got Space Dysentery. I hope you're happy with what you've done.",
 	"Win":"[b]You win, Nomad.[/b]\r\nYou have delivered all of the artifacts to the fancy scientists.",
-	"LowFuel":"[b]Greetings, Nomad![/b]\r\nYou have been selected... etc....\r\n\r\nREFUEL and BEGIN your journey.",
-	"Restart":"[center][b]Restart game?[/b]\r\nThis will delete your current progress.",
-	"Exit":"[center][b]Exit game?[/b]\r\nThis will save your current progress and exit the game.",
-	"ReturnToMenu":"[center][b]Return to the main menu?[/b]\r\nThis will save your current progress and return to the main menu.",
-	"RegenerateUniverse":"[center][b]Generate a new universe?[/b]\r\nThis will delete the current universe and generate an entirely new universe."
+	"LowFuel":"[b]Greetings, Nomad![/b]\r\nYou have been selected... etc....\r\n\r\nREFUEL and BEGIN your journey."
 }
 
 var buttons = []
@@ -20,13 +16,13 @@ var display_speed = 1.5
 
 func _ready():
 	buttons = [
-		$MessageBoxUI/HBoxContainer/Button1,
-		$MessageBoxUI/HBoxContainer/Button2,
-		$MessageBoxUI/HBoxContainer/Button3,
-		$MessageBoxUI/HBoxContainer/Button4,
+		$GameNarrativeDisplay2/HBoxContainer/Button1,
+		$GameNarrativeDisplay2/HBoxContainer/Button2,
+		$GameNarrativeDisplay2/HBoxContainer/Button3,
+		$GameNarrativeDisplay2/HBoxContainer/Button4,
 	]
 	messageNodes = [
-		$MessageBoxUI
+		$GameNarrativeDisplay2
 	]
 	SetMessageNodeVisibility(false)
 #	var txt = "[b]A surface encounter...[/b]\r\n\r\n"
@@ -53,9 +49,9 @@ func DisplayText(txt, array_buttons):
 	
 	if array_buttons.size() > buttons.size():
 		print("TOO MANY OPTIONS SENT! ONLY USING %d", buttons.size())
-	$MessageBoxUI/Message.bbcode_text = message
+	$GameNarrativeDisplay2/Message.bbcode_text = message
 	SetMessageNodeVisibility(true)
-	$MessageBoxUI/Message.percent_visible = 0
+	$GameNarrativeDisplay2/Message.percent_visible = 0
 	
 	for btn in buttons:
 		btn.visible = false
@@ -70,10 +66,10 @@ func DisplayText(txt, array_buttons):
 	pass
 
 func _process(delta):
-	if($MessageBoxUI/Message.percent_visible > 0.9):
-		$MessageBoxUI/Message.percent_visible = 1
+	if($GameNarrativeDisplay2/Message.percent_visible > 0.9):
+		$GameNarrativeDisplay2/Message.percent_visible = 1
 	else:
-		$MessageBoxUI/Message.percent_visible += display_speed * delta
+		$GameNarrativeDisplay2/Message.percent_visible += display_speed * delta
 
 
 func CancelDialog():

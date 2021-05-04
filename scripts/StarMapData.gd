@@ -5,8 +5,8 @@ var StarMap
 var MapScale = 10000
 var Loaded = false
 var SavedSinceLoad = false
-export var DatabaseFileName = "res://starmap_data/generated/Generated_2021-3-31_6-32-20_6527443740791628228.json"
-export var SavedDatabaseFileName = "user://testdata_PLAYERSAVE.json"
+export var DefaultUniverseFile = "res://starmap_data/generated/Generated_2021-3-31_6-32-20_6527443740791628228.json"
+export var SavedUniverseFile = "user://Player_Universe_Data.json"
 
 var NearestSystem = null
 var NearestSystemDistance = INF
@@ -32,38 +32,41 @@ var PlanetSizes = [
 ]
 
 func _ready():
-	self.LoadMapData(DatabaseFileName)
+	self.LoadMapData(DefaultUniverseFile)
+
+func GetMostRecentGeneratedFile():
+	var files = []
+	var dir = Directory.new()
+	dir.open("user://")
+	dir.list_dir_begin(true, true)
+	while true:
+		var file = dir.get_next()
+		if file == "":
+			break
+		if file.begins_with("Starmap_"):
+			files.append(file)
+	dir.list_dir_end()
 	
-	#EXPLANATION
-	
-	#Print name of first planet in first system
-	#print(self.Systems()[0].Planets[0].Name)
-	#print(self.Systems()[0].X - self.Systems()[0].Y)
-	
-	#Change name of first planet in first system
-	#self.Systems()[0].Planets[0].Name = "updated name!"
-	
-	#Save to a save file
-	#self.Save(SavedDatabaseFileName)
+	return "user://%s" % [files.back()] if not files.empty() else DefaultUniverseFile
 
 func ResetMap() :
-	self.LoadMapData(DatabaseFileName)
+	self.LoadMapData(GetMostRecentGeneratedFile())
 	var dir = Directory.new()
-	dir.remove(SavedDatabaseFileName)
+	dir.remove(SavedUniverseFile)
 	self.SaveMap()
 
 func LoadSave() :
 	if (!self.SaveExists()):
-		self.LoadMapData(DatabaseFileName)
+		self.LoadMapData(GetMostRecentGeneratedFile())
 		self.SaveMap()
-	self.LoadMapData(SavedDatabaseFileName)
+	self.LoadMapData(SavedUniverseFile)
 
 func SaveMap() :
-	self.Save(SavedDatabaseFileName)
+	self.Save(SavedUniverseFile)
 	
 func SaveExists():
 	var save_file = File.new()
-	return save_file.file_exists(SavedDatabaseFileName)
+	return save_file.file_exists(SavedUniverseFile)
 	
 func LoadMapData(filename):
 	print("Loading map data from %s" % filename)

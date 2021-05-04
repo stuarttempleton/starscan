@@ -1,12 +1,18 @@
 extends Button
 
 
+# Declare member variables here. Examples:
+# var a = 2
+# var b = "text"
+
+
+# Called when the node enters the scene tree for the first time.
 func _ready():
 	connect("pressed", self, "on_button_pressed")
 
 func on_button_pressed () :
 	MessageBox.connect("ChoiceSelected", self, "ChoiceResponse")	
-	MessageBox.DisplayText("Exit", ["YES","NO"])
+	MessageBox.DisplayText("RegenerateUniverse", ["YES","NO"])
 
 
 func ChoiceResponse(choice):
@@ -17,8 +23,5 @@ func ChoiceResponse(choice):
 		1: return
 
 func DoResponse():
-	StarMapData.SaveMap()
-	ShipData.SaveShip()
-	AudioPlayer._play_UI_Button_Select()
-	get_tree().quit()
-
+	print("generating new universe, maybe...")
+	WorldGenerator.generate(-1)

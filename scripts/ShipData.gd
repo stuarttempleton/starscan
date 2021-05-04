@@ -4,13 +4,13 @@ extends Node
 var StarShip
 var Loaded = false
 var SavedSinceLoad = false
-var DatabaseFileName = "res://ship_data/shiptestdata.json"
-var SavedDatabaseFileName = "user://shiptestdata_PLAYERSAVE.json"
+var DefaultShipFile = "res://ship_data/shiptestdata.json"
+var SavedShipFile = "user://Player_Ship_Data.json"
 
 signal FuelTanksEmpty
 
 func _ready():
-	self.LoadShipData(DatabaseFileName)
+	self.LoadShipData(DefaultShipFile)
 	
 	#EXPLANATION
 	
@@ -31,23 +31,23 @@ func _ready():
 	#self.Save(SavedDatabaseFileName)
 	
 func ResetShip() :
-	self.LoadShipData(DatabaseFileName)
+	self.LoadShipData(DefaultShipFile)
 	var dir = Directory.new()
-	dir.remove(SavedDatabaseFileName)
+	dir.remove(SavedShipFile)
 	self.SaveShip()
 
 func LoadSave() :
 	if (!self.SaveExists()):
-		self.LoadShipData(DatabaseFileName)
+		self.LoadShipData(DefaultShipFile)
 		self.SaveShip()
-	self.LoadShipData(SavedDatabaseFileName)
+	self.LoadShipData(SavedShipFile)
 
 func SaveShip() :
-	self.Save(SavedDatabaseFileName)
+	self.Save(SavedShipFile)
 	
 func SaveExists():
 	var save_file = File.new()
-	return save_file.file_exists(SavedDatabaseFileName)
+	return save_file.file_exists(SavedShipFile)
 	
 func LoadShipData(filename):
 	var shipdata_file = File.new()

@@ -26,12 +26,13 @@ export var NameGenerationNodePath = ""
 var NameGenerator
 
 func _ready():
-	NameGenerator = get_parent().get_node(NameGenerationNodePath)
-	if (seedNumber < 0):
-		 print("World generator seed is negative, choosing a random seed")
-	generate(seedNumber if seedNumber >= 0 else randi())
+	NameGenerator = $"/root/StoryGenerator/WordGenerator" #get_parent().get_node(NameGenerationNodePath)
+	#generate(seedNumber)
 
 func generate(seednumber):
+	if seednumber < 0:
+		print("World generator seed is negative, choosing a random seed")
+		seednumber = randi()
 	var rng = RandomNumberGenerator.new()
 	rng.seed = seednumber
 	print("Generating world data with seed " + str(seednumber) + "...")
@@ -45,7 +46,7 @@ func generate(seednumber):
 func serializeToFile(map, rng):	
 	StarMapData.StarMap = map
 	var currtime = OS.get_datetime()
-	var filename = "res://starmap_data/generated/Generated_" + str(currtime.year) + "-" + str(currtime.month) + "-" + str(currtime.day) + "_" + str(currtime.hour) + "-" + str(currtime.minute) + "-" + str(currtime.second) + "_" + str(rng.seed) + ".json"
+	var filename = "user://Starmap_" + str(currtime.year) + "-" + str(currtime.month) + "-" + str(currtime.day) + "_" + str(currtime.hour) + "-" + str(currtime.minute) + "-" + str(currtime.second) + "_" + str(rng.seed) + ".json"
 	StarMapData.Save(filename)
 	return filename
 
