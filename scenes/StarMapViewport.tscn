@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/Starfield.gd" type="Script" id=1]
 [ext_resource path="res://scenes/ShipAvatar.tscn" type="PackedScene" id=2]
@@ -8,12 +8,32 @@
 [ext_resource path="res://scripts/StarMapViewport.gd" type="Script" id=6]
 [ext_resource path="res://scripts/Grid.gd" type="Script" id=7]
 [ext_resource path="res://sprites/grid_square.png" type="Texture" id=8]
+[ext_resource path="res://scenes/Boundary.tscn" type="PackedScene" id=9]
 
 [node name="StarMapView" type="Node2D"]
 light_mask = -2147483647
 script = ExtResource( 6 )
 
 [node name="VFX Scene" parent="." instance=ExtResource( 4 )]
+
+[node name="BoundaryTop" parent="." instance=ExtResource( 9 )]
+margin_right = 500.0
+margin_bottom = 200.0
+
+[node name="BoundaryRight" parent="." instance=ExtResource( 9 )]
+margin_right = 500.0
+margin_bottom = 200.0
+Side = 1
+
+[node name="BoundaryBottom" parent="." instance=ExtResource( 9 )]
+margin_right = 500.0
+margin_bottom = 200.0
+Side = 2
+
+[node name="BoundaryLeft" parent="." instance=ExtResource( 9 )]
+margin_right = 500.0
+margin_bottom = 200.0
+Side = 3
 
 [node name="Grid" type="TextureRect" parent="."]
 self_modulate = Color( 0.0666667, 0.0862745, 0.164706, 1 )
