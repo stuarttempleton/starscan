@@ -16,10 +16,31 @@ var Patterns = {
 		"A %appearance %color %noun",
 		"A %size %color %noun",
 		"A %size %adjective %noun",
-		"A %size %adjective %color %noun"]
+		"A %size %adjective %color %noun",
+		"A %tech-adjective %tech-noun",
+		"A %appearance, %tech-adjective %tech-noun",
+		"A %size %tech-noun",
+		"A %color %tech-noun",
+		"A %appearance %tech-noun",
+		"A %appearance %color %tech-adjective %tech-noun",
+		"A %size %color %tech-noun",
+		"A %size %tech-adjective %tech-noun",
+		"A %size %color %tech-adjective %tech-noun"]
 }
 var Words = {
-	"%noun":["hammer", "book", "data cube", "obelisk"],
+	"%noun":["hammer", "book", "obelisk"],
+	"%tech-noun":["device",
+		"computer",
+		"tablet",
+		"unit",
+		"cube",
+		"sphere",
+		"cylinder",
+		"crystal",
+		"unit",
+		"archive",
+		"record"
+	],
 	"%color":[
 		"aqua",
 		"aquamarine",
@@ -149,7 +170,7 @@ var Words = {
 		"flawed",
 		"blemished"
 	],
-	"%adjective-tech": [
+	"%tech-adjective": [
 		"whirring",
 		"buzzing",
 		"humming",
@@ -162,7 +183,14 @@ var Words = {
 		"dynamic",
 		"working",
 		"flashing",
-		"blinking"
+		"blinking",
+		"digital",
+		"data",
+		"library",
+		"memory",
+		"news",
+		"entertainment",
+		"communicatin"
 	]
 }
 var Nouns = ["Hammer"]
@@ -170,13 +198,11 @@ var Nouns = ["Hammer"]
 func GetUpperKey(key):
 	var newKey = key
 	newKey[1] = newKey[1].to_upper()
-	print("%s -> %s" % [key, newKey])
 	return newKey
 
 func GetLowerKey(key):
 	var newKey = key
 	newKey[1] = newKey[1].to_lower()
-	print("%s -> %s" % [key, newKey])
 	return newKey
 
 func GetWordWithCaps(key):

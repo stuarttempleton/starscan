@@ -3,7 +3,7 @@ extends Control
 
 func _on_GenerateArtifacts_pressed():
 	var list = ""
-	var qty = $WordGenerator.NewRand(8) + 1
+	var qty = 10 #$WordGenerator.NewRand(8) + 1
 	var i = 1
 	for w in $WordGenerator/Artifact.CreateList(qty, true):
 		list += "%d. %s\r\n" % [i, w]
