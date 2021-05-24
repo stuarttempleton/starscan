@@ -206,5 +206,6 @@ margin_bottom = 77.7715
 
 [node name="EnterSystemEvent" type="Node2D" parent="."]
 script = ExtResource( 8 )
+
 [connection signal="button_down" from="CanvasLayer/SystemViewUI/ActionButtons/LeaveOrbit" to="." method="ViewSystem"]
 [connection signal="button_down" from="CanvasLayer/SystemViewUI/ActionButtons/LeaveSystem" to="CanvasLayer/SystemViewUI/ActionButtons/LeaveSystem" method="_on_button_down"]
