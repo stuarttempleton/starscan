@@ -36,6 +36,7 @@ Console="*res://addons/quentincaffeino-console/src/Console.tscn"
 Cheat="*res://scenes/Cheat.tscn"
 WorldGenerator="*res://scenes/WorldGenerator.tscn"
 MessageBox="*res://GameNarrativeDisplay/MessageBox.tscn"
+SceneChanger="*res://SceneChanger/SceneChanger.tscn"
 
 [display]
 

@@ -5,6 +5,7 @@ func _ready():
 	connect("pressed", self, "on_button_pressed")
 
 func on_button_pressed () :
+	AudioPlayer._play_UI_Button_Select()
 	MessageBox.connect("ChoiceSelected", self, "ChoiceResponse")	
 	MessageBox.DisplayText("Exit", ["YES","NO"])
 
@@ -20,5 +21,5 @@ func DoResponse():
 	StarMapData.SaveMap()
 	ShipData.SaveShip()
 	AudioPlayer._play_UI_Button_Select()
-	get_tree().quit()
+	SceneChanger.FadeToExit()
 

@@ -22,4 +22,4 @@ func mouse_exit():
 func _on_button_down():
 	AudioPlayer._play_UI_Button_Select()
 	hoverflag = false
-	get_tree().change_scene(SystemViewport_scene)
+	SceneChanger.LoadScene(SystemViewport_scene)

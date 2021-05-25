@@ -36,7 +36,7 @@ func DialogTextDone(choice):
 	elif choice == 1:
 		print("returning to menu...")
 		Reset()
-		get_tree().change_scene(menu_scene_path)
+		SceneChanger.LoadScene(menu_scene_path, 0.0)
 	elif choice == 2:
 		print("quiting game...")
 		Reset()

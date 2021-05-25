@@ -14,12 +14,14 @@ func _ready():
 
 
 func Pause():
+	AudioPlayer._play_UI_Button_Select()
 	pause_menu_instance = pause_menu_scene.instance()
 	add_child(pause_menu_instance)
 	get_tree().paused = true
 
 
 func Unpause():
+	AudioPlayer._play_UI_Button_Select()
 	pause_menu_instance.queue_free()
 	get_tree().paused = false
 
