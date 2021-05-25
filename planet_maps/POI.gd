@@ -16,18 +16,22 @@ func _ready():
 	$ClickArea.connect("unhover", self, "unhover")
 
 func hover(hover_position):
+	if POIModel.PerceivedType == "Empty": return
+	
 	ScaleToVector = bigScale
 	$Hover.show()
 	get_parent().get_parent().get_parent().get_parent().POIHover(hover_position)
 	pass
 
 func unhover():
+	if POIModel.PerceivedType == "Empty": return
 	ScaleToVector = defaultScale
 	$Hover.hide()
 	get_parent().get_parent().get_parent().get_parent().POIUnhover()
 	pass
 
 func selected():
+	if POIModel.PerceivedType == "Empty": return
 	if !POIModel.IsExhausted:
 		POIModel.IsExhausted = true
 		if POIModel.PerceivedType == "Unknown":
