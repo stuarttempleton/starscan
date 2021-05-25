@@ -19,16 +19,17 @@ func _ready():
 	var nebuladistance = StarMapData.NearestNebulaDistance
 	var nebula = StarMapData.NearestNebula
 	var nebulascale = StarMapData.get_nebula_scale(nebula.Size)
+	var max_neb_distance = 0.015
 	
+	print("NEBULA ", nebula.Name)
+	print("Size: ", nebulascale)
 	print("Dist to nebula: ", nebuladistance)
 	print("Dist checking: ", 0.01 * nebulascale)
-	print("NEBULA ", nebula.Name)
 	
-	if ( nebuladistance < 0.015 * nebulascale ):
+	if ( nebuladistance < max_neb_distance * nebulascale ):
 		print("Close to nebula!")
 		$"../../Nebula".visible = true
-		var distance_scaling = nebuladistance / (0.01 * nebulascale)
-		print (distance_scaling)
+		var distance_scaling = 0.1 * nebulascale * 2
 		$"../../Nebula".scale = Vector2($"../../Nebula".scale.x * distance_scaling, $"../../Nebula".scale.y * distance_scaling)
 	else:
 		print("NOT close to nebula")
