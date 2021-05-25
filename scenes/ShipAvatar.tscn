@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://StarField/StarField.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/ShipAvatar.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://sprites/LSS_Science.png" type="Texture" id=4]
 [ext_resource path="res://Audio/SFX/270553__littlerobotsoundfactory__warpdrive-00.ogg" type="AudioStream" id=5]
 [ext_resource path="res://Audio/SFX/274187__littlerobotsoundfactory__spaceengine-controlroom-loop-00.ogg" type="AudioStream" id=6]
+[ext_resource path="res://sprites/arrow.png" type="Texture" id=7]
+[ext_resource path="res://scripts/NavArrow.gd" type="Script" id=8]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0, 0.859375, 1, 1, 0.382355, 0.483758, 0.523438, 0 )
@@ -203,6 +205,25 @@ stream = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipAvatar"]
 shape = SubResource( 6 )
+
+[node name="NavArrow" type="Node2D" parent="ShipAvatar"]
+script = ExtResource( 8 )
+
+[node name="arrow" type="Sprite" parent="ShipAvatar/NavArrow"]
+self_modulate = Color( 1.2, 1.2, 1.2, 0.513726 )
+position = Vector2( 64, 0 )
+rotation = 1.5708
+texture = ExtResource( 7 )
+
+[node name="NavArrow2" type="Node2D" parent="ShipAvatar"]
+script = ExtResource( 8 )
+UseNebulaInstead = true
+
+[node name="arrow" type="Sprite" parent="ShipAvatar/NavArrow2"]
+self_modulate = Color( 0.709804, 0, 1, 0.513726 )
+position = Vector2( 64, 0 )
+rotation = 1.5708
+texture = ExtResource( 7 )
 
 [node name="target-debug" type="Node2D" parent="."]
 
