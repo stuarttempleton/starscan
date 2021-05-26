@@ -43,7 +43,6 @@ func _ready():
 
 func SetMessageNodeVisibility(newState):
 	for node in messageNodes:
-		print("Setting visibility on ", node.name)
 		node.visible = newState
 	GameController.EnableMovement(!newState)
 

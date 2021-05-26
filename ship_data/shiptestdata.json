@@ -8,6 +8,7 @@
     "FuelPerUnitDistance":0.03,
 	"TravelSpeed":500.0,
     "AccelerationRate":200.0,
+    "WarpDrive":false,
     "Crew":20,
 	"CrewCapacity":20,
     "MaxInventory":10,

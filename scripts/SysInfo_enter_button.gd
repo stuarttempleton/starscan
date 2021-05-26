@@ -9,7 +9,6 @@ func _ready():
 
 
 func mouse_enter():
-	print("mouse enter...")
 	hoverflag = true
 	GameController.EnableMovement(false)
 

@@ -25,7 +25,6 @@ func on_button_pressed () :
 #	minigame.get_node("Scanner Minigame").connect("complete", self, "hideMinigame")
 
 func mouse_enter():
-	print("mouse enter...")
 	hoverflag = true
 	GameController.EnableMovement(false)
 	
@@ -34,7 +33,6 @@ func mouse_exit():
 		GameController.EnableMovement(true)
 
 func scanPerformed():
-	#print("Scan game ended")
 	emit_signal("minigameComplete")
 
 func hideMinigame():

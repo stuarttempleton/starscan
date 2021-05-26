@@ -117,4 +117,5 @@ custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 text = "Enter System"
 script = ExtResource( 4 )
 SystemViewport_scene = "res://scenes/SystemViewport.tscn"
+
 [connection signal="button_down" from="Control/Background/InfoContainer/EnterButton" to="Control/Background/InfoContainer/EnterButton" method="_on_button_down"]

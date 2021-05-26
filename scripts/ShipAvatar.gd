@@ -97,7 +97,8 @@ func _physics_process(_delta):
 		target = get_global_mouse_position()
 		#CurrentSpeed = min(CurrentSpeed + _delta * ship.AccelerationRate, ship.TravelSpeed)
 	
-	HandleBoundary()
+	if !ship.WarpDrive: #TODO: UPGRADE INVENTORY
+		HandleBoundary()
 	HandleThrusters()
 	HandleShipTowing()
 	
