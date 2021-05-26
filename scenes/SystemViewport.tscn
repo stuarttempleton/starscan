@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scripts/SysView_Leave_Button.gd" type="Script" id=1]
 [ext_resource path="res://scripts/SolarSystemRender.gd" type="Script" id=2]
@@ -36,10 +36,16 @@ font_data = SubResource( 3 )
 font_path = "res://fonts/Montserrat-Regular.ttf"
 
 [sub_resource type="DynamicFont" id=6]
+font_data = SubResource( 5 )
+
+[sub_resource type="DynamicFontData" id=7]
+font_path = "res://fonts/Montserrat-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=8]
 size = 15
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 5 )
+font_data = SubResource( 7 )
 
 [node name="SystemViewPort" type="Node2D"]
 script = ExtResource( 10 )
@@ -90,6 +96,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="SystemAnomalyLabel" type="Label" parent="SystemView/Control"]
+self_modulate = Color( 1, 1, 1, 0.580392 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -240.0
+margin_top = 144.0
+margin_bottom = 166.0
+custom_fonts/font = SubResource( 6 )
+text = "The %s Anomaly"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="HoverUI" type="Control" parent="."]
 visible = false
 margin_left = -32.0
@@ -117,7 +137,7 @@ margin_left = -32.0
 margin_top = 72.0
 margin_right = 96.0
 margin_bottom = 88.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 8 )
 custom_colors/font_color = Color( 1.2, 0.51, 0, 1 )
 text = "Planet Name"
 align = 1

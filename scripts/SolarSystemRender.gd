@@ -28,11 +28,13 @@ func _ready():
 	
 	if ( nebuladistance < max_neb_distance * nebulascale ):
 		print("Close to nebula!")
+		$"../Control/SystemAnomalyLabel".text = $"../Control/SystemAnomalyLabel".text % [nebula.Name]
 		$"../../Nebula".visible = true
 		var distance_scaling = 0.1 * nebulascale * 2
 		$"../../Nebula".scale = Vector2($"../../Nebula".scale.x * distance_scaling, $"../../Nebula".scale.y * distance_scaling)
 	else:
 		print("NOT close to nebula")
+		$"../Control/SystemAnomalyLabel".text = ""
 		$"../../Nebula/BGAudio".stop()
 		$"../../Nebula".visible = false
 
