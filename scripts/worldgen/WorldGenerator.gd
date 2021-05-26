@@ -46,7 +46,8 @@ func generate(seednumber):
 func serializeToFile(map, rng):	
 	StarMapData.StarMap = map
 	var currtime = OS.get_datetime()
-	var filename = "user://Starmap_" + str(currtime.year) + "-" + str(currtime.month) + "-" + str(currtime.day) + "_" + str(currtime.hour) + "-" + str(currtime.minute) + "-" + str(currtime.second) + "_" + str(rng.seed) + ".json"
+	var filename = "user://Starmap_%04d-%02d-%02d_%02d-%02d-%02d_%s.json" % [currtime.year, currtime.month, currtime.day, currtime.hour, currtime.minute, currtime.second, str(rng.seed)]
+	
 	StarMapData.Save(filename)
 	return filename
 

@@ -24,5 +24,6 @@ func ChoiceResponse(choice):
 		1: return
 
 func DoResponse():
-	print("generating new universe, maybe...")
 	WorldGenerator.generate(-1)
+	StarMapData.ResetMap()
+	ShipData.ResetShip()

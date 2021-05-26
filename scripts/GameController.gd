@@ -22,7 +22,8 @@ func Pause():
 
 func Unpause():
 	AudioPlayer._play_UI_Button_Select()
-	pause_menu_instance.queue_free()
+	if pause_menu_instance:
+		pause_menu_instance.queue_free()
 	get_tree().paused = false
 
 

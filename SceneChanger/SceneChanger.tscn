@@ -19,6 +19,7 @@ tracks/0/keys = {
 }
 
 [node name="SceneChanger" type="CanvasLayer"]
+pause_mode = 2
 layer = 100
 script = ExtResource( 1 )
 
