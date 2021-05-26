@@ -28,15 +28,14 @@ func _process(delta):
 			emit_signal("inside_medium")
 			time = 0
 			ShipData.DeductCrew(MediumCostInCrew)
-			print("inside medium!")
 			
 		if !EnteredMedium:
 			EnteredMedium = true #one time flag
 			emit_signal("enter_medium")
-			print("entered intracluster medium!!!")
+			#print("entered intracluster medium!!!")
 	else:
 		if EnteredMedium:
 			EnteredMedium = false #one time exit flag
 			emit_signal("exit_medium")
-			print("exited intracluster medium!!!")
+			#print("exited intracluster medium!!!")
 			time = 0

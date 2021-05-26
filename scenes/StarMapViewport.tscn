@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scripts/Starfield.gd" type="Script" id=1]
 [ext_resource path="res://scenes/ShipAvatar.tscn" type="PackedScene" id=2]
@@ -9,6 +9,31 @@
 [ext_resource path="res://scripts/Grid.gd" type="Script" id=7]
 [ext_resource path="res://sprites/grid_square.png" type="Texture" id=8]
 [ext_resource path="res://scenes/Boundary.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scripts/warning hud.gd" type="Script" id=10]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://fonts/Montserrat-ExtraBold.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 17
+font_data = SubResource( 1 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "WarningFade"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.5, 1, 2 ),
+"transitions": PoolRealArray( 1, 0.435275, 1, 1 ),
+"update": 0,
+"values": [ Color( 1.2, 0, 0, 0 ), Color( 1.2, 0, 0, 1 ), Color( 1.2, 0, 0, 1 ), Color( 1.2, 0, 0, 0 ) ]
+}
 
 [node name="StarMapView" type="Node2D"]
 light_mask = -2147483647
@@ -57,3 +82,24 @@ NebulaPath = "res://scenes/background space dust.tscn"
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource( 3 )]
+
+[node name="warning hud" type="CanvasLayer" parent="."]
+script = ExtResource( 10 )
+
+[node name="IntraclusterMedium" type="Label" parent="warning hud"]
+self_modulate = Color( 1.2, 0, 0, 0 )
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -88.0
+margin_bottom = -66.0
+custom_fonts/font = SubResource( 2 )
+text = "WARNING: INTRACLUSTER MEDIUM"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="warning hud/IntraclusterMedium"]
+anims/WarningFade = SubResource( 3 )
