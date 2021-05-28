@@ -24,3 +24,6 @@ func UnFade(delay = 0.5):
 	yield(get_tree().create_timer(delay),"timeout")
 	animation_player.play_backwards("fade")
 	yield(animation_player,"animation_finished")
+
+func GoAway():
+	animation_player.play_backwards("fade")

@@ -1,0 +1,94 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://ShipGenerator/ShipGenerator.gd" type="Script" id=1]
+[ext_resource path="res://sprites/ship avatar pieces/ship_avatar_base.png" type="Texture" id=2]
+[ext_resource path="res://sprites/ship avatar pieces/ship_avatar_details.png" type="Texture" id=3]
+[ext_resource path="res://sprites/ship avatar pieces/ship_avatar_engines.png" type="Texture" id=4]
+[ext_resource path="res://sprites/ship avatar pieces/paint/ship_avatar_paint_base_solidfadenose.png" type="Texture" id=5]
+[ext_resource path="res://sprites/ship avatar pieces/paint/ship_avatar_paint_base_solidfadetail.png" type="Texture" id=6]
+[ext_resource path="res://sprites/ship avatar pieces/paint/ship_avatar_paint_base_fadenose.png" type="Texture" id=7]
+[ext_resource path="res://sprites/ship avatar pieces/paint/ship_avatar_paint_base_fadetail.png" type="Texture" id=8]
+[ext_resource path="res://sprites/ship avatar pieces/paint/ship_avatar_paint_base_solid.png" type="Texture" id=9]
+[ext_resource path="res://sprites/ship avatar pieces/paint/ship_avatar_paint_design_lines_horizontal.png" type="Texture" id=10]
+[ext_resource path="res://sprites/ship avatar pieces/paint/ship_avatar_paint_design_chevron_forward.png" type="Texture" id=11]
+[ext_resource path="res://sprites/ship avatar pieces/paint/ship_avatar_paint_design_sunburst.png" type="Texture" id=12]
+[ext_resource path="res://sprites/ship avatar pieces/paint/ship_avatar_paint_design_wing.png" type="Texture" id=13]
+[ext_resource path="res://sprites/ship avatar pieces/paint/ship_avatar_paint_design_lines_vertical.png" type="Texture" id=14]
+[ext_resource path="res://sprites/ship avatar pieces/paint/ship_avatar_paint_design_nose.png" type="Texture" id=15]
+[ext_resource path="res://sprites/ship avatar pieces/paint/ship_avatar_paint_design_chevron_back.png" type="Texture" id=16]
+[ext_resource path="res://sprites/ship avatar pieces/paint/ship_avatar_paint_design_warstripe.png" type="Texture" id=17]
+
+[node name="ShipGenerator" type="Node2D"]
+script = ExtResource( 1 )
+ship_base = [ NodePath("ship_avatar_base") ]
+ship_engine = [ NodePath("ship_avatar_engines") ]
+ship_detail = [ NodePath("ship_avatar_details") ]
+ship_paint_base = [ NodePath("ship_avatar_paint_base_solid"), NodePath("ship_avatar_paint_base_solid"), NodePath("ship_avatar_paint_base_solidfadenose"), NodePath("ship_avatar_paint_base_solidfadetail") ]
+ship_paint_detail = [ NodePath("ship_avatar_paint_design_chevron_back"), NodePath("ship_avatar_paint_design_chevron_forward"), NodePath("ship_avatar_paint_design_lines_horizontal"), NodePath("ship_avatar_paint_design_lines_vertical"), NodePath("ship_avatar_paint_design_nose"), NodePath("ship_avatar_paint_design_sunburst"), NodePath("ship_avatar_paint_design_warstripe"), NodePath("ship_avatar_paint_design_wing") ]
+
+[node name="ship_avatar_base" type="Sprite" parent="."]
+rotation = -1.5708
+texture = ExtResource( 2 )
+
+[node name="ship_avatar_paint_base_fadenose" type="Sprite" parent="."]
+visible = false
+rotation = -1.5708
+texture = ExtResource( 7 )
+
+[node name="ship_avatar_paint_base_fadetail" type="Sprite" parent="."]
+visible = false
+rotation = -1.5708
+texture = ExtResource( 8 )
+
+[node name="ship_avatar_paint_base_solid" type="Sprite" parent="."]
+rotation = -1.5708
+texture = ExtResource( 9 )
+
+[node name="ship_avatar_paint_base_solidfadenose" type="Sprite" parent="."]
+rotation = -1.5708
+texture = ExtResource( 5 )
+
+[node name="ship_avatar_paint_base_solidfadetail" type="Sprite" parent="."]
+rotation = -1.5708
+texture = ExtResource( 6 )
+
+[node name="ship_avatar_paint_design_chevron_back" type="Sprite" parent="."]
+rotation = -1.5708
+texture = ExtResource( 16 )
+
+[node name="ship_avatar_paint_design_chevron_forward" type="Sprite" parent="."]
+rotation = -1.5708
+texture = ExtResource( 11 )
+
+[node name="ship_avatar_paint_design_lines_horizontal" type="Sprite" parent="."]
+rotation = -1.5708
+texture = ExtResource( 10 )
+
+[node name="ship_avatar_paint_design_lines_vertical" type="Sprite" parent="."]
+rotation = -1.5708
+texture = ExtResource( 14 )
+
+[node name="ship_avatar_paint_design_nose" type="Sprite" parent="."]
+rotation = -1.5708
+texture = ExtResource( 15 )
+
+[node name="ship_avatar_paint_design_sunburst" type="Sprite" parent="."]
+rotation = -1.5708
+texture = ExtResource( 12 )
+
+[node name="ship_avatar_paint_design_warstripe" type="Sprite" parent="."]
+rotation = -1.5708
+texture = ExtResource( 17 )
+
+[node name="ship_avatar_paint_design_wing" type="Sprite" parent="."]
+rotation = -1.5708
+texture = ExtResource( 13 )
+
+[node name="ship_avatar_engines" type="Sprite" parent="."]
+rotation = -1.5708
+texture = ExtResource( 4 )
+
+[node name="ship_avatar_details" type="Sprite" parent="."]
+self_modulate = Color( 1.2, 1.2, 1.2, 1 )
+rotation = -1.5708
+texture = ExtResource( 3 )

@@ -35,5 +35,6 @@
         "CrewLost":0
     },
     "DeliveredArtifacts":0,
+    "ShipSeedNumber":0,
     "FirstRun":true
 }
