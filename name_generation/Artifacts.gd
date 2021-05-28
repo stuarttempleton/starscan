@@ -28,7 +28,47 @@ var Patterns = {
 		"A %size %color %tech-adjective %tech-noun"]
 }
 var Words = {
-	"%noun":["hammer", "book", "obelisk"],
+	"%noun":["hammer",
+		"tool",
+		"weapon",
+		"sword",
+		"knife",
+		"shield",
+		"club",
+		"gun",
+		"beaker",
+		"flask",
+		"book",
+		"magazine",
+		"painting",
+		"sculpture",
+		"etching",
+		"carving",
+		"scroll",
+		"disc",
+		"pot",
+		"cup",
+		"chalice",
+		"bowl",
+		"plate",
+		"obelisk",
+		"armillary sphere",
+		"azimuth theodolite",
+		"mechanism",
+		"sundial",
+		"nilometer",
+		"siesmograph",
+		"sextant",
+		"alidade",
+		"astrolabe",
+		"quadrant",
+		"octant",
+		"monocular",
+		"telescope",
+		"vessel",
+		"clock",
+		"celestial calendar"
+	],
 	"%tech-noun":["device",
 		"computer",
 		"tablet",
@@ -190,7 +230,7 @@ var Words = {
 		"memory",
 		"news",
 		"entertainment",
-		"communicatin"
+		"communication"
 	]
 }
 var Nouns = ["Hammer"]
