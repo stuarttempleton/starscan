@@ -32,7 +32,7 @@ func ActivateCollections(collection):
 		collection[i] = get_node(collection[i])
 
 
-func TurnOnRandomEntry(collection,random_color = false, qty = 1):
+func TurnOnRandomEntry(collection,random_color = false, random_h_flip = false, qty = 1):
 	for item in collection:
 		item.hide()
 	for i in qty:
@@ -40,6 +40,8 @@ func TurnOnRandomEntry(collection,random_color = false, qty = 1):
 		if random_color:
 			collection[r].modulate = colors[rng.randi_range(0,colors.size()-1)]
 			pass
+		if random_h_flip:
+			collection[r].set_flip_h(rng.randi_range(0,1) == 1)
 		collection[r].show()
 
 
@@ -52,8 +54,8 @@ func _generate( SeedNumber = -1):
 	TurnOnRandomEntry(ship_base)
 	TurnOnRandomEntry(ship_engine)
 	TurnOnRandomEntry(ship_detail)
-	TurnOnRandomEntry(ship_paint_base, true)
-	TurnOnRandomEntry(ship_paint_detail, true, rng.randi_range(1,2))
+	TurnOnRandomEntry(ship_paint_base, true, true)
+	TurnOnRandomEntry(ship_paint_detail, true, true, rng.randi_range(1,2))
 
 
 func _on_Button_toggled(button_pressed):
