@@ -38,7 +38,8 @@ func TurnOnRandomEntry(collection,random_color = false, random_h_flip = false, q
 	for i in qty:
 		var r = rng.randi_range(0, collection.size()-1)
 		if random_color:
-			collection[r].modulate = colors[rng.randi_range(0,colors.size()-1)]
+			#collection[r].modulate = colors[rng.randi_range(0,colors.size()-1)]
+			collection[r].modulate = Color(rng.randf(), rng.randf(), rng.randf(),1.0)
 			pass
 		if random_h_flip:
 			collection[r].set_flip_h(rng.randi_range(0,1) == 1)
