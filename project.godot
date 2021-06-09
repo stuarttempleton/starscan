@@ -37,6 +37,7 @@ Cheat="*res://scenes/Cheat.tscn"
 WorldGenerator="*res://scenes/WorldGenerator.tscn"
 MessageBox="*res://GameNarrativeDisplay/MessageBox.tscn"
 SceneChanger="*res://SceneChanger/SceneChanger.tscn"
+DevBuildOverlay="*res://DevBuildOverlay/DevBuildOverlay.tscn"
 
 [display]
 
