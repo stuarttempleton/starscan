@@ -17,6 +17,7 @@ func on_button_pressed () :
 	AudioPlayer._play_UI_Button_Select()
 	print("Load: %s" % [minigame_scene])
 	hoverflag = false
+	disabled = true
 	var loaded_scene = load(minigame_scene)
 	minigame = loaded_scene.instance()
 	add_child(minigame)

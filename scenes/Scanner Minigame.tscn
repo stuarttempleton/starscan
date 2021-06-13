@@ -248,6 +248,7 @@ text = "Scan!"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="mouse_entered" from="CanvasLayer/SceneBackground/Scanner Minigame/ScanButton" to="CanvasLayer/SceneBackground/Scanner Minigame/ScanButton" method="_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/SceneBackground/Scanner Minigame/ScanButton" to="CanvasLayer/SceneBackground/Scanner Minigame/ScanButton" method="_mouse_exited"]
 [connection signal="pressed" from="CanvasLayer/SceneBackground/Scanner Minigame/ScanButton" to="CanvasLayer/SceneBackground/Scanner Minigame" method="_on_Button_pressed"]
