@@ -1,10 +1,7 @@
 extends Button
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+export var scene_to_load = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,3 +24,4 @@ func DoResponse():
 	WorldGenerator.generate(-1)
 	StarMapData.ResetMap()
 	ShipData.ResetShip()
+	SceneChanger.LoadScene(scene_to_load,0.0)

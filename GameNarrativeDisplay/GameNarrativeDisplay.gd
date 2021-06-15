@@ -11,7 +11,7 @@ var Texts = {
 	"Restart":"[center][b]Restart game?[/b]\r\nThis will delete your current progress.",
 	"Exit":"[center][b]Exit game?[/b]\r\nThis will save your current progress and exit the game.",
 	"ReturnToMenu":"[center][b]Return to the main menu?[/b]\r\nThis will save your current progress and return to the main menu.",
-	"RegenerateUniverse":"[center][b]Generate a new universe?[/b]\r\nThis will delete the current universe and generate an entirely new universe."
+	"RegenerateUniverse":"[center][b]Start a New Game?[/b]\r\nThis will delete any current progress and start an entirely new game."
 }
 
 var buttons = []

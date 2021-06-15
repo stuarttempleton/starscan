@@ -16,5 +16,8 @@ func _ready():
 
 func set_nodes_state(nodes, state):
 	for node in nodes :
-		get_node(node).visible = state
+		if "RemoveFromMenu" in get_node(node) and get_node(node).RemoveFromMenu == true:
+			get_node(node).visible = false
+		else:
+			get_node(node).visible = state
 

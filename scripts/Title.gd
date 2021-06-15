@@ -7,6 +7,6 @@ func _ready():
 	AudioPlayer.PlayMusic(AudioPlayer.AUDIO_KEY.MUSIC_TITLE)
 	SceneChanger.UnFade(0)
 	
-	StarMapData.LoadSave()
-	ShipData.LoadSave()
+	#StarMapData.LoadSave()
+	#ShipData.LoadSave()
 
