@@ -33,6 +33,7 @@ func EnterGameLoop(is_loop):
 	is_gameloop = is_loop
 	emit_signal("gameloop_state",is_gameloop)
 	$CanvasLayer/TextureButton.visible = is_gameloop
+	$WinLoseCheck.isInGame = is_gameloop
 
 
 func EnableMovement(toggle_movement):

@@ -5,6 +5,7 @@ export var ArtifactsRequiredToWin = 10
 var starmap_scene_path = "res://scenes/StarMapViewport.tscn"
 var menu_scene_path = "res://scenes/Title.tscn"
 var handlingGameOver = false
+var isInGame = false
 var viewing_stats = false
 
 # Called when the node enters the scene tree for the first time.
@@ -49,7 +50,7 @@ func GetStoryText():
 		return StoryGenerator.Lose()
 
 func _process(delta):
-	if !handlingGameOver:
+	if !handlingGameOver && isInGame:
 		if WinConditionMet():
 			print("WIN CONDITION MET")
 			handlingGameOver = true

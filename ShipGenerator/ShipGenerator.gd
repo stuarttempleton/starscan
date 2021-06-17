@@ -22,8 +22,8 @@ func _ready():
 	ActivateCollections(ship_detail)
 	ActivateCollections(ship_paint_base)
 	ActivateCollections(ship_paint_detail)
-	if ShipData.StarShip.ShipSeedNumber == 0:
-		ShipData.StarShip.ShipSeedNumber = randi()
+	#if ShipData.StarShip.ShipSeedNumber == 0:
+	#	ShipData.StarShip.ShipSeedNumber = randi()
 	_generate(ShipData.StarShip.ShipSeedNumber)
 
 

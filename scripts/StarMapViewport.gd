@@ -10,8 +10,6 @@ func _on_FirstPlay():
 	ShipData.Ship().X = 0.5
 	ShipData.Ship().Y = 0.5
 	
-	ShipData.StarShip.Captain = $"/root/StoryGenerator/WordGenerator".CreateWord().capitalize()
-	
 	#deplete fuel to force education about refueling
 	ShipData.ConsumeFuel(ShipData.Ship().Fuel)
 	

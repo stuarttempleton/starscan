@@ -32,6 +32,8 @@ func _ready():
 	
 func ResetShip() :
 	self.LoadShipData(DefaultShipFile)
+	StarShip.Captain = $"/root/StoryGenerator/WordGenerator".CreateWord().capitalize()
+	StarShip.ShipSeedNumber = randi()
 	var dir = Directory.new()
 	dir.remove(SavedShipFile)
 	self.SaveShip()
@@ -50,6 +52,7 @@ func SaveExists():
 	return save_file.file_exists(SavedShipFile)
 	
 func LoadShipData(filename):
+	print("Loading ship data from %s" % filename)
 	var shipdata_file = File.new()
 	shipdata_file.open(filename, File.READ)
 	var shipdata_json = JSON.parse(shipdata_file.get_as_text())

@@ -18,8 +18,9 @@ func ChoiceResponse(choice):
 		1: return
 
 func DoResponse():
-	StarMapData.SaveMap()
-	ShipData.SaveShip()
+	if ShipData.StarShip.ShipSeedNumber != 0: #note: they haven't been in the game
+		StarMapData.SaveMap()
+		ShipData.SaveShip()
 	AudioPlayer._play_UI_Button_Select()
 	SceneChanger.FadeToExit()
 
