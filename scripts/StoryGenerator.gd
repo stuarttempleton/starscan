@@ -108,7 +108,7 @@ func RomanNumeral(num):
 
 var PlanetHints = {
 	"Civilization": { 
-		true: ["We have detected feint signs of sentient life. "],
+		true: ["We have detected faint signs of sentient life. "],
 		false: ["We have detected no signs of sentient life. "]
 	},
 	"Resource": { 
