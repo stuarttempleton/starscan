@@ -32,12 +32,12 @@ GameController="*res://scenes/GameController.tscn"
 GameNarrativeDisplay="*res://GameNarrativeDisplay/GameNarrativeDisplay.tscn"
 StoryGenerator="*res://scenes/StoryGenerator.tscn"
 AudioPlayer="*res://AudioPlayer/AudioPlayer.tscn"
-Console="*res://addons/quentincaffeino-console/src/Console.tscn"
 Cheat="*res://scenes/Cheat.tscn"
 WorldGenerator="*res://scenes/WorldGenerator.tscn"
 MessageBox="*res://GameNarrativeDisplay/MessageBox.tscn"
 SceneChanger="*res://SceneChanger/SceneChanger.tscn"
 DevBuildOverlay="*res://DevBuildOverlay/DevBuildOverlay.tscn"
+Console="*res://addons/quentincaffeino-console/src/Console.tscn"
 
 [display]
 
@@ -49,7 +49,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "quentincaffeino-console" )
+enabled=PoolStringArray( "res://addons/quentincaffeino-console/plugin.cfg" )
 
 [input]
 

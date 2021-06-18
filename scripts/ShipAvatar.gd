@@ -1,7 +1,5 @@
 extends KinematicBody2D
 
-export (NodePath) var TargetDebug
-
 var target = Vector2()
 var velocity = Vector2()
 var CurrentSpeed = 0
@@ -17,11 +15,8 @@ func _ready():
 	self.position = Vector2(ShipData.Ship().X * MapScale, ShipData.Ship().Y * MapScale)
 	target = self.position
 	GameController.EnableMovement(true)
-	TargetDebug = get_node(TargetDebug)
 	ShipData.connect("FuelTanksEmpty", self, "_on_FuelTanksEmpty")
-	if not OS.is_debug_build():
-		TargetDebug.queue_free()
-	
+
 func _input(event):
 	if GameController.is_movement_enabled:
 		if event is InputEventMouseButton:
@@ -133,8 +128,6 @@ func _physics_process(_delta):
 		CurrentSpeed = 0
 		if ShipIsTowing:
 			TurnOffTow()
-	
-	TargetDebug.position = target
 	_setMapPosition(position)
 
 func TurnOffTow():
