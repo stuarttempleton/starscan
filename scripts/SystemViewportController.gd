@@ -26,11 +26,9 @@ func ViewPlanet(_planetID):
 		ToggleView()
 		var planet = $SystemView/SolarSystem.system.Planets[_planetID]
 		if !StarMapData.IsVisited(planet):
-			print("visiting planet.")
 			StarMapData.SetVisited(planet)
 			ShipData.UpdatePlayStat("PlanetsVisited",1)
 			if StarMapData.AllPlanetsVisited($SystemView/SolarSystem.system):
-				print("System completed!")
 				ShipData.UpdatePlayStat("SystemsCompleted",1)
 		$CanvasLayer/PlanetSurface._generate_planet_map($SystemView/SolarSystem.system.Planets[_planetID], $SystemView/SolarSystem.system.Scan)
 		$CanvasLayer/SystemViewUI/ActionButtons/LeaveOrbit.visible = true
@@ -56,13 +54,16 @@ func ToggleView():
 
 func POIHover(_point):
 	if(allow_poi_click): # We are viewing the planet.
-		print("POIHover()")
+		#print("POIHover()")
+		pass
 
 func POIUnhover():
 	if(allow_poi_click): # We are viewing the planet.
-		print("POIUnhover()")
+		#print("POIUnhover()")
+		pass
 
 func POISelect(POIType):
 	if(allow_poi_click): # We are viewing the planet.
-		print("Selected: ", POIType)
+		#print("Selected: ", POIType)
+		pass
 

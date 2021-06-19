@@ -48,7 +48,7 @@ func TurnOnRandomEntry(collection,random_color = false, random_h_flip = false, q
 
 func _generate( SeedNumber = -1):
 	if SeedNumber < 0: SeedNumber = randi()
-	print("Using seed number: ", SeedNumber)
+	#print("Using seed number: ", SeedNumber)
 	rng = RandomNumberGenerator.new()
 	rng.seed = SeedNumber
 	

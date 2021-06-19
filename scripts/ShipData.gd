@@ -100,7 +100,7 @@ func PayToVisitAPlanet():
 func TurnInArtifacts():
 	var qty = TurnInCargoType("Artifacts",0)
 	StarShip.DeliveredArtifacts += qty
-	print("Turned in " + str(qty) + " artifacts.")
+	#print("Turned in " + str(qty) + " artifacts.")
 	UpdatePlayStat("ArtifactsTurnedIn", qty)
 	return qty #report how many we turned in for displayor whatever
 

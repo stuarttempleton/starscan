@@ -7,7 +7,7 @@ export var NebulaPath = ""
 
 func _ready():
 	GameController.EnterGameLoop(true)
-	print("Nebulae found: ", len(StarMapData.Nebulae()) )
+	#print("Nebulae found: ", len(StarMapData.Nebulae()) )
 	
 	
 	for nebula in StarMapData.Nebulae():

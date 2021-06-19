@@ -18,7 +18,6 @@ func _ready():
 	Cheat.connect("cheat_setscan", self, "_reset")
 
 func _reset():
-	print("Resetting POIs")
 	_generate(Planet, Scan)
 
 func _generate(planet, scan):
@@ -37,7 +36,6 @@ func ClearPOINodes():
 	for poi in poi_nodes:
 		poi.queue_free()
 	poi_nodes.clear()
-	print("POI nodes cleared")
 	pass
 
 func _generatePOIData(rng):

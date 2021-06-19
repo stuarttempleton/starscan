@@ -21,7 +21,7 @@ var targetScaleX
 var currentState = State.Normal
 
 func _ready():
-	print("%s %f, %s %f" % [ship_value_key, ShipData.StarShip[ship_value_key], ship_capacity_key, ShipData.StarShip[ship_capacity_key]])
+	#print("%s %f, %s %f" % [ship_value_key, ShipData.StarShip[ship_value_key], ship_capacity_key, ShipData.StarShip[ship_capacity_key]])
 	var startFraction = GetModelFraction()
 	SetPercent(startFraction)
 	DisplayFraction(startFraction)
@@ -53,7 +53,7 @@ func DisplayFraction(newFraction):
 	
 func SetPercent(fraction) :
 	if (fraction > 1.0):
-		print("%s fraction %f is too high, clamping to 1.0" % [ship_value_key, fraction])
+		#print("%s fraction %f is too high, clamping to 1.0" % [ship_value_key, fraction])
 		fraction = 1.0
 	targetScaleX = fraction
 
@@ -61,7 +61,7 @@ func HandleState():
 	for stateName in State:
 		var targetState = State[stateName]
 		if (currentState != targetState && CheckStateCondition(targetState)):
-			print("%s bar state condition met for state %s" % [ship_value_key, stateName])
+			#print("%s bar state condition met for state %s" % [ship_value_key, stateName])
 			ChangeState(targetState)
 			break
 		

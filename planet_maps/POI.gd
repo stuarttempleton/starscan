@@ -35,7 +35,6 @@ func selected():
 	if !POIModel.IsExhausted:
 		POIModel.IsExhausted = true
 		if POIModel.PerceivedType == "Unknown":
-			print("unknown looted!")
 			ShipData.UpdatePlayStat("UnknownsLooted",1)
 		var qty = 1 #TODO: Adjust this for "severity"
 		get_parent().get_parent().get_parent().get_parent().POISelect(POIModel.ActualType)

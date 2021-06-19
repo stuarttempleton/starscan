@@ -17,12 +17,13 @@ func _process(_delta):
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
-			print("%s registered click: %s" % [self, event.as_text()])
+			#print("%s registered click: %s" % [self, event.as_text()])
+			pass
 
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
-			print("POI selected")
+			#print("POI selected")
 			emit_signal("selected")
 
 func mouse_enter():

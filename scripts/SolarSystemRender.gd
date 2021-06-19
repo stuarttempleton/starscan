@@ -12,7 +12,6 @@ func _ready():
 		StarMapData.FindNearestSystem(Vector2(ShipData.Ship().X,ShipData.Ship().Y))
 	system = StarMapData.NearestSystem
 	if !StarMapData.IsVisited(system):
-		print("visiting system.")
 		StarMapData.SetVisited(system)
 		ShipData.UpdatePlayStat("SystemsVisited",1)
 	StarMapData.DistanceToNearestNebula(Vector2(system.X, system.Y))
@@ -21,19 +20,19 @@ func _ready():
 	var nebulascale = StarMapData.get_nebula_scale(nebula.Size)
 	var max_neb_distance = 0.015
 	
-	print("NEBULA ", nebula.Name)
-	print("Size: ", nebulascale)
-	print("Dist to nebula: ", nebuladistance)
-	print("Dist checking: ", 0.01 * nebulascale)
+	#print("NEBULA ", nebula.Name)
+	#print("Size: ", nebulascale)
+	#print("Dist to nebula: ", nebuladistance)
+	#print("Dist checking: ", 0.01 * nebulascale)
 	
 	if ( nebuladistance < max_neb_distance * nebulascale ):
-		print("Close to nebula!")
+		#print("Close to nebula!")
 		$"../Control/SystemAnomalyLabel".text = $"../Control/SystemAnomalyLabel".text % [nebula.Name]
 		$"../../Nebula".visible = true
 		var distance_scaling = 0.1 * nebulascale * 2
 		$"../../Nebula".scale = Vector2($"../../Nebula".scale.x * distance_scaling, $"../../Nebula".scale.y * distance_scaling)
 	else:
-		print("NOT close to nebula")
+		#print("NOT close to nebula")
 		$"../Control/SystemAnomalyLabel".text = ""
 		$"../../Nebula/BGAudio".stop()
 		$"../../Nebula".visible = false
@@ -46,7 +45,7 @@ func _draw():
 func BuildSystem():
 	var center = Vector2(get_viewport().get_visible_rect().size.x/2, get_viewport().get_visible_rect().size.y/2)
 	var system_size = system.Planets.size()
-	print("building system: %s (%d)" % [system.Name, system_size])
+	#print("building system: %s (%d)" % [system.Name, system_size])
 	
 	#build star
 	AddPlanetToMap(center, "Giant", "Star", -1, system.Name)
@@ -56,7 +55,7 @@ func BuildSystem():
 	#Build orbits and planets
 	var i = 0
 	for planet in system.Planets:
-		print(planet.Type)
+		#print(planet.Type)
 		var next_planet_center = draw_circle_arc(center, orbital_radius, 0, 360, orbit_color )
 		randomize()
 		orbital_radius += planet.RadialOffset
