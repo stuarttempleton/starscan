@@ -100,7 +100,7 @@ func Systems() :
 
 func GetOutpost(system):
 	for planet in system.Planets:
-		if "Outpost" == planet.Type:
+		if PlanetTypes[8] == planet.Type:
 			return planet
 	return false
 func SystemHasPlanetWithArtifacts(system):
@@ -126,16 +126,15 @@ func SystemHasOutpost(system):
 	return false
 	
 func GetNearestOutpostSystem(origin):
-	var NearestOutpostSystem = StarMap.Systems[0]
-	var previous_distance = origin.distance_to(Vector2(StarMap.Systems[0].X, StarMap.Systems[0].Y))
+	var NearestOutpostSystem
+	var previous_distance = -1
 	
 	for system in StarMap.Systems :
-		if not SystemHasOutpost(system): continue
-		var distance = origin.distance_to(Vector2(system.X, system.Y))
-		if (distance < previous_distance):
-			previous_distance = distance
-			NearestOutpostSystem = system
-			
+		if SystemHasOutpost(system):
+			var distance = origin.distance_to(Vector2(system.X, system.Y))
+			if (distance < previous_distance or previous_distance < 0):
+				previous_distance = distance
+				NearestOutpostSystem = system
 	return NearestOutpostSystem
 
 func getPlanetID(planet, system):

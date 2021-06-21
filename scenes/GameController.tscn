@@ -15,9 +15,10 @@ ArtifactsRequiredToWin = 50
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 pause_mode = 2
-layer = 10
+layer = 12
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer"]
+self_modulate = Color( 1, 1, 1, 0.694118 )
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -56.0

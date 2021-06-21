@@ -159,7 +159,6 @@ func _on_FuelTanksEmpty():
 	if !ShipIsTowing && !ShipData.Ship().FirstRun:
 		var shipPos = Vector2(ShipData.Ship().X,ShipData.Ship().Y)
 		var nearestOutpostSystem = StarMapData.GetNearestOutpostSystem(shipPos)
-	
 		GameNarrativeDisplay.connect("ChoiceSelected", self, "DialogChoice")
 		GameNarrativeDisplay.DisplayText(StoryGenerator.LowFuel(nearestOutpostSystem),["OK"])
 
