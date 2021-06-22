@@ -2,7 +2,7 @@ extends Node
 
 
 var StarMap
-var MapScale = 10000
+var MapScale = 30000
 var Loaded = false
 var SavedSinceLoad = false
 export var DefaultUniverseFile = "res://starmap_data/generated/Generated_2021-3-31_6-32-20_6527443740791628228.json"

@@ -162,8 +162,8 @@ func _on_FuelTanksEmpty():
 		var shipPos = Vector2(ShipData.Ship().X,ShipData.Ship().Y)
 		
 		TowEncounter = {"Friendly":true, 
-						"Artifacts":1 + randi() % ShipData.GetInventoryQTYFor("Artifacts"), 
-						"Crew":1 + randi() % ShipData.StarShip.CrewCapacity / 2, #we know this might be high.
+						"Artifacts": randi() % int(ShipData.GetInventoryQTYFor("Artifacts") + 1),
+						"Crew": 1 + randi() % int(ShipData.StarShip.CrewCapacity / 2 - 1), #we know this might be high.
 						"nearestOutpostSystem":StarMapData.GetNearestOutpostSystem(shipPos)}
 		print(TowEncounter)
 		var opts = ["OK"]
