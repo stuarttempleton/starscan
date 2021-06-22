@@ -55,7 +55,7 @@ func GetWeightedItem(CharacterList, distribution_test):
 	
 	return c1[0]
 	pass
-	
+
 func DistributionComparison(a, b):
 	return a[1] > b[1]
 		
@@ -72,3 +72,11 @@ func CreateWordList(_qty):
 		words.append(CreateWord())
 	return words
 
+func RawLetters(qty):
+	var FullLetterList = []
+	FullLetterList.append_array(LanguageStructure["V"])
+	FullLetterList.append_array(LanguageStructure["C"])
+	var letters = ""
+	for i in qty:
+		letters += FullLetterList[randi() % FullLetterList.size()-1][0]
+	return letters

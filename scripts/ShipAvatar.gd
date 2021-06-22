@@ -160,8 +160,8 @@ var TowEncounter = {"Friendly":true, "Artifacts":0, "Crew":0, "nearestOutpostSys
 func _on_FuelTanksEmpty():
 	if !ShipIsTowing && !ShipData.Ship().FirstRun:
 		var shipPos = Vector2(ShipData.Ship().X,ShipData.Ship().Y)
-		
-		TowEncounter = {"Friendly":true, 
+		var chanceOfHostile = 0.20
+		TowEncounter = {"Friendly":true if randf() > chanceOfHostile else false, 
 						"Artifacts": randi() % int(ShipData.GetInventoryQTYFor("Artifacts") + 1),
 						"Crew": 1 + randi() % int(ShipData.StarShip.CrewCapacity / 2 - 1), #we know this might be high.
 						"nearestOutpostSystem":StarMapData.GetNearestOutpostSystem(shipPos)}
