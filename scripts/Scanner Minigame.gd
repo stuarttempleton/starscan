@@ -105,3 +105,4 @@ func _on_endAnimComplete():
 	emit_signal("complete")
 	GameController.EnableMovement(true)
 	minigameRoot.queue_free()
+

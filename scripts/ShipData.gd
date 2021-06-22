@@ -97,16 +97,22 @@ func PayToVisitAStar():
 func PayToVisitAPlanet():
 	return PayResourcesDefaultToCrew(1, 1.0)
 
+func DeductArtifact(_Payment):
+	var qty = TurnInCargoType("Artifacts",0, _Payment)
+	return qty
+
 func TurnInArtifacts():
-	var qty = TurnInCargoType("Artifacts",0)
+	var qty = TurnInCargoType("Artifacts",0, GetInventoryQTYFor("Artifacts"))
 	StarShip.DeliveredArtifacts += qty
 	#print("Turned in " + str(qty) + " artifacts.")
 	UpdatePlayStat("ArtifactsTurnedIn", qty)
 	return qty #report how many we turned in for displayor whatever
 
 
-func TurnInCargoType(cargoType, tradeValue):
-	var qty = GetInventoryQTYFor(cargoType)
+func TurnInCargoType(cargoType, tradeValue, qty):
+	#var qty = GetInventoryQTYFor(cargoType)
+	if qty > GetInventoryQTYFor(cargoType):
+		qty = GetInventoryQTYFor(cargoType)
 	var loot = qty * tradeValue
 	GainInventoryItem(cargoType, qty * -1) #nuke it
 	return qty

@@ -255,14 +255,14 @@ func _poi_item_detail(POIType, qty):
 	return txt
 
 
-func LowFuel(outpostSystem):
-	var outpost = StarMapData.GetOutpost(outpostSystem)
+func LowFuel(TowEncounter):
+	var outpost = StarMapData.GetOutpost(TowEncounter.nearestOutpostSystem)
 	var title = "LOW FUEL RESPONDER"
 	var cptName = $WordGenerator.CreateWord().capitalize()
 	var shipName = $WordGenerator.CreateWord().capitalize()
 	var txt = "This is Captain %s of Rescue Vessel TUG-%s, responding to your low fuel beacon. \r\n\r\n" % [cptName, shipName]
 	
-	txt += "The nearest Supercluster Federation outpost is %s Station in the %s system. We have arranged dock space for %s. You can refuel and resume your journey at Outpost %s." % [outpost.Name, outpostSystem.Name, ShipData.Ship().Name, outpost.Name]
+	txt += "The nearest Supercluster Federation outpost is %s Station in the %s system. We have arranged dock space for %s. You can refuel and resume your journey at Outpost %s." % [outpost.Name, TowEncounter.nearestOutpostSystem.Name, ShipData.Ship().Name, outpost.Name]
 	txt += "\r\n\r\nInitiating tractor beam on your mark."
 	return main_boiler % [title, txt]
 

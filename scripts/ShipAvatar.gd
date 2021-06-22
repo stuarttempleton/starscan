@@ -155,12 +155,23 @@ func JumpToMapPosition(newPosition):
 	target = newPosition
 	mouseIsPressed = false
 
+var TowEncounter = {"Friendly":true, "Artifacts":0, "Crew":0, "nearestOutpostSystem":0}
+
 func _on_FuelTanksEmpty():
 	if !ShipIsTowing && !ShipData.Ship().FirstRun:
 		var shipPos = Vector2(ShipData.Ship().X,ShipData.Ship().Y)
-		var nearestOutpostSystem = StarMapData.GetNearestOutpostSystem(shipPos)
+		
+		TowEncounter = {"Friendly":true, 
+						"Artifacts":1 + randi() % ShipData.GetInventoryQTYFor("Artifacts"), 
+						"Crew":1 + randi() % ShipData.StarShip.CrewCapacity / 2, #we know this might be high.
+						"nearestOutpostSystem":StarMapData.GetNearestOutpostSystem(shipPos)}
+		print(TowEncounter)
+		var opts = ["OK"]
+		if !TowEncounter.Friendly:
+			opts = ["CREW", "ARTIFACTS"]
+		
 		GameNarrativeDisplay.connect("ChoiceSelected", self, "DialogChoice")
-		GameNarrativeDisplay.DisplayText(StoryGenerator.LowFuel(nearestOutpostSystem),["OK"])
+		GameNarrativeDisplay.DisplayText(StoryGenerator.LowFuel(TowEncounter),opts)
 
 
 func DialogChoice(choice):
