@@ -160,15 +160,24 @@ var TowEncounter = {"Friendly":true, "Artifacts":0, "Crew":0, "nearestOutpostSys
 func _on_FuelTanksEmpty():
 	if !ShipIsTowing && !ShipData.Ship().FirstRun:
 		var shipPos = Vector2(ShipData.Ship().X,ShipData.Ship().Y)
-		var chanceOfHostile = 0.20
+		var outpost = StarMapData.GetNearestOutpostSystem(shipPos)
+		var distanceToOutpost = StarMapData.GetDistanceToSystem(shipPos, outpost)
+		print ("Distance: " + str(distanceToOutpost))
+		var chanceOfHostile = distanceToOutpost * 10 
+		if chanceOfHostile > 0.5:
+			chanceOfHostile += 0.2
+		elif chanceOfHostile < 0.2:
+			chanceOfHostile -= 0.2
+		print ("Hostile Probability: " + str(chanceOfHostile))
 		TowEncounter = {"Friendly":true if randf() > chanceOfHostile else false, 
 						"Artifacts": randi() % int(ShipData.GetInventoryQTYFor("Artifacts") + 1),
 						"Crew": 1 + randi() % int(ShipData.StarShip.CrewCapacity / 2 - 1), #we know this might be high.
-						"nearestOutpostSystem":StarMapData.GetNearestOutpostSystem(shipPos)}
-		print(TowEncounter)
+						"nearestOutpostSystem": outpost}
 		var opts = ["OK"]
 		if !TowEncounter.Friendly:
-			opts = ["CREW", "ARTIFACTS"]
+			opts = ["%s CREW" % [TowEncounter.Crew]]
+			if TowEncounter.Artifacts > 0:
+				opts.append("%s ARTIFACT%s" % [TowEncounter.Artifacts, "S" if TowEncounter.Artifacts > 1 else ""])
 		
 		GameNarrativeDisplay.connect("ChoiceSelected", self, "DialogChoice")
 		GameNarrativeDisplay.DisplayText(StoryGenerator.LowFuel(TowEncounter),opts)
@@ -176,10 +185,14 @@ func _on_FuelTanksEmpty():
 
 func DialogChoice(choice):
 	GameNarrativeDisplay.disconnect("ChoiceSelected",self,"DialogChoice")
-	
-	var shipPos = Vector2(ShipData.Ship().X,ShipData.Ship().Y)
-	var nearestOutpostSystem = StarMapData.GetNearestOutpostSystem(shipPos)
-	var outpostSystemPos = Vector2(nearestOutpostSystem.X, nearestOutpostSystem.Y) * StarMapData.MapScale
-
+	if choice == 0:
+		if !TowEncounter.Friendly:
+			ShipData.UpdatePlayStat("Conscripts",ShipData.DeductCrew(TowEncounter.Crew))
+		pass
+	if choice == 1:
+		if !TowEncounter.Friendly:
+			ShipData.UpdatePlayStat("Bribes",ShipData.DeductArtifact(TowEncounter.Artifacts))
+		pass
+	var outpostSystemPos = Vector2(TowEncounter.nearestOutpostSystem.X, TowEncounter.nearestOutpostSystem.Y) * StarMapData.MapScale
 	ShipData.UpdatePlayStat("Tows",1)
 	TowShipTo(outpostSystemPos)

@@ -137,6 +137,9 @@ func GetNearestOutpostSystem(origin):
 				NearestOutpostSystem = system
 	return NearestOutpostSystem
 
+func GetDistanceToSystem(origin, system):
+	return origin.distance_to(Vector2(system.X, system.Y))
+
 func getPlanetID(planet, system):
 	var i = 0
 	for p in system.Planets:

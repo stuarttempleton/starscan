@@ -262,8 +262,24 @@ func LowFuel(TowEncounter):
 	var NPCShip = $WordGenerator/NPCShip.GenerateNPCShip(TowEncounter.Friendly)
 	var txt = "This is Captain %s of %s Vessel %s, responding to your low fuel distress beacon. \r\n\r\n" %  [NPCShip.Captain, NPCShip.Disposition, NPCShip.FullDesignation]
 	
-	txt += "The nearest Supercluster Federation outpost is %s Station in the %s system. We have arranged dock space for %s. You can refuel and resume your journey at Outpost %s." % [outpost.Name, TowEncounter.nearestOutpostSystem.Name, ShipData.Ship().Name, outpost.Name]
-	txt += "\r\n\r\nInitiating tractor beam on your mark."
+	if TowEncounter.Friendly:
+		txt += "The nearest Supercluster Federation outpost is %s Station in the %s system. We have arranged dock space for %s. You can refuel and resume your journey at Outpost %s." % [outpost.Name, TowEncounter.nearestOutpostSystem.Name, ShipData.Ship().Name, outpost.Name]
+		txt += "\r\n\r\nInitiating tractor beam on your mark."
+	else:
+		txt += "You're a long way from safety. We would be happy to help you out of this predicament... For a price. " 
+		
+		txt += "\r\n\r\nWe will%s take some of your precious crew%s as compensation:\r\n\r\n" % [" either" if TowEncounter.Artifacts > 0 else "", " or cargo" if TowEncounter.Artifacts > 0 else ""]
+		txt += "[indent]"
+		if TowEncounter.Crew > 0:
+			txt += "[color=#ff0000]CONSCRIPT %d CREW[/color]" % [TowEncounter.Crew]
+		if TowEncounter.Artifacts > 0:
+			txt += "  or  [color=#ff0000]GIVE %d ARTIFACT%s.[/color]" % [TowEncounter.Artifacts, "S" if TowEncounter.Artifacts > 1 else ""]
+		txt += "[/indent]"
+		txt += "\r\n\r\nIf you are unable or unwilling to comply with our demand%s, you can rot in space, Captain %s. Either way, it's of no matter to us. " % ["s" if TowEncounter.Artifacts > 0 and TowEncounter.Crew > 0 else "", ShipData.Ship().Captain]
+		txt += "\r\n\r\nWhat will it be, Captain %s? " % [ShipData.Ship().Captain]
+		if TowEncounter.Artifacts > 0:
+			txt += "The choice is yours."
+	
 	return main_boiler % [title, txt]
 
 func Win():
@@ -319,6 +335,8 @@ func PlayStats():
 		txt += stat_boiler % ["You were A DIPLOMAT"]
 	if ShipData.GetPlayStat("ArtifactsTurnedIn") > $"/root/GameController/WinLoseCheck".ArtifactsRequiredToWin:
 		txt += stat_boiler % ["You were AN OVERACHIEVER"]
+	if ShipData.GetPlayStat("Conscripts") > 10:
+		txt += stat_boiler % ["You were RUTHLESS"]
 	
 	txt += "\r\n\r\n"
 	
@@ -336,6 +354,11 @@ func PlayStats():
 		txt += stat_boiler % ["You discovered %s civilizations" % [ShipData.GetPlayStat("CivilizationsDiscovered")]]
 	if ShipData.GetPlayStat("PeopleMet") > 0:
 		txt += stat_boiler % ["You met %s people" % [ShipData.GetPlayStat("PeopleMet")]]
+	if ShipData.GetPlayStat("Conscripts") > 0:
+		txt += stat_boiler % ["You conscripted %s people" % [ShipData.GetPlayStat("Conscripts")]]
+	if ShipData.GetPlayStat("Bribes") > 0:
+		txt += stat_boiler % ["You paid pirates %s artifacts" % [ShipData.GetPlayStat("Bribes")]]
+	
 	
 	txt += "\r\n"
 	return main_boiler % [title, txt]
