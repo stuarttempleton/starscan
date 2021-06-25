@@ -28,7 +28,43 @@ __meta__ = {
 
 [node name="PlayerStats" parent="." instance=ExtResource( 1 )]
 
-[node name="StatusText" type="HBoxContainer" parent="."]
+[node name="NearestSystemStatus" type="HBoxContainer" parent="."]
+visible = false
+modulate = Color( 0.960784, 1, 0.270588, 1 )
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -512.0
+margin_top = -32.0
+margin_right = 512.0
+margin_bottom = -11.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NearestSystem" type="Label" parent="NearestSystemStatus"]
+margin_right = 510.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 2 )
+text = "Nearest System: "
+align = 2
+valign = 1
+
+[node name="SystemInfo" type="Label" parent="NearestSystemStatus"]
+margin_left = 514.0
+margin_right = 1024.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 2 )
+text = "ABCD (3423424u)"
+valign = 1
+script = ExtResource( 2 )
+
+[node name="NearestOutpostStatus" type="HBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -41,17 +77,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NearestSystem" type="Label" parent="StatusText"]
+[node name="NearestSystem" type="Label" parent="NearestOutpostStatus"]
 margin_right = 510.0
 margin_bottom = 21.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 2 )
-text = "Nearest System: "
+text = "Nearest Outpost: "
 align = 2
 valign = 1
 
-[node name="SystemInfo" type="Label" parent="StatusText"]
+[node name="SystemInfo" type="Label" parent="NearestOutpostStatus"]
 margin_left = 514.0
 margin_right = 1024.0
 margin_bottom = 21.0
@@ -61,7 +97,7 @@ custom_fonts/font = SubResource( 2 )
 text = "ABCD (3423424u)"
 valign = 1
 script = ExtResource( 2 )
-boiler_plate = "%s (%fu)"
+UseOutpostInstead = true
 
 [node name="TowNotification" type="ColorRect" parent="."]
 anchor_left = 0.5

@@ -263,7 +263,8 @@ func LowFuel(TowEncounter):
 	var txt = "This is Captain %s of %s Vessel %s, responding to your low fuel distress beacon. \r\n\r\n" %  [NPCShip.Captain, NPCShip.Disposition, NPCShip.FullDesignation]
 	
 	if TowEncounter.Friendly:
-		txt += "The nearest Supercluster Federation outpost is %s Station in the %s system. We have arranged dock space for %s. You can refuel and resume your journey at Outpost %s." % [outpost.Name, TowEncounter.nearestOutpostSystem.Name, ShipData.Ship().Name, outpost.Name]
+		txt += "The nearest Supercluster Federation outpost is %s Station in the %s system. We have arranged dock space for DSCV %s. You can refuel and resume your journey at Outpost %s." % [outpost.Name, TowEncounter.nearestOutpostSystem.Name, ShipData.Ship().Name, outpost.Name]
+		txt += "\r\n\r\n%s Station has standard Star Dock and Scientific facilities." % [outpost.Name]
 		txt += "\r\n\r\nInitiating tractor beam on your mark."
 	else:
 		txt += "You're a long way from safety. We would be happy to help you out of this predicament... For a price. " 
@@ -337,6 +338,8 @@ func PlayStats():
 		txt += stat_boiler % ["You were AN OVERACHIEVER"]
 	if ShipData.GetPlayStat("Conscripts") > 10:
 		txt += stat_boiler % ["You were RUTHLESS"]
+	if ShipData.GetPlayStat("Conscripts") < 1 and ShipData.GetPlayStat("Bribes") > 0:
+		txt += stat_boiler % ["You were PROTECTIVE"]
 	
 	txt += "\r\n\r\n"
 	

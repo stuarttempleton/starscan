@@ -23,6 +23,7 @@ func LoseConditionMet():
 func Reset():
 	StarMapData.ResetMap()
 	ShipData.ResetShip()
+	handlingGameOver = false
 
 func DialogTextDone(choice):
 	GameNarrativeDisplay.disconnect("ChoiceSelected",self,"DialogTextDone")

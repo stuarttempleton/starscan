@@ -194,5 +194,6 @@ func DialogChoice(choice):
 			ShipData.UpdatePlayStat("Bribes",ShipData.DeductArtifact(TowEncounter.Artifacts))
 		pass
 	var outpostSystemPos = Vector2(TowEncounter.nearestOutpostSystem.X, TowEncounter.nearestOutpostSystem.Y) * StarMapData.MapScale
-	ShipData.UpdatePlayStat("Tows",1)
-	TowShipTo(outpostSystemPos)
+	if ShipData.Ship().Crew > 0:
+		ShipData.UpdatePlayStat("Tows",1)
+		TowShipTo(outpostSystemPos)
