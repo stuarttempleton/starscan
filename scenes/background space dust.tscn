@@ -62,6 +62,7 @@ color_ramp = SubResource( 9 )
 hue_variation_curve = SubResource( 4 )
 
 [node name="Nebula" type="Node2D"]
+pause_mode = 2
 
 [node name="Particles2D2" type="Particles2D" parent="."]
 position = Vector2( -0.106857, 0.208084 )

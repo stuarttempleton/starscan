@@ -4,10 +4,14 @@ var target = Vector2()
 var velocity = Vector2()
 var CurrentSpeed = 0
 var MapScale = StarMapData.MapScale
-var MinCameraZoom = 0.5
+var MinCameraZoom = 1
 var MaxCameraZoom = 2
+var MapCameraZoom = 10
+var MapSavedZoom
 var mouseIsPressed = false
 var ShipIsTowing = false
+var UsingMap = false
+
 signal TowingAlert(bool_is_towing)
 var playedWarpOnce = false
 
@@ -16,10 +20,11 @@ func _ready():
 	target = self.position
 	GameController.EnableMovement(true)
 	ShipData.connect("FuelTanksEmpty", self, "_on_FuelTanksEmpty")
+	GameController.connect("map_state", self, "MapToggle")
 
 func _input(event):
 	if GameController.is_movement_enabled:
-		if event is InputEventMouseButton:
+		if event is InputEventMouseButton and !UsingMap:
 			if event.button_index == BUTTON_LEFT:
 				mouseIsPressed = event.pressed
 			elif event.button_index == BUTTON_WHEEL_DOWN and event.pressed:
@@ -27,9 +32,24 @@ func _input(event):
 			elif event.button_index == BUTTON_WHEEL_UP and event.pressed:
 				Zoom(-0.25)
 
+
+func MapToggle(_useMap):
+	if !_useMap:
+		$Camera2D.zoom = MapSavedZoom
+		$StarField.show()
+		$FuelRange.hide()
+	else:
+		MapSavedZoom = $Camera2D.zoom
+		$Camera2D.zoom = Vector2(MapCameraZoom, MapCameraZoom )
+		$StarField.hide()
+		$FuelRange.show()
+	
+	UsingMap = _useMap
+
 func Zoom(amount) :
 	$Camera2D.zoom = Vector2(clamp($Camera2D.zoom.x + amount, MinCameraZoom, MaxCameraZoom), clamp($Camera2D.zoom.y + amount, MinCameraZoom, MaxCameraZoom) )
-
+	
+	
 func HandleShipTowing():
 	if ShipIsTowing:
 		$LSS_Transporter.show()
