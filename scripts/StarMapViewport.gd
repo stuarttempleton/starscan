@@ -4,7 +4,7 @@ func _ready():
 	AudioPlayer.PlayBG(AudioPlayer.AUDIO_KEY.BG_SPACE)
 	if ShipData.Ship().FirstRun:
 		_on_FirstPlay()
-	
+	GameController.EnableMap()
 	GameController.connect("map_state", self, "MapToggle")
 	
 func _on_FirstPlay():

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/GameController.gd" type="Script" id=1]
 [ext_resource path="res://scripts/WinLoseCheck.gd" type="Script" id=2]
 [ext_resource path="res://sprites/Gear-icon.png" type="Texture" id=3]
+[ext_resource path="res://sprites/map-icon.png" type="Texture" id=4]
 
 [node name="GameController" type="Node2D"]
 pause_mode = 2
@@ -34,6 +35,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="MapButton" type="TextureButton" parent="CanvasLayer"]
+self_modulate = Color( 1, 1, 1, 0.694118 )
+margin_left = 1176.0
+margin_right = 1688.0
+margin_bottom = 512.0
+rect_scale = Vector2( 0.1, 0.1 )
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 4 )
+texture_disabled = ExtResource( 4 )
+texture_focused = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="mouse_entered" from="CanvasLayer/TextureButton" to="." method="_on_TextureButton_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/TextureButton" to="." method="_on_TextureButton_mouse_exited"]
 [connection signal="pressed" from="CanvasLayer/TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/MapButton" to="." method="_on_MapButton_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/MapButton" to="." method="_on_MapButton_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/MapButton" to="." method="_on_MapButton_pressed"]
