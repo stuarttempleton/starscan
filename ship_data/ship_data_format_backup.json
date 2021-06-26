@@ -5,7 +5,7 @@
     "Y":0.5,
     "Fuel":0,
 	"FuelCapacity":100,
-    "FuelPerUnitDistance":0.03,
+    "FuelPerUnitDistance":0.025,
 	"TravelSpeed":500.0,
     "AccelerationRate":200.0,
     "WarpDrive":false,
