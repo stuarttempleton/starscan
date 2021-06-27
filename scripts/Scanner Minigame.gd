@@ -47,6 +47,8 @@ func _ready():
 	oscillatorRange = bg.rect_size.x - bgMargin * 2
 	
 	SetupSweetSpot()
+	if  Input.get_connected_joypads().size() > 0:
+		$ScanButton.grab_focus()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

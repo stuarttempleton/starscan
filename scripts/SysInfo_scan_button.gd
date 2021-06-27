@@ -15,6 +15,7 @@ func _ready():
 
 func on_button_pressed () :
 	AudioPlayer._play_UI_Button_Select()
+	$"../../..".YieldFocus(true)
 	hoverflag = false
 	disabled = true
 	var loaded_scene = load(minigame_scene)

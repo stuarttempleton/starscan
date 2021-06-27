@@ -2,6 +2,7 @@ extends CanvasLayer
 
 
 signal ChoiceSelected(int_choice)
+signal DisplayState(bool_OnOff)
 
 var Texts = {
 	"Greeting":"[b]Greetings, Nomad![/b]\r\nYou have been selected... etc....\r\n\r\nREFUEL and BEGIN your journey.",
@@ -48,6 +49,7 @@ func SetMessageNodeVisibility(newState):
 
 
 func DisplayText(txt, array_buttons, focus = 0):
+	emit_signal("DisplayState", true)
 	var message = txt if not Texts.has(txt) else Texts[txt]
 	
 	if array_buttons.size() > buttons.size():
@@ -83,6 +85,7 @@ func CancelDialog():
 func CloseWithPress(int_button):
 	SetMessageNodeVisibility(false)
 	emit_signal("ChoiceSelected", int_button)
+	emit_signal("DisplayState", false)
 
 
 func _on_Button1_pressed():
