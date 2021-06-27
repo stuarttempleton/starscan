@@ -26,8 +26,7 @@ export var NameGenerationNodePath = ""
 var NameGenerator
 
 func _ready():
-	NameGenerator = $"/root/StoryGenerator/WordGenerator" #get_parent().get_node(NameGenerationNodePath)
-	#generate(seedNumber)
+	NameGenerator = $"/root/StoryGenerator/WordGenerator"
 
 func generate(seednumber):
 	if seednumber < 0:

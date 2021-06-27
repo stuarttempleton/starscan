@@ -7,11 +7,9 @@ var positions
 var posCount
 
 func generate(rng):
-	#print("Generating star positions.")
 	# Build an empty square grid sized to hold at most 1 star per grid cell based on minimum distance between stars
 	#var cellSize = MinStarDistance / sqrt(2)
 	var gridSize = 1.0 / MinStarDistance
-	#print("\tGrid is " + str(gridSize) + " cells square.")
 	var grid = []
 	grid.resize(gridSize)
 	for x in range(gridSize):
@@ -22,7 +20,6 @@ func generate(rng):
 	positions = []
 	positions.resize(pow(gridSize, 2))
 	posCount = 0
-	#print("Position array size " + str(positions.size()))
 	
 	# Build a list to point to the "active" star positions
 	var activePositionIndices = PoolIntArray([])
@@ -36,7 +33,6 @@ func generate(rng):
 	var targetPosIndex = addPosition(targetPosition, grid, targetGridPos)
 	# Add index of the new position array element to the active positions list
 	activePositionIndices.append(targetPosIndex)
-	#print("\t\t\tactivePositionIndices size: " + str(activePositionIndices.size()) + ", contents: " + str(activePositionIndices))
 	
 	# while there are still active positions:
 	while activePositionIndices.size() > 0:
@@ -102,27 +98,17 @@ func generate(rng):
 		else:
 			# Remove the current active position from the active positions list
 			activePositionIndices.remove(indexIndex)
-			#print("\t\tExhausted attempts to fit a new neighbor near (" + str(currentActivePos.x) + "," + str(currentActivePos.y) + "). Deactivating it.")
-		
-		#print("\t\t" + str(activePositionIndices.size()) + " active positions remain. Moving to the next active position.")
-	# End of active position loop
-	#print("\tNo active positions remain, star position generation is complete.")
-	#print("\tPositions generated: " + str(positions))
 	positions.resize(posCount)
 	return positions
 
 func fitVectorToNormalArea(vector):
 	var newVector = Vector2(clamp(vector.x, 0.0, 0.999999), clamp(vector.y, 0.0, 0.999999))
-	#if vector.x < 0 || vector.x >= 1 || vector.y < 0 || vector.y >= 1:
-	#	print("\t\t\tVector (" + str(vector.x) + "," + str(vector.y) + ") doesn't fit in a normal area, clamping it to (" + str(newVector.x) + "," + str(newVector.y) + ").")
 	return newVector
 
 func addPosition(targetPosition, grid, gridPos):
-	#print("\t\tAdding position (" + str(targetPosition.x) + "," + str(targetPosition.y) + "), grid cell (" + str(gridPos.x) + "," + str(gridPos.y) + "). There are now " + str(posCount+1) + " positions.")
 	var targetPosIndex = posCount
 	positions[targetPosIndex] = targetPosition
 	posCount += 1
 	# Assign the index of the new position array element to its grid position
-	#print("\t\t\tGrid cell content is currently " + str(grid[gridPos.x][gridPos.y]))
 	grid[gridPos.x][gridPos.y] = targetPosIndex
 	return targetPosIndex

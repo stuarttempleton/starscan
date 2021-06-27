@@ -32,10 +32,8 @@ func _process(delta):
 		if !EnteredMedium:
 			EnteredMedium = true #one time flag
 			emit_signal("enter_medium")
-			#print("entered intracluster medium!!!")
 	else:
 		if EnteredMedium:
 			EnteredMedium = false #one time exit flag
 			emit_signal("exit_medium")
-			#print("exited intracluster medium!!!")
 			time = 0

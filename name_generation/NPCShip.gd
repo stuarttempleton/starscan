@@ -51,5 +51,4 @@ func GenerateNPCShip(disposition):
 		
 	Ship["FullDesignation"] = "%s-%s-%s" % [Ship.Disposition.left(3).trim_suffix("-").to_upper(),Ship.Designation,wordgen.RawLetters(1).to_upper()]
 		
-	print("Captain %s of %s Vessel %s" % [Ship.Captain, Ship.Disposition, Ship.FullDesignation])
 	return Ship

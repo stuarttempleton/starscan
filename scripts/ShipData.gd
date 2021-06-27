@@ -104,13 +104,11 @@ func DeductArtifact(_Payment):
 func TurnInArtifacts():
 	var qty = TurnInCargoType("Artifacts",0, GetInventoryQTYFor("Artifacts"))
 	StarShip.DeliveredArtifacts += qty
-	#print("Turned in " + str(qty) + " artifacts.")
 	UpdatePlayStat("ArtifactsTurnedIn", qty)
 	return qty #report how many we turned in for displayor whatever
 
 
 func TurnInCargoType(cargoType, tradeValue, qty):
-	#var qty = GetInventoryQTYFor(cargoType)
 	if qty > GetInventoryQTYFor(cargoType):
 		qty = GetInventoryQTYFor(cargoType)
 	var loot = qty * tradeValue

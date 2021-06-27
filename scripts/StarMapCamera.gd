@@ -12,9 +12,6 @@ func _input(event):
 
 func _physics_process(delta):
 	velocity = position.direction_to(target) * speed
-	# look_at(target)
 	if position.distance_to(target) > 5:
 		velocity = move_and_slide(velocity)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+

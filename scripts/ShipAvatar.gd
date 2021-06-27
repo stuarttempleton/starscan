@@ -152,16 +152,12 @@ func _physics_process(_delta):
 
 func TurnOffTow():
 	ShipIsTowing = false
-	print("Tow complete.")
-	#$LSS_Transporter.hide()
 	emit_signal("TowingAlert", ShipIsTowing)
 
 
 func TowShipTo(_outpost_position):
-	print("Towing ship to... " + str(_outpost_position))
 	ShipIsTowing = true
 	target = _outpost_position
-	#$LSS_Transporter.show()
 	emit_signal("TowingAlert", ShipIsTowing)
 
 
@@ -182,7 +178,6 @@ func _on_FuelTanksEmpty():
 		var shipPos = Vector2(ShipData.Ship().X,ShipData.Ship().Y)
 		var outpost = StarMapData.GetNearestOutpostSystem(shipPos)
 		var distanceToOutpost = StarMapData.GetDistanceToSystem(shipPos, outpost)
-		print ("Distance: " + str(distanceToOutpost))
 		var chanceOfHostile = distanceToOutpost * 10 
 		if chanceOfHostile > 0.5:
 			chanceOfHostile += 0.2

@@ -132,7 +132,6 @@ func _ready():
 	var center = Vector2(mapX, mapY)
 	position = center
 	
-	print(center)
 	pass
 
 

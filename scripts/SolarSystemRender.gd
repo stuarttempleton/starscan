@@ -20,19 +20,12 @@ func _ready():
 	var nebulascale = StarMapData.get_nebula_scale(nebula.Size)
 	var max_neb_distance = 0.015
 	
-	#print("NEBULA ", nebula.Name)
-	#print("Size: ", nebulascale)
-	#print("Dist to nebula: ", nebuladistance)
-	#print("Dist checking: ", 0.01 * nebulascale)
-	
 	if ( nebuladistance < max_neb_distance * nebulascale ):
-		#print("Close to nebula!")
 		$"../Control/SystemAnomalyLabel".text = $"../Control/SystemAnomalyLabel".text % [nebula.Name]
 		$"../../Nebula".visible = true
 		var distance_scaling = 0.1 * nebulascale * 2
 		$"../../Nebula".scale = Vector2($"../../Nebula".scale.x * distance_scaling, $"../../Nebula".scale.y * distance_scaling)
 	else:
-		#print("NOT close to nebula")
 		$"../Control/SystemAnomalyLabel".text = ""
 		$"../../Nebula/BGAudio".stop()
 		$"../../Nebula".visible = false
@@ -45,12 +38,11 @@ func _draw():
 func BuildSystem():
 	var center = Vector2(get_viewport().get_visible_rect().size.x/2, get_viewport().get_visible_rect().size.y/2)
 	var system_size = system.Planets.size()
-	#print("building system: %s (%d)" % [system.Name, system_size])
 	
 	#build star
 	AddPlanetToMap(center, "Giant", "Star", -1, system.Name)
 	
-	var orbital_radius = 50 #start here
+	var orbital_radius = 50
 	
 	#Build orbits and planets
 	var i = 0

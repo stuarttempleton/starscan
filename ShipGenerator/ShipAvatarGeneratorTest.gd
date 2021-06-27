@@ -11,5 +11,4 @@ func _ready():
 	SceneChanger.GoAway()
 
 func _on_Button_pressed():
-	print("Generating new ship")
 	$ShipGenerator._generate(-1)

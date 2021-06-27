@@ -24,8 +24,6 @@ func _ready() -> void:
 
 
 func _generate(planet, scan):
-	#print("Building map for ", planet.Name, " seed ", planet.SurfaceSeednumber)
-	#print("Scan: ", scan)
 	
 	var planet_texture_gradient = GradientTexture.new()
 	planet_texture_gradient.gradient = load(PlanetGradientMaps[planet.Type])

@@ -38,7 +38,6 @@ func ViewPlanet(_planetID):
 func ViewSystem():
 	if(!allow_planet_click):
 		AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_SELECT)
-		#AudioPlayer._play_UI_Button_Select()
 		$CanvasLayer/PlanetSurface._clearPOI()
 		ToggleView()
 		$CanvasLayer/SystemViewUI/ActionButtons/LeaveOrbit.visible = false
@@ -54,16 +53,13 @@ func ToggleView():
 
 func POIHover(_point):
 	if(allow_poi_click): # We are viewing the planet.
-		#print("POIHover()")
 		pass
 
 func POIUnhover():
 	if(allow_poi_click): # We are viewing the planet.
-		#print("POIUnhover()")
 		pass
 
 func POISelect(POIType):
 	if(allow_poi_click): # We are viewing the planet.
-		#print("Selected: ", POIType)
 		pass
 

@@ -75,6 +75,7 @@ func LoadMapData(filename):
 	var starmapdata_json = JSON.parse(starmapdata_file.get_as_text())
 	starmapdata_file.close()
 	StarMap = starmapdata_json.result
+	SetAllSystemOutpostFlags()
 	Loaded = true
 	SavedSinceLoad = false
 	
@@ -119,11 +120,18 @@ func SystemHasPlanetWithHazards(system):
 			return true
 	return false
 
+
+func SetAllSystemOutpostFlags():
+	for system in StarMap.Systems :
+		for planet in system.Planets:
+			if PlanetTypes[8] == planet.Type:
+				SetMarkerForSystem(system, "HasOutpost")
+
 func SystemHasOutpost(system):
-	for planet in system.Planets:
-		if PlanetTypes[8] == planet.Type:
-			return true
-	return false
+#	for planet in system.Planets:
+#		if PlanetTypes[8] == planet.Type:
+#			return true
+	return SystemHasMarker(system, "HasOutpost")
 	
 func GetNearestOutpostSystem(origin):
 	var NearestOutpostSystem
@@ -205,13 +213,19 @@ func ScanNearestSystem(quality):
 		ScanPlanet(planet, quality)
 	return is_new_scan
 
-func IsVisited(SystemOrPlanet):
-	if SystemOrPlanet.has("Visited"):
-		return SystemOrPlanet["Visited"]
+func SystemHasMarker(SystemOrPlanet, Marker):
+	if SystemOrPlanet.has(Marker):
+		return SystemOrPlanet[Marker]
 	return false
 
+func SetMarkerForSystem(SystemOrPlanet, Marker):
+	SystemOrPlanet[Marker] = true
+
+func IsVisited(SystemOrPlanet):
+	return SystemHasMarker(SystemOrPlanet, "Visited")
+
 func SetVisited(SystemOrPlanet):
-	SystemOrPlanet["Visited"] = true
+	SetMarkerForSystem(SystemOrPlanet,"Visited")
 
 func AllPlanetsVisited(system):
 	var visited = true
@@ -237,7 +251,6 @@ func ScanPlanet(planet, quality):
 			
 	#TODO: replace this shuffle, it doesn't use a configurable seed
 	icons.shuffle()
-	#print("Shuffled icons for " + planet.Name + ": " + str(icons))
 	
 	planet.PerceivedArtifactCount = 0
 	planet.PerceivedResourceCount = 0
@@ -245,7 +258,6 @@ func ScanPlanet(planet, quality):
 	planet.PerceivedDudCount = 0
 	
 	var scanCount = totalIcons * quality
-	#print("\tRevealing " + str(scanCount) + " icons.")
 	for i in range(scanCount):
 		if icons[i] == "Artifact":
 			planet.PerceivedArtifactCount += 1

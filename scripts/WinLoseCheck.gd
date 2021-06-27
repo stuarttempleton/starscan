@@ -28,7 +28,6 @@ func Reset():
 func DialogTextDone(choice):
 	GameNarrativeDisplay.disconnect("ChoiceSelected",self,"DialogTextDone")
 	if choice == 0:
-		#print("Viewing stats or message...")
 		GameNarrativeDisplay.connect("ChoiceSelected", self, "DialogTextDone")
 		viewing_stats = !viewing_stats
 		if viewing_stats:
@@ -36,11 +35,9 @@ func DialogTextDone(choice):
 		else:
 			GameNarrativeDisplay.DisplayText(GetStoryText(),["ATTRIBUTES","MENU","QUIT"])
 	elif choice == 1:
-		#print("returning to menu...")
 		Reset()
 		SceneChanger.LoadScene(menu_scene_path, 0.0)
 	elif choice == 2:
-		#print("quiting game...")
 		Reset()
 		get_tree().quit()
 
@@ -53,7 +50,6 @@ func GetStoryText():
 func _process(delta):
 	if !handlingGameOver && isInGame:
 		if WinConditionMet():
-			#print("WIN CONDITION MET")
 			handlingGameOver = true
 			GameNarrativeDisplay.CancelDialog()
 			AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_WIN)
@@ -61,7 +57,6 @@ func _process(delta):
 			GameNarrativeDisplay.connect("ChoiceSelected", self, "DialogTextDone")
 			GameNarrativeDisplay.DisplayText(GetStoryText(),["STATS","MENU","QUIT"])
 		elif LoseConditionMet():
-			#print("LOSE CONDITION MET")
 			handlingGameOver = true
 			GameNarrativeDisplay.CancelDialog()
 			AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_LOSE)

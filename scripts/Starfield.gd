@@ -7,9 +7,6 @@ export var NebulaPath = ""
 
 func _ready():
 	GameController.EnterGameLoop(true)
-	#print("Nebulae found: ", len(StarMapData.Nebulae()) )
-	
-	
 	for nebula in StarMapData.Nebulae():
 		AddNebulaToMap(Vector2(nebula.X * MapScale, nebula.Y * MapScale), StarMapData.get_nebula_scale(nebula.Size) * (MapScale / 10000))
 		pass
@@ -20,21 +17,15 @@ func AddNebulaToMap(pos,size):
 	var nebula = loaded_scene.instance()
 	add_child(nebula)
 	
-	#set position and scale
 	nebula.position = pos
 	nebula.scale *= Vector2(nebula.scale.x * size, nebula.scale.y * size)
 	
 func _draw():
-	#draw space background
-	#draw_rect( Rect2(Vector2(-5,-5), Vector2(MapScale + 10,MapScale + 10)), Color(0.289063, 0.289063, 0.289063) ) 
-	#draw_rect( Rect2(Vector2(0,0), Vector2(MapScale,MapScale)), Color(0,0,0) )
-	 
 	var systems = StarMapData.Systems()
 	for system in systems :
 		AddSystemToMap(system)
 
 func AddSystemToMap( system ) :
-	#print("%s (%f, %f)" % [system.Name, system.X * MapScale, system.Y * MapScale]);
 	if StarMapData.SystemHasOutpost(system):
 		draw_circle_arc(Vector2(system.X * MapScale, system.Y * MapScale), system.Planets.size() * PlanetSizeScale * 9 , 0, 360, Color(1, 1, 1, 0.364706))
 	
