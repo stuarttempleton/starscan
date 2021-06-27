@@ -33,7 +33,7 @@ func DialogTextDone(choice):
 		if viewing_stats:
 			GameNarrativeDisplay.DisplayText(StoryGenerator.PlayStats(),["MESSAGE","MENU","QUIT"])
 		else:
-			GameNarrativeDisplay.DisplayText(GetStoryText(),["ATTRIBUTES","MENU","QUIT"])
+			GameNarrativeDisplay.DisplayText(GetStoryText(),["STATUS","MENU","QUIT"])
 	elif choice == 1:
 		Reset()
 		SceneChanger.LoadScene(menu_scene_path, 0.0)

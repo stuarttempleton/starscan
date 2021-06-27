@@ -26,3 +26,12 @@ func set_nodes_state(nodes, state):
 		else:
 			get_node(node).visible = state
 
+func YieldFocus(state):
+	var _focus = Control.FOCUS_ALL
+	if state: _focus = Control.FOCUS_NONE
+	
+	$MenuUIContainer/Menu/Buttons/Play.focus_mode = _focus
+	$"MenuUIContainer/Menu/Buttons/Generate Universe".focus_mode = _focus
+	$MenuUIContainer/Menu/Buttons/Continue.focus_mode = _focus
+	$"MenuUIContainer/Menu/Buttons/Back To Menu".focus_mode = _focus
+	$MenuUIContainer/Menu/Buttons/Exit.focus_mode = _focus

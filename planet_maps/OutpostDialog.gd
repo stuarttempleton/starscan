@@ -22,9 +22,9 @@ func DialogBegin(planet):
 	DialogPrompt()
 
 
-func DialogPrompt():
+func DialogPrompt(focus = 0):
 	GameNarrativeDisplay.connect("ChoiceSelected", self, "ChoiceResponse")	
-	GameNarrativeDisplay.DisplayText(StoryGenerator.OutpostStory(State, System, Planet, Qty), Options)
+	GameNarrativeDisplay.DisplayText(StoryGenerator.OutpostStory(State, System, Planet, Qty), Options, focus)
 
 
 func ChoiceResponse(choice):
@@ -35,7 +35,7 @@ func ChoiceResponse(choice):
 		1: RefuelSelected()
 		2: TurnInSeelected()
 		3: return LeaveOrbitSelected()
-	DialogPrompt()
+	DialogPrompt(choice)
 
 
 func BackToLobbySelected():

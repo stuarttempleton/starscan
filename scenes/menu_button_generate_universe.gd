@@ -9,12 +9,16 @@ func _ready():
 
 func on_button_pressed () :
 	AudioPlayer._play_UI_Button_Select()
+	$"../../../..".YieldFocus(true)
 	MessageBox.connect("ChoiceSelected", self, "ChoiceResponse")	
 	MessageBox.DisplayText("RegenerateUniverse", ["YES","NO"])
 
 
 func ChoiceResponse(choice):
 	MessageBox.disconnect("ChoiceSelected", self, "ChoiceResponse")
+	$"../../../..".YieldFocus(false)
+	if Input.get_connected_joypads().size() > 0: 
+		grab_focus()
 	match choice:
 		-1: return
 		0: DoResponse()

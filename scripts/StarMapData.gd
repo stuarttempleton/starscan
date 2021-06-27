@@ -127,12 +127,11 @@ func SetAllSystemOutpostFlags():
 			if PlanetTypes[8] == planet.Type:
 				SetMarkerForSystem(system, "HasOutpost")
 
+
 func SystemHasOutpost(system):
-#	for planet in system.Planets:
-#		if PlanetTypes[8] == planet.Type:
-#			return true
 	return SystemHasMarker(system, "HasOutpost")
-	
+
+
 func GetNearestOutpostSystem(origin):
 	var NearestOutpostSystem
 	var previous_distance = -1

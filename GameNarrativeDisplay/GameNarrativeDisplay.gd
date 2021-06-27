@@ -47,7 +47,7 @@ func SetMessageNodeVisibility(newState):
 	GameController.EnableMovement(!newState)
 
 
-func DisplayText(txt, array_buttons):
+func DisplayText(txt, array_buttons, focus = 0):
 	var message = txt if not Texts.has(txt) else Texts[txt]
 	
 	if array_buttons.size() > buttons.size():
@@ -67,6 +67,8 @@ func DisplayText(txt, array_buttons):
 		if ( i == buttons.size() ):
 			break
 	pass
+	if Input.get_connected_joypads().size() > 0:
+		buttons[focus].grab_focus()
 
 func _process(delta):
 	if($MessageBoxUI/Message.percent_visible > 0.9):
