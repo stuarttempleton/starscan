@@ -13,6 +13,11 @@ export(Array, NodePath) var title_nodes
 func _ready():
 	set_nodes_state(in_game_nodes, in_game)
 	set_nodes_state(title_nodes, !in_game)
+	if Input.get_connected_joypads().size() > 0:
+		if in_game:
+			$MenuUIContainer/Menu/Buttons/Continue.grab_focus()
+		else:
+			$MenuUIContainer/Menu/Buttons/Play.grab_focus()
 
 func set_nodes_state(nodes, state):
 	for node in nodes :

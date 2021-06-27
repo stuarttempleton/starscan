@@ -5,8 +5,6 @@ export var scene_to_load = ""
 export var RemoveFromMenu = false
 
 func _ready():
-	if Input.get_connected_joypads().size() > 0:
-		grab_focus()
 	if (!StarMapData.SaveExists()):
 		RemoveFromMenu = true
 	connect("pressed", self, "on_button_pressed")

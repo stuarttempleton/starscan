@@ -132,11 +132,18 @@ func PlanetHint( Planet ):
 	return Hint
 
 func PlanetStory(System, Planet):
+	var isBelt = true if Planet.Type == "Asteroid Belt" else false
+	var isComet = true if Planet.Type == "Comet" else false
 	var title = "%s (%s %s)" % [Planet.Name, System.Name, RomanNumeral(StarMapData.getPlanetID(Planet, System) + 1)]
 	var txt = ""
 	
-	txt += "Captain, %s has entered orbit around %s and we are ready to begin Planetary Operations. \r\n\r\n " % [ ShipData.Ship().Name, Planet.Name]
-	txt += PlanetHint(Planet) + "\r\n\r\n"
+	txt += "Captain, %s has entered %s %s%s and we are ready to begin %s Operations. \r\n\r\n" % [ShipData.Ship().Name,"The" if isBelt else "orbit around", Planet.Name, " Belt" if isBelt else "", "Surface" if isBelt or isComet else "Planetary"]
+	var hint = PlanetHint(Planet)
+	if isBelt:
+		hint = hint.replace(" planet ", " asteroid belt ")
+	elif isComet:
+		hint = hint.replace(" planet ", " comet ")
+	txt += hint + "\r\n\r\n"
 	txt += "You have the console. "
 	
 	var scan_txt = "System scans are currently at %s percent." % [System.Scan]
@@ -144,7 +151,7 @@ func PlanetStory(System, Planet):
 	return main_boiler % [title, txt]
 
 func Outpost_Promenade(system, planet):
-	var txt = "Captain, %s is docked and secure. Word of your mission has reached us and we are honored to host you and your crew. \r\n\r\n " % [ ShipData.Ship().Name]
+	var txt = "Captain, %s is docked and secure. Word of your mission has reached us and we are honored to host you and your crew. \r\n\r\n" % [ ShipData.Ship().Name]
 	txt += "The Station Hub is a cultural nexus of %s, the meeting place of travelers and the people of this system. " % [system.Name]
 	txt += "You may refuel and repair your vessel at the Space Port and you may deliver any artifacts in your cargo hold to the Supercluster Federation in the Science Bay. "
 	txt += "\r\n\r\n"
@@ -153,7 +160,7 @@ func Outpost_Promenade(system, planet):
 	return txt
 
 func Outpost_Refuel(system, planet, qty):
-	var txt = "%s is currently docked. Maintenance scans and refueling have completed. \r\n\r\n " % [ ShipData.Ship().Name]
+	var txt = "%s is currently docked. Maintenance scans and refueling have completed. \r\n\r\n" % [ ShipData.Ship().Name]
 	if qty > 0:
 		txt += "It looks like you've seen some time in space. All costs are covered by the Supercluster Federation. "
 	else:
@@ -176,7 +183,7 @@ func Outpost_ScienceBay(system, planet, qty):
 		txt += "You have brought us a total of %s artifacts to study. Humanity owes you a debt of gratitude." % [str(ShipData.StarShip.DeliveredArtifacts)]
 	
 	txt += "\r\n\r\n"
-	txt += "Come back when you have gathered more artifacts. We require currently %s to study. You can bring them to us or any Supercluster Outpost." % [ str($"/root/GameController/WinLoseCheck".ArtifactsRequiredToWin - ShipData.StarShip.DeliveredArtifacts)]
+	txt += "Come back when you have gathered more artifacts. We currently require %s to study. You can bring them to us or any Supercluster Outpost." % [ str($"/root/GameController/WinLoseCheck".ArtifactsRequiredToWin - ShipData.StarShip.DeliveredArtifacts)]
 		
 	txt += "\r\n\r\n"
 	if qty > 0:
@@ -292,7 +299,7 @@ func Win():
 	txt += "All of humanity owes you a debt of gratitude. " 
 	txt += "\r\n\r\n"
 	
-	txt += "The Supercluster AI has begun corellating all of the new information and the next phase of work is under way "
+	txt += "The Supercluster AI has begun correlating all of the new information and the next phase of work is under way "
 	txt += "-- all thanks to the hard work of you and your crew." 
 	txt += "\r\n\r\n"
 		

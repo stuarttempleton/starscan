@@ -66,13 +66,14 @@ func togglePause():
 
 func _input(_event):
 	if is_gameloop:
-		if Input.is_action_just_released("ui_cancel"):
+		if Input.is_action_just_released("pause_menu"):
 			togglePause()
 		if Input.is_action_just_released("starmap_mapview"):
 			MapToggle()
 
 func MapToggle():
-	if scene_has_map:
+	if scene_has_map and !get_tree().paused:
+		AudioPlayer._play_UI_Button_Select()
 		is_usingmap = !is_usingmap
 		emit_signal("map_state", is_usingmap)
 
