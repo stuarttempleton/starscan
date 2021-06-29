@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/GameController.gd" type="Script" id=1]
 [ext_resource path="res://scripts/WinLoseCheck.gd" type="Script" id=2]
 [ext_resource path="res://sprites/Gear-icon.png" type="Texture" id=3]
 [ext_resource path="res://sprites/map-icon.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://fonts/Montserrat-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 60
+font_data = SubResource( 1 )
 
 [node name="GameController" type="Node2D"]
 pause_mode = 2
@@ -22,9 +29,10 @@ layer = 12
 self_modulate = Color( 1, 1, 1, 0.694118 )
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -56.0
-margin_right = 456.0
-margin_bottom = 512.0
+margin_left = -63.9999
+margin_top = 8.0
+margin_right = 448.0
+margin_bottom = 520.0
 rect_scale = Vector2( 0.1, 0.1 )
 texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 3 )
@@ -35,17 +43,46 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Label" type="Label" parent="CanvasLayer/TextureButton"]
+visible = false
+margin_top = 512.0
+margin_right = 512.0
+margin_bottom = 616.0
+custom_fonts/font = SubResource( 2 )
+text = "Options"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="MapButton" type="TextureButton" parent="CanvasLayer"]
 self_modulate = Color( 1, 1, 1, 0.694118 )
-margin_left = 1176.0
-margin_right = 1688.0
-margin_bottom = 512.0
+margin_left = 1168.0
+margin_top = 8.0
+margin_right = 1680.0
+margin_bottom = 520.0
 rect_scale = Vector2( 0.1, 0.1 )
 texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 4 )
 texture_hover = ExtResource( 4 )
 texture_disabled = ExtResource( 4 )
 texture_focused = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="CanvasLayer/MapButton"]
+visible = false
+margin_top = 512.0
+margin_right = 512.0
+margin_bottom = 616.0
+custom_fonts/font = SubResource( 2 )
+text = "Map"
+align = 1
+valign = 1
+uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

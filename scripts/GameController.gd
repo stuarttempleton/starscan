@@ -11,6 +11,7 @@ var scene_has_map = false
 
 signal gameloop_state(loopstate)
 signal map_state(mapstate)
+signal pause_state(pausestate)
 
 
 func _ready():
@@ -24,6 +25,7 @@ func Pause():
 	AudioPlayer._play_UI_Button_Select()
 	pause_menu_instance = pause_menu_scene.instance()
 	add_child(pause_menu_instance)
+	emit_signal("pause_state", true)
 	get_tree().paused = true
 	$CanvasLayer/MapButton.visible = false
 
@@ -33,6 +35,7 @@ func Unpause():
 	if pause_menu_instance:
 		pause_menu_instance.queue_free()
 	get_tree().paused = false
+	emit_signal("pause_state", false)
 	$CanvasLayer/MapButton.visible = is_gameloop && scene_has_map
 
 

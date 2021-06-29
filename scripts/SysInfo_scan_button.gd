@@ -15,14 +15,12 @@ func _ready():
 
 func on_button_pressed () :
 	AudioPlayer._play_UI_Button_Select()
-	$"../../..".YieldFocus(true)
 	hoverflag = false
 	disabled = true
 	var loaded_scene = load(minigame_scene)
 	minigame = loaded_scene.instance()
 	add_child(minigame)
-	minigame.get_node("CanvasLayer/SceneBackground/Scanner Minigame").connect("success", self, "scanPerformed")
-	minigame.get_node("CanvasLayer/SceneBackground/Scanner Minigame").connect("fail", self, "scanPerformed")
+	minigame.get_node("CanvasLayer/SceneBackground/Scanner Minigame").connect("complete", self, "scanPerformed")
 
 func mouse_enter():
 	hoverflag = true

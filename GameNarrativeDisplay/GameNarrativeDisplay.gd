@@ -30,16 +30,6 @@ func _ready():
 		$MessageBoxUI
 	]
 	SetMessageNodeVisibility(false)
-#	var txt = "[b]A surface encounter...[/b]\r\n\r\n"
-#	txt += "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
-#	txt += "\r\n\r\n"
-#	txt += "[indent][code]"
-#	txt += "[color=#00ff00]You found 1 artifact.[/color]\r\n"
-#	txt += "[color=#00ff00]You gained 1 fuel.[/color]\r\n"
-#	txt += "[color=#ff0000]You lost 10 resources.[/color]\r\n"
-#	txt += "[color=#ff0000]You lost half your crew (42 souls).[/color]\r\n"
-#	txt += "[/code][/indent]"
-#	DisplayText(txt, ["OK", "Space Port"])
 
 
 func SetMessageNodeVisibility(newState):
@@ -48,7 +38,7 @@ func SetMessageNodeVisibility(newState):
 	GameController.EnableMovement(!newState)
 
 
-func DisplayText(txt, array_buttons, focus = 0):
+func DisplayText(txt, array_buttons):
 	emit_signal("DisplayState", true)
 	var message = txt if not Texts.has(txt) else Texts[txt]
 	
@@ -69,8 +59,6 @@ func DisplayText(txt, array_buttons, focus = 0):
 		if ( i == buttons.size() ):
 			break
 	pass
-	if Input.get_connected_joypads().size() > 0:
-		buttons[focus].grab_focus()
 
 func _process(delta):
 	if($MessageBoxUI/Message.percent_visible > 0.9):

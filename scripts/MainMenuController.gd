@@ -1,10 +1,6 @@
 extends CanvasLayer
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 export var in_game = true
 export(Array, NodePath) var in_game_nodes
 export(Array, NodePath) var title_nodes
@@ -13,11 +9,7 @@ export(Array, NodePath) var title_nodes
 func _ready():
 	set_nodes_state(in_game_nodes, in_game)
 	set_nodes_state(title_nodes, !in_game)
-	if Input.get_connected_joypads().size() > 0:
-		if in_game:
-			$MenuUIContainer/Menu/Buttons/Continue.grab_focus()
-		else:
-			$MenuUIContainer/Menu/Buttons/Play.grab_focus()
+
 
 func set_nodes_state(nodes, state):
 	for node in nodes :
@@ -25,13 +17,3 @@ func set_nodes_state(nodes, state):
 			get_node(node).visible = false
 		else:
 			get_node(node).visible = state
-
-func YieldFocus(state):
-	var _focus = Control.FOCUS_ALL
-	if state: _focus = Control.FOCUS_NONE
-	
-	$MenuUIContainer/Menu/Buttons/Play.focus_mode = _focus
-	$"MenuUIContainer/Menu/Buttons/Generate Universe".focus_mode = _focus
-	$MenuUIContainer/Menu/Buttons/Continue.focus_mode = _focus
-	$"MenuUIContainer/Menu/Buttons/Back To Menu".focus_mode = _focus
-	$MenuUIContainer/Menu/Buttons/Exit.focus_mode = _focus

@@ -47,8 +47,6 @@ func _ready():
 	oscillatorRange = bg.rect_size.x - bgMargin * 2
 	
 	SetupSweetSpot()
-	if  Input.get_connected_joypads().size() > 0:
-		$ScanButton.grab_focus()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -91,6 +89,8 @@ func updateText(percent, confidence):
 
 func handleScanResult(isSuccess, accuracy):
 	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.SCAN_WIN if isSuccess else AudioPlayer.AUDIO_KEY.SCAN_LOSE)
+	if accuracy == 0:
+		accuracy = 0.01
 	resultTextLabel.text = str(int(accuracy * 100)) + "%"
 	updateText(str(int(accuracy * 100)), "HIGH" if isSuccess else "LOW")
 	resultTextAnimator.play("WinAnim")
