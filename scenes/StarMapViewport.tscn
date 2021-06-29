@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scripts/Starfield.gd" type="Script" id=1]
 [ext_resource path="res://scenes/ShipAvatar.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://sprites/grid_square.png" type="Texture" id=8]
 [ext_resource path="res://scenes/Boundary.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scripts/warning hud.gd" type="Script" id=10]
+[ext_resource path="res://scripts/map_FuelRange.gd" type="Script" id=11]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-ExtraBold.ttf"
@@ -124,7 +125,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="MapName/MapUI"]
+[node name="MapTitle" type="Label" parent="MapName/MapUI"]
 anchor_right = 1.0
 margin_top = 40.0
 margin_bottom = 78.0
@@ -133,7 +134,7 @@ text = "Sector Space"
 align = 1
 uppercase = true
 
-[node name="Label2" type="Label" parent="MapName/MapUI"]
+[node name="FuelRange" type="Label" parent="MapName/MapUI"]
 anchor_right = 1.0
 margin_top = 88.0
 margin_bottom = 126.0
@@ -141,6 +142,7 @@ custom_fonts/font = SubResource( 6 )
 text = "Fuel Range"
 align = 1
 uppercase = true
+script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

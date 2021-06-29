@@ -6,7 +6,7 @@ var CurrentSpeed = 0
 var MapScale = StarMapData.MapScale
 var MinCameraZoom = 1
 var MaxCameraZoom = 2
-var MapCameraZoom = 10
+var MapCameraZoom = 12
 var MapSavedZoom
 var mouseIsPressed = false
 var ShipIsTowing = false
@@ -40,7 +40,7 @@ func MapToggle(_useMap):
 		$FuelRange.hide()
 	else:
 		MapSavedZoom = $Camera2D.zoom
-		$Camera2D.zoom = Vector2(MapCameraZoom, MapCameraZoom )
+		$Camera2D.zoom = Vector2(MapCameraZoom, MapCameraZoom)
 		$StarField.hide()
 		$FuelRange.show()
 	
@@ -131,7 +131,7 @@ func _physics_process(_delta):
 			CurrentSpeed = max(CurrentSpeed - _delta * ship.AccelerationRate * distanceToTravel, approachSpeed)
 			
 		var fuelRequired = min(distanceToTravel * ship.FuelPerUnitDistance, ship.Fuel)
-		var availableFuelFraction = min(1.0, ship.Fuel / ship.FuelPerUnitDistance)
+		var availableFuelFraction = min(1.0, ship.Fuel / ship.FuelPerUnitDistance )
 		if ShipIsTowing:
 			availableFuelFraction = 1
 		var speedToHitTargetThisFrame = availableFuelFraction * distanceToTravel / _delta
