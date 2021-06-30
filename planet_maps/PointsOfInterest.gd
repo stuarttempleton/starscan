@@ -38,14 +38,28 @@ func ClearPOINodes():
 	poi_nodes.clear()
 	pass
 
+var poi_scan_difficulties = []
 func _generatePOIData(rng):
 	Planet.POIs = []
+	poi_scan_difficulties = []
 	_generatePOIsOfType("Artifact", Planet.ArtifactCount, rng)
 	_generatePOIsOfType("Resource", Planet.ResourceCount, rng)
 	_generatePOIsOfType("Hazard", Planet.HazardCount, rng)
 	var emptyCount = TotalPOIsPerPlanet - Planet.ArtifactCount - Planet.ResourceCount - Planet.HazardCount
 	_generatePOIsOfType("Empty", emptyCount, rng)
+	_calculateScanInterference()
 	
+func _calculateScanInterference():
+	var scan_average = 0
+	var poi_scan_hardest = 0
+	for scan in poi_scan_difficulties:
+		if scan > poi_scan_hardest: 
+			poi_scan_hardest = scan
+		scan_average += scan
+	scan_average = scan_average / poi_scan_difficulties.size()
+	if poi_scan_hardest > Scan:
+		$"../PlanetSurfaceMap/PlanetInformation".text += "\r\nScan Interference: %.0d%%" % [ poi_scan_hardest * 100]
+
 func _generatePOIsOfType(poiType, count, rng):
 	for i in count:
 		var poiPos = Vector2(rng.randf_range(0, 1), rng.randf_range(0, 1))
@@ -55,8 +69,9 @@ func _generatePOIsOfType(poiType, count, rng):
 		poiData.ActualType = poiType
 		poiData.PerceivedType = "Unknown"
 		poiData.IsExhausted = false
-		poiData.ScanDifficulty = rng.randf_range(0, 1)
+		poiData.ScanDifficulty = rng.randf_range(0, 0.5) + rng.randf_range(0, 0.3) + 0.1
 		Planet.POIs.append(poiData)
+		poi_scan_difficulties.append(poiData.ScanDifficulty)
 	
 func _applyScanToPOIs():
 	for poi in Planet.POIs:

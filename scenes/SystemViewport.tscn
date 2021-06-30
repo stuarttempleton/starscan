@@ -201,7 +201,7 @@ __meta__ = {
 StarMapViewport_scene = "res://scenes/StarMapViewport.tscn"
 
 [node name="LeaveSystem" type="Button" parent="CanvasLayer/SystemViewUI/ActionButtons"]
-margin_right = 163.0
+margin_right = 101.0
 margin_bottom = 40.0
 grow_vertical = 0
 rect_min_size = Vector2( 0, 40 )
