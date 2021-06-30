@@ -20,9 +20,9 @@ func Greeting(Planet):
 	details += "Visit Star Dock at Outpost " + Planet.Name + " to refuel and begin your adventure.\r\n\r\n"
 	#details += "\r\n\r\n"
 	details += "[indent][code]"
-	#details += "[color=#0080ff]Visit Star Dock at Outpost " + Planet.Name + " to refuel.[/color]\r\n"
-	#details += "[color=#0080ff]Collect artifacts throughout the sector.[/color]\r\n\r\n"
-	details += "[color=#ff0000]You are low on fuel.[/color]\r\n"
+	details += "[color=#FFBF00]- Refuel at Outpost %s.[/color]\r\n" % [Planet.Name]
+	details += "[color=#FFBF00]- Collect and deliver %d planetary artifacts.[/color]\r\n\r\n" % [$"/root/GameController/WinLoseCheck".ArtifactsRequiredToWin]
+	details += "[color=#ff0000]  You are low on fuel.[/color]\r\n"
 	details += "[/code][/indent]\r\n"
 	
 	
@@ -335,15 +335,15 @@ func PlayStats():
 		txt += stat_boiler % ["You were AN EXPLORER"]
 	if ShipData.GetPlayStat("UnknownsLooted") < 3:
 		txt += stat_boiler % ["You were CAUTIOUS"]
-	if ShipData.GetPlayStat("Tows") < 2:
+	if ShipData.GetPlayStat("Tows") < 1:
 		txt += stat_boiler % ["You were FUEL EFFICIENT"]
 	if ShipData.GetPlayStat("PeopleMet") > 15:
 		txt += stat_boiler % ["You were SOCIAL"]
-	if ShipData.GetPlayStat("CivilizationsDiscovered") < 2:
+	if ShipData.GetPlayStat("CivilizationsDiscovered") > 2:
 		txt += stat_boiler % ["You were A DIPLOMAT"]
 	if ShipData.GetPlayStat("ArtifactsTurnedIn") > $"/root/GameController/WinLoseCheck".ArtifactsRequiredToWin:
 		txt += stat_boiler % ["You were AN OVERACHIEVER"]
-	if ShipData.GetPlayStat("Conscripts") > 10:
+	if ShipData.GetPlayStat("Conscripts") > 5:
 		txt += stat_boiler % ["You were RUTHLESS"]
 	if ShipData.GetPlayStat("Conscripts") < 1 and ShipData.GetPlayStat("Bribes") > 0:
 		txt += stat_boiler % ["You were PROTECTIVE"]
