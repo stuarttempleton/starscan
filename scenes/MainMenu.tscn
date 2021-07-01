@@ -78,9 +78,9 @@ texture = ExtResource( 2 )
 stretch_mode = 4
 
 [node name="Buttons" type="VBoxContainer" parent="MenuUIContainer/Menu"]
-margin_top = 91.0
+margin_top = 87.0
 margin_right = 880.0
-margin_bottom = 298.0
+margin_bottom = 278.0
 size_flags_vertical = 3
 alignment = 1
 
@@ -106,9 +106,9 @@ scene_to_load = "res://scenes/StarMapViewport.tscn"
 
 [node name="Generate Universe" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 43.0
+margin_top = 39.0
 margin_right = 880.0
-margin_bottom = 78.0
+margin_bottom = 74.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/hover = ExtResource( 9 )
@@ -127,9 +127,9 @@ scene_to_load = "res://scenes/StarMapViewport.tscn"
 
 [node name="Continue" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 86.0
+margin_top = 78.0
 margin_right = 880.0
-margin_bottom = 121.0
+margin_bottom = 113.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/hover = ExtResource( 9 )
@@ -147,9 +147,9 @@ script = ExtResource( 7 )
 
 [node name="Back To Menu" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 129.0
+margin_top = 117.0
 margin_right = 880.0
-margin_bottom = 164.0
+margin_bottom = 152.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/hover = ExtResource( 9 )
@@ -168,9 +168,9 @@ scene_to_load = "res://scenes/Title.tscn"
 
 [node name="Exit" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 172.0
+margin_top = 156.0
 margin_right = 880.0
-margin_bottom = 207.0
+margin_bottom = 191.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/hover = ExtResource( 9 )

@@ -32,7 +32,8 @@
         "CivilizationsDiscovered":0,
         "UnknownsLooted":0,
         "Tows":0,
-        "CrewLost":0
+        "CrewLost":0,
+        "PlayDuration":0
     },
     "DeliveredArtifacts":0,
     "ShipSeedNumber":0,

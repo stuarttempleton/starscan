@@ -351,6 +351,13 @@ func PlayStats():
 	
 	txt += "\r\n\r\n"
 	
+	var playtime = ShipData.GetPlayStat("PlayDuration")
+	var hours = playtime / (60 * 60)
+	var minutes = fmod(playtime, (60 * 60)) / 60
+	var seconds = fmod(playtime, 60)
+	if ShipData.GetPlayStat("PlayDuration") > 0:
+		txt += stat_boiler % ["Your journey ended in%s%s%s." % [" %dhrs" %[hours] if hours > 1 else "", " %dmin" %[minutes] if minutes > 1 else ""," %dsec" %[seconds] if seconds > 1 else ""]]
+		
 	if ShipData.GetPlayStat("ArtifactsTurnedIn") > 0:
 		txt += stat_boiler % ["You turned in %s artifacts" % [ShipData.GetPlayStat("ArtifactsTurnedIn")]]
 	if ShipData.GetPlayStat("SystemsScanned") > 0:

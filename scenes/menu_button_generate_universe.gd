@@ -22,7 +22,9 @@ func ChoiceResponse(choice):
 		1: return
 
 func DoResponse():
-	WorldGenerator.generate(-1)
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	WorldGenerator.generate(rng.randi())
 	StarMapData.ResetMap()
 	ShipData.ResetShip()
 	SceneChanger.LoadScene(scene_to_load,0.0)

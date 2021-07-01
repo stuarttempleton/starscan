@@ -39,6 +39,7 @@ func generate(seednumber):
 	var map = Dictionary()
 	map.Systems = generateStars(rng)
 	map.Nebulae = generateNebulae(rng)
+	map.MapSeed = seednumber
 	var filename = serializeToFile(map, rng)
 	print("...World generated. Saved to file " + filename)
 	

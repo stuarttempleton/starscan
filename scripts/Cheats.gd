@@ -5,6 +5,7 @@ var godmode_enabled = false
 signal cheat_godmode
 signal cheat_setscan
 signal cheat_resetpois
+signal cheat_die
 
 func _ready():
 	Console.add_command('godmode', self, '_cheat_toggle_godmode')\
@@ -19,7 +20,16 @@ func _ready():
 	Console.add_command('resetpois', self, '_cheat_resetpois')\
 		.set_description('Resets perceived and exhausted status for all pois on all planets in the nearest system.')\
 		.register()
+		
+	Console.add_command('die', self, '_cheat_die')\
+		.set_description('Kills all of your crew and ends the game.')\
+		.register()
 
+func _cheat_die():
+	Console.write_line("Killing crew. You monster.")
+	ShipData.DeductCrew(ShipData.StarShip.Crew)
+	emit_signal("cheat_die")
+	
 func _cheat_toggle_godmode():
 	godmode_enabled = !godmode_enabled
 	Console.write_line('godmode %s' % ('enabled' if godmode_enabled else 'disabled'))
