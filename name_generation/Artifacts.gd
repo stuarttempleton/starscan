@@ -8,24 +8,24 @@ var RarityColor = {
 var Patterns = {
 	"Rare": ["%name's %Noun", "%Noun of %name", "The %name %Noun", "%name %Noun"],
 	"Common": [
-		"A %adjective %noun",
-		"A %adjective, %appearance %noun",
-		"A %size %noun",
-		"A %color %noun",
-		"A %appearance %noun",
-		"A %appearance %color %noun",
-		"A %size %color %noun",
-		"A %size %adjective %noun",
-		"A %size %adjective %color %noun",
-		"A %tech-adjective %tech-noun",
-		"A %appearance, %tech-adjective %tech-noun",
-		"A %size %tech-noun",
-		"A %color %tech-noun",
-		"A %appearance %tech-noun",
-		"A %appearance %color %tech-adjective %tech-noun",
-		"A %size %color %tech-noun",
-		"A %size %tech-adjective %tech-noun",
-		"A %size %color %tech-adjective %tech-noun"]
+		"%A|N %adjective %noun",
+		"%A|N %adjective %appearance %noun",
+		"%A|N %size %noun",
+		"%A|N %color %noun",
+		"%A|N %appearance %noun",
+		"%A|N %appearance %color %noun",
+		"%A|N %size %color %noun",
+		"%A|N %size %adjective %noun",
+		"%A|N %size %adjective %color %noun",
+		"%A|N %tech-adjective %tech-noun",
+		"%A|N %appearance %tech-adjective %tech-noun",
+		"%A|N %size %tech-noun",
+		"%A|N %color %tech-noun",
+		"%A|N %appearance %tech-noun",
+		"%A|N %appearance %color %tech-adjective %tech-noun",
+		"%A|N %size %color %tech-noun",
+		"%A|N %size %tech-adjective %tech-noun",
+		"%A|N %size %color %tech-adjective %tech-noun"]
 }
 var Words = {
 	"%noun":["hammer",
@@ -260,7 +260,26 @@ func SwapBoilerPlate(txt, key):
 		if i < split.size() - 1 :
 			swapped += GetWordWithCaps(key)
 	return swapped
+	
+func StartsWith(text, items):
+	for item in items:
+		if text.left(item.length()) == item:
+			return true
+	return false
 
+func CorrectAAN(item):
+	var split = item.split(' ')
+	for i in range(0, split.size()):
+		if split[i] == "%A|N":
+			if StartsWith(split[i+1].to_upper(), ["EU","EW","UNI","HAI","HOR","ONCE","ONE"]):
+				split[i] = "A"
+			elif StartsWith(split[i+1].to_upper(), ["HOU","HONO","HEI","HIS","HAI","YV"]):
+				split[i] = "AN"
+			elif StartsWith(split[i+1].to_upper(), ["A","E","I","O","U"]):
+				split[i] = "An"
+			else:
+				split[i] = "A"
+	return split.join(" ")
 
 func ExpandPattern(pat):
 	var item = pat
@@ -269,6 +288,7 @@ func ExpandPattern(pat):
 	for key in Words.keys():
 		item = SwapBoilerPlate(item, GetUpperKey(key))
 		item = SwapBoilerPlate(item, key)
+	item = CorrectAAN(item)
 	return item
 
 func ConvertRarityFromFloat(rarity):

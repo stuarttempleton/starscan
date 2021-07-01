@@ -78,13 +78,14 @@ func ReportSystemEntryCost(cost):
 func ScanConfidence(scan):
 	var stat_pos_item_boiler = "[color=#00ff00]%s[/color]\r\n"
 	var stat_neg_item_boiler = "[color=#ff0000]WARNING: %s[/color]\r\n"
+	var stat_reg_item_boiler = "[color=#3261c7]CAUTION: %s[/color]\r\n"
 	var scan_txt = "System scans are currently at %d percent." % [scan * 100]
 	var txt = ""
 	
-	if scan > 0.99:
+	if scan > 0.89:
 		txt += stat_pos_item_boiler % [scan_txt]
-	elif scan > 0.49:
-		txt += stat_neg_item_boiler % [scan_txt]
+	elif scan > 0.69:
+		txt += stat_reg_item_boiler % [scan_txt]
 	else:
 		txt += stat_neg_item_boiler % [scan_txt]
 	return txt

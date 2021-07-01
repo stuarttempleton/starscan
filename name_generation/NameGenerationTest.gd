@@ -1,5 +1,8 @@
 extends Control
 
+func _ready():
+	SceneChanger.GoAway()
+
 func _on_GenerateArtifacts_pressed():
 	var list = ""
 	var qty = 10 #$WordGenerator.NewRand(8) + 1
