@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/starscan_transition.ogg-491f90f58c6a7319f2c63f748caefa7a.oggstr"
+
+[deps]
+
+source_file="res://Audio/MUSIC/starscan_transition.ogg"
+dest_files=[ "res://.import/starscan_transition.ogg-491f90f58c6a7319f2c63f748caefa7a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

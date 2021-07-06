@@ -7,6 +7,7 @@ var allow_poi_click = true #
 func _ready():
 	
 	AudioPlayer.PlayBG(AudioPlayer.AUDIO_KEY.BG_SPACE)
+	AudioPlayer.PlayMusic(AudioPlayer.AUDIO_KEY.MUSIC_SYSTEM_MAP)
 	ToggleView()
 	pass # Replace with function body.
 

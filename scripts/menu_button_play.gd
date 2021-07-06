@@ -14,6 +14,7 @@ func on_button_pressed () :
 		AudioPlayer._play_UI_Button_Select()
 		StarMapData.LoadSave()
 		ShipData.LoadSave()
+		AudioPlayer.FadeOutMusic(2)
 		SceneChanger.LoadScene(scene_to_load,0.5)
 	else :
 		print("THIS MENU BUTTON HAS NO SCENE TO LOAD")

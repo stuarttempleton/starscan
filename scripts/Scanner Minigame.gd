@@ -36,7 +36,6 @@ var scanButtonPressed = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	AudioPlayer.PlayBG(AudioPlayer.AUDIO_KEY.SCAN_OSCILLATOR)
 	GameController.EnableMovement(false)
 	if (StarMapData.NearestSystem == null):
 		StarMapData.FindNearestSystem(Vector2(ShipData.Ship().X,ShipData.Ship().Y))

@@ -2,6 +2,8 @@ extends Node2D
 
 func _ready():
 	AudioPlayer.PlayBG(AudioPlayer.AUDIO_KEY.BG_SPACE)
+	AudioPlayer.PlayBG_2(AudioPlayer.AUDIO_KEY.BG_BRIDGE)
+	AudioPlayer.PlayMusic(AudioPlayer.AUDIO_KEY.MUSIC_STAR_MAP)
 	if ShipData.Ship().FirstRun:
 		_on_FirstPlay()
 	GameController.EnableMap()

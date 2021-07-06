@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/starscan_transition_bridge_sound.ogg-92b0081de22ab9bbd8f0cbf70ada6eac.oggstr"
+
+[deps]
+
+source_file="res://Audio/MUSIC/starscan_transition_bridge_sound.ogg"
+dest_files=[ "res://.import/starscan_transition_bridge_sound.ogg-92b0081de22ab9bbd8f0cbf70ada6eac.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
