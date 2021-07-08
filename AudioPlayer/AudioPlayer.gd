@@ -111,7 +111,6 @@ var fade_counter = 1.0
 var fade_speed = 1.0
 func _process(delta):
 	if doFade:
-		print("FC: ", linear2db(fade_counter))
 		if fade_out:
 			fade_counter -= delta * fade_speed
 		else:
