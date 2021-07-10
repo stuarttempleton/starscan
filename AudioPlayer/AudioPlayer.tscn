@@ -10,6 +10,7 @@ script = ExtResource( 1 )
 bus = "SFX"
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -80.0
 bus = "Music"
 
 [node name="BGPlayer" type="AudioStreamPlayer" parent="."]

@@ -58,8 +58,18 @@ func GetWeightedItem(CharacterList, distribution_test):
 
 func DistributionComparison(a, b):
 	return a[1] > b[1]
-		
+
 func CreateWord():
+	var word = CreateUnsafeWord()
+	var threshold = 5
+	while $ProfanityFilter.isRestricted(word):
+		#print("profanity filtered: ", word)
+		word = CreateWord()
+		threshold -= 1
+		if threshold < 1: break
+	return word
+
+func CreateUnsafeWord():
 	var pattern = GetWeightedItem(LanguageStructure["CharacterPatterns"],2)[0]
 	var output = ""
 	for i in pattern.length():

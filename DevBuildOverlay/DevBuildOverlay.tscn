@@ -12,7 +12,7 @@ font_data = SubResource( 1 )
 [node name="DevBuildOverlay" type="CanvasLayer"]
 layer = 128
 script = ExtResource( 1 )
-VersionNumber = "0.01"
+VersionNumber = "0.02"
 VersionClass = "PREVIEW"
 
 [node name="BuildNumber" type="Label" parent="."]

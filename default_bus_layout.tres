@@ -9,7 +9,7 @@ resource_name = "LowShelfFilter"
 cutoff_hz = 1000.0
 
 [resource]
-bus/0/volume_db = 0.0672607
+bus/0/volume_db = -0.130497
 bus/0/effect/0/effect = SubResource( 1 )
 bus/0/effect/0/enabled = false
 bus/0/effect/1/effect = SubResource( 2 )
@@ -32,3 +32,9 @@ bus/3/mute = false
 bus/3/bypass_fx = false
 bus/3/volume_db = 0.0
 bus/3/send = "Master"
+bus/4/name = "Anomaly"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = -10.0741
+bus/4/send = "Master"
