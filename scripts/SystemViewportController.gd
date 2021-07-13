@@ -9,7 +9,6 @@ func _ready():
 	AudioPlayer.PlayBG(AudioPlayer.AUDIO_KEY.BG_SPACE)
 	AudioPlayer.PlayMusic(AudioPlayer.AUDIO_KEY.MUSIC_SYSTEM_MAP)
 	ToggleView()
-	pass # Replace with function body.
 
 func PlanetHover(planet_position, planet_name):
 	$HoverUI/Label.text = planet_name

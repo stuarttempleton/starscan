@@ -3,11 +3,11 @@ extends Node2D
 
 export var pause_menu_path = ""
 var is_gameloop = false
-var is_movement_enabled = true
 var pause_menu_scene
 var pause_menu_instance
 var is_usingmap = false
 var scene_has_map = false
+var movement_block_queue = 0
 
 signal gameloop_state(loopstate)
 signal map_state(mapstate)
@@ -26,6 +26,7 @@ func Pause():
 	pause_menu_instance = pause_menu_scene.instance()
 	add_child(pause_menu_instance)
 	emit_signal("pause_state", true)
+	EnableMovement(false)
 	get_tree().paused = true
 	$CanvasLayer/MapButton.visible = false
 
@@ -35,6 +36,7 @@ func Unpause():
 	if pause_menu_instance:
 		pause_menu_instance.queue_free()
 	get_tree().paused = false
+	EnableMovement(true)
 	emit_signal("pause_state", false)
 	$CanvasLayer/MapButton.visible = is_gameloop && scene_has_map
 
@@ -50,8 +52,21 @@ func EnterGameLoop(is_loop):
 func isGameOver():
 	return $WinLoseCheck.handlingGameOver
 
-func EnableMovement(toggle_movement):
-	is_movement_enabled = toggle_movement
+func EnableMovement(enable):
+	if enable:
+		movement_block_queue -= 1
+	else:
+		movement_block_queue += 1
+	
+	if movement_block_queue <= 0:
+		movement_block_queue = 0
+
+
+func ResetMoveBlock():
+	movement_block_queue = 0
+
+func is_movement_enabled():
+	return movement_block_queue == 0
 
 func EnableMap():
 	scene_has_map = true
@@ -78,6 +93,7 @@ func MapToggle():
 	if scene_has_map and !get_tree().paused:
 		AudioPlayer._play_UI_Button_Select()
 		is_usingmap = !is_usingmap
+		EnableMovement(!is_usingmap)
 		emit_signal("map_state", is_usingmap)
 
 

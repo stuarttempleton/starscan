@@ -36,7 +36,7 @@ var scanButtonPressed = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	GameController.EnableMovement(false)
+	#GameController.EnableMovement(false)
 	if (StarMapData.NearestSystem == null):
 		StarMapData.FindNearestSystem(Vector2(ShipData.Ship().X,ShipData.Ship().Y))
 	$Title.text = $Title.text % [StarMapData.NearestSystem.Name]
@@ -47,11 +47,19 @@ func _ready():
 	
 	SetupSweetSpot()
 
+var increasing = true
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if not scanButtonPressed:
 		x = fmod(x + delta * speed, amplitude)
 		oscillator.rect_position.x = oscillatorRange * abs(x - 1.0)
+		var newping = abs(x - 1.0) 
+			
+		if (newping > 0.9 and increasing == true) or (newping < 0.1 and increasing == false):
+			AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.SCAN_OSCILLATOR)
+			increasing = !increasing
+
 
 func _on_Button_pressed():
 	scanButtonPressed = true

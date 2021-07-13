@@ -78,7 +78,7 @@ func _applyScanToPOIs():
 		if Scan >= poi.ScanDifficulty:
 			poi.PerceivedType = poi.ActualType if !poi.IsExhausted else "Exhausted"
 		else:
-			poi.PerceivedType = "Unknown"
+			poi.PerceivedType = "Unknown" if !poi.IsExhausted else "Exhausted"
 	
 func _addPOINodes():
 	var margin = 0.75

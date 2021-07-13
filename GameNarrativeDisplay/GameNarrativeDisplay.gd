@@ -35,11 +35,11 @@ func _ready():
 func SetMessageNodeVisibility(newState):
 	for node in messageNodes:
 		node.visible = newState
-	GameController.EnableMovement(!newState)
 
 
 func DisplayText(txt, array_buttons):
 	emit_signal("DisplayState", true)
+	GameController.EnableMovement(false)
 	var message = txt if not Texts.has(txt) else Texts[txt]
 	
 	if array_buttons.size() > buttons.size():
@@ -72,6 +72,7 @@ func CancelDialog():
 
 func CloseWithPress(int_button):
 	SetMessageNodeVisibility(false)
+	GameController.EnableMovement(true)
 	emit_signal("ChoiceSelected", int_button)
 	emit_signal("DisplayState", false)
 

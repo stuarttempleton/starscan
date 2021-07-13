@@ -11,5 +11,5 @@ dest_files=[ "res://.import/290379__littlerobotsoundfactory__slide-electronic-01
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

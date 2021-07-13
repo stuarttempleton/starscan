@@ -18,12 +18,12 @@ var playedWarpOnce = false
 func _ready():
 	self.position = Vector2(ShipData.Ship().X * MapScale, ShipData.Ship().Y * MapScale)
 	target = self.position
-	GameController.EnableMovement(true)
+	GameController.ResetMoveBlock()
 	ShipData.connect("FuelTanksEmpty", self, "_on_FuelTanksEmpty")
 	GameController.connect("map_state", self, "MapToggle")
 
 func _input(event):
-	if GameController.is_movement_enabled:
+	if GameController.is_movement_enabled():
 		if event is InputEventMouseButton and !UsingMap:
 			if event.button_index == BUTTON_LEFT:
 				mouseIsPressed = event.pressed
@@ -110,7 +110,6 @@ func _physics_process(_delta):
 	
 	if mouseIsPressed and !ShipIsTowing:
 		target = get_global_mouse_position()
-		#CurrentSpeed = min(CurrentSpeed + _delta * ship.AccelerationRate, ship.TravelSpeed)
 	
 	if !ship.WarpDrive: #TODO: UPGRADE INVENTORY
 		HandleBoundary()
@@ -183,10 +182,9 @@ func _on_FuelTanksEmpty():
 			chanceOfHostile += 0.2
 		elif chanceOfHostile < 0.2:
 			chanceOfHostile -= 0.2
-		print ("Hostile Probability: " + str(chanceOfHostile))
 		TowEncounter = {"Friendly":true if randf() > chanceOfHostile else false, 
 						"Artifacts": randi() % int(ShipData.GetInventoryQTYFor("Artifacts") + 1),
-						"Crew": 1 + randi() % int(ShipData.StarShip.CrewCapacity / 2 - 1), #we know this might be high.
+						"Crew": 1 + randi() % 1, #int(ShipData.StarShip.CrewCapacity / 2 - 1),
 						"nearestOutpostSystem": outpost}
 		var opts = ["OK"]
 		if !TowEncounter.Friendly:
