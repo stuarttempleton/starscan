@@ -53,7 +53,7 @@ export var Audio = {
 	AUDIO_KEY.DIALOG_LOSE:"res://Audio/UI/288953__littlerobotsoundfactory__click-electronic-07.ogg",
 	AUDIO_KEY.DIALOG_SELECT:"res://Audio/UI/288957__littlerobotsoundfactory__click-electronic-09.ogg",
 	
-	AUDIO_KEY.SCAN_OSCILLATOR:"res://Audio/UI/288951__littlerobotsoundfactory__click-electronic-01.ogg",
+	AUDIO_KEY.SCAN_OSCILLATOR:"res://Audio/MUSIC/starscan_scan_ping.ogg",
 	AUDIO_KEY.SCAN_WIN:"res://Audio/MUSIC/starscan_transition_scan_success.ogg",
 	AUDIO_KEY.SCAN_LOSE:"res://Audio/MUSIC/starscan_transition_scan_failure.ogg",
 	

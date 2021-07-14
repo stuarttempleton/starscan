@@ -31,14 +31,21 @@ export var greenMax = 0.6
 const amplitude = 2.0
 var x = amplitude / 2 #this initial value starts the oscillator on the left end
 var oscillatorRange
+var difficultyModifier
 
 var scanButtonPressed = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#GameController.EnableMovement(false)
 	if (StarMapData.NearestSystem == null):
 		StarMapData.FindNearestSystem(Vector2(ShipData.Ship().X,ShipData.Ship().Y))
+	
+	var nebuladistance = StarMapData.DistanceToNearestNebula(Vector2(ShipData.Ship().X,ShipData.Ship().Y))
+	var nebula = StarMapData.NearestNebula
+	var nebulascale = StarMapData.get_nebula_scale(nebula.Size)
+	var max_neb_distance = 0.015
+	difficultyModifier = clamp((nebuladistance - max_neb_distance * nebulascale) * -10, 0,1) + speed
+	
 	$Title.text = $Title.text % [StarMapData.NearestSystem.Name]
 	
 	#Fit oscillator within bg assuming sbg offset left of origin is margin
@@ -52,7 +59,7 @@ var increasing = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if not scanButtonPressed:
-		x = fmod(x + delta * speed, amplitude)
+		x = fmod(x + delta * difficultyModifier, amplitude)
 		oscillator.rect_position.x = oscillatorRange * abs(x - 1.0)
 		var newping = abs(x - 1.0) 
 			
