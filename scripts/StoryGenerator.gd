@@ -151,12 +151,14 @@ func PlanetStory(System, Planet):
 	txt += stats_boiler % [ScanConfidence(System.Scan)]
 	return main_boiler % [title, txt]
 
-func Outpost_Promenade(system, planet):
+func Outpost_Promenade(system, planet, routes):
 	var txt = "Captain, %s is docked and secure. Word of your mission has reached us and we are honored to host you and your crew. \r\n\r\n" % [ ShipData.Ship().Name]
 	txt += "The Station Hub is a cultural nexus of %s, the meeting place of travelers and the people of this system. " % [system.Name]
 	txt += "You may refuel and repair your vessel at the Space Port and you may deliver any artifacts in your cargo hold to the Supercluster Federation in the Science Bay. "
 	txt += "\r\n\r\n"
 	txt += "Welcome to Outpost %s. You are free to roam the facility. " % [ planet.Name]
+	if routes > 0:
+		txt += "\r\n\r\n[color=#FFBF00]%d travel routes added to your Star Map.[/color]\r\n" % [routes]
 	txt += "\r\n\r\n"
 	return txt
 
@@ -192,13 +194,13 @@ func Outpost_ScienceBay(system, planet, qty):
 	txt += "\r\n\r\n"
 	return txt
 
-func OutpostStory(_state, system, planet, qty):
+func OutpostStory(_state, system, planet, qty, routes):
 	var title = "Outpost %s" % [planet.Name]
 	var txt = ""
 	
 	match _state:
 		OUTPOST_STATE.LOBBY:
-			txt += Outpost_Promenade(system, planet)
+			txt += Outpost_Promenade(system, planet, routes)
 		OUTPOST_STATE.FUEL:
 			txt += Outpost_Refuel(system, planet, qty)
 		OUTPOST_STATE.FUEL_FULL:

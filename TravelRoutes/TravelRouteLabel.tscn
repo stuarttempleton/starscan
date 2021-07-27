@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://fonts/Montserrat-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 12
+outline_size = 3
+outline_color = Color( 0, 0, 0, 0.560784 )
+use_mipmaps = true
+font_data = SubResource( 1 )
+
+[node name="TravelRouteLabel" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelText" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -192.0
+margin_top = -8.0
+margin_right = 152.0
+margin_bottom = -29.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.647059, 0.647059, 0.647059, 1 )
+text = "System A <--> System B"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

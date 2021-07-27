@@ -28,12 +28,14 @@ func OutpostTextHelper(system):
 		return "No"
 
 func InRange(system):
+	$ColorRect.visible = true
 	$Background.visible = true
 	if DisplayedSystem != system:
 		DisplayedSystem = system
 		RefreshDisplayedData()
 
 func NotInRange():
+	$ColorRect.visible = false
 	$Background.visible = false
 	
 func RefreshDisplayedData():

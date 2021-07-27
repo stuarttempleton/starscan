@@ -58,6 +58,8 @@ func LoadShipData(filename):
 	var shipdata_json = JSON.parse(shipdata_file.get_as_text())
 	shipdata_file.close()
 	StarShip = shipdata_json.result
+	if !StarShip.has("KnownRoutes") || StarShip.KnownRoutes == null:
+		StarShip.KnownRoutes = []
 	Loaded = true
 	SavedSinceLoad = false
 	
@@ -171,6 +173,23 @@ func DeductCrew(crewLost):
 	UpdatePlayStat("CrewLost", crewLost)
 	StarShip.Crew -= crewLost
 	return crewLost
+
+func AddRouteList(Routes):
+	var added = 0
+	for route in Routes:
+		added += AddKnownRoute(route)
+	return added
+
+func AddKnownRoute(Route):
+	if !StarMapData.RouteListHas(StarShip.KnownRoutes, Route):
+		StarShip.KnownRoutes.append(Route)
+		return 1
+	return 0
+
+func GetPosition(useMapScale = true):
+	var scale = StarMapData.MapScale if useMapScale else 1
+	return Vector2(StarShip.X, StarShip.Y) * scale
+
 
 func UpdatePlayStat(stat, qty):
 	if StarShip.PlayStats.has(stat):

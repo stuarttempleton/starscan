@@ -6,6 +6,7 @@ var Planet
 var System
 var Options = ["Station Hub","Star Dock","Science Bay","Leave Orbit"]
 var Qty = 0
+var RoutesAdded = 0
 
 func _ready():
 	if StarMapData.NearestSystem != null: 
@@ -19,12 +20,17 @@ func DialogBegin(planet):
 	Planet = planet
 	State = StoryGenerator.OUTPOST_STATE.LOBBY
 	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_OUTPOST)
+	
+#	var routes = StarMapData.AllRoutesBySystem(System)
+#	print("Route list: ", routes)
+#	RoutesAdded += ShipData.AddRouteList(routes)
+#	print("Routes added: ", RoutesAdded)
 	DialogPrompt()
 
 
 func DialogPrompt():
 	GameNarrativeDisplay.connect("ChoiceSelected", self, "ChoiceResponse")	
-	GameNarrativeDisplay.DisplayText(StoryGenerator.OutpostStory(State, System, Planet, Qty), Options)
+	GameNarrativeDisplay.DisplayText(StoryGenerator.OutpostStory(State, System, Planet, Qty, RoutesAdded), Options)
 
 
 func ChoiceResponse(choice):

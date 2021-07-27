@@ -75,7 +75,14 @@ func LoadMapData(filename):
 	var starmapdata_json = JSON.parse(starmapdata_file.get_as_text())
 	starmapdata_file.close()
 	StarMap = starmapdata_json.result
+	
+	if !StarMap.has("MapSeed") || StarMap.MapSeed == null:
+		StarMap.MapSeed = randi()
+	if !StarMap.has("TravelRoutes") || StarMap.TravelRoutes == null:
+		StarMap.TravelRoutes = []
 	SetAllSystemOutpostFlags()
+	SetSystemRoutes()
+	SetOutpostRoutes()
 	Loaded = true
 	SavedSinceLoad = false
 	
@@ -127,6 +134,110 @@ func SetAllSystemOutpostFlags():
 			if PlanetTypes[8] == planet.Type:
 				SetMarkerForSystem(system, "HasOutpost")
 
+func SetSystemRoutes():
+	var system_list = AllOutpostSystemsByIndex()
+	var qty = 10
+	var rng
+	rng = RandomNumberGenerator.new()
+	rng.seed = StarMap.MapSeed
+	var maxsystem = system_list.size() - 1
+	for i in qty:
+		var route = NewRoute(IncrementIfSame(system_list[rng.randi_range(0,maxsystem)], system_list[rng.randi_range(0,maxsystem)]))
+		if !RouteListHas(StarMap.TravelRoutes, route):
+			StarMap.TravelRoutes.append(route)
+
+func SetOutpostRoutes():
+	var system_list = AllOutpostSystemsByIndex()
+	var qty = 2
+	var rng
+	rng = RandomNumberGenerator.new()
+	rng.seed = StarMap.MapSeed
+	
+	var maxsystem = system_list.size() - 1
+	for i in system_list:
+		qty = 2 + StarMap.Systems[i].Planets.size() / 2
+		for _route in qty:
+			var route = NewRoute(IncrementIfSame(i, system_list[rng.randi_range(0,maxsystem)]))
+			if !StarMap.Systems[i].has("TravelRoutes") || StarMap.Systems[i].TravelRoutes == null:
+				StarMap.Systems[i].TravelRoutes = []
+			if !RouteListHas(StarMap.Systems[i].TravelRoutes, route):
+				StarMap.Systems[i].TravelRoutes.append(route)
+
+func SystemPosition(system, use_mapscale = false):
+	return Vector2(system.X, system.Y)
+	
+func DistanceBetween(system_a, system_b):
+	return SystemPosition(system_a).distance_to(SystemPosition(system_b))
+
+func AngleBetween(system_a, system_b):
+	return rad2deg(SystemPosition(system_a).angle_to_point(SystemPosition(system_b)))
+
+func NewRoute(ab):
+	var route = {
+		"A": ab[0],
+		"B": ab[1],
+		"Distance": DistanceBetween(StarMap.Systems[ab[0]], StarMap.Systems[ab[1]]),
+		"Angle": AngleBetween(StarMap.Systems[ab[0]], StarMap.Systems[ab[1]])
+	}
+	return route
+
+func RouteListHas(route_list, route):
+	var has = false
+	for rte in route_list:
+		if rte.A == route.A and rte.B == route.B:
+			has = true
+		elif rte.A == route.B and rte.B == route.A:
+			has = true
+	return has
+
+func IncrementIfSame(a, b):
+	if a == b: b -= 1
+	if b < 0: b = a + 1
+	return [a,b]
+
+func AllOutpostSystemsByIndex():
+	var list = []
+	var index = 0
+	for system in StarMap.Systems:
+		if SystemHasOutpost(system):
+			list.append(index)
+		index += 1
+	return list
+
+func AllRoutesByIndex(index):
+	if StarMap.Systems[index].has("TravelRoutes"):
+		return StarMap.Systems[index].TravelRoutes
+	return []
+
+func AllRoutesBySystem(system):
+	var index = 0
+	for sys in StarMap.Systems:
+		if sys == system:
+			return AllRoutesByIndex(index)
+		index += 1
+	return []
+
+func AllRoutesBySystemList(systemList):
+	var routes = []
+	for sys in systemList:
+		routes.append_array(AllRoutesBySystem(sys))
+	return routes
+
+func AllSystemsInRect(rect, systemList = StarMap.Systems, useMapScale = true):
+	var scale = MapScale if useMapScale else 1
+	var list = []
+	for sys in systemList:
+		if rect.has_point(SystemPosition(sys) * scale):
+			list.append(sys) 
+	return list
+
+func AllSystemsInRadius(point, radius, systemList = StarMap.Systems, useMapScale = true):
+	var scale = MapScale if useMapScale else 1
+	var list = []
+	for sys in systemList:
+		if point.distance_to(SystemPosition(sys) * scale) <= radius:
+			list.append(sys) 
+	return list
 
 func SystemHasOutpost(system):
 	return SystemHasMarker(system, "HasOutpost")

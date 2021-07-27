@@ -78,7 +78,7 @@ __meta__ = {
 }
 
 [node name="NearestSystem" type="Label" parent="NearestOutpostStatus"]
-margin_right = 508.0
+margin_right = 510.0
 margin_bottom = 21.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -88,7 +88,7 @@ align = 2
 valign = 1
 
 [node name="SystemInfo" type="Label" parent="NearestOutpostStatus"]
-margin_left = 516.0
+margin_left = 514.0
 margin_right = 1024.0
 margin_bottom = 21.0
 size_flags_horizontal = 3

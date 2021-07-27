@@ -36,6 +36,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ColorRect" type="ColorRect" parent="Control"]
+margin_left = 752.0
+margin_top = 240.0
+margin_right = 968.0
+margin_bottom = 456.0
+color = Color( 1, 1, 1, 0.286275 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="Control/ColorRect"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 214.0
+margin_bottom = 214.0
+color = Color( 0, 0, 0, 0.815686 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Background" type="ColorRect" parent="Control"]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -70,9 +90,9 @@ custom_fonts/font = SubResource( 2 )
 text = "System Name"
 
 [node name="SystemDetail" type="Label" parent="Control/Background/InfoContainer"]
-margin_top = 29.0
+margin_top = 25.0
 margin_right = 174.0
-margin_bottom = 129.0
+margin_bottom = 125.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -84,9 +104,9 @@ Suitability: Unknown"
 autowrap = true
 
 [node name="ScanButton" type="Button" parent="Control/Background/InfoContainer"]
-margin_top = 137.0
+margin_top = 129.0
 margin_right = 174.0
-margin_bottom = 166.0
+margin_bottom = 154.0
 rect_min_size = Vector2( 0, 25 )
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 6 )
@@ -102,9 +122,9 @@ script = ExtResource( 2 )
 minigame_scene = "res://scenes/Scanner Minigame.tscn"
 
 [node name="EnterButton" type="Button" parent="Control/Background/InfoContainer"]
-margin_top = 174.0
+margin_top = 158.0
 margin_right = 174.0
-margin_bottom = 203.0
+margin_bottom = 183.0
 rect_min_size = Vector2( 0, 25 )
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 6 )
