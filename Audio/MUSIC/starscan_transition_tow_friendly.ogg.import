@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/starscan_transition_tow_friendly.ogg-540d16c86b97ee35958ce95e6f91656e.oggstr"
+
+[deps]
+
+source_file="res://Audio/MUSIC/starscan_transition_tow_friendly.ogg"
+dest_files=[ "res://.import/starscan_transition_tow_friendly.ogg-540d16c86b97ee35958ce95e6f91656e.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

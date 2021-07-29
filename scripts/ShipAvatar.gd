@@ -191,7 +191,7 @@ func _on_FuelTanksEmpty():
 			opts = ["%s CREW" % [TowEncounter.Crew]]
 			if TowEncounter.Artifacts > 0:
 				opts.append("%s ARTIFACT%s" % [TowEncounter.Artifacts, "S" if TowEncounter.Artifacts > 1 else ""])
-		
+		AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_HAIL_FRIENDLY if TowEncounter.Friendly else AudioPlayer.AUDIO_KEY.DIALOG_HAIL_HOSTILE)
 		GameNarrativeDisplay.connect("ChoiceSelected", self, "DialogChoice")
 		GameNarrativeDisplay.DisplayText(StoryGenerator.LowFuel(TowEncounter),opts)
 

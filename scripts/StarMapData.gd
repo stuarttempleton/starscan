@@ -155,7 +155,7 @@ func SetOutpostRoutes():
 	
 	var maxsystem = system_list.size() - 1
 	for i in system_list:
-		qty = 2 + StarMap.Systems[i].Planets.size() / 2
+		qty = 2 + StarMap.Systems[i].Planets.size() / 3
 		for _route in qty:
 			var route = NewRoute(IncrementIfSame(i, system_list[rng.randi_range(0,maxsystem)]))
 			if !StarMap.Systems[i].has("TravelRoutes") || StarMap.Systems[i].TravelRoutes == null:

@@ -18,6 +18,8 @@ enum AUDIO_KEY {
 	DIALOG_WIN,
 	DIALOG_LOSE,
 	DIALOG_SELECT,
+	DIALOG_HAIL_FRIENDLY,
+	DIALOG_HAIL_HOSTILE,
 	
 	SCAN_OSCILLATOR,
 	SCAN_WIN,
@@ -45,13 +47,15 @@ export var Audio = {
 	
 	AUDIO_KEY.DIALOG_HAIL:"res://Audio/UI/288953__littlerobotsoundfactory__click-electronic-07.ogg",
 	AUDIO_KEY.DIALOG_OUTPOST:"res://Audio/UI/288953__littlerobotsoundfactory__click-electronic-07.ogg",
-	AUDIO_KEY.DIALOG_POI_DEFAULT:"res://Audio/MUSIC/starscan_transition_scan_failure.ogg",
+	AUDIO_KEY.DIALOG_POI_DEFAULT:"res://Audio/MUSIC/starscan_transition_scan_neutral.ogg",
 	AUDIO_KEY.DIALOG_POI_ARTIFACT:"res://Audio/MUSIC/starscan_transition_scan_success.ogg",
 	AUDIO_KEY.DIALOG_POI_RESOURCE:"res://Audio/MUSIC/starscan_transition_scan_success.ogg",
 	AUDIO_KEY.DIALOG_POI_HAZARD:"res://Audio/MUSIC/starscan_transition_scan_failure.ogg",
 	AUDIO_KEY.DIALOG_WIN:"res://Audio/UI/288953__littlerobotsoundfactory__click-electronic-07.ogg",
 	AUDIO_KEY.DIALOG_LOSE:"res://Audio/UI/288953__littlerobotsoundfactory__click-electronic-07.ogg",
 	AUDIO_KEY.DIALOG_SELECT:"res://Audio/UI/288957__littlerobotsoundfactory__click-electronic-09.ogg",
+	AUDIO_KEY.DIALOG_HAIL_FRIENDLY:"res://Audio/MUSIC/starscan_transition_tow_friendly.ogg",
+	AUDIO_KEY.DIALOG_HAIL_HOSTILE:"res://Audio/MUSIC/starscan_transition_tow_hostile.ogg",
 	
 	AUDIO_KEY.SCAN_OSCILLATOR:"res://Audio/MUSIC/starscan_scan_ping.ogg",
 	AUDIO_KEY.SCAN_WIN:"res://Audio/MUSIC/starscan_transition_scan_success.ogg",
