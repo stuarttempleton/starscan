@@ -3,6 +3,7 @@ extends Node2D
 var rng
 var SeedNumber = -1
 export var TravelRouteLabel = "res://TravelRoutes/TravelRouteLabel.tscn"
+export var Enabled = true
 
 var RouteLists = {
 	"Sector": {
@@ -34,9 +35,13 @@ var _loadedLabelTemplate
 func _ready():
 	camera = $"../ShipAvatarView/ShipAvatar/Camera2D"
 	_loadedLabelTemplate = load(TravelRouteLabel)
-	GetRoutes()
+	
+	if Enabled:
+		GetRoutes()
 
 func _process(delta):
+	if !Enabled: return
+	
 	poll_timer += delta
 	if poll_timer > poll_rate:
 		poll_timer = 0
@@ -98,6 +103,7 @@ func GetSubSegment(from, to, offset = 250):
 
 
 func _drawTravelRoutes(Routes):
+	if !Enabled: return
 	var ShipPosition = ShipData.GetPosition()
 	
 	for i in Routes.routes.size():
