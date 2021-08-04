@@ -4,6 +4,5 @@
 
 [node name="TravelRoutes" type="Node2D"]
 script = ExtResource( 1 )
-Enabled = false
 
 [node name="LabelPool" type="CanvasLayer" parent="."]

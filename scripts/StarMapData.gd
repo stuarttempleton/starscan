@@ -145,6 +145,18 @@ func SetSystemRoutes():
 		var route = NewRoute(IncrementIfSame(system_list[rng.randi_range(0,maxsystem)], system_list[rng.randi_range(0,maxsystem)]))
 		if !RouteListHas(StarMap.TravelRoutes, route):
 			StarMap.TravelRoutes.append(route)
+			
+func OutpostsByDistance(origin_outpost):
+	var list = []
+	var system_list = AllOutpostSystemsByIndex()
+	for i in system_list:
+		if origin_outpost.Name != StarMap.Systems[i].Name:
+			list.append({"A":i,"Distance":DistanceBetween(StarMap.Systems[i], origin_outpost)})
+	list.sort_custom(self, "DistanceComparisonSort")
+	return list
+	
+func DistanceComparisonSort(a, b):
+	return a.Distance < b.Distance
 
 func SetOutpostRoutes():
 	var system_list = AllOutpostSystemsByIndex()
@@ -156,8 +168,9 @@ func SetOutpostRoutes():
 	var maxsystem = system_list.size() - 1
 	for i in system_list:
 		qty = 2 + StarMap.Systems[i].Planets.size() / 3
-		for _route in qty:
-			var route = NewRoute(IncrementIfSame(i, system_list[rng.randi_range(0,maxsystem)]))
+		var neighbors_by_distances = OutpostsByDistance(StarMap.Systems[i])
+		for _outpost in neighbors_by_distances.slice(0, qty - 1):
+			var route = NewRoute([i,_outpost.A])
 			if !StarMap.Systems[i].has("TravelRoutes") || StarMap.Systems[i].TravelRoutes == null:
 				StarMap.Systems[i].TravelRoutes = []
 			if !RouteListHas(StarMap.Systems[i].TravelRoutes, route):
