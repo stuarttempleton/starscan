@@ -29,11 +29,13 @@ var RouteLists = {
 var poll_rate = 0
 var poll_timer = 0
 var camera
+var shipavatar
 
 var _loadedLabelTemplate
 
 func _ready():
 	camera = $"../ShipAvatarView/ShipAvatar/Camera2D"
+	shipavatar = $"../ShipAvatarView/ShipAvatar"
 	_loadedLabelTemplate = load(TravelRouteLabel)
 	
 	if Enabled:
@@ -75,7 +77,7 @@ func GetRoutes():
 	var visible_systems = StarMapData.AllSystemsInRect(ScreenRect)
 	var nearby_systems = StarMapData.AllSystemsInRadius(ShipPosition, 300, visible_systems)
 #
-	RouteLists.Sector.routes = StarMapData.StarMap.TravelRoutes
+	#RouteLists.Sector.routes = StarMapData.StarMap.TravelRoutes
 	var outpost_routes = StarMapData.AllRoutesBySystemList(nearby_systems)
 	if outpost_routes.size() > 0:
 		RouteLists.Outpost.routes = outpost_routes 
@@ -97,10 +99,11 @@ func GetRoutes():
 
 
 func GetSubSegment(from, to, offset = 250):
-	if camera.zoom.x > 2:
-		offset *= 10
+	if camera.zoom.x > shipavatar.MaxCameraZoom:
+		offset *= 5
 	elif camera.zoom.x > 1:
-		offset *= camera.zoom
+		offset *= camera.zoom.x
+	offset = min(offset, from.distance_to(to) * 0.5) #clamp
 	return [from + from.direction_to(to) * offset, to + to.direction_to(from) * offset]
 
 
@@ -117,7 +120,7 @@ func _drawTravelRoutes(Routes):
 		var label_point = Geometry.get_closest_point_to_segment_2d(ShipPosition, segment[0], segment[1])
 		Routes.pool[i - 1].rect_position = get_viewport_transform().xform(label_point)
 		#_labelPool[i - 1 + pool_offset].rect_scale = Vector2(1,1) / camera.zoom.clamped(2)
-		#draw_circle(label_point,10, color)
+		#draw_circle(label_point,10, Color.red)
 	pass
 
 func _draw():

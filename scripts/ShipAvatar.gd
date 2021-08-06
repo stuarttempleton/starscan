@@ -5,8 +5,8 @@ var velocity = Vector2()
 var CurrentSpeed = 0
 var MapScale = StarMapData.MapScale
 var MinCameraZoom = 1
-var MaxCameraZoom = 2
-var MapCameraZoom = 12
+var MaxCameraZoom = 4
+var MapCameraZoom = 14
 var MapSavedZoom
 var mouseIsPressed = false
 var ShipIsTowing = false
