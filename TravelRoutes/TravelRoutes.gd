@@ -76,7 +76,9 @@ func GetRoutes():
 	var nearby_systems = StarMapData.AllSystemsInRadius(ShipPosition, 300, visible_systems)
 #
 	RouteLists.Sector.routes = StarMapData.StarMap.TravelRoutes
-	RouteLists.Outpost.routes = StarMapData.AllRoutesBySystemList(nearby_systems)
+	var outpost_routes = StarMapData.AllRoutesBySystemList(nearby_systems)
+	if outpost_routes.size() > 0:
+		RouteLists.Outpost.routes = outpost_routes 
 	RouteLists.ShipMap.routes = ShipData.Ship().KnownRoutes
 	
 	for list in RouteLists:
