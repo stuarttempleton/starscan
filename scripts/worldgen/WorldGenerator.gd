@@ -20,6 +20,7 @@ export var Artifact0_Chance = 0.6
 export var Artifact1_Chance = 0.2
 export var Artifact2_Chance = 0.15
 export var Artifact3_Chance = 0.05
+export var Hostility_Modifier = 0.25
 export var MaxTargetTries = 5
 
 export var NameGenerationNodePath = ""
@@ -89,19 +90,18 @@ func generateStars(rng):
 func generatePlanets(rng, starName):
 	var planetCount = rng.randi_range(MinPlanetsPerStar, MaxPlanetsPerStar)
 	var planets = []
+	var hasOutposts = false
+	
 	planets.resize(planetCount)
 	for j in range(planetCount):
 		var planet = Dictionary()
 		planet.Name = NameGenerator.CreateWord().capitalize()
 		planet.Type = StarMapData.PlanetTypes[rng.randi_range(0, StarMapData.PlanetTypes.size()-1)]
+		if planet.Type == "Outpost":
+			hasOutposts = true
 		planet.Size = StarMapData.PlanetSizes[rng.randi_range(0, StarMapData.PlanetSizes.size()-1)]
 		planet.Ring = (rng.randf() <= RingChance)
-		planet.ArtifactCount = randomArtifactCount(rng.randf())
-		planet.HazardCount = randomHazardCount(rng.randf())
-		planet.ResourceCount = randomResourceCount(rng.randf())
-		planet.OriginalArtifactCount = planet.ArtifactCount
-		planet.OriginalHazardCount = planet.HazardCount
-		planet.OriginalResourceCount = planet.ResourceCount
+		
 		planet.PerceivedArtifactCount = -1
 		planet.PerceivedHazardCount = -1
 		planet.PerceivedResourceCount = -1
@@ -109,7 +109,19 @@ func generatePlanets(rng, starName):
 		planet.SurfaceSeednumber = rng.randi_range(0, 2147483646)
 		planet.RadialOffset = rng.randi_range(25, 60)
 		planets[j] = planet
+	
+	var system_difficulty = -0.25 if hasOutposts else Hostility_Modifier
+	
+	for planet in planets:
+		planet.ArtifactCount = randomArtifactCount(clamp(rng.randf() + system_difficulty, 0.0, 1.0) )
+		planet.HazardCount = randomArtifactCount(clamp(rng.randf() + system_difficulty, 0.0, 1.0) )
+		planet.ResourceCount = randomArtifactCount(clamp(rng.randf(), 0.0, 1.0) )
+		planet.OriginalArtifactCount = planet.ArtifactCount
+		planet.OriginalHazardCount = planet.HazardCount
+		planet.OriginalResourceCount = planet.ResourceCount
+		pass
 	return planets
+
 	
 func randomArtifactCount(dieRoll):
 	var threshold = Artifact0_Chance
