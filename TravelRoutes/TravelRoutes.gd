@@ -77,7 +77,7 @@ func GetRoutes():
 	var visible_systems = StarMapData.AllSystemsInRect(ScreenRect)
 	var nearby_systems = StarMapData.AllSystemsInRadius(ShipPosition, 300, visible_systems)
 #
-	#RouteLists.Sector.routes = StarMapData.StarMap.TravelRoutes
+	RouteLists.Sector.routes = StarMapData.ScannedRoutes()
 	var outpost_routes = StarMapData.AllRoutesBySystemList(nearby_systems)
 	if outpost_routes.size() > 0:
 		RouteLists.Outpost.routes = outpost_routes 
@@ -88,9 +88,9 @@ func GetRoutes():
 		for i in RouteLists[list].pool.size():
 			if i <= RouteLists[list].routes.size():
 				if camera.zoom.x > 2:
-					RouteLists[list].pool[i].get_node("LabelText").text = "%s <--> %s\r\n%.1f sector units" % [StarMapData.Systems()[RouteLists[list].routes[i].A].Name, StarMapData.Systems()[RouteLists[list].routes[i].B].Name, RouteLists[list].routes[i].Distance * StarMapData.MapScale]
+					RouteLists[list].pool[i].get_node("LabelText").text = "%s <--> %s\r\n%.1f sector units" % [StarMapData.StarMap[RouteLists[list].routes[i].ObjectPool][RouteLists[list].routes[i].A].Name, StarMapData.StarMap[RouteLists[list].routes[i].ObjectPool][RouteLists[list].routes[i].B].Name, RouteLists[list].routes[i].Distance * StarMapData.MapScale]
 				else:
-					RouteLists[list].pool[i].get_node("LabelText").text = "%s <--> %s" % [StarMapData.Systems()[RouteLists[list].routes[i].A].Name, StarMapData.Systems()[RouteLists[list].routes[i].B].Name]
+					RouteLists[list].pool[i].get_node("LabelText").text = "%s <--> %s" % [StarMapData.StarMap[RouteLists[list].routes[i].ObjectPool][RouteLists[list].routes[i].A].Name, StarMapData.StarMap[RouteLists[list].routes[i].ObjectPool][RouteLists[list].routes[i].B].Name]
 				RouteLists[list].pool[i].show()
 			else:
 				RouteLists[list].pool[i].hide()
@@ -113,8 +113,8 @@ func _drawTravelRoutes(Routes):
 	
 	for i in Routes.routes.size():
 		var rte = Routes.routes[i - 1]
-		var from = StarMapData.SystemPosition(StarMapData.Systems()[rte.A]) * StarMapData.MapScale
-		var to = StarMapData.SystemPosition(StarMapData.Systems()[rte.B]) * StarMapData.MapScale
+		var from = StarMapData.SystemPosition(StarMapData.StarMap[rte.ObjectPool][rte.A]) * StarMapData.MapScale
+		var to = StarMapData.SystemPosition(StarMapData.StarMap[rte.ObjectPool][rte.B]) * StarMapData.MapScale
 		draw_line(from,to,Routes.color,Routes.width,true)
 		var segment = GetSubSegment(from, to)
 		var label_point = Geometry.get_closest_point_to_segment_2d(ShipPosition, segment[0], segment[1])

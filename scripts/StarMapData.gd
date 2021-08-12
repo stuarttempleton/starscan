@@ -81,7 +81,9 @@ func LoadMapData(filename):
 	if !StarMap.has("TravelRoutes") || StarMap.TravelRoutes == null:
 		StarMap.TravelRoutes = []
 	SetAllSystemOutpostFlags()
-	SetSystemRoutes()
+	#SetSystemRoutes()
+	SetAllDefaultNebulaScans()
+	SetWormholeRoutes()
 	SetOutpostRoutes()
 	Loaded = true
 	SavedSinceLoad = false
@@ -127,6 +129,10 @@ func SystemHasPlanetWithHazards(system):
 			return true
 	return false
 
+func SetAllDefaultNebulaScans():
+	for nebula in StarMap.Nebulae:
+		if !nebula.has("Scan"):
+			nebula.Scan = 0.0
 
 func SetAllSystemOutpostFlags():
 	for system in StarMap.Systems :
@@ -146,17 +152,33 @@ func SetSystemRoutes():
 		if !RouteListHas(StarMap.TravelRoutes, route):
 			StarMap.TravelRoutes.append(route)
 			
-func OutpostsByDistance(origin_outpost):
+func ObjectsByDistance(origin, objects_by_index, object_pool = "Systems"):
 	var list = []
-	var system_list = AllOutpostSystemsByIndex()
-	for i in system_list:
-		if origin_outpost.Name != StarMap.Systems[i].Name:
-			list.append({"A":i,"Distance":DistanceBetween(StarMap.Systems[i], origin_outpost)})
+	for i in objects_by_index:
+		if origin.Name != StarMap[object_pool][i].Name:
+			list.append({"A":i,"Distance":DistanceBetween(StarMap[object_pool][i], origin)})
 	list.sort_custom(self, "DistanceComparisonSort")
 	return list
 	
 func DistanceComparisonSort(a, b):
 	return a.Distance < b.Distance
+
+func ArrayMinusItem(_array, _item):
+	return []
+
+func SetWormholeRoutes():
+	var nebs = AllNebulaeByIndex()
+	while nebs.size() > 0:
+		var origin = nebs[0]
+		nebs.remove(0) 
+		var endpoints = ObjectsByDistance(StarMap.Nebulae[origin], nebs, "Nebulae")
+		var destination = endpoints[0]
+		nebs.erase(destination.A)
+		var route = NewRoute([origin, destination.A], "Nebulae")
+		if !RouteListHas(StarMap.TravelRoutes, route):
+			StarMap.TravelRoutes.append(route)
+		StarMap.Nebulae[origin].Destination = StarMap.Nebulae[destination.A].Name
+		StarMap.Nebulae[destination.A].Destination = StarMap.Nebulae[origin].Name
 
 func SetOutpostRoutes():
 	var system_list = AllOutpostSystemsByIndex()
@@ -168,13 +190,22 @@ func SetOutpostRoutes():
 	var maxsystem = system_list.size() - 1
 	for i in system_list:
 		qty = 2 + StarMap.Systems[i].Planets.size() / 3
-		var neighbors_by_distances = OutpostsByDistance(StarMap.Systems[i])
+		var neighbors_by_distances = ObjectsByDistance(StarMap.Systems[i], system_list)
 		for _outpost in neighbors_by_distances.slice(0, qty - 1):
 			var route = NewRoute([i,_outpost.A])
 			if !StarMap.Systems[i].has("TravelRoutes") || StarMap.Systems[i].TravelRoutes == null:
 				StarMap.Systems[i].TravelRoutes = []
 			if !RouteListHas(StarMap.Systems[i].TravelRoutes, route):
 				StarMap.Systems[i].TravelRoutes.append(route)
+
+func ScannedRoutes():
+	var list = []
+	for rte in StarMap.TravelRoutes:
+		var a_scanned = (StarMap[rte.ObjectPool][rte.A].Scan > 0)
+		var b_scanned = (StarMap[rte.ObjectPool][rte.B].Scan > 0)
+		if a_scanned or b_scanned:
+			list.append(rte)
+	return list
 
 func SystemPosition(system, use_mapscale = false):
 	return Vector2(system.X, system.Y)
@@ -185,12 +216,13 @@ func DistanceBetween(system_a, system_b):
 func AngleBetween(system_a, system_b):
 	return rad2deg(SystemPosition(system_a).angle_to_point(SystemPosition(system_b)))
 
-func NewRoute(ab):
+func NewRoute(ab, object_pool = "Systems"):
 	var route = {
 		"A": ab[0],
 		"B": ab[1],
-		"Distance": DistanceBetween(StarMap.Systems[ab[0]], StarMap.Systems[ab[1]]),
-		"Angle": AngleBetween(StarMap.Systems[ab[0]], StarMap.Systems[ab[1]])
+		"ObjectPool":object_pool,
+		"Distance": DistanceBetween(StarMap[object_pool][ab[0]], StarMap[object_pool][ab[1]]),
+		"Angle": AngleBetween(StarMap[object_pool][ab[0]], StarMap[object_pool][ab[1]])
 	}
 	return route
 
@@ -202,6 +234,7 @@ func RouteListHas(route_list, route):
 		elif rte.A == route.B and rte.B == route.A:
 			has = true
 	return has
+
 
 func IncrementIfSame(a, b):
 	if a == b: b -= 1
@@ -216,7 +249,15 @@ func AllOutpostSystemsByIndex():
 			list.append(index)
 		index += 1
 	return list
-
+	
+func AllNebulaeByIndex():
+	var list = []
+	var index = 0
+	for system in StarMap.Nebulae:
+		list.append(index)
+		index += 1
+	return list
+	
 func AllRoutesByIndex(index):
 	if StarMap.Systems[index].has("TravelRoutes"):
 		return StarMap.Systems[index].TravelRoutes
@@ -329,11 +370,18 @@ func FindNearestSystem(origin):
 	NearestSystem = NearbySystem
 	NearestSystemDistance = previous_distance
 
+func GetNearestBody():
+	if NearestNebulaDistance < NearestSystemDistance:
+		return NearestNebula
+	return NearestSystem
+
 func ScanNearestSystem(quality):
-	var is_new_scan = (NearestSystem.Scan <= 0)
-	NearestSystem.Scan = quality
-	for planet in NearestSystem.Planets:
-		ScanPlanet(planet, quality)
+	var nearest_body = GetNearestBody()
+	var is_new_scan = (nearest_body.Scan <= 0)
+	nearest_body.Scan = quality
+	if nearest_body.has("Planets"):
+		for planet in nearest_body.Planets:
+			ScanPlanet(planet, quality)
 	return is_new_scan
 
 func SystemHasMarker(SystemOrPlanet, Marker):

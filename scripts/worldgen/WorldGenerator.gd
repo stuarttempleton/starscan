@@ -44,7 +44,7 @@ func generate(seednumber):
 	var filename = serializeToFile(map, rng)
 	print("...World generated. Saved to file " + filename)
 	
-func serializeToFile(map, rng):	
+func serializeToFile(map, rng):
 	StarMapData.StarMap = map
 	var currtime = OS.get_datetime()
 	var filename = "user://Starmap_%04d-%02d-%02d_%02d-%02d-%02d_%s.json" % [currtime.year, currtime.month, currtime.day, currtime.hour, currtime.minute, currtime.second, str(rng.seed)]
@@ -57,6 +57,8 @@ func generateNebulae(rng):
 	posGen.MaxTargetTries = MaxTargetTries
 	posGen.MinStarDistance = MinNebulaDistance
 	var positions = posGen.generate(rng)
+	if positions.size() % 2 > 0:
+		positions.pop_back()
 	var nebCount = positions.size()
 	var nebs = []
 	nebs.resize(nebCount)
@@ -65,6 +67,7 @@ func generateNebulae(rng):
 		neb.Name = NameGenerator.CreateWord().capitalize()
 		neb.X = positions[i].x
 		neb.Y = positions[i].y
+		neb.Scan = 0.0
 		neb.Size = StarMapData.PlanetSizes[rng.randi_range(0, StarMapData.PlanetSizes.size()-1)]
 		nebs[i] = neb
 	return nebs

@@ -21,4 +21,8 @@ func mouse_exit():
 func _on_button_down():
 	AudioPlayer._play_UI_Button_Select()
 	hoverflag = false
-	SceneChanger.LoadScene(SystemViewport_scene)
+	var Nearby = StarMapData.GetNearestBody()
+	if Nearby.has("Destination"):
+		print("Entering wormhole to %s" % [Nearby.Destination])
+	else:
+		SceneChanger.LoadScene(SystemViewport_scene)
