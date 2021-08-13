@@ -29,6 +29,7 @@ func EnterWormholeTo(target):
 		jump_location = target
 		CurrentState = State.ScaleDown
 		avatar.look_enabled = false
+		SceneChanger.Fade(0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -42,6 +43,7 @@ func _process(delta):
 		State.JumpLocation:
 			avatar.JumpToMapPosition(jump_location) #or animate movement like a tow
 			CurrentState = State.ScaleUp
+			SceneChanger.UnFade(0)
 		State.ScaleUp:
 			avatar.modulate.a = clamp(avatar.modulate.a + delta * fade_rate, min_lerp, max_lerp)
 			avatar.scale.x = clamp(avatar.scale.x + delta * scale_rate, min_lerp, max_lerp)
