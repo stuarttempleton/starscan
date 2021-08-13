@@ -11,6 +11,7 @@ var MapSavedZoom
 var mouseIsPressed = false
 var ShipIsTowing = false
 var UsingMap = false
+var look_enabled = true
 
 signal TowingAlert(bool_is_towing)
 var playedWarpOnce = false
@@ -135,7 +136,8 @@ func _physics_process(_delta):
 			availableFuelFraction = 1
 		var speedToHitTargetThisFrame = availableFuelFraction * distanceToTravel / _delta
 		
-		look_at(target)
+		if look_enabled:
+			look_at(target)
 		velocity = position.direction_to(target) * speedToHitTargetThisFrame
 		velocity = move_and_slide(velocity)
 		if !ShipIsTowing:

@@ -208,7 +208,8 @@ func ScannedRoutes():
 	return list
 
 func SystemPosition(system, use_mapscale = false):
-	return Vector2(system.X, system.Y)
+	var scale = MapScale if use_mapscale else 1.0
+	return Vector2(system.X, system.Y) * scale
 	
 func DistanceBetween(system_a, system_b):
 	return SystemPosition(system_a).distance_to(SystemPosition(system_b))
@@ -374,6 +375,12 @@ func GetNearestBody():
 	if NearestNebulaDistance < NearestSystemDistance:
 		return NearestNebula
 	return NearestSystem
+
+func GetBodyByName(body_name, object_pool = "Systems"):
+	for body in StarMap[object_pool]:
+		if body.Name == body_name:
+			return body
+	print("UNKNOWN BODY NAME")
 
 func ScanNearestSystem(quality):
 	var nearest_body = GetNearestBody()
