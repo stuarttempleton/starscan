@@ -44,7 +44,6 @@ func _process(delta):
 		State.JumpLocation:
 			avatar.JumpToMapPosition(jump_location)
 			CurrentState = State.ScaleUp
-			AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.ANOMALY_ARRIVE)
 			SceneChanger.UnFade(0)
 		State.ScaleUp:
 			avatar.modulate.a = clamp(avatar.modulate.a + delta * fade_rate, min_lerp, max_lerp)
