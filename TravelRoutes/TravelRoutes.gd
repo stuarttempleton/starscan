@@ -9,8 +9,8 @@ var RouteLists = {
 	"Sector": {
 		"routes": [],
 		"pool": [],
-		"color": Color(0.517647, 0, 0.780392, 0.235294),
-		"width": 30
+		"color": Color(0.662745, 0, 1, 0.67451),
+		"width": 10
 	},
 	"Outpost":{
 		"routes": [],
@@ -22,7 +22,7 @@ var RouteLists = {
 		"routes": [],
 		"pool": [],
 		"color": Color(0.780392, 0.419608, 0, 0.235294),
-		"width": 15
+		"width": 10
 	}
 }
 

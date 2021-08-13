@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Wormhole/Wormhole.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Wormhole/wormhole_testharness.gd" type="Script" id=2]
+
+[node name="wormhole_testscene" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Wormhole" parent="." instance=ExtResource( 1 )]
+position = Vector2( 640, 384 )
+
+[node name="Reveal" type="Button" parent="."]
+margin_left = 608.0
+margin_top = 512.0
+margin_right = 672.0
+margin_bottom = 532.0
+text = "Reveal"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hide" type="Button" parent="."]
+margin_left = 608.0
+margin_top = 552.0
+margin_right = 672.0
+margin_bottom = 572.0
+text = "Hide"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Reveal" to="." method="_on_Reveal_pressed"]
+[connection signal="pressed" from="Hide" to="." method="_on_Hide_pressed"]

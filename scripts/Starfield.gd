@@ -4,14 +4,22 @@ extends Node2D
 var MapScale = StarMapData.MapScale
 var PlanetSizeScale = 5
 export var NebulaPath = ""
+export var WormholePath = ""
 
 func _ready():
 	GameController.EnterGameLoop(true)
 	for nebula in StarMapData.Nebulae():
 		AddNebulaToMap(Vector2(nebula.X * MapScale, nebula.Y * MapScale), StarMapData.get_nebula_scale(nebula.Size) * (MapScale / 10000))
+		AddWormholeToMap(Vector2(nebula.X * MapScale, nebula.Y * MapScale))
 		pass
 
+func AddWormholeToMap(pos):
+	var loaded_scene = load(WormholePath)
+	var wormhole = loaded_scene.instance()
+	add_child(wormhole)
 	
+	wormhole.position = pos
+
 func AddNebulaToMap(pos,size):
 	var loaded_scene = load(NebulaPath)
 	var nebula = loaded_scene.instance()
