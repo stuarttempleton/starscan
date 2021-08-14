@@ -39,7 +39,7 @@ func _cheat_toggle_godmode():
 	emit_signal('cheat_godmode')
 	
 func _cheat_setscan(newScan):
-	clamp(newScan, 0.0, 1.0)
+	newScan = clamp(newScan, 0.0, 1.0)
 	Console.write_line('Setting scan level for nearest system, %s, to %f (currently %f)' % [StarMapData.NearestSystem.Name, newScan, StarMapData.NearestSystem.Scan])
 	StarMapData.ScanNearestSystem(newScan)
 	emit_signal('cheat_setscan')

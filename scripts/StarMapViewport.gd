@@ -50,7 +50,7 @@ func MapToggle(usemap):
 #			return planet
 #	return false
 	
-func StartingTextDone(choice):
+func StartingTextDone(_choice):
 	ShipData.Ship().FirstRun = false
 	GameNarrativeDisplay.disconnect("ChoiceSelected",self,"StartingTextDone")
 

@@ -18,8 +18,6 @@ onready var resultTextAnimator = get_node(resultTextAnimator_path)
 export(NodePath) var minigameRoot_path
 onready var minigameRoot = get_node(minigameRoot_path)
 
-signal success
-signal fail
 signal complete
 
 export(Curve) var success_curve

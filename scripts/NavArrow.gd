@@ -14,7 +14,7 @@ var MapScale = StarMapData.MapScale
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	var ship = ShipData.Ship()
 	var shipPos = Vector2(ship.X, ship.Y)
 		

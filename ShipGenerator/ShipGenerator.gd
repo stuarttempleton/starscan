@@ -58,6 +58,6 @@ func _generate( SeedNumber = -1):
 	TurnOnRandomEntry(ship_paint_detail, true, true, rng.randi_range(1,2))
 
 
-func _on_Button_toggled(button_pressed):
+func _on_Button_toggled(_button_pressed):
 	print("Generating new ship")
 	_generate(-1)

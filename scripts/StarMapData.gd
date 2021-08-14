@@ -187,7 +187,6 @@ func SetOutpostRoutes():
 	rng = RandomNumberGenerator.new()
 	rng.seed = StarMap.MapSeed
 	
-	var maxsystem = system_list.size() - 1
 	for i in system_list:
 		qty = 2 + StarMap.Systems[i].Planets.size() / 3
 		var neighbors_by_distances = ObjectsByDistance(StarMap.Systems[i], system_list)

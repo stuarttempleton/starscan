@@ -47,7 +47,7 @@ func GetStoryText():
 	else:
 		return StoryGenerator.Lose()
 
-func _process(delta):
+func _process(_delta):
 	if !handlingGameOver && isInGame:
 		if WinConditionMet():
 			handlingGameOver = true

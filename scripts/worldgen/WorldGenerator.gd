@@ -90,7 +90,7 @@ func generateStars(rng):
 		stars[i] = star
 	return stars
 		
-func generatePlanets(rng, starName):
+func generatePlanets(rng, _starName):
 	var planetCount = rng.randi_range(MinPlanetsPerStar, MaxPlanetsPerStar)
 	var planets = []
 	var hasOutposts = false

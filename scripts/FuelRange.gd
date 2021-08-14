@@ -21,7 +21,7 @@ func _draw():
 	draw_circle_arc(to_local(target), fuel_range * 0.33, 0, 360, Color(0.198944, 0.568035, 0.960938))
 
 
-func _process(delta):
+func _process(_delta):
 	target = Vector2(get_parent().global_position.x, get_parent().global_position.y)
 	fuel_range = ship.Fuel / ship.FuelPerUnitDistance
 	update()

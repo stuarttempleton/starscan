@@ -30,7 +30,6 @@ func Greeting(Planet):
 
 func SystemStory(System, Cost):
 	var title = "Entering " + System.Name
-	var planet_sub_boiler_plate = "%s: %s, %s"
 	var txt = "Captain, we are entering system %s. There are %s orbital bodies to explore. " % [System.Name, System.Planets.size()]
 	if Cost.Crew > 0:
 		txt += "We lack the resources for a safe entry and have reports of casualties throughout the ship. "
@@ -99,7 +98,7 @@ func RomanNumeral(num):
 		if num != 0:
 			var quotient = num / x
 			if quotient != 0:
-				for y in range(quotient):
+				for _y in range(quotient):
 					roman_num += intToroman[x]
 			num = num%x
 	
@@ -147,7 +146,6 @@ func PlanetStory(System, Planet):
 	txt += hint + "\r\n\r\n"
 	txt += "You have the console. "
 	
-	var scan_txt = "System scans are currently at %s percent." % [System.Scan]
 	txt += stats_boiler % [ScanConfidence(System.Scan)]
 	return main_boiler % [title, txt]
 
@@ -162,7 +160,7 @@ func Outpost_Promenade(system, planet, routes):
 	txt += "\r\n\r\n"
 	return txt
 
-func Outpost_Refuel(system, planet, qty):
+func Outpost_Refuel(system, _planet, qty):
 	var txt = "%s is currently docked. Maintenance scans and refueling have completed. \r\n\r\n" % [ ShipData.Ship().Name]
 	if qty > 0:
 		txt += "It looks like you've seen some time in space. All costs are covered by the Supercluster Federation. "
@@ -176,7 +174,7 @@ func Outpost_Refuel(system, planet, qty):
 	txt += "\r\n\r\n"
 	return txt
 
-func Outpost_ScienceBay(system, planet, qty):
+func Outpost_ScienceBay(_system, _planet, qty):
 	var txt = ""
 	if qty > 0:
 		txt += "Captain, we have received your latest  %s contributions and will begin researching them immediately. " % [str(qty)]
@@ -326,10 +324,7 @@ func Lose():
 	return main_boiler % [title, txt]
 
 func PlayStats():
-	var stats = ShipData.StarShip.PlayStats
-	
 	var title = "Your Attributes"
-	var SectorLeaderName = $WordGenerator.CreateWord().capitalize()
 	var stat_boiler = "[indent][code][color=#00ff00]%s[/color][/code][/indent]\r\n"
 	var txt = "During your journey..."
 	txt += "\r\n\r\n"

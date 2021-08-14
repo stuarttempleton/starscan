@@ -8,10 +8,10 @@ export var boiler_plate = "%s (%.1f sector units)"
 export var UseOutpostInstead = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#SetSystemText(StarMapData.Systems()[0])
+	#SetSystemText()
 	pass
 
-func SetSystemText(system):
+func SetSystemText():
 	var SystemName = "No Systems Nearby"
 	var SystemDistance = INF
 	if UseOutpostInstead:
@@ -29,4 +29,4 @@ func SetSystemText(system):
 	text = boiler_plate % [SystemName, SystemDistance * StarMapData.MapScale]
 
 func _physics_process(_delta):
-	SetSystemText(StarMapData.NearestSystem)
+	SetSystemText()

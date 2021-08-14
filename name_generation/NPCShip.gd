@@ -39,7 +39,6 @@ func GenerateNPCShip(disposition):
 						"Buccaneer"
 						]}
 	var wordgen = get_parent()
-	randi() % Vessel.Friendly.size()-1
 
 	var Ship = {
 		"Captain" : wordgen.CreateWord().capitalize(),

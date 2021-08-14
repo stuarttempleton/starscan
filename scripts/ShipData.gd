@@ -110,10 +110,9 @@ func TurnInArtifacts():
 	return qty #report how many we turned in for displayor whatever
 
 
-func TurnInCargoType(cargoType, tradeValue, qty):
+func TurnInCargoType(cargoType, _tradeValue, qty):
 	if qty > GetInventoryQTYFor(cargoType):
 		qty = GetInventoryQTYFor(cargoType)
-	var loot = qty * tradeValue
 	GainInventoryItem(cargoType, qty * -1) #nuke it
 	return qty
 
@@ -123,7 +122,6 @@ func GetInventoryQTYFor(resourceName):
 	for cargo in StarShip.Inventory:
 		if cargo.Type == resourceName:
 			return cargo.Quantity
-			break
 	return qty
 
 
