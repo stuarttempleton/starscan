@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/starscan_wormhole.ogg-a55cd06d736623534ddd31a29af8d612.oggstr"
+
+[deps]
+
+source_file="res://Audio/MUSIC/starscan_wormhole.ogg"
+dest_files=[ "res://.import/starscan_wormhole.ogg-a55cd06d736623534ddd31a29af8d612.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

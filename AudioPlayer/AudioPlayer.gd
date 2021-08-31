@@ -42,7 +42,7 @@ export var Audio = {
 	AUDIO_KEY.UI_BUTTON_HOVER:"res://Audio/UI/288949__littlerobotsoundfactory__click-electronic-03.ogg",
 	AUDIO_KEY.UI_BUTTON_SELECT:"res://Audio/UI/288965__littlerobotsoundfactory__click-electronic-13.ogg",
 	
-	AUDIO_KEY.ANOMALY_TRAVEL:"res://Audio/SFX/401116__s-cheremisinov__sd-low-06.ogg",
+	AUDIO_KEY.ANOMALY_TRAVEL:"res://Audio/MUSIC/starscan_wormhole.ogg",
 	
 	AUDIO_KEY.BG_SPACE:"res://Audio/BG/270525__littlerobotsoundfactory__ambience-space-00.ogg",
 	AUDIO_KEY.BG_BRIDGE:"res://Audio/MUSIC/starscan_transition_bridge_sound.ogg",

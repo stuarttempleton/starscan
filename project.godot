@@ -21,8 +21,10 @@ _global_script_class_icons={
 [application]
 
 config/name="Starscan"
+config/description="Scarscan"
 run/main_scene="res://scenes/Title.tscn"
-config/icon="res://icon.png"
+config/icon="res://AppIcon/starscan_icon.png"
+config/windows_native_icon="res://AppIcon/icon.ico"
 
 [autoload]
 
