@@ -97,7 +97,7 @@ bbcode_text = "[center][b]CREDITS[/b]
 The source code to this project is freely available on GitHub:
 [i]https://github.com/stuarttempleton/project-starscan[/i]
 
-Some audio provided by LittleRobotSoundFactory under CC-BY-03 license:
+Some audio provided by LittleRobotSoundFactory under CC-BY-3.0 license:
 [i]UI Sound Effects Library & Sci-Fi Sound Effects Library[/i][/center]"
 text = "CREDITS
 
@@ -106,7 +106,7 @@ Starscan (2021) was created by VOLTUR and TARLNU.
 The source code to this project is freely available on GitHub:
 https://github.com/stuarttempleton/project-starscan
 
-Some audio provided by LittleRobotSoundFactory under CC-BY-03 license:
+Some audio provided by LittleRobotSoundFactory under CC-BY-3.0 license:
 UI Sound Effects Library & Sci-Fi Sound Effects Library"
 __meta__ = {
 "_edit_use_anchors_": false
