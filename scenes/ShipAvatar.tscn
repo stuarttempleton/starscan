@@ -1,9 +1,8 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://StarField/StarField.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/ShipAvatar.gd" type="Script" id=2]
 [ext_resource path="res://sprites/LSS_Transporter.png" type="Texture" id=3]
-[ext_resource path="res://sprites/LSS_Science.png" type="Texture" id=4]
 [ext_resource path="res://Audio/SFX/270553__littlerobotsoundfactory__warpdrive-00.ogg" type="AudioStream" id=5]
 [ext_resource path="res://Audio/SFX/274187__littlerobotsoundfactory__spaceengine-controlroom-loop-00.ogg" type="AudioStream" id=6]
 [ext_resource path="res://scenes/NavArrow.tscn" type="PackedScene" id=7]
@@ -146,11 +145,6 @@ visible = false
 self_modulate = Color( 1.3, 1.2, 1.3, 1 )
 rotation = -1.5708
 texture = ExtResource( 10 )
-
-[node name="LSS_Science" type="Sprite" parent="ShipAvatar"]
-visible = false
-rotation = -1.5708
-texture = ExtResource( 4 )
 
 [node name="LSS_Transporter" type="Sprite" parent="ShipAvatar"]
 position = Vector2( 160, 0 )
