@@ -92,7 +92,7 @@ custom_fonts/normal_font = SubResource( 9 )
 bbcode_enabled = true
 bbcode_text = "[center][b]CREDITS[/b]
 
-[b]Starscan[/b] (2021) was created by [b]VOLTUR[/b] and [b]TARLNU[/b].
+[b]Starscan[/b] (2021) was created by [b]VOLTUR[/b] and [b]TALRNU[/b].
 
 The source code to this project is freely available on GitHub:
 [i]https://github.com/stuarttempleton/project-starscan[/i]
@@ -101,7 +101,7 @@ Some audio provided by LittleRobotSoundFactory under CC-BY-3.0 license:
 [i]UI Sound Effects Library & Sci-Fi Sound Effects Library[/i][/center]"
 text = "CREDITS
 
-Starscan (2021) was created by VOLTUR and TARLNU.
+Starscan (2021) was created by VOLTUR and TALRNU.
 
 The source code to this project is freely available on GitHub:
 https://github.com/stuarttempleton/project-starscan
