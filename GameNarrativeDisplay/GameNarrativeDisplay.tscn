@@ -21,30 +21,29 @@ font_path = "res://fonts/Montserrat-SemiBoldItalic.ttf"
 size = 20
 font_data = SubResource( 3 )
 
-[sub_resource type="DynamicFontData" id=10]
+[sub_resource type="DynamicFontData" id=5]
 font_path = "res://fonts/Montserrat-Italic.ttf"
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=6]
 size = 20
-font_data = SubResource( 10 )
+font_data = SubResource( 5 )
 
 [sub_resource type="DynamicFontData" id=7]
 font_path = "res://fonts/Montserrat-SemiBold.ttf"
 
-[sub_resource type="DynamicFont" id=12]
-size = 20
+[sub_resource type="DynamicFont" id=8]
+size = 19
 font_data = SubResource( 7 )
 
 [sub_resource type="DynamicFont" id=9]
-size = 20
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFontData" id=13]
+[sub_resource type="DynamicFontData" id=10]
 font_path = "res://fonts/Montserrat-Medium.ttf"
 
-[sub_resource type="DynamicFont" id=14]
+[sub_resource type="DynamicFont" id=11]
 size = 15
-font_data = SubResource( 13 )
+font_data = SubResource( 10 )
 
 [node name="GameNarrativeDisplay" type="CanvasLayer"]
 pause_mode = 2
@@ -96,8 +95,8 @@ margin_right = 928.0
 margin_bottom = 512.0
 custom_fonts/mono_font = SubResource( 2 )
 custom_fonts/bold_italics_font = SubResource( 4 )
-custom_fonts/italics_font = SubResource( 11 )
-custom_fonts/bold_font = SubResource( 12 )
+custom_fonts/italics_font = SubResource( 6 )
+custom_fonts/bold_font = SubResource( 8 )
 custom_fonts/normal_font = SubResource( 9 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
@@ -106,7 +105,7 @@ bbcode_text = "[b]Greetings, Nomad![/b]
 You have been chosen.
 
 REFUEL and BEGIN your journey."
-text = "[b]Greetings, Nomad![/b]
+text = "Greetings, Nomad!
 
 You have been chosen.
 
@@ -138,7 +137,7 @@ custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = SubResource( 14 )
+custom_fonts/font = SubResource( 11 )
 text = "BUTTON1"
 
 [node name="Button2" type="Button" parent="MessageBoxUI/HBoxContainer"]
@@ -151,7 +150,7 @@ custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = SubResource( 14 )
+custom_fonts/font = SubResource( 11 )
 text = "BUTTON2"
 
 [node name="Button3" type="Button" parent="MessageBoxUI/HBoxContainer"]
@@ -164,7 +163,7 @@ custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = SubResource( 14 )
+custom_fonts/font = SubResource( 11 )
 text = "BUTTON3"
 
 [node name="Button4" type="Button" parent="MessageBoxUI/HBoxContainer"]
@@ -177,7 +176,7 @@ custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = SubResource( 14 )
+custom_fonts/font = SubResource( 11 )
 text = "BUTTON4"
 
 [connection signal="pressed" from="MessageBoxUI/HBoxContainer/Button1" to="." method="_on_Button1_pressed"]
