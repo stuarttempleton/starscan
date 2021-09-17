@@ -18,12 +18,14 @@ If you're building for Windows, you might need to follow the instructions for in
 # Contributing
 If I'm being completely honest, I haven't really thought this part through very much. I will happily review pull requests and would love to have other folk contribute features. If there's enough interest, I might make some kind of plugin system for it.
 
-# Attribution
-Some audio in Starscan is [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) and it's important to respect that. Please keep that in mind.
+# License and Attribution
+This project is licensed under the [GPLv2 License](https://github.com/stuarttempleton/starscan/blob/main/LICENSE) except for:
+
+- Some audio in Starscan is [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) and is listed in [ATTRIBUTIONS.md](https://github.com/stuarttempleton/starscan/blob/main/ATTRIBUTIONS.md).
+- [Godot Console](https://github.com/quentincaffeino/godot-console) (/quentincaffeino-console) is licensed under the [MIT License](https://github.com/quentincaffeino/godot-console/blob/develop/LICENSE.md).
 
 As for me? I would appreciate some manner of attribution if you do fork or use this project or its code. I'm not super picky, but a h/t would be nice.
 
-Check out the ATTRIBUTIONS.md file for an ongoing list of *CC BY 3.0* stuff.
 
 
 
