@@ -11,7 +11,9 @@ var MaxTimerSizeInSeconds = 60 * 60 * 24
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# warning-ignore:return_value_discarded
 	GameController.connect("gameloop_state", self, "GameLoopState")
+	# warning-ignore:return_value_discarded
 	GameController.connect("pause_state", self, "PauseTimer")
 #	testPrint(2,3,4)
 #	testPrint(0,3,4)

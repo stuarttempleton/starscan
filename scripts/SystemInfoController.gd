@@ -7,6 +7,7 @@ var DisplayedSystem
 var NarrativeYield = false
 
 func _ready():
+	# warning-ignore:return_value_discarded
 	$Background/InfoContainer/ScanButton.connect("minigameComplete", self, "RefreshDisplayedData")
 
 func NearestBody():

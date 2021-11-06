@@ -20,7 +20,9 @@ func _ready():
 	self.position = Vector2(ShipData.Ship().X * MapScale, ShipData.Ship().Y * MapScale)
 	target = self.position
 	GameController.ResetMoveBlock()
+	# warning-ignore:return_value_discarded
 	ShipData.connect("FuelTanksEmpty", self, "_on_FuelTanksEmpty")
+	# warning-ignore:return_value_discarded
 	GameController.connect("map_state", self, "MapToggle")
 
 func _input(event):
@@ -194,6 +196,7 @@ func _on_FuelTanksEmpty():
 			if TowEncounter.Artifacts > 0:
 				opts.append("%s ARTIFACT%s" % [TowEncounter.Artifacts, "S" if TowEncounter.Artifacts > 1 else ""])
 		AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_HAIL_FRIENDLY if TowEncounter.Friendly else AudioPlayer.AUDIO_KEY.DIALOG_HAIL_HOSTILE)
+		# warning-ignore:return_value_discarded
 		GameNarrativeDisplay.connect("ChoiceSelected", self, "DialogChoice")
 		GameNarrativeDisplay.DisplayText(StoryGenerator.LowFuel(TowEncounter),opts)
 

@@ -19,6 +19,8 @@ export(NodePath) var minigameRoot_path
 onready var minigameRoot = get_node(minigameRoot_path)
 
 signal complete
+signal success
+signal fail
 
 export(Curve) var success_curve
 export(Curve) var speed_curve

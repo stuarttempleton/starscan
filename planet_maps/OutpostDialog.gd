@@ -29,6 +29,7 @@ func DialogBegin(planet):
 
 
 func DialogPrompt():
+	# warning-ignore:return_value_discarded
 	GameNarrativeDisplay.connect("ChoiceSelected", self, "ChoiceResponse")	
 	GameNarrativeDisplay.DisplayText(StoryGenerator.OutpostStory(State, System, Planet, Qty, RoutesAdded), Options)
 

@@ -14,7 +14,9 @@ var Scan
 var poi_nodes = []
 
 func _ready():
+	# warning-ignore:return_value_discarded
 	Cheat.connect("cheat_resetpois", self, "_reset")
+	# warning-ignore:return_value_discarded
 	Cheat.connect("cheat_setscan", self, "_reset")
 
 func _reset():

@@ -20,8 +20,11 @@ func get_planet_scale(size_str):
 
 
 func _ready():
+	# warning-ignore:return_value_discarded
 	$ClickArea.connect("planet_selected", self, "planet_selected")
+	# warning-ignore:return_value_discarded
 	$ClickArea.connect("planet_hover", self, "planet_hover")
+	# warning-ignore:return_value_discarded
 	$ClickArea.connect("planet_unhover", self, "planet_unhover")
 
 func planet_hover(planet_position, planet_name):

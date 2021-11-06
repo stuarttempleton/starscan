@@ -7,6 +7,7 @@ func _ready():
 	if ShipData.Ship().FirstRun:
 		_on_FirstPlay()
 	GameController.EnableMap()
+	# warning-ignore:return_value_discarded
 	GameController.connect("map_state", self, "MapToggle")
 	
 func _on_FirstPlay():
@@ -25,6 +26,7 @@ func _on_FirstPlay():
 	
 	ShipData.SaveShip()
 	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_HAIL)
+	# warning-ignore:return_value_discarded
 	GameNarrativeDisplay.connect("ChoiceSelected", self, "StartingTextDone")
 	#GameNarrativeDisplay.DisplayText(StoryGenerator.Lose(),["Begin"])
 	GameNarrativeDisplay.DisplayText(StoryGenerator.Greeting(StarMapData.GetOutpost(nearestOutpostSystem)),["Begin"])

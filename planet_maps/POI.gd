@@ -11,8 +11,11 @@ var lerpSpeed = 10
 
 func _ready():
 	$Hover.hide()
+	# warning-ignore:return_value_discarded
 	$ClickArea.connect("selected", self, "selected")
+	# warning-ignore:return_value_discarded
 	$ClickArea.connect("hover", self, "hover")
+	# warning-ignore:return_value_discarded
 	$ClickArea.connect("unhover", self, "unhover")
 
 func hover(hover_position):
@@ -40,6 +43,7 @@ func selected():
 		get_parent().get_parent().get_parent().get_parent().POISelect(POIModel.ActualType)
 		CollectPOI(POIModel.ActualType, qty)
 		AudioPlayer.PlaySFX(GetAudioKeyForPOI(POIModel.ActualType))
+		# warning-ignore:return_value_discarded
 		GameNarrativeDisplay.connect("ChoiceSelected", self, "StoryResponse")
 		GameNarrativeDisplay.DisplayText(StoryGenerator.POIStory(POIModel.ActualType, qty),["OK"])
 	pass
@@ -65,7 +69,7 @@ func CollectPOI(POIType, qty):
 		"Hazard":
 			ShipData.DeductCrew(qty)
 
-func StoryResponse(choice):
+func StoryResponse(_choice):
 	GameNarrativeDisplay.disconnect("ChoiceSelected", self, "StoryResponse")
 	_setPOIInfo("Exhausted", "Exhausted")
 	pass

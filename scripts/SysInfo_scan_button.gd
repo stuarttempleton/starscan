@@ -9,8 +9,11 @@ var minigame
 var hoverflag = true #flag controls the stray mouse event for exit when you load a scene as an overlay
 
 func _ready():
+	# warning-ignore:return_value_discarded
 	connect("mouse_entered",self,"mouse_enter")
+	# warning-ignore:return_value_discarded
 	connect("mouse_exited",self,"mouse_exit")
+	# warning-ignore:return_value_discarded
 	connect("pressed", self, "on_button_pressed")
 
 func on_button_pressed () :

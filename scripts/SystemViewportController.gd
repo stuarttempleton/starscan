@@ -59,7 +59,7 @@ func POIUnhover():
 	if(allow_poi_click): # We are viewing the planet.
 		pass
 
-func POISelect(POIType):
+func POISelect(_POIType):
 	if(allow_poi_click): # We are viewing the planet.
 		pass
 

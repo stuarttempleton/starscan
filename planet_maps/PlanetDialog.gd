@@ -14,9 +14,10 @@ func _ready():
 
 func DialogBegin(planet):
 	Planet = planet
+	# warning-ignore:return_value_discarded
 	GameNarrativeDisplay.connect("ChoiceSelected", self, "ChoiceResponse")	
 	GameNarrativeDisplay.DisplayText(StoryGenerator.PlanetStory(System, Planet), ["OK"])
 
 
-func ChoiceResponse(choice):
+func ChoiceResponse(_choice):
 	GameNarrativeDisplay.disconnect("ChoiceSelected", self, "ChoiceResponse")

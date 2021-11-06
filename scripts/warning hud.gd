@@ -3,8 +3,11 @@ extends CanvasLayer
 
 func _ready():
 	TurnOffICM()
+	# warning-ignore:return_value_discarded
 	$"../ShipAvatarView/IntraClusterMediumTracker".connect("enter_medium", self, "TurnOnICM")
+	# warning-ignore:return_value_discarded
 	$"../ShipAvatarView/IntraClusterMediumTracker".connect("exit_medium", self, "TurnOffICM")
+	# warning-ignore:return_value_discarded
 	$"../ShipAvatarView/IntraClusterMediumTracker".connect("inside_medium", self, "CheckICM")
 
 

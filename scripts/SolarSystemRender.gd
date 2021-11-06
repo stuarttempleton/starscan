@@ -37,7 +37,7 @@ func _draw():
 
 func BuildSystem():
 	var center = Vector2(get_viewport().get_visible_rect().size.x/2, get_viewport().get_visible_rect().size.y/2)
-	var system_size = system.Planets.size()
+	var _system_size = system.Planets.size()
 	
 	#build star
 	AddPlanetToMap(center, "Giant", "Star", -1, system.Name)

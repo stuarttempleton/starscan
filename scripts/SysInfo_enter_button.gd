@@ -4,7 +4,9 @@ export(String) var SystemViewport_scene
 var hoverflag = false
 
 func _ready():
+	# warning-ignore:return_value_discarded
 	connect("mouse_entered",self,"mouse_enter")
+	# warning-ignore:return_value_discarded
 	connect("mouse_exited",self,"mouse_exit")
 
 
