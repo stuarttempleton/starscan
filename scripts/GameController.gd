@@ -88,6 +88,8 @@ func _input(_event):
 			togglePause()
 		if Input.is_action_just_released("starmap_mapview"):
 			MapToggle()
+	if Input.is_action_just_pressed("fullscreen_mode"):
+		OS.window_fullscreen = !OS.window_fullscreen
 
 func MapToggle():
 	if scene_has_map and !get_tree().paused:
