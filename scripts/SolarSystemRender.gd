@@ -2,11 +2,9 @@ extends Node2D
 
 export var planet_scene_path = ""
 var system
-
 var orbit_color = Color(0.2, 0.2, 0.2)
-var built = false
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	if (StarMapData.NearestSystem == null):
 		StarMapData.FindNearestSystem(Vector2(ShipData.Ship().X,ShipData.Ship().Y))
@@ -29,11 +27,18 @@ func _ready():
 		$"../Control/SystemAnomalyLabel".text = ""
 		$"../../Nebula/BGAudio".stop()
 		$"../../Nebula".visible = false
+		
+	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
+
+func _on_viewport_size_changed():
+	# Do whatever you need to do when the window changes!
+	print ("Viewport size changed")
+	for child in get_children():
+		child.queue_free()
+	update()
 
 func _draw():
-	if(!built):
-		BuildSystem()
-		built = true
+	BuildSystem()
 
 func BuildSystem():
 	var center = Vector2(get_viewport().get_visible_rect().size.x/2, get_viewport().get_visible_rect().size.y/2)

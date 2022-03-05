@@ -76,9 +76,6 @@ custom_fonts/font = SubResource( 2 )
 text = "TANTALUS V"
 align = 1
 script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="SystemDetailLabel" type="Label" parent="SystemView/Control"]
 anchor_top = 1.0
@@ -99,17 +96,13 @@ __meta__ = {
 
 [node name="SystemAnomalyLabel" type="Label" parent="SystemView/Control"]
 self_modulate = Color( 1, 1, 1, 0.580392 )
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -240.0
+margin_left = 1040.0
 margin_top = 144.0
+margin_right = 1280.0
 margin_bottom = 166.0
 custom_fonts/font = SubResource( 6 )
 text = "The %s Anomaly"
 align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HoverUI" type="Control" parent="."]
 visible = false
@@ -138,8 +131,8 @@ margin_left = -32.0
 margin_top = 72.0
 margin_right = 96.0
 margin_bottom = 88.0
-custom_fonts/font = SubResource( 8 )
 custom_colors/font_color = Color( 1.2, 0.51, 0, 1 )
+custom_fonts/font = SubResource( 8 )
 text = "Planet Name"
 align = 1
 __meta__ = {
@@ -161,9 +154,6 @@ margin_top = -72.0
 margin_right = -32.0
 margin_bottom = -32.0
 mouse_filter = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ActionButtons" type="VBoxContainer" parent="CanvasLayer/SystemViewUI"]
 anchor_left = 1.0
@@ -173,9 +163,6 @@ anchor_bottom = 1.0
 margin_left = -101.0
 margin_top = -40.0
 grow_vertical = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LeaveOrbit" type="Button" parent="CanvasLayer/SystemViewUI/ActionButtons"]
 visible = false
@@ -184,15 +171,15 @@ margin_bottom = 40.0
 grow_vertical = 0
 rect_min_size = Vector2( 0, 40 )
 mouse_filter = 1
+custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 16 )
 custom_styles/normal = ExtResource( 3 )
-custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
-custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 text = "LEAVE ORBIT"
 script = ExtResource( 1 )
 __meta__ = {
@@ -205,15 +192,15 @@ margin_right = 101.0
 margin_bottom = 40.0
 grow_vertical = 0
 rect_min_size = Vector2( 0, 40 )
+custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 16 )
 custom_styles/normal = ExtResource( 3 )
-custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
-custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 text = "LEAVE SYSTEM"
 script = ExtResource( 1 )
 __meta__ = {

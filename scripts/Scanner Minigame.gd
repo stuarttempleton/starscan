@@ -37,6 +37,7 @@ var scanButtonPressed = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	SceneChanger.GoAway()
 	if (StarMapData.NearestSystem == null):
 		StarMapData.FindNearestSystem(Vector2(ShipData.Ship().X,ShipData.Ship().Y))
 	
@@ -51,7 +52,10 @@ func _ready():
 	#Fit oscillator within bg assuming sbg offset left of origin is margin
 	var bgMargin = -bg.rect_position.x
 	oscillatorRange = bg.rect_size.x - bgMargin * 2
+	oscillatorRange = bg.rect_size.x
 	
+	print("bgMargin: ", bgMargin)
+	print("OscRange: ", oscillatorRange)
 	SetupSweetSpot()
 
 var increasing = true
@@ -60,7 +64,7 @@ var increasing = true
 func _process(delta):
 	if not scanButtonPressed:
 		x = fmod(x + delta * difficultyModifier, amplitude)
-		oscillator.rect_position.x = oscillatorRange * abs(x - 1.0)
+		oscillator.rect_position.x = oscillatorRange * abs(x - 1.0) + bg.rect_position.x
 		var newping = abs(x - 1.0) 
 			
 		if (newping > 0.9 and increasing == true) or (newping < 0.1 and increasing == false):
@@ -94,7 +98,7 @@ func SetupSweetSpot():
 	gradient.set_offset(3, rightMin.x)
 	
 	#Place target zone as a fraction of max oscillator size
-	sweetSpot.rect_position.x = oscillatorRange * leftMin.x
+	sweetSpot.rect_position.x = oscillatorRange * leftMin.x + bg.rect_position.x
 	sweetSpot.rect_size.x = oscillatorRange * (rightMin.x - leftMin.x)
 
 func updateText(percent, confidence):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://planet_maps/HeightMap.gd" type="Script" id=1]
 [ext_resource path="res://sprites/smokeparticle.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://planet_maps/PlanetDialog.gd" type="Script" id=7]
 [ext_resource path="res://sprites/grid_square.png" type="Texture" id=8]
 [ext_resource path="res://scenes/PlayerStats.tscn" type="PackedScene" id=9]
+[ext_resource path="res://planet_maps/AnomalyDialog.gd" type="Script" id=10]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -85,7 +86,10 @@ scale = 3.0
 scale_random = 1.0
 color_ramp = SubResource( 12 )
 
-[node name="PlanetSurface" type="Node2D"]
+[node name="PlanetSurface" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
 script = ExtResource( 5 )
 
 [node name="PointsOfInterest" type="Node2D" parent="."]
@@ -93,14 +97,9 @@ z_index = 2
 script = ExtResource( 6 )
 
 [node name="PlanetSurfaceMap" type="Control" parent="."]
-margin_right = 1280.0
-margin_bottom = 720.0
-grow_horizontal = 2
-grow_vertical = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
 mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PlanetMap" type="TextureRect" parent="PlanetSurfaceMap"]
 material = SubResource( 3 )
@@ -113,35 +112,32 @@ texture = SubResource( 5 )
 stretch_mode = 1
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 PointsOfInterest_path = NodePath("../../PointsOfInterest")
 colormap = SubResource( 6 )
 
 [node name="Grid" type="TextureRect" parent="PlanetSurfaceMap"]
-self_modulate = Color( 1, 1, 1, 0.207843 )
+self_modulate = Color( 1, 1, 1, 0.121569 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 40.0
-margin_top = 72.0
-margin_right = 1160.0
-margin_bottom = 504.0
-rect_scale = Vector2( 0.5, 0.5 )
+margin_left = 64.0
+margin_top = 64.0
+margin_right = -64.0
+margin_bottom = -80.0
 mouse_filter = 2
 texture = ExtResource( 8 )
 stretch_mode = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PlayerStats" parent="PlanetSurfaceMap" instance=ExtResource( 9 )]
 
 [node name="PlanetName" type="Label" parent="PlanetSurfaceMap"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_top = 32.0
-margin_right = -40.0
-margin_bottom = 69.0
+margin_left = -182.0
+margin_top = 56.0
+margin_right = -63.0
+margin_bottom = 93.0
 grow_horizontal = 0
 custom_fonts/font = SubResource( 8 )
 text = "PLANET"
@@ -155,9 +151,10 @@ __meta__ = {
 [node name="PlanetInformation" type="Label" parent="PlanetSurfaceMap"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_top = 72.0
-margin_right = -40.0
-margin_bottom = 200.0
+margin_left = -208.0
+margin_top = 96.0
+margin_right = -63.0
+margin_bottom = 224.0
 grow_horizontal = 0
 custom_fonts/font = SubResource( 10 )
 text = "Type: Gas
@@ -183,3 +180,6 @@ script = ExtResource( 3 )
 
 [node name="PlanetDialog" type="Node2D" parent="."]
 script = ExtResource( 7 )
+
+[node name="AnomalyDialog" type="Node2D" parent="."]
+script = ExtResource( 10 )

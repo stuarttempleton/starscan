@@ -32,25 +32,30 @@ layer = 3
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="Control"]
-margin_left = 752.0
-margin_top = 240.0
-margin_right = 968.0
-margin_bottom = 456.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 112.0
+margin_top = -120.0
+margin_right = 328.0
+margin_bottom = 96.0
 color = Color( 1, 1, 1, 0.286275 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ColorRect2" type="ColorRect" parent="Control/ColorRect"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 214.0
-margin_bottom = 214.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -106.0
+margin_top = -106.0
+margin_right = 106.0
+margin_bottom = 106.0
 color = Color( 0, 0, 0, 0.815686 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -66,9 +71,6 @@ margin_top = -108.0
 margin_right = 312.0
 margin_bottom = 12.0
 color = Color( 0.133333, 0.133333, 0.133333, 0 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="InfoContainer" type="VBoxContainer" parent="Control/Background"]
 anchor_right = 1.0
@@ -108,15 +110,15 @@ margin_top = 129.0
 margin_right = 174.0
 margin_bottom = 154.0
 rect_min_size = Vector2( 0, 25 )
+custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 6 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 7 )
 custom_styles/normal = ExtResource( 3 )
-custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
-custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 text = "Scan System"
 script = ExtResource( 2 )
 minigame_scene = "res://scenes/Scanner Minigame.tscn"
@@ -126,15 +128,15 @@ margin_top = 158.0
 margin_right = 174.0
 margin_bottom = 183.0
 rect_min_size = Vector2( 0, 25 )
+custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 6 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 7 )
 custom_styles/normal = ExtResource( 3 )
-custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
-custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 text = "Enter System"
 script = ExtResource( 4 )
 SystemViewport_scene = "res://scenes/SystemViewport.tscn"

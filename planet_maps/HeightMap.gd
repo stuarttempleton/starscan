@@ -16,7 +16,8 @@ export var PlanetGradientMaps = {
 	"Ocean":"res://planet_maps/ocean_planet_surface_gradient.tres",
 	"Asteroid Belt":"res://planet_maps/asteroid_planet_surface_gradient.tres",
 	"Comet":"res://planet_maps/comet_planet_surface_gradient.tres",
-	"Outpost":"res://planet_maps/asteroid_planet_surface_gradient.tres"
+	"Outpost":"res://planet_maps/asteroid_planet_surface_gradient.tres",
+	"Anomaly":"res://planet_maps/asteroid_planet_surface_gradient.tres"
 }
 
 func _ready() -> void:
@@ -53,6 +54,9 @@ func _generate(planet, scan):
 	if planet.Type == "Outpost":
 		PointsOfInterest.ClearPOINodes()
 		$"../../OutpostDialog".DialogBegin(planet)
+	elif planet.Type == "Anomaly":
+		PointsOfInterest.ClearPOINodes()
+		$"../../AnomalyDialog".DialogBegin(planet)
 	else:
 		PointsOfInterest._generate(planet, scan)
 		$"../../PlanetDialog".DialogBegin(planet)

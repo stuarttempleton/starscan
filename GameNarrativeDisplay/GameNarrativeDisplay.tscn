@@ -64,41 +64,50 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 6 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="MessageBoxUI"]
-margin_left = 320.0
-margin_top = 96.0
-margin_right = 960.0
-margin_bottom = 544.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = -264.0
+margin_right = 320.0
+margin_bottom = 184.0
 color = Color( 0.396078, 0.396078, 0.396078, 0.870588 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ColorRect2" type="ColorRect" parent="MessageBoxUI"]
-margin_left = 322.0
-margin_top = 98.0
-margin_right = 958.0
-margin_bottom = 542.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -318.0
+margin_top = -262.0
+margin_right = 318.0
+margin_bottom = 182.0
 color = Color( 0.0862745, 0.0862745, 0.0862745, 0.956863 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Message" type="RichTextLabel" parent="MessageBoxUI"]
-margin_left = 352.0
-margin_top = 128.0
-margin_right = 928.0
-margin_bottom = 512.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -288.0
+margin_top = -232.0
+margin_right = 288.0
+margin_bottom = 152.0
+custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_fonts/mono_font = SubResource( 2 )
 custom_fonts/bold_italics_font = SubResource( 4 )
 custom_fonts/italics_font = SubResource( 6 )
 custom_fonts/bold_font = SubResource( 8 )
 custom_fonts/normal_font = SubResource( 9 )
-custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[b]Greetings, Nomad![/b]
 
@@ -116,15 +125,17 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MessageBoxUI"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 352.0
-margin_top = 576.0
-margin_right = -352.0
-margin_bottom = -104.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -288.0
+margin_top = 216.0
+margin_right = 288.0
+margin_bottom = 256.0
 alignment = 1
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="Button1" type="Button" parent="MessageBoxUI/HBoxContainer"]
@@ -132,12 +143,12 @@ margin_left = 26.0
 margin_right = 154.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 128, 0 )
+custom_fonts/font = SubResource( 11 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = SubResource( 11 )
 text = "BUTTON1"
 
 [node name="Button2" type="Button" parent="MessageBoxUI/HBoxContainer"]
@@ -145,12 +156,12 @@ margin_left = 158.0
 margin_right = 286.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 128, 0 )
+custom_fonts/font = SubResource( 11 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = SubResource( 11 )
 text = "BUTTON2"
 
 [node name="Button3" type="Button" parent="MessageBoxUI/HBoxContainer"]
@@ -158,12 +169,12 @@ margin_left = 290.0
 margin_right = 418.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 128, 0 )
+custom_fonts/font = SubResource( 11 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = SubResource( 11 )
 text = "BUTTON3"
 
 [node name="Button4" type="Button" parent="MessageBoxUI/HBoxContainer"]
@@ -171,12 +182,12 @@ margin_left = 422.0
 margin_right = 550.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 128, 0 )
+custom_fonts/font = SubResource( 11 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = SubResource( 11 )
 text = "BUTTON4"
 
 [connection signal="pressed" from="MessageBoxUI/HBoxContainer/Button1" to="." method="_on_Button1_pressed"]
