@@ -20,11 +20,6 @@ func DialogBegin(planet):
 	Planet = planet
 	State = StoryGenerator.OUTPOST_STATE.LOBBY
 	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_OUTPOST)
-	
-#	var routes = StarMapData.AllRoutesBySystem(System)
-#	print("Route list: ", routes)
-#	RoutesAdded += ShipData.AddRouteList(routes)
-#	print("Routes added: ", RoutesAdded)
 	DialogPrompt()
 
 
@@ -47,7 +42,6 @@ func ChoiceResponse(choice):
 
 func BackToLobbySelected():
 	State = StoryGenerator.OUTPOST_STATE.LOBBY
-	
 
 
 func RefuelSelected():
@@ -66,5 +60,5 @@ func TurnInSeelected():
 
 
 func LeaveOrbitSelected():
-	get_parent().get_parent().get_parent().ViewSystem()
+	get_parent()._on_LeaveOrbit()
 	return true

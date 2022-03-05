@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://planet_maps/HeightMap.gd" type="Script" id=1]
 [ext_resource path="res://sprites/smokeparticle.png" type="Texture" id=2]
@@ -10,6 +10,10 @@
 [ext_resource path="res://sprites/grid_square.png" type="Texture" id=8]
 [ext_resource path="res://scenes/PlayerStats.tscn" type="PackedScene" id=9]
 [ext_resource path="res://planet_maps/AnomalyDialog.gd" type="Script" id=10]
+[ext_resource path="res://styles/MenuButton_HoverFocus.tres" type="StyleBox" id=12]
+[ext_resource path="res://styles/MenuButton_Pressed.tres" type="StyleBox" id=13]
+[ext_resource path="res://styles/MenuButton_Normal.tres" type="StyleBox" id=14]
+[ext_resource path="res://styles/MenuButton_Disabled.tres" type="StyleBox" id=15]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -183,3 +187,30 @@ script = ExtResource( 7 )
 
 [node name="AnomalyDialog" type="Node2D" parent="."]
 script = ExtResource( 10 )
+
+[node name="LeaveOrbit" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -133.0
+margin_top = -72.0
+margin_right = -32.0
+margin_bottom = -32.0
+grow_vertical = 0
+rect_min_size = Vector2( 0, 40 )
+custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_styles/hover = ExtResource( 12 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/focus = ExtResource( 12 )
+custom_styles/disabled = ExtResource( 15 )
+custom_styles/normal = ExtResource( 14 )
+text = "LEAVE ORBIT"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[connection signal="button_down" from="LeaveOrbit" to="." method="_on_LeaveOrbit"]

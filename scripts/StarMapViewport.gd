@@ -28,7 +28,6 @@ func _on_FirstPlay():
 	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_HAIL)
 	# warning-ignore:return_value_discarded
 	GameNarrativeDisplay.connect("ChoiceSelected", self, "StartingTextDone")
-	#GameNarrativeDisplay.DisplayText(StoryGenerator.Lose(),["Begin"])
 	GameNarrativeDisplay.DisplayText(StoryGenerator.Greeting(StarMapData.GetOutpost(nearestOutpostSystem)),["Begin"])
 
 
@@ -43,15 +42,8 @@ func MapToggle(usemap):
 		$CanvasLayer/HUD.show()
 		$SystemInformation.get_child(0).show()
 		$MapName/MapUI.hide()
-		pass
-	pass
 
-#func GetOutpost(system):
-#	for planet in system.Planets:
-#		if "Outpost" == planet.Type:
-#			return planet
-#	return false
-	
+
 func StartingTextDone(_choice):
 	ShipData.Ship().FirstRun = false
 	GameNarrativeDisplay.disconnect("ChoiceSelected",self,"StartingTextDone")

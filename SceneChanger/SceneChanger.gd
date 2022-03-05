@@ -7,7 +7,10 @@ signal fade_out_complete()
 onready var animation_player = $AnimationPlayer
 onready var black = $Control/Black
 
-func LoadScene(path, delay = 0.5):
+var SceneVars = {}
+
+func LoadScene(path, delay = 0.5, args = {}):
+	SceneVars[path] = args
 	yield(get_tree().create_timer(delay),"timeout")
 	animation_player.play("fade")
 	yield(animation_player,"animation_finished")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scripts/SysView_Leave_Button.gd" type="Script" id=1]
 [ext_resource path="res://scripts/SolarSystemRender.gd" type="Script" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://scripts/EnterSystemEvent.gd" type="Script" id=8]
 [ext_resource path="res://scripts/SystemDetailLabel.gd" type="Script" id=9]
 [ext_resource path="res://scripts/SystemViewportController.gd" type="Script" id=10]
-[ext_resource path="res://planet_maps/PlanetSurfaceMap.tscn" type="PackedScene" id=11]
 [ext_resource path="res://sprites/UI_planet_hover_border.png" type="Texture" id=12]
 [ext_resource path="res://StarField/StarField.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/background space dust.tscn" type="PackedScene" id=14]
@@ -141,55 +140,15 @@ __meta__ = {
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="PlanetSurface" parent="CanvasLayer" instance=ExtResource( 11 )]
-visible = false
-
-[node name="SystemViewUI" type="Control" parent="CanvasLayer"]
+[node name="LeaveSystem" type="Button" parent="CanvasLayer"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -136.0
+margin_left = -133.0
 margin_top = -72.0
 margin_right = -32.0
 margin_bottom = -32.0
-mouse_filter = 1
-
-[node name="ActionButtons" type="VBoxContainer" parent="CanvasLayer/SystemViewUI"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -101.0
-margin_top = -40.0
-grow_vertical = 0
-
-[node name="LeaveOrbit" type="Button" parent="CanvasLayer/SystemViewUI/ActionButtons"]
-visible = false
-margin_right = 101.0
-margin_bottom = 40.0
-grow_vertical = 0
-rect_min_size = Vector2( 0, 40 )
-mouse_filter = 1
-custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
-custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 16 )
-custom_styles/normal = ExtResource( 3 )
-text = "LEAVE ORBIT"
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-StarMapViewport_scene = "res://scenes/StarMapViewport.tscn"
-
-[node name="LeaveSystem" type="Button" parent="CanvasLayer/SystemViewUI/ActionButtons"]
-margin_right = 101.0
-margin_bottom = 40.0
 grow_vertical = 0
 rect_min_size = Vector2( 0, 40 )
 custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
@@ -203,9 +162,6 @@ custom_styles/disabled = ExtResource( 16 )
 custom_styles/normal = ExtResource( 3 )
 text = "LEAVE SYSTEM"
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 StarMapViewport_scene = "res://scenes/StarMapViewport.tscn"
 
 [node name="PlayerStats" parent="." instance=ExtResource( 15 )]
@@ -215,5 +171,4 @@ margin_bottom = 77.7715
 [node name="EnterSystemEvent" type="Node2D" parent="."]
 script = ExtResource( 8 )
 
-[connection signal="button_down" from="CanvasLayer/SystemViewUI/ActionButtons/LeaveOrbit" to="." method="ViewSystem"]
-[connection signal="button_down" from="CanvasLayer/SystemViewUI/ActionButtons/LeaveSystem" to="CanvasLayer/SystemViewUI/ActionButtons/LeaveSystem" method="_on_button_down"]
+[connection signal="button_down" from="CanvasLayer/LeaveSystem" to="CanvasLayer/LeaveSystem" method="_on_button_down"]

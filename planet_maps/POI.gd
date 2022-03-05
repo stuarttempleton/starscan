@@ -20,18 +20,13 @@ func _ready():
 
 func hover(hover_position):
 	if POIModel.PerceivedType == "Empty": return
-	
 	ScaleToVector = bigScale
 	$Hover.show()
-	get_parent().get_parent().get_parent().get_parent().POIHover(hover_position)
-	pass
 
 func unhover():
 	if POIModel.PerceivedType == "Empty": return
 	ScaleToVector = defaultScale
 	$Hover.hide()
-	get_parent().get_parent().get_parent().get_parent().POIUnhover()
-	pass
 
 func selected():
 	if POIModel.PerceivedType == "Empty": return
@@ -40,7 +35,6 @@ func selected():
 		if POIModel.PerceivedType == "Unknown":
 			ShipData.UpdatePlayStat("UnknownsLooted",1)
 		var qty = 1 #TODO: Adjust this for "severity"
-		get_parent().get_parent().get_parent().get_parent().POISelect(POIModel.ActualType)
 		CollectPOI(POIModel.ActualType, qty)
 		AudioPlayer.PlaySFX(GetAudioKeyForPOI(POIModel.ActualType))
 		# warning-ignore:return_value_discarded

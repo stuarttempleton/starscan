@@ -1,7 +1,7 @@
 extends Node2D
 
 
-func _ready():
+func StartEvent():
 	if (StarMapData.NearestSystem == null):
 		StarMapData.FindNearestSystem(Vector2(ShipData.Ship().X,ShipData.Ship().Y))
 	var system = StarMapData.NearestSystem

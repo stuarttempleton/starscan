@@ -31,10 +31,8 @@ func _ready():
 	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
 
 func _on_viewport_size_changed():
-	# Do whatever you need to do when the window changes!
-	print ("Viewport size changed")
-	for child in get_children():
-		child.queue_free()
+	#this *can* fire twice (x and y)
+	for child in get_children(): child.queue_free()
 	update()
 
 func _draw():
