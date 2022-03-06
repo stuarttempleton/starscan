@@ -30,13 +30,16 @@ func _ready():
 		
 	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
 
+
 func _on_viewport_size_changed():
 	#this *can* fire twice (x and y)
 	for child in get_children(): child.queue_free()
 	update()
 
+
 func _draw():
 	BuildSystem()
+
 
 func BuildSystem():
 	var center = Vector2(get_viewport().get_visible_rect().size.x/2, get_viewport().get_visible_rect().size.y/2)
@@ -51,11 +54,14 @@ func BuildSystem():
 	var i = 0
 	for planet in system.Planets:
 		#print(planet.Type)
-		var next_planet_center = draw_circle_arc(center, orbital_radius, 0, 360, orbit_color )
-		randomize()
+		var rng = RandomNumberGenerator.new()
+		rng.seed = planet.SurfaceSeednumber
+		
+		var next_planet_center = draw_circle_arc(center, orbital_radius, 0, 360, orbit_color, rng )
 		orbital_radius += planet.RadialOffset
 		AddPlanetToMap(next_planet_center, planet.Size, planet.Type, i, planet.Name)
 		i += 1
+
 
 func AddPlanetToMap( planet_position, planet_size, planet_type, planet_id, planet_name ) :
 	var loaded_scene = load(planet_scene_path)
@@ -66,7 +72,8 @@ func AddPlanetToMap( planet_position, planet_size, planet_type, planet_id, plane
 	planet.position = planet_position
 	planet.SetPlanetInfo(planet_type, planet_size, planet_id, planet_name)
 
-func draw_circle_arc(center, radius, angle_from, angle_to, color):
+
+func draw_circle_arc(center, radius, angle_from, angle_to, color, rng):
 	var nb_points = 64
 	var points_arc = PoolVector2Array()
 
@@ -76,6 +83,5 @@ func draw_circle_arc(center, radius, angle_from, angle_to, color):
 
 	for index_point in range(nb_points):
 		draw_line(points_arc[index_point], points_arc[index_point + 1], color)
-		
-	randomize()
-	return points_arc[rand_range(0,nb_points - 1)]
+	
+	return points_arc[rng.randi_range(0,nb_points - 1)]
