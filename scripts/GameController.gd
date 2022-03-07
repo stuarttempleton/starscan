@@ -14,6 +14,19 @@ signal map_state(mapstate)
 signal pause_state(pausestate)
 
 
+func _init():
+	for arg in OS.get_cmdline_args():
+		print("Arg: ", arg)
+		var param = arg.split("=")
+		match param[0]:
+			"--windowed", "-f":
+				match param[1]:
+					"1","true","yes":
+						OS.window_fullscreen = false
+						OS.window_size = Vector2(1280,720)
+					"0","false","no":
+						OS.window_fullscreen = true
+
 func _ready():
 	pause_menu_scene = load(pause_menu_path)
 	
@@ -90,6 +103,8 @@ func _input(_event):
 			MapToggle()
 	if Input.is_action_just_pressed("fullscreen_mode"):
 		OS.window_fullscreen = !OS.window_fullscreen
+		if !OS.window_fullscreen:
+			OS.window_size = Vector2(1280,720)
 
 func MapToggle():
 	if scene_has_map and !get_tree().paused:
