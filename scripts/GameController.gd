@@ -19,13 +19,24 @@ func _init():
 		print("Arg: ", arg)
 		var param = arg.split("=")
 		match param[0]:
-			"--windowed", "-f":
+			"--windowed", "-w":
 				match param[1]:
 					"1","true","yes":
-						OS.window_fullscreen = false
-						OS.window_size = Vector2(1280,720)
+						PlayerPrefs.SetPref("window_fullscreen", false)
+						PlayerPrefs.SetPref("window_size", {"x":1280,"y":720})
 					"0","false","no":
-						OS.window_fullscreen = true
+						PlayerPrefs.SetPref("window_fullscreen", true)
+	LoadWindowSettings()
+
+
+func LoadWindowSettings():
+	OS.window_fullscreen = PlayerPrefs.GetPref("window_fullscreen")
+	if !OS.window_fullscreen:
+		OS.window_size = Vector2(PlayerPrefs.GetPref("window_size").x,PlayerPrefs.GetPref("window_size").y)
+
+func SaveWindowSettings():
+	PlayerPrefs.SetPref("window_fullscreen", OS.window_fullscreen)
+	PlayerPrefs.SetPref("window_size", {"x":OS.window_size.x,"y":OS.window_size.x})
 
 func _ready():
 	pause_menu_scene = load(pause_menu_path)
@@ -95,6 +106,7 @@ func togglePause():
 	else:
 		Pause()
 
+
 func _input(_event):
 	if is_gameloop:
 		if Input.is_action_just_released("pause_menu"):
@@ -102,9 +114,9 @@ func _input(_event):
 		if Input.is_action_just_released("starmap_mapview"):
 			MapToggle()
 	if Input.is_action_just_pressed("fullscreen_mode"):
-		OS.window_fullscreen = !OS.window_fullscreen
-		if !OS.window_fullscreen:
-			OS.window_size = Vector2(1280,720)
+		PlayerPrefs.SetPref("window_fullscreen", !OS.window_fullscreen)
+		LoadWindowSettings()
+
 
 func MapToggle():
 	if scene_has_map and !get_tree().paused:

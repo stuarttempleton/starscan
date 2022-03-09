@@ -28,6 +28,7 @@ config/windows_native_icon="res://AppIcon/icon.ico"
 
 [autoload]
 
+PlayerPrefs="*res://PlayerPrefs/PlayerPrefs.tscn"
 ShipData="*res://scenes/ShipData.tscn"
 StarMapData="*res://scenes/StarMapData.tscn"
 GameController="*res://scenes/GameController.tscn"
