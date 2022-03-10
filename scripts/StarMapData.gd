@@ -7,6 +7,7 @@ var Loaded = false
 var SavedSinceLoad = false
 export var DefaultUniverseFile = "res://starmap_data/generated/Generated_2021-3-31_6-32-20_6527443740791628228.json"
 export var SavedUniverseFile = "user://Player_Universe_Data.json"
+export var BaseUniverseFile = "user://Base_Universe_Data.json"
 
 var NearestSystem = null
 var NearestSystemDistance = INF
@@ -32,10 +33,10 @@ var PlanetSizes = [
 ]
 
 func _ready():
+	PruneLegacySaves()
 	self.LoadMapData(DefaultUniverseFile)
 
-func GetMostRecentGeneratedFile():
-	var files = []
+func PruneLegacySaves():
 	var dir = Directory.new()
 	dir.open("user://")
 	dir.list_dir_begin(true, true)
@@ -44,10 +45,11 @@ func GetMostRecentGeneratedFile():
 		if file == "":
 			break
 		if file.begins_with("Starmap_"):
-			files.append(file)
+			dir.remove(file)
 	dir.list_dir_end()
-	
-	return "user://%s" % [files.back()] if not files.empty() else DefaultUniverseFile
+
+func GetMostRecentGeneratedFile():
+	return BaseUniverseFile if BaseExists() else DefaultUniverseFile
 
 func ResetMap() :
 	self.LoadMapData(GetMostRecentGeneratedFile())
@@ -63,6 +65,10 @@ func LoadSave() :
 
 func SaveMap() :
 	self.Save(SavedUniverseFile)
+
+func BaseExists():
+	var save_file = File.new()
+	return save_file.file_exists(BaseUniverseFile)
 	
 func SaveExists():
 	var save_file = File.new()

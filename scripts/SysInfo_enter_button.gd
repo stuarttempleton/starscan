@@ -29,5 +29,4 @@ func _on_button_down():
 		Wormhole.EnterWormholeTo(StarMapData.SystemPosition(Destination, true))
 	else:
 		hoverflag = false
-		print("We think sysviewport_path: ", SystemViewport_scene)
 		SceneChanger.LoadScene(SystemViewport_scene, 0.5, {"do_entry": true})

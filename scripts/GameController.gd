@@ -36,7 +36,8 @@ func LoadWindowSettings():
 
 func SaveWindowSettings():
 	PlayerPrefs.SetPref("window_fullscreen", OS.window_fullscreen)
-	PlayerPrefs.SetPref("window_size", {"x":OS.window_size.x,"y":OS.window_size.x})
+	if !OS.window_fullscreen:
+		PlayerPrefs.SetPref("window_size", {"x":OS.window_size.x,"y":OS.window_size.y})
 
 func _ready():
 	pause_menu_scene = load(pause_menu_path)
@@ -116,6 +117,7 @@ func _input(_event):
 	if Input.is_action_just_pressed("fullscreen_mode"):
 		PlayerPrefs.SetPref("window_fullscreen", !OS.window_fullscreen)
 		LoadWindowSettings()
+		SaveWindowSettings()
 
 
 func MapToggle():

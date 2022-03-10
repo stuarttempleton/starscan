@@ -27,7 +27,8 @@ func _ready():
 		$"../Control/SystemAnomalyLabel".text = ""
 		$"../../Nebula/BGAudio".stop()
 		$"../../Nebula".visible = false
-		
+	
+	# warning-ignore:return_value_discarded
 	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
 
 

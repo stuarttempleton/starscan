@@ -24,7 +24,7 @@ func _ready() -> void:
 	PointsOfInterest = get_node(PointsOfInterest_path)
 
 
-func _generate(planet, scan):
+func _generate(planet):
 	
 	var planet_texture_gradient = GradientTexture.new()
 	planet_texture_gradient.gradient = load(PlanetGradientMaps[planet.Type])
@@ -51,16 +51,6 @@ func _generate(planet, scan):
 	# Use the material's `set_shader_param` method to assign values to a shader's uniforms.
 	material.set_shader_param("noise_minmax", heightmap_minmax)
 	material.set_shader_param("colormap", planet_texture_gradient)
-#	if planet.Type == "Outpost":
-#		PointsOfInterest.ClearPOINodes()
-#		$"../../OutpostDialog".DialogBegin(planet)
-#	elif planet.Type == "Anomaly":
-#		PointsOfInterest.ClearPOINodes()
-#		$"../../AnomalyDialog".DialogBegin(planet)
-#	else:
-#		PointsOfInterest._generate(planet, scan)
-#		$"../../PlanetDialog".DialogBegin(planet)
-#	pass
 
 # gotta normalize the noise data to 0..1
 func _get_heightmap_minmax(image: Image) -> Vector2:
