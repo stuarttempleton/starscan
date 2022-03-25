@@ -10,33 +10,26 @@ var Loaded = false
 
 
 func _init():
-	LoadPrefs()
-
-
-func LoadPrefs() :
 	if (!self.PlayerPrefsExists()):
-		self.LoadPrefsData(DefaultPrefsFileName)
-		self.SavePrefs()
-	self.LoadPrefsData(PrefsFileName)
+		self.Load(DefaultPrefsFileName)
+		self.Save()
+	self.Load(PrefsFileName)
 
-
-func SavePrefs():
-	self.Save(PrefsFileName)
 
 func HasPref(property):
 	return settings.has(property)
 
-func GetPref(property):
+func GetPref(property, default_return = 0):
 	if HasPref(property):
 		return settings[property]
 	else:
 		printerr("Unknown property requested: ", property)
-		return 0
+		return default_return
 
 
 func SetPref(property, value):
 	settings[property] = value
-	SavePrefs()
+	Save()
 
 
 func PlayerPrefsExists():
@@ -44,7 +37,7 @@ func PlayerPrefsExists():
 	return save_file.file_exists(PrefsFileName)
 
 
-func LoadPrefsData(filename):
+func Load(filename):
 	print("Loading player preference data from %s" % filename)
 	var _file = File.new()
 	_file.open(filename, File.READ)
@@ -55,7 +48,7 @@ func LoadPrefsData(filename):
 	SavedSinceLoad = false
 
 
-func Save(filename):
+func Save(filename = PrefsFileName):
 	var file = File.new()
 	file.open(filename, File.WRITE)
 	file.store_string(JSON.print(settings, "\t"))
