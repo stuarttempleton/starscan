@@ -112,7 +112,8 @@ func _physics_process(_delta):
 	var ship = ShipData.Ship()
 	
 	if mouseIsPressed and !ShipIsTowing:
-		target = get_global_mouse_position()
+		if MovementEvent.is_valid(get_viewport().get_mouse_position()):
+			target = get_global_mouse_position()
 	
 	if !ship.WarpDrive: #TODO: UPGRADE INVENTORY
 		HandleBoundary()

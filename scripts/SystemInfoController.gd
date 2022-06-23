@@ -68,10 +68,12 @@ func InRange(system):
 	if DisplayedSystem != system:
 		DisplayedSystem = system
 		RefreshDisplayedData()
+	MovementEvent.add_deadzone(name, $ColorRect.get_global_rect())
 
 func NotInRange():
 	$ColorRect.visible = false
 	$Background.visible = false
+	MovementEvent.remove_deadzone(name)
 	
 func RefreshDisplayedData():
 	RefreshSystemNameText()
