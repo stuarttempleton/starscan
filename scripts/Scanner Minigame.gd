@@ -38,6 +38,7 @@ var scanButtonPressed = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GameController.EnableMovement(false)
+	GamepadMenu.add_menu(name,[$ScanButton])
 	SceneChanger.GoAway()
 	if (StarMapData.NearestSystem == null):
 		StarMapData.FindNearestSystem(Vector2(ShipData.Ship().X,ShipData.Ship().Y))
@@ -122,5 +123,6 @@ func handleScanResult(isSuccess, accuracy):
 func _on_endAnimComplete():
 	emit_signal("complete")
 	GameController.EnableMovement(true)
+	GamepadMenu.remove_menu(name)
 	minigameRoot.queue_free()
 

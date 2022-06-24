@@ -37,7 +37,7 @@ func SetMessageNodeVisibility(newState):
 		node.visible = newState
 
 
-func DisplayText(txt, array_buttons):
+func DisplayText(txt, array_buttons, button_selected = 0):
 	emit_signal("DisplayState", true)
 	GameController.EnableMovement(false)
 	var message = txt if not Texts.has(txt) else Texts[txt]
@@ -58,6 +58,7 @@ func DisplayText(txt, array_buttons):
 		i += 1
 		if ( i == buttons.size() ):
 			break
+	GamepadMenu.add_menu(name,buttons.slice(0,i - 1), button_selected)
 	pass
 
 func _process(delta):
@@ -71,6 +72,7 @@ func CancelDialog():
 	CloseWithPress(-1)
 
 func CloseWithPress(int_button):
+	GamepadMenu.remove_menu(name)
 	SetMessageNodeVisibility(false)
 	GameController.EnableMovement(true)
 	emit_signal("ChoiceSelected", int_button)

@@ -107,7 +107,9 @@ func HandleBoundary() :
 		target.x = 0
 	if target.y < 0 :
 		target.y = 0
-		
+
+var usingGamepad = false
+
 func _physics_process(_delta):
 	var ship = ShipData.Ship()
 	
@@ -115,10 +117,14 @@ func _physics_process(_delta):
 		if mouseIsPressed:
 			if MovementEvent.is_valid(get_viewport().get_mouse_position()):
 				target = get_global_mouse_position()
+				usingGamepad = false
 		else:
 			var _target = Input.get_vector("move_left","move_right","move_forward","move_backward")
 			if _target != Vector2.ZERO:
 				target = position + _target * ship.AccelerationRate
+				usingGamepad = true
+			elif usingGamepad:
+				target = position
 	
 	if !ship.WarpDrive: #TODO: UPGRADE INVENTORY
 		HandleBoundary()

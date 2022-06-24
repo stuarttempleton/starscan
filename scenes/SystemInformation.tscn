@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scripts/SystemInfoController.gd" type="Script" id=1]
 [ext_resource path="res://scripts/SysInfo_scan_button.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://styles/MenuButton_HoverFocus.tres" type="StyleBox" id=5]
 [ext_resource path="res://styles/MenuButton_Pressed.tres" type="StyleBox" id=6]
 [ext_resource path="res://styles/MenuButton_Disabled.tres" type="StyleBox" id=7]
+[ext_resource path="res://styles/MenuButton_Focus.tres" type="StyleBox" id=8]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-Black.ttf"
@@ -113,7 +114,7 @@ custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = ExtResource( 5 )
+custom_styles/focus = ExtResource( 8 )
 custom_styles/disabled = ExtResource( 7 )
 custom_styles/normal = ExtResource( 3 )
 text = "Scan System"
@@ -131,7 +132,7 @@ custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = ExtResource( 5 )
+custom_styles/focus = ExtResource( 8 )
 custom_styles/disabled = ExtResource( 7 )
 custom_styles/normal = ExtResource( 3 )
 text = "Enter System"

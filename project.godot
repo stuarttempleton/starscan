@@ -43,6 +43,7 @@ DevBuildOverlay="*res://DevBuildOverlay/DevBuildOverlay.tscn"
 Console="*res://addons/quentincaffeino-console/src/Console.tscn"
 PlayTimer="*res://PlayTimer/PlayTimer.tscn"
 MovementEvent="*res://scenes/MovementEvent.tscn"
+GamepadMenu="*res://scenes/GamepadMenu.tscn"
 
 [display]
 

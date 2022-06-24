@@ -69,11 +69,25 @@ func InRange(system):
 		DisplayedSystem = system
 		RefreshDisplayedData()
 	MovementEvent.add_deadzone(name, $ColorRect.get_global_rect())
+	if !ShipData.Ship().FirstRun:
+		GamepadMenu.add_menu(name,GetVisibleButtons())
 
+func _exit_tree():
+	MovementEvent.remove_deadzone(name)
+	GamepadMenu.remove_menu(name)
+	
 func NotInRange():
 	$ColorRect.visible = false
 	$Background.visible = false
 	MovementEvent.remove_deadzone(name)
+	GamepadMenu.remove_menu(name)
+
+func GetVisibleButtons():
+	var menu = []
+	if !$Background/InfoContainer/ScanButton.disabled:
+		menu.push_back($Background/InfoContainer/ScanButton)
+	menu.push_back($Background/InfoContainer/EnterButton)
+	return menu
 	
 func RefreshDisplayedData():
 	RefreshSystemNameText()
@@ -104,6 +118,7 @@ func RefreshButtonEnable():
 		$Background/InfoContainer/EnterButton.disabled = (scan <= 0)
 	else:
 		$Background/InfoContainer/EnterButton.disabled = false
+	GamepadMenu.refresh_menu(name,GetVisibleButtons())
 
 	
 

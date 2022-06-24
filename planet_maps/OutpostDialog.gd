@@ -23,10 +23,10 @@ func DialogBegin(planet):
 	DialogPrompt()
 
 
-func DialogPrompt():
+func DialogPrompt(selected = 0):
 	# warning-ignore:return_value_discarded
 	GameNarrativeDisplay.connect("ChoiceSelected", self, "ChoiceResponse")	
-	GameNarrativeDisplay.DisplayText(StoryGenerator.OutpostStory(State, System, Planet, Qty, RoutesAdded), Options)
+	GameNarrativeDisplay.DisplayText(StoryGenerator.OutpostStory(State, System, Planet, Qty, RoutesAdded), Options, selected)
 
 
 func ChoiceResponse(choice):
@@ -37,7 +37,7 @@ func ChoiceResponse(choice):
 		1: RefuelSelected()
 		2: TurnInSeelected()
 		3: return LeaveOrbitSelected()
-	DialogPrompt()
+	DialogPrompt(choice)
 
 
 func BackToLobbySelected():
