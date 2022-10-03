@@ -44,9 +44,9 @@ func generate(seednumber):
 	var filename = serializeToFile(map, rng)
 	print("...World generated. Saved to file " + filename)
 	
-func serializeToFile(map, rng):
+func serializeToFile(map, _rng):
 	StarMapData.StarMap = map
-	var currtime = OS.get_datetime()
+	var _currtime = OS.get_datetime()
 	#var filename = "user://Starmap_%04d-%02d-%02d_%02d-%02d-%02d_%s.json" % [currtime.year, currtime.month, currtime.day, currtime.hour, currtime.minute, currtime.second, str(rng.seed)]
 	StarMapData.Save(StarMapData.BaseUniverseFile)
 	return StarMapData.BaseUniverseFile

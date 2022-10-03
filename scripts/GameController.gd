@@ -108,7 +108,7 @@ func togglePause():
 		Pause()
 
 
-func _input(_event):
+func _process(_delta):
 	if is_gameloop:
 		if Input.is_action_just_released("pause_menu"):
 			togglePause()

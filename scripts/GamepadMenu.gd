@@ -1,9 +1,20 @@
-extends Node2D
+extends Control
 
 
 export var menus = {}
 var menu_cursor = {}
 var current_menu = ""
+
+func _ready():
+	var _connection = Input.connect("joy_connection_changed",self,"_joypad_changed")
+
+func _joypad_changed(_device, _connected):
+	if _connected:
+		activate_top_menu()
+	else:
+		var foc = get_focus_owner()
+		if foc:
+			foc.release_focus()
 
 func add_menu(id, buttons:Array, selected = 0):
 	if buttons.size() <= 0:
@@ -24,8 +35,8 @@ func refresh_menu(id, buttons:Array, selected = 0):
 		activate_top_menu()
 
 func remove_menu(id):
-	print("Removing menu for %s" % id)
-	menus.erase(id)
+	if menus.erase(id):
+		print("Removed menu for %s" % id)
 	menu_cursor.erase(id)
 	activate_top_menu()
 
@@ -41,7 +52,8 @@ func activate_top_menu():
 
 func grab_focus():
 	if menus.size() > 0:
-		menus[current_menu][menu_cursor[current_menu]].grab_focus()
+		if Input.get_connected_joypads().size() > 0:
+			menus[current_menu][menu_cursor[current_menu]].grab_focus()
 
 func focus_next():
 	menu_cursor[current_menu] += 1
@@ -55,8 +67,7 @@ func focus_previous():
 		menu_cursor[current_menu] = menus[current_menu].size() - 1
 	grab_focus()
 
-
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ui_left") || Input.is_action_just_pressed("ui_up"):
 		focus_previous()
 	elif Input.is_action_just_pressed("ui_right") || Input.is_action_just_pressed("ui_down"):
