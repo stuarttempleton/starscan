@@ -78,9 +78,6 @@ margin_top = -264.0
 margin_right = 320.0
 margin_bottom = 184.0
 color = Color( 0.396078, 0.396078, 0.396078, 0.870588 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect2" type="ColorRect" parent="MessageBoxUI"]
 anchor_left = 0.5
@@ -194,8 +191,14 @@ custom_styles/normal = ExtResource( 4 )
 text = "BUTTON4"
 
 [node name="GamepadHint" parent="MessageBoxUI" instance=ExtResource( 10 )]
-margin_top = 632.0
-margin_bottom = 656.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -128.0
+margin_top = 272.0
+margin_right = 128.0
+margin_bottom = 296.0
 
 [connection signal="pressed" from="MessageBoxUI/HBoxContainer/Button1" to="." method="_on_Button1_pressed"]
 [connection signal="pressed" from="MessageBoxUI/HBoxContainer/Button2" to="." method="_on_Button2_pressed"]

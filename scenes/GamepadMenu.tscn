@@ -12,6 +12,7 @@ script = ExtResource( 2 )
 MAX_MOUSE_SPEED = 10
 
 [node name="GamepadInfo" type="Label" parent="."]
+visible = false
 margin_left = 24.0
 margin_top = 680.0
 margin_right = 408.0
