@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://planet_maps/HeightMap.gd" type="Script" id=1]
 [ext_resource path="res://sprites/smokeparticle.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://sprites/grid_square.png" type="Texture" id=8]
 [ext_resource path="res://scenes/PlayerStats.tscn" type="PackedScene" id=9]
 [ext_resource path="res://planet_maps/AnomalyDialog.gd" type="Script" id=10]
+[ext_resource path="res://planet_maps/LeaveOrbitButton.gd" type="Script" id=11]
 [ext_resource path="res://styles/MenuButton_HoverFocus.tres" type="StyleBox" id=12]
 [ext_resource path="res://styles/MenuButton_Pressed.tres" type="StyleBox" id=13]
 [ext_resource path="res://styles/MenuButton_Normal.tres" type="StyleBox" id=14]
@@ -193,7 +194,7 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -133.0
+margin_left = -160.0
 margin_top = -72.0
 margin_right = -32.0
 margin_bottom = -32.0
@@ -209,8 +210,10 @@ custom_styles/focus = ExtResource( 12 )
 custom_styles/disabled = ExtResource( 15 )
 custom_styles/normal = ExtResource( 14 )
 text = "LEAVE ORBIT"
+script = ExtResource( 11 )
 __meta__ = {
 "_editor_description_": ""
 }
+GamepadButton = 1
 
 [connection signal="button_down" from="LeaveOrbit" to="." method="_on_LeaveOrbit"]

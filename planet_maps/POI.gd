@@ -18,7 +18,7 @@ func _ready():
 	# warning-ignore:return_value_discarded
 	$ClickArea.connect("unhover", self, "unhover")
 
-func hover(hover_position):
+func hover(_hover_position):
 	if POIModel.PerceivedType == "Empty": return
 	ScaleToVector = bigScale
 	$Hover.show()

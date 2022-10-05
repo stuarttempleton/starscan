@@ -38,7 +38,6 @@ var scanButtonPressed = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GameController.EnableMovement(false)
-	GamepadMenu.add_menu(name,[$ScanButton])
 	SceneChanger.GoAway()
 	if (StarMapData.NearestSystem == null):
 		StarMapData.FindNearestSystem(Vector2(ShipData.Ship().X,ShipData.Ship().Y))
@@ -64,6 +63,11 @@ var increasing = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if !$ScanButton.disabled:
+		if Input.is_action_just_pressed("ui_accept"):
+			if !GamepadMenu.menu_is_active():
+				_on_Button_pressed()
+	
 	if not scanButtonPressed:
 		x = fmod(x + delta * difficultyModifier, amplitude)
 		oscillator.rect_position.x = oscillatorRange * abs(x - 1.0) + bg.rect_position.x
@@ -123,6 +127,5 @@ func handleScanResult(isSuccess, accuracy):
 func _on_endAnimComplete():
 	emit_signal("complete")
 	GameController.EnableMovement(true)
-	GamepadMenu.remove_menu(name)
 	minigameRoot.queue_free()
 

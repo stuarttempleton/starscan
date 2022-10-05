@@ -35,6 +35,12 @@ func _input(event):
 			elif event.button_index == BUTTON_WHEEL_UP and event.pressed:
 				Zoom(-0.25)
 
+func _process(_delta):
+	if GameController.is_movement_enabled():
+		if Input.is_action_pressed("map_zoom_in"):
+			Zoom(0.05)
+		elif Input.is_action_pressed("map_zoom_out"):
+			Zoom(-0.05)
 
 func MapToggle(_useMap):
 	if !_useMap:

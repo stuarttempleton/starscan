@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scripts/MainMenuController.gd" type="Script" id=1]
 [ext_resource path="res://sprites/starscan-logo.png" type="Texture" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://scenes/menu_button_generate_universe.gd" type="Script" id=13]
 [ext_resource path="res://scripts/menu_button_credits.gd" type="Script" id=14]
 [ext_resource path="res://styles/MenuButton_Focus.tres" type="StyleBox" id=15]
+[ext_resource path="res://GameNarrativeDisplay/GamepadHint.tscn" type="PackedScene" id=19]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-ExtraLight.ttf"
@@ -204,5 +205,18 @@ custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 8 )
 text = "QUIT"
 script = ExtResource( 3 )
+
+[node name="GamepadSpacer" type="ColorRect" parent="MenuUIContainer/Menu"]
+margin_top = 351.0
+margin_right = 880.0
+margin_bottom = 361.0
+rect_min_size = Vector2( 0, 10 )
+color = Color( 1, 1, 1, 0 )
+
+[node name="GamepadHint2" parent="MenuUIContainer/Menu" instance=ExtResource( 19 )]
+margin_left = 0.0
+margin_top = 365.0
+margin_right = 880.0
+margin_bottom = 389.0
 
 [connection signal="button_down" from="MenuUIContainer/Menu/Buttons/Credits" to="MenuUIContainer/Menu/Buttons/Credits" method="_on_Credits_button_down"]

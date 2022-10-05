@@ -9,13 +9,49 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Button",
+"class": "GamepadButton",
+"language": "GDScript",
+"path": "res://scripts/GamepadButton.gd"
+}, {
+"base": "Button",
+"class": "Planetsurface_Leave_button",
+"language": "GDScript",
+"path": "res://planet_maps/LeaveOrbitButton.gd"
+}, {
+"base": "Button",
+"class": "ScanMinigameButton",
+"language": "GDScript",
+"path": "res://scripts/ScanMinigameButton.gd"
+}, {
 "base": "Reference",
 "class": "StarPosGenerator",
 "language": "GDScript",
 "path": "res://scripts/worldgen/StarPosGenerator.gd"
+}, {
+"base": "Button",
+"class": "Sysinfo_Leave_button",
+"language": "GDScript",
+"path": "res://scripts/SysView_Leave_Button.gd"
+}, {
+"base": "Button",
+"class": "Sysinfo_enter_button",
+"language": "GDScript",
+"path": "res://scripts/SysInfo_enter_button.gd"
+}, {
+"base": "Button",
+"class": "Sysinfo_scan_button",
+"language": "GDScript",
+"path": "res://scripts/SysInfo_scan_button.gd"
 } ]
 _global_script_class_icons={
-"StarPosGenerator": ""
+"GamepadButton": "",
+"Planetsurface_Leave_button": "",
+"ScanMinigameButton": "",
+"StarPosGenerator": "",
+"Sysinfo_Leave_button": "",
+"Sysinfo_enter_button": "",
+"Sysinfo_scan_button": ""
 }
 
 [application]
@@ -32,6 +68,7 @@ PlayerPrefs="*res://PlayerPrefs/PlayerPrefs.tscn"
 ShipData="*res://scenes/ShipData.tscn"
 StarMapData="*res://scenes/StarMapData.tscn"
 GameController="*res://scenes/GameController.tscn"
+GamepadIcons="*res://scenes/GamepadIcons.tscn"
 GameNarrativeDisplay="*res://GameNarrativeDisplay/GameNarrativeDisplay.tscn"
 StoryGenerator="*res://scenes/StoryGenerator.tscn"
 AudioPlayer="*res://AudioPlayer/AudioPlayer.tscn"
@@ -64,7 +101,6 @@ ui_accept={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777222,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
@@ -139,6 +175,16 @@ joystick_mouse_button={
 "deadzone": 0.5,
 "events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":7,"pressure":0.0,"pressed":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":9,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+map_zoom_in={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":4,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+map_zoom_out={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":5,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
 

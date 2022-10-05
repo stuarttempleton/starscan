@@ -145,7 +145,7 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -133.0
+margin_left = -160.0
 margin_top = -72.0
 margin_right = -32.0
 margin_bottom = -32.0
@@ -162,6 +162,7 @@ custom_styles/disabled = ExtResource( 16 )
 custom_styles/normal = ExtResource( 3 )
 text = "LEAVE SYSTEM"
 script = ExtResource( 1 )
+GamepadButton = 1
 StarMapViewport_scene = "res://scenes/StarMapViewport.tscn"
 
 [node name="PlayerStats" parent="." instance=ExtResource( 15 )]

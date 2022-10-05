@@ -10,3 +10,10 @@ script = ExtResource( 1 )
 [node name="GamepadAsMouse" type="Node2D" parent="."]
 script = ExtResource( 2 )
 MAX_MOUSE_SPEED = 10
+
+[node name="GamepadInfo" type="Label" parent="."]
+margin_left = 24.0
+margin_top = 680.0
+margin_right = 408.0
+margin_bottom = 694.0
+text = "Gamepad: Info..."

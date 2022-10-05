@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scripts/Scanner Minigame.gd" type="Script" id=1]
 [ext_resource path="res://styles/MenuButton_Disabled.tres" type="StyleBox" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://styles/MenuButton_Pressed.tres" type="StyleBox" id=7]
 [ext_resource path="res://GameNarrativeDisplay/blur_shader_material.tres" type="Material" id=8]
 [ext_resource path="res://shaders/white.png" type="Texture" id=9]
+[ext_resource path="res://scripts/ScanMinigameButton.gd" type="Script" id=10]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0.243816, 0 ), 0.0, 4.35385, 0, 1, Vector2( 0.473498, 1 ), 4.35385, 0.0, 1, 1, Vector2( 0.522968, 1 ), 0.0, -4.49206, 1, 1, Vector2( 0.745583, 0 ), -4.49206, 0.0, 1, 0 ]
@@ -279,5 +280,6 @@ custom_styles/disabled = ExtResource( 2 )
 custom_styles/normal = ExtResource( 5 )
 action_mode = 0
 text = "Scan!"
+script = ExtResource( 10 )
 
 [connection signal="pressed" from="CanvasLayer/SceneBackground/Scanner Minigame/ScanButton" to="CanvasLayer/SceneBackground/Scanner Minigame" method="_on_Button_pressed"]

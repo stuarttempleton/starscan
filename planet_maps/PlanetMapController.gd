@@ -34,7 +34,7 @@ func _show_dialog(planet):
 		$PlanetDialog.DialogBegin(planet)
 
 
-func _generate_planet_map(planet, scan):
+func _generate_planet_map(planet, _scan):
 	$PlanetSurfaceMap/PlanetMap.visible = true
 	$PlanetSurfaceMap/PlanetName.text = planet.Name
 	$PlanetSurfaceMap/PlanetInformation.text = PlanetDetailBoilerPlate % [planet.Type, planet.Size, "Major" if planet.Ring else "Minor"]
@@ -45,6 +45,11 @@ func _generate_planet_map(planet, scan):
 func _on_generate_button_pressed(planet_type):
 	$PlanetSurfaceMap/PlanetMap._generate(StarMapData.GetRandomPlanetByType(planet_type))
 
+func _process(_delta):
+	if !$LeaveOrbit.disabled:
+		if Input.is_action_just_pressed("ui_cancel"):
+			if !GamepadMenu.menu_is_active():
+				_on_LeaveOrbit()
 
 func _on_LeaveOrbit(play_sfx = true):
 	if play_sfx:

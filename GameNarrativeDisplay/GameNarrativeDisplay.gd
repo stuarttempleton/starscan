@@ -59,7 +59,8 @@ func DisplayText(txt, array_buttons, button_selected = 0):
 		if ( i == buttons.size() ):
 			break
 	GamepadMenu.add_menu(name,buttons.slice(0,i - 1), button_selected)
-	pass
+	$MessageBoxUI/GamepadHint.dpad_visible((array_buttons.size() > 1))
+
 
 func _process(delta):
 	if($MessageBoxUI/Message.percent_visible > 0.9):

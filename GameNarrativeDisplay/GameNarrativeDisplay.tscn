@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://GameNarrativeDisplay/GameNarrativeDisplay.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Montserrat-Light.ttf" type="DynamicFontData" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://GameNarrativeDisplay/blur_shader_material.tres" type="Material" id=7]
 [ext_resource path="res://styles/MenuButton_Focus.tres" type="StyleBox" id=8]
 [ext_resource path="res://styles/MenuButton_Disabled.tres" type="StyleBox" id=9]
+[ext_resource path="res://GameNarrativeDisplay/GamepadHint.tscn" type="PackedScene" id=10]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-Regular.ttf"
@@ -191,6 +192,10 @@ custom_styles/focus = ExtResource( 8 )
 custom_styles/disabled = ExtResource( 9 )
 custom_styles/normal = ExtResource( 4 )
 text = "BUTTON4"
+
+[node name="GamepadHint" parent="MessageBoxUI" instance=ExtResource( 10 )]
+margin_top = 632.0
+margin_bottom = 656.0
 
 [connection signal="pressed" from="MessageBoxUI/HBoxContainer/Button1" to="." method="_on_Button1_pressed"]
 [connection signal="pressed" from="MessageBoxUI/HBoxContainer/Button2" to="." method="_on_Button2_pressed"]

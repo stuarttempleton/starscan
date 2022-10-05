@@ -63,31 +63,20 @@ func NebulaHazardHelper(nebula):
 	return "Unknown"
 	
 func InRange(system):
-	$ColorRect.visible = true
+	#$ColorRect.visible = true
 	$Background.visible = true
 	if DisplayedSystem != system:
 		DisplayedSystem = system
 		RefreshDisplayedData()
 	MovementEvent.add_deadzone(name, $ColorRect.get_global_rect())
-	if !ShipData.Ship().FirstRun:
-		GamepadMenu.add_menu(name,GetVisibleButtons())
 
 func _exit_tree():
 	MovementEvent.remove_deadzone(name)
-	GamepadMenu.remove_menu(name)
-	
+
 func NotInRange():
-	$ColorRect.visible = false
+	#$ColorRect.visible = false
 	$Background.visible = false
 	MovementEvent.remove_deadzone(name)
-	GamepadMenu.remove_menu(name)
-
-func GetVisibleButtons():
-	var menu = []
-	if !$Background/InfoContainer/ScanButton.disabled:
-		menu.push_back($Background/InfoContainer/ScanButton)
-	menu.push_back($Background/InfoContainer/EnterButton)
-	return menu
 	
 func RefreshDisplayedData():
 	RefreshSystemNameText()
@@ -104,21 +93,19 @@ func RefreshButtonText():
 
 func RefreshSystemNameText():
 	$Background/InfoContainer/SystemName.text = DisplayedSystem.Name
-	
+
 func RefreshDetailText():
 	if DisplayedSystem.has("Planets"):
 		$Background/InfoContainer/SystemDetail.text = system_detail_boilerplate % [OutpostTextHelper(DisplayedSystem), DisplayedSystem.Planets.size(), ScanTextHelper(DisplayedSystem.Scan), "Unknown"]
 	else:
 		$Background/InfoContainer/SystemDetail.text = nebula_detail_boilerplate % [ScanTextHelper(DisplayedSystem.Scan), NebulaHazardHelper(DisplayedSystem), NebulaDestinationHelper(DisplayedSystem)]
-		
+
 func RefreshButtonEnable():
 	var scan = DisplayedSystem.Scan
 	$Background/InfoContainer/ScanButton.disabled = (scan > 0)
+	$Background/InfoContainer/ScanButton.visible = (scan <= 0)
 	if DisplayedSystem.has("Destination"):
 		$Background/InfoContainer/EnterButton.disabled = (scan <= 0)
 	else:
 		$Background/InfoContainer/EnterButton.disabled = false
-	GamepadMenu.refresh_menu(name,GetVisibleButtons())
-
-	
 
