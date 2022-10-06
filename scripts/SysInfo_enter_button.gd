@@ -7,7 +7,7 @@ var hoverflag = false
 
 func _process(_delta):
 	if !disabled:
-		if Input.is_action_just_pressed("ui_accept"):
+		if Input.is_action_just_pressed("enter_system"):
 			if get_parent().get_parent().visible:
 				if !GamepadMenu.menu_is_active():
 					if GameController.is_movement_enabled():

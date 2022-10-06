@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-signal scene_changed()
+signal scene_changed(new_scene)
 signal fade_in_complete()
 signal fade_out_complete()
 
@@ -19,7 +19,7 @@ func LoadScene(path, delay = 0.5, args = {}):
 		print("Error loading scene")
 	animation_player.play_backwards("fade")
 	yield(animation_player,"animation_finished")
-	emit_signal("scene_changed")
+	emit_signal("scene_changed", path)
 
 func FadeToExit(delay = 0.5):
 	yield(get_tree().create_timer(delay),"timeout")

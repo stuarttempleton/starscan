@@ -140,6 +140,7 @@ custom_styles/disabled = ExtResource( 7 )
 custom_styles/normal = ExtResource( 3 )
 text = "Enter System"
 script = ExtResource( 4 )
+GamepadButton = 3
 SystemViewport_scene = "res://scenes/SystemViewport.tscn"
 
 [connection signal="pressed" from="Control/Background/InfoContainer/ScanButton" to="Control/Background/InfoContainer/ScanButton" method="_on_ScanButton_pressed"]
