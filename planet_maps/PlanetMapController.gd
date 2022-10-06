@@ -28,6 +28,7 @@ func _generate_poi(planet, scan):
 func _show_dialog(planet):
 	if planet.Type == "Outpost":
 		$OutpostDialog.DialogBegin(planet)
+		$LeaveOrbit.visible = false
 	elif planet.Type == "Anomaly":
 		$AnomalyDialog.DialogBegin(planet)
 	else:
