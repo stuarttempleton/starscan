@@ -121,6 +121,8 @@ func handleScanResult(isSuccess, accuracy):
 	if StarMapData.ScanNearestSystem(accuracy) && isSuccess:
 		ShipData.GainInventoryItem("Scan Data", 1)
 		ShipData.UpdatePlayStat("SystemsScanned",1)
+	if isSuccess && !StarMapData.GetNearestBody().has("Destination"):
+		ShipData.AddRouteList(StarMapData.AllRoutesBySystem(StarMapData.GetNearestBody()))
 	var resultSignal = "success" if isSuccess else "fail"
 	emit_signal(resultSignal)
 

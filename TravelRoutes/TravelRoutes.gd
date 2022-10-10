@@ -9,20 +9,23 @@ var RouteLists = {
 	"Sector": {
 		"routes": [],
 		"pool": [],
-		"color": Color(0.662745, 0, 1, 0.67451),
-		"width": 10
-	},
-	"Outpost":{
-		"routes": [],
-		"pool": [],
-		"color": Color(0.411765, 0.411765, 0.411765, 0.235294),
-		"width": 10
+		"color": Color(0.662745, 0, 1, 0.67),
+		"width": 10,
+		"showText":true
 	},
 	"ShipMap":{
 		"routes": [],
 		"pool": [],
-		"color": Color(0.780392, 0.419608, 0, 0.235294),
-		"width": 10
+		"color": Color(1, 1, 1, 0.4),
+		"width": 10,
+		"showText":false
+	},
+	"Outpost":{
+		"routes": [],
+		"pool": [],
+		"color": Color(1, 1, 1, 0.15),
+		"width": 10,
+		"showText":true
 	}
 }
 
@@ -79,10 +82,14 @@ func GetRoutes():
 #
 	RouteLists.Sector.routes = StarMapData.ScannedRoutes()
 	var outpost_routes = StarMapData.AllRoutesBySystemList(nearby_systems)
-	if outpost_routes.size() > 0:
-		RouteLists.Outpost.routes = outpost_routes 
-	RouteLists.ShipMap.routes = ShipData.Ship().KnownRoutes
-	
+	#if outpost_routes.size() > 0:
+	RouteLists.Outpost.routes = outpost_routes 
+	if ShipData.Ship().KnownRoutes.size() > 0:
+		RouteLists.ShipMap.routes = ShipData.Ship().KnownRoutes
+#		for rt in ShipData.Ship().KnownRoutes:
+#			if !StarMapData.RouteListHas(RouteLists.Outpost.routes, rt):
+#				RouteLists.ShipMap.routes.append(rt)
+
 	for list in RouteLists:
 		GrowPool(RouteLists[list].pool, RouteLists[list].routes.size())
 		for i in RouteLists[list].pool.size():
@@ -91,7 +98,10 @@ func GetRoutes():
 					RouteLists[list].pool[i].get_node("LabelText").text = "%s <--> %s\r\n%.1f sector units" % [StarMapData.StarMap[RouteLists[list].routes[i].ObjectPool][RouteLists[list].routes[i].A].Name, StarMapData.StarMap[RouteLists[list].routes[i].ObjectPool][RouteLists[list].routes[i].B].Name, RouteLists[list].routes[i].Distance * StarMapData.MapScale]
 				else:
 					RouteLists[list].pool[i].get_node("LabelText").text = "%s <--> %s" % [StarMapData.StarMap[RouteLists[list].routes[i].ObjectPool][RouteLists[list].routes[i].A].Name, StarMapData.StarMap[RouteLists[list].routes[i].ObjectPool][RouteLists[list].routes[i].B].Name]
-				RouteLists[list].pool[i].show()
+				if RouteLists[list].showText:
+					RouteLists[list].pool[i].show()
+				else:
+					RouteLists[list].pool[i].hide()
 			else:
 				RouteLists[list].pool[i].hide()
 			pass

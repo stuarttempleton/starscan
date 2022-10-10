@@ -10,7 +10,7 @@ func _ready():
 	pass
 
 func _process(delta):
-	if position.distance_to(ShipData.GetPosition()) > 300:
+	if position.distance_to(ShipData.GetPosition()) > 300 || StarMapData.GetNearestBody() == null:
 		Disappear()
 	elif StarMapData.GetNearestBody().Scan > 0:
 		Appear()

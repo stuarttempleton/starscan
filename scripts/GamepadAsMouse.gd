@@ -13,6 +13,7 @@ var scenes_for_ui_accept = [
 var enable_full_input = false
 
 func _ready():
+	# warning-ignore:return_value_discarded
 	SceneChanger.connect("scene_changed",self,"scene_changed")
 
 func scene_changed(scene_path = ""):

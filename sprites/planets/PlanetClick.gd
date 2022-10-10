@@ -5,6 +5,8 @@ signal planet_selected()
 signal planet_hover(planet_position, planet_name)
 signal planet_unhover()
 
+var clicked = false
+
 func _ready():
 	# warning-ignore:return_value_discarded
 	connect("mouse_entered",self,"mouse_enter")
@@ -12,9 +14,11 @@ func _ready():
 	connect("mouse_exited",self,"mouse_exit")
 
 func _input_event(_viewport, event, _shape_idx):
-	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT and event.pressed:
-			emit_signal("planet_selected")
+		if event is InputEventMouseButton:
+			if event.button_index == BUTTON_LEFT and event.pressed:
+				if !clicked:
+					emit_signal("planet_selected")
+					clicked = true #block for echoes and double clicks
 
 func mouse_enter():
 	emit_signal("planet_hover", get_parent().position, get_parent().PlanetName)
