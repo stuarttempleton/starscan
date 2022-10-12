@@ -78,7 +78,7 @@ stretch_mode = 4
 [node name="Buttons" type="VBoxContainer" parent="MenuUIContainer/Menu"]
 margin_top = 87.0
 margin_right = 880.0
-margin_bottom = 347.0
+margin_bottom = 383.0
 size_flags_vertical = 3
 custom_constants/separation = 10
 alignment = 1
@@ -86,7 +86,7 @@ alignment = 1
 [node name="Play" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
 margin_right = 880.0
-margin_bottom = 35.0
+margin_bottom = 41.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
@@ -105,9 +105,9 @@ scene_to_load = "res://scenes/StarMapViewport.tscn"
 
 [node name="Generate Universe" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 45.0
+margin_top = 51.0
 margin_right = 880.0
-margin_bottom = 80.0
+margin_bottom = 92.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
@@ -126,9 +126,9 @@ scene_to_load = "res://scenes/StarMapViewport.tscn"
 
 [node name="Continue" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 90.0
+margin_top = 102.0
 margin_right = 880.0
-margin_bottom = 125.0
+margin_bottom = 143.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
@@ -146,9 +146,9 @@ script = ExtResource( 7 )
 
 [node name="Back To Menu" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 135.0
+margin_top = 153.0
 margin_right = 880.0
-margin_bottom = 170.0
+margin_bottom = 194.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
@@ -167,9 +167,9 @@ scene_to_load = "res://scenes/Title.tscn"
 
 [node name="Credits" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 180.0
+margin_top = 204.0
 margin_right = 880.0
-margin_bottom = 215.0
+margin_bottom = 245.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
@@ -188,9 +188,9 @@ scene_to_load = "res://scenes/credits.tscn"
 
 [node name="Exit" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 225.0
+margin_top = 255.0
 margin_right = 880.0
-margin_bottom = 260.0
+margin_bottom = 296.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
@@ -207,16 +207,16 @@ text = "QUIT"
 script = ExtResource( 3 )
 
 [node name="GamepadSpacer" type="ColorRect" parent="MenuUIContainer/Menu"]
-margin_top = 351.0
+margin_top = 387.0
 margin_right = 880.0
-margin_bottom = 361.0
+margin_bottom = 397.0
 rect_min_size = Vector2( 0, 10 )
 color = Color( 1, 1, 1, 0 )
 
 [node name="GamepadHint2" parent="MenuUIContainer/Menu" instance=ExtResource( 19 )]
 margin_left = 0.0
-margin_top = 365.0
+margin_top = 401.0
 margin_right = 880.0
-margin_bottom = 389.0
+margin_bottom = 425.0
 
 [connection signal="button_down" from="MenuUIContainer/Menu/Buttons/Credits" to="MenuUIContainer/Menu/Buttons/Credits" method="_on_Credits_button_down"]

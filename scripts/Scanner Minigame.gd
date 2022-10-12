@@ -77,7 +77,6 @@ func _process(delta):
 			AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.SCAN_OSCILLATOR)
 			increasing = !increasing
 
-
 func _on_Button_pressed():
 	scanButtonPressed = true
 	$ScanButton.disabled = true

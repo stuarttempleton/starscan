@@ -89,7 +89,11 @@ func GetRoutes():
 #		for rt in ShipData.Ship().KnownRoutes:
 #			if !StarMapData.RouteListHas(RouteLists.Outpost.routes, rt):
 #				RouteLists.ShipMap.routes.append(rt)
+	UpdateLabels()
 
+
+
+func UpdateLabels():
 	for list in RouteLists:
 		GrowPool(RouteLists[list].pool, RouteLists[list].routes.size())
 		for i in RouteLists[list].pool.size():
