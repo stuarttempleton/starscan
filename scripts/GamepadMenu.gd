@@ -23,8 +23,13 @@ func _joypad_changed(_device, _connected):
 			foc.release_focus()
 
 func menu_is_active():
+	#see if whatever has focus is part of our menu
+	#quirk of godot input is that mouse interaction will give a button focus
 	var foc = get_focus_owner()
-	return (foc)
+	if menus.has(current_menu) && (foc):
+		if menus[current_menu].has(foc):
+			return true
+	return false
 	
 func add_menu(id, buttons:Array, selected = 0):
 	if buttons.size() <= 0:

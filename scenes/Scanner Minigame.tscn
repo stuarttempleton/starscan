@@ -251,15 +251,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScanButton" type="Button" parent="CanvasLayer/SceneBackground/Scanner Minigame"]
+[node name="Buttons" type="VBoxContainer" parent="CanvasLayer/SceneBackground/Scanner Minigame"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -45.0
+margin_left = -64.0
 margin_top = 112.0
-margin_right = 51.0
-margin_bottom = 138.0
+margin_right = 64.0
+margin_bottom = 152.0
+
+[node name="ScanButton" type="Button" parent="CanvasLayer/SceneBackground/Scanner Minigame/Buttons"]
+margin_right = 128.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 0, 25 )
 custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -274,4 +278,19 @@ action_mode = 0
 text = "Scan"
 script = ExtResource( 10 )
 
-[connection signal="pressed" from="CanvasLayer/SceneBackground/Scanner Minigame/ScanButton" to="CanvasLayer/SceneBackground/Scanner Minigame" method="_on_Button_pressed"]
+[node name="CancelButton" type="Button" parent="CanvasLayer/SceneBackground/Scanner Minigame/Buttons"]
+margin_top = 29.0
+margin_right = 128.0
+margin_bottom = 53.0
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 5 )
+action_mode = 0
+text = "Cancel"
+script = ExtResource( 10 )
+GamepadButton = 1
+
+[connection signal="pressed" from="CanvasLayer/SceneBackground/Scanner Minigame/Buttons/ScanButton" to="CanvasLayer/SceneBackground/Scanner Minigame" method="_on_Button_pressed"]
+[connection signal="pressed" from="CanvasLayer/SceneBackground/Scanner Minigame/Buttons/CancelButton" to="CanvasLayer/SceneBackground/Scanner Minigame" method="_on_CancelButton_pressed"]

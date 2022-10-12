@@ -63,10 +63,13 @@ var increasing = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if !$ScanButton.disabled:
+	if !$Buttons/ScanButton.disabled:
 		if Input.is_action_just_pressed("ui_accept"):
 			if !GamepadMenu.menu_is_active():
 				_on_Button_pressed()
+		if Input.is_action_just_pressed("ui_cancel"):
+			if !GamepadMenu.menu_is_active():
+				_on_CancelButton_pressed()
 	
 	if not scanButtonPressed:
 		x = fmod(x + delta * difficultyModifier, amplitude)
@@ -79,14 +82,16 @@ func _process(delta):
 
 func _on_Button_pressed():
 	scanButtonPressed = true
-	$ScanButton.disabled = true
+	$Buttons/ScanButton.disabled = true
+	$Buttons/CancelButton.disabled = true
 	var score = success_curve.interpolate(abs(x - 1.0))
 	var success = score > 0.5
 	handleScanResult(success, score)
 
 func reset():
 	scanButtonPressed = false
-	$ScanButton.disabled = false
+	$Buttons/ScanButton.disabled = false
+	$Buttons/CancelButton.disabled = false
 
 func SetupSweetSpot():
 	assert(success_curve.get_point_count() == 4, "Scanner minigame success curve must have exactly 4 points")
@@ -130,3 +135,6 @@ func _on_endAnimComplete():
 	GameController.EnableMovement(true)
 	minigameRoot.queue_free()
 
+func _on_CancelButton_pressed():
+	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.UI_BUTTON_SELECT)
+	_on_endAnimComplete()
