@@ -63,12 +63,11 @@ func NebulaHazardHelper(nebula):
 	return "Unknown"
 	
 func InRange(system):
-	#$ColorRect.visible = true
 	$Background.visible = true
 	if DisplayedSystem != system:
 		DisplayedSystem = system
 		RefreshDisplayedData()
-	MovementEvent.add_deadzone(name, $ColorRect.get_global_rect())
+	MovementEvent.add_deadzone(name, $Background.get_global_rect())
 
 func _exit_tree():
 	MovementEvent.remove_deadzone(name)

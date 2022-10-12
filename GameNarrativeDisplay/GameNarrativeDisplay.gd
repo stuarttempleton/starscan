@@ -21,10 +21,10 @@ var display_speed = 1.5
 
 func _ready():
 	buttons = [
-		$MessageBoxUI/HBoxContainer/Button1,
-		$MessageBoxUI/HBoxContainer/Button2,
-		$MessageBoxUI/HBoxContainer/Button3,
-		$MessageBoxUI/HBoxContainer/Button4,
+		$MessageBoxUI/Vbox/HBoxContainer/Button1,
+		$MessageBoxUI/Vbox/HBoxContainer/Button2,
+		$MessageBoxUI/Vbox/HBoxContainer/Button3,
+		$MessageBoxUI/Vbox/HBoxContainer/Button4,
 	]
 	messageNodes = [
 		$MessageBoxUI
@@ -44,9 +44,9 @@ func DisplayText(txt, array_buttons, button_selected = 0):
 	
 	if array_buttons.size() > buttons.size():
 		print("TOO MANY OPTIONS SENT! ONLY USING %d", buttons.size())
-	$MessageBoxUI/Message.bbcode_text = message
+	$MessageBoxUI/Vbox/Panel/Message.bbcode_text = message
 	SetMessageNodeVisibility(true)
-	$MessageBoxUI/Message.percent_visible = 0
+	$MessageBoxUI/Vbox/Panel/Message.percent_visible = 0
 	
 	for btn in buttons:
 		btn.visible = false
@@ -59,14 +59,14 @@ func DisplayText(txt, array_buttons, button_selected = 0):
 		if ( i == buttons.size() ):
 			break
 	GamepadMenu.add_menu(name,buttons.slice(0,i - 1), button_selected)
-	$MessageBoxUI/GamepadHint.dpad_visible((array_buttons.size() > 1))
+	$MessageBoxUI/Vbox/GamepadHint.dpad_visible((array_buttons.size() > 1))
 
 
 func _process(delta):
-	if($MessageBoxUI/Message.percent_visible > 0.9):
-		$MessageBoxUI/Message.percent_visible = 1
+	if($MessageBoxUI/Vbox/Panel/Message.percent_visible > 0.9):
+		$MessageBoxUI/Vbox/Panel/Message.percent_visible = 1
 	else:
-		$MessageBoxUI/Message.percent_visible += display_speed * delta
+		$MessageBoxUI/Vbox/Panel/Message.percent_visible += display_speed * delta
 
 
 func CancelDialog():

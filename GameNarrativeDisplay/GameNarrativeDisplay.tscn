@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://GameNarrativeDisplay/GameNarrativeDisplay.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Montserrat-Light.ttf" type="DynamicFontData" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://styles/MenuButton_Focus.tres" type="StyleBox" id=8]
 [ext_resource path="res://styles/MenuButton_Disabled.tres" type="StyleBox" id=9]
 [ext_resource path="res://GameNarrativeDisplay/GamepadHint.tscn" type="PackedScene" id=10]
+[ext_resource path="res://styles/dialogPanel.tres" type="StyleBox" id=11]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-Regular.ttf"
@@ -57,9 +58,6 @@ script = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Background" type="TextureRect" parent="MessageBoxUI"]
 material = ExtResource( 7 )
@@ -68,40 +66,30 @@ anchor_bottom = 1.0
 texture = ExtResource( 6 )
 expand = true
 
-[node name="ColorRect" type="ColorRect" parent="MessageBoxUI"]
+[node name="Vbox" type="VBoxContainer" parent="MessageBoxUI"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -320.0
-margin_top = -264.0
+margin_top = -344.0
 margin_right = 320.0
-margin_bottom = 184.0
-color = Color( 0.396078, 0.396078, 0.396078, 0.870588 )
+margin_bottom = 344.0
+custom_constants/separation = 24
+alignment = 1
 
-[node name="ColorRect2" type="ColorRect" parent="MessageBoxUI"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -318.0
-margin_top = -262.0
-margin_right = 318.0
-margin_bottom = 182.0
-color = Color( 0.0862745, 0.0862745, 0.0862745, 0.956863 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Panel" type="PanelContainer" parent="MessageBoxUI/Vbox"]
+margin_top = 217.0
+margin_right = 640.0
+margin_bottom = 370.0
+rect_min_size = Vector2( 640, 0 )
+custom_styles/panel = ExtResource( 11 )
 
-[node name="Message" type="RichTextLabel" parent="MessageBoxUI"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -288.0
-margin_top = -232.0
-margin_right = 288.0
-margin_bottom = 152.0
+[node name="Message" type="RichTextLabel" parent="MessageBoxUI/Vbox/Panel"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 620.0
+margin_bottom = 133.0
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_fonts/mono_font = SubResource( 2 )
 custom_fonts/bold_italics_font = SubResource( 4 )
@@ -121,25 +109,20 @@ You have been chosen.
 REFUEL and BEGIN your journey."
 fit_content_height = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MessageBoxUI"]
-anchor_left = 0.5
-anchor_top = 0.477778
-anchor_right = 0.5
-anchor_bottom = 0.477778
-margin_left = -288.0
-margin_top = 216.0
-margin_right = 288.0
-margin_bottom = 256.0
+[node name="HBoxContainer" type="HBoxContainer" parent="MessageBoxUI/Vbox"]
+margin_top = 394.0
+margin_right = 640.0
+margin_bottom = 423.0
 custom_constants/separation = 15
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Button1" type="Button" parent="MessageBoxUI/HBoxContainer"]
-margin_left = 9.0
-margin_right = 137.0
-margin_bottom = 40.0
+[node name="Button1" type="Button" parent="MessageBoxUI/Vbox/HBoxContainer"]
+margin_left = 41.0
+margin_right = 169.0
+margin_bottom = 29.0
 rect_min_size = Vector2( 128, 0 )
 custom_fonts/font = SubResource( 11 )
 custom_styles/hover = ExtResource( 3 )
@@ -149,10 +132,10 @@ custom_styles/disabled = ExtResource( 9 )
 custom_styles/normal = ExtResource( 4 )
 text = "BUTTON1"
 
-[node name="Button2" type="Button" parent="MessageBoxUI/HBoxContainer"]
-margin_left = 152.0
-margin_right = 280.0
-margin_bottom = 40.0
+[node name="Button2" type="Button" parent="MessageBoxUI/Vbox/HBoxContainer"]
+margin_left = 184.0
+margin_right = 312.0
+margin_bottom = 29.0
 rect_min_size = Vector2( 128, 0 )
 custom_fonts/font = SubResource( 11 )
 custom_styles/hover = ExtResource( 3 )
@@ -162,10 +145,10 @@ custom_styles/disabled = ExtResource( 9 )
 custom_styles/normal = ExtResource( 4 )
 text = "BUTTON2"
 
-[node name="Button3" type="Button" parent="MessageBoxUI/HBoxContainer"]
-margin_left = 295.0
-margin_right = 423.0
-margin_bottom = 40.0
+[node name="Button3" type="Button" parent="MessageBoxUI/Vbox/HBoxContainer"]
+margin_left = 327.0
+margin_right = 455.0
+margin_bottom = 29.0
 rect_min_size = Vector2( 128, 0 )
 custom_fonts/font = SubResource( 11 )
 custom_styles/hover = ExtResource( 3 )
@@ -175,10 +158,10 @@ custom_styles/disabled = ExtResource( 9 )
 custom_styles/normal = ExtResource( 4 )
 text = "BUTTON3"
 
-[node name="Button4" type="Button" parent="MessageBoxUI/HBoxContainer"]
-margin_left = 438.0
-margin_right = 566.0
-margin_bottom = 40.0
+[node name="Button4" type="Button" parent="MessageBoxUI/Vbox/HBoxContainer"]
+margin_left = 470.0
+margin_right = 598.0
+margin_bottom = 29.0
 rect_min_size = Vector2( 128, 0 )
 custom_fonts/font = SubResource( 11 )
 custom_styles/hover = ExtResource( 3 )
@@ -188,17 +171,40 @@ custom_styles/disabled = ExtResource( 9 )
 custom_styles/normal = ExtResource( 4 )
 text = "BUTTON4"
 
-[node name="GamepadHint" parent="MessageBoxUI" instance=ExtResource( 10 )]
+[node name="GamepadHint" parent="MessageBoxUI/Vbox" instance=ExtResource( 10 )]
+margin_left = 0.0
+margin_top = 447.0
+margin_right = 640.0
+margin_bottom = 471.0
+
+[node name="ColorRect" type="ColorRect" parent="MessageBoxUI"]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -128.0
-margin_top = 272.0
-margin_right = 128.0
-margin_bottom = 296.0
+margin_left = -320.0
+margin_top = -264.0
+margin_right = 320.0
+margin_bottom = 184.0
+color = Color( 0.396078, 0.396078, 0.396078, 0.870588 )
 
-[connection signal="pressed" from="MessageBoxUI/HBoxContainer/Button1" to="." method="_on_Button1_pressed"]
-[connection signal="pressed" from="MessageBoxUI/HBoxContainer/Button2" to="." method="_on_Button2_pressed"]
-[connection signal="pressed" from="MessageBoxUI/HBoxContainer/Button3" to="." method="_on_Button3_pressed"]
-[connection signal="pressed" from="MessageBoxUI/HBoxContainer/Button4" to="." method="_on_Button4_pressed"]
+[node name="ColorRect2" type="ColorRect" parent="MessageBoxUI"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -318.0
+margin_top = -262.0
+margin_right = 318.0
+margin_bottom = 182.0
+color = Color( 0.0862745, 0.0862745, 0.0862745, 0.956863 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="MessageBoxUI/Vbox/HBoxContainer/Button1" to="." method="_on_Button1_pressed"]
+[connection signal="pressed" from="MessageBoxUI/Vbox/HBoxContainer/Button2" to="." method="_on_Button2_pressed"]
+[connection signal="pressed" from="MessageBoxUI/Vbox/HBoxContainer/Button3" to="." method="_on_Button3_pressed"]
+[connection signal="pressed" from="MessageBoxUI/Vbox/HBoxContainer/Button4" to="." method="_on_Button4_pressed"]
