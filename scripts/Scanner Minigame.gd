@@ -35,8 +35,17 @@ var difficultyModifier
 
 var scanButtonPressed = false
 
+var title
+var description
+var scanbutton
+var cancelbutton
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	title = $"../ScanPanel/VBoxContainer/Title"
+	description = $"../ScanPanel/VBoxContainer/Description"
+	scanbutton = $"../ButtonPanel/Buttons/ScanButton"
+	cancelbutton = $"../ButtonPanel/Buttons/CancelButton"
 	GameController.EnableMovement(false)
 	SceneChanger.GoAway()
 	if (StarMapData.NearestSystem == null):
@@ -48,7 +57,8 @@ func _ready():
 	var max_neb_distance = 0.015
 	difficultyModifier = clamp((nebuladistance - max_neb_distance * nebulascale) * -10, 0,1) + speed
 	
-	$Title.text = $Title.text % [StarMapData.NearestSystem.Name]
+	#$"../ScanPanel/VBoxContainer/Title"
+	title.text = title.text % [StarMapData.NearestSystem.Name]
 	
 	#Fit oscillator within bg assuming sbg offset left of origin is margin
 	var bgMargin = -bg.rect_position.x
@@ -63,7 +73,7 @@ var increasing = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if !$Buttons/ScanButton.disabled:
+	if !scanbutton.disabled:
 		if Input.is_action_just_pressed("ui_accept"):
 			if !GamepadMenu.menu_is_active():
 				_on_Button_pressed()
@@ -82,16 +92,16 @@ func _process(delta):
 
 func _on_Button_pressed():
 	scanButtonPressed = true
-	$Buttons/ScanButton.disabled = true
-	$Buttons/CancelButton.disabled = true
+	scanbutton.disabled = true
+	cancelbutton.disabled = true
 	var score = success_curve.interpolate(abs(x - 1.0))
 	var success = score > 0.5
 	handleScanResult(success, score)
 
 func reset():
 	scanButtonPressed = false
-	$Buttons/ScanButton.disabled = false
-	$Buttons/CancelButton.disabled = false
+	scanbutton.disabled = false
+	cancelbutton.disabled = false
 
 func SetupSweetSpot():
 	assert(success_curve.get_point_count() == 4, "Scanner minigame success curve must have exactly 4 points")
@@ -112,7 +122,7 @@ func SetupSweetSpot():
 	sweetSpot.rect_size.x = oscillatorRange * (rightMin.x - leftMin.x)
 
 func updateText(percent, confidence):
-	$Description.text = "Scan complete: %s%%\r\nConfidence: %s" % [percent, confidence]
+	description.text = "Scan complete: %s%%\r\nConfidence: %s" % [percent, confidence]
 	pass
 
 func handleScanResult(isSuccess, accuracy):

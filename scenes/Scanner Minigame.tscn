@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scripts/Scanner Minigame.gd" type="Script" id=1]
 [ext_resource path="res://styles/MenuButton_Disabled.tres" type="StyleBox" id=2]
@@ -10,9 +10,8 @@
 [ext_resource path="res://GameNarrativeDisplay/blur_shader_material.tres" type="Material" id=8]
 [ext_resource path="res://shaders/white.png" type="Texture" id=9]
 [ext_resource path="res://scripts/ScanMinigameButton.gd" type="Script" id=10]
-
-[sub_resource type="Curve" id=1]
-_data = [ Vector2( 0.243816, 0 ), 0.0, 4.35385, 0, 1, Vector2( 0.473498, 1 ), 4.35385, 0.0, 1, 1, Vector2( 0.522968, 1 ), 0.0, -4.49206, 1, 1, Vector2( 0.745583, 0 ), -4.49206, 0.0, 1, 0 ]
+[ext_resource path="res://styles/dialogPanel.tres" type="StyleBox" id=11]
+[ext_resource path="res://styles/dialogButtonPanel.tres" type="StyleBox" id=12]
 
 [sub_resource type="DynamicFontData" id=2]
 font_path = "res://fonts/Montserrat-Medium.ttf"
@@ -26,6 +25,9 @@ font_path = "res://fonts/Montserrat-Light.ttf"
 
 [sub_resource type="DynamicFont" id=5]
 font_data = SubResource( 4 )
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0.243816, 0 ), 0.0, 4.35385, 0, 1, Vector2( 0.473498, 1 ), 4.35385, 0.0, 1, 1, Vector2( 0.522968, 1 ), 0.0, -4.49206, 1, 1, Vector2( 0.745583, 0 ), -4.49206, 0.0, 1, 0 ]
 
 [sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0.253906, 0.398438, 0.644531, 0.796875 )
@@ -110,13 +112,50 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ScanPanel" type="PanelContainer" parent="CanvasLayer/SceneBackground"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -192.0
+margin_top = -168.0
+margin_right = 192.0
+custom_styles/panel = ExtResource( 11 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/SceneBackground/ScanPanel"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 364.0
+margin_bottom = 148.0
+
+[node name="Title" type="Label" parent="CanvasLayer/SceneBackground/ScanPanel/VBoxContainer"]
+margin_right = 344.0
+margin_bottom = 29.0
+custom_fonts/font = SubResource( 3 )
+text = "Scanning %s system"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Description" type="Label" parent="CanvasLayer/SceneBackground/ScanPanel/VBoxContainer"]
+margin_top = 33.0
+margin_right = 344.0
+margin_bottom = 54.0
+custom_fonts/font = SubResource( 5 )
+text = "Attenuating..."
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Scanner Minigame" type="Control" parent="CanvasLayer/SceneBackground"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_top = -64.0
-margin_bottom = -64.0
+margin_top = -120.0
+margin_bottom = -120.0
 script = ExtResource( 1 )
 oscillator_path = NodePath("Oscillator")
 bg_path = NodePath("BG")
@@ -128,6 +167,7 @@ success_curve = SubResource( 1 )
 speed = 1.0
 
 [node name="Text Border" type="ColorRect" parent="CanvasLayer/SceneBackground/Scanner Minigame"]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -139,6 +179,7 @@ margin_bottom = 16.0
 color = Color( 0.396078, 0.396078, 0.396078, 0.870588 )
 
 [node name="Text BG" type="ColorRect" parent="CanvasLayer/SceneBackground/Scanner Minigame"]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -148,38 +189,6 @@ margin_top = -102.0
 margin_right = 161.0
 margin_bottom = 14.0
 color = Color( 0.0862745, 0.0862745, 0.0862745, 0.956863 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Title" type="Label" parent="CanvasLayer/SceneBackground/Scanner Minigame"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -157.0
-margin_top = -88.0
-margin_right = 163.0
-margin_bottom = -56.0
-custom_fonts/font = SubResource( 3 )
-text = "Scanning %s system"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Description" type="Label" parent="CanvasLayer/SceneBackground/Scanner Minigame"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -157.0
-margin_top = -48.0
-margin_right = 163.0
-margin_bottom = 1.0
-custom_fonts/font = SubResource( 5 )
-text = "Attenuating..."
-align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -251,20 +260,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Buttons" type="VBoxContainer" parent="CanvasLayer/SceneBackground/Scanner Minigame"]
+[node name="ButtonPanel" type="PanelContainer" parent="CanvasLayer/SceneBackground"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -64.0
-margin_top = 112.0
-margin_right = 64.0
-margin_bottom = 152.0
+margin_left = -192.0
+margin_right = 192.0
+margin_bottom = 65.0
+custom_styles/panel = ExtResource( 12 )
 
-[node name="ScanButton" type="Button" parent="CanvasLayer/SceneBackground/Scanner Minigame/Buttons"]
-margin_right = 128.0
+[node name="Buttons" type="HBoxContainer" parent="CanvasLayer/SceneBackground/ButtonPanel"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 364.0
+margin_bottom = 45.0
+custom_constants/separation = 15
+alignment = 1
+
+[node name="ScanButton" type="Button" parent="CanvasLayer/SceneBackground/ButtonPanel/Buttons"]
+margin_left = 36.0
+margin_right = 164.0
 margin_bottom = 25.0
-rect_min_size = Vector2( 0, 25 )
+rect_min_size = Vector2( 128, 25 )
 custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
@@ -278,10 +296,11 @@ action_mode = 0
 text = "Scan"
 script = ExtResource( 10 )
 
-[node name="CancelButton" type="Button" parent="CanvasLayer/SceneBackground/Scanner Minigame/Buttons"]
-margin_top = 29.0
-margin_right = 128.0
-margin_bottom = 53.0
+[node name="CancelButton" type="Button" parent="CanvasLayer/SceneBackground/ButtonPanel/Buttons"]
+margin_left = 179.0
+margin_right = 307.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 128, 0 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 7 )
 custom_styles/focus = ExtResource( 3 )
@@ -292,5 +311,5 @@ text = "Cancel"
 script = ExtResource( 10 )
 GamepadButton = 1
 
-[connection signal="pressed" from="CanvasLayer/SceneBackground/Scanner Minigame/Buttons/ScanButton" to="CanvasLayer/SceneBackground/Scanner Minigame" method="_on_Button_pressed"]
-[connection signal="pressed" from="CanvasLayer/SceneBackground/Scanner Minigame/Buttons/CancelButton" to="CanvasLayer/SceneBackground/Scanner Minigame" method="_on_CancelButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/SceneBackground/ButtonPanel/Buttons/ScanButton" to="CanvasLayer/SceneBackground/Scanner Minigame" method="_on_Button_pressed"]
+[connection signal="pressed" from="CanvasLayer/SceneBackground/ButtonPanel/Buttons/CancelButton" to="CanvasLayer/SceneBackground/Scanner Minigame" method="_on_CancelButton_pressed"]
