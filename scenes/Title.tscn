@@ -110,9 +110,6 @@ margin_right = 10.0
 margin_bottom = 3.0
 rect_rotation = 45.0
 color = Color( 0.478431, 0, 1, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="MainMenu" parent="." instance=ExtResource( 1 )]
 in_game = false

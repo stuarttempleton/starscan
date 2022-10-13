@@ -21,10 +21,10 @@ var display_speed = 1.5
 
 func _ready():
 	buttons = [
-		$MessageBoxUI/Vbox/HBoxContainer/Button1,
-		$MessageBoxUI/Vbox/HBoxContainer/Button2,
-		$MessageBoxUI/Vbox/HBoxContainer/Button3,
-		$MessageBoxUI/Vbox/HBoxContainer/Button4,
+		$MessageBoxUI/Vbox/ButtonPanel/HBoxContainer/Button1,
+		$MessageBoxUI/Vbox/ButtonPanel/HBoxContainer/Button2,
+		$MessageBoxUI/Vbox/ButtonPanel/HBoxContainer/Button3,
+		$MessageBoxUI/Vbox/ButtonPanel/HBoxContainer/Button4,
 	]
 	messageNodes = [
 		$MessageBoxUI
