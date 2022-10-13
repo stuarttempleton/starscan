@@ -6,7 +6,7 @@ export(String) var StarMapViewport_scene
 
 func _process(_delta):
 	if !disabled:
-		if Input.is_action_just_pressed("ui_cancel"):
+		if Input.is_action_just_pressed("leave_system_orbit"):
 			if !GamepadMenu.menu_is_active():
 				_on_button_down()
 

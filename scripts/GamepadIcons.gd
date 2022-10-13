@@ -1,6 +1,6 @@
 extends Node2D
 
-enum GamepadButtonTypes {ui_accept, ui_cancel, ui_select, enter_system, dpad_all, dpad_any, dpad_up_down, dpad_left_right, dpad_up, dpad_down, dpad_left, dpad_right}
+enum GamepadButtonTypes {ui_accept, ui_cancel, ui_select, enter_system, leave_system_orbit, dpad_all, dpad_any, dpad_up_down, dpad_left_right, dpad_up, dpad_down, dpad_left, dpad_right}
 
 var GamepadIconSet = {
 	"Keyboard":
@@ -9,6 +9,7 @@ var GamepadIconSet = {
 			"ui_cancel":"res://sprites/GamepadGlyphs/Xbox/B.png",
 			"ui_select":"res://sprites/GamepadGlyphs/Xbox/Y.png",
 			"enter_system":"res://sprites/GamepadGlyphs/Xbox/A.png",
+			"leave_system_orbit":"res://sprites/GamepadGlyphs/Xbox/B.png",
 			"dpad_all":"res://sprites/GamepadGlyphs/dpad/all.png",
 			"dpad_any":"res://sprites/GamepadGlyphs/dpad/any.png",
 			"dpad_up_down":"res://sprites/GamepadGlyphs/dpad/up-down.png",
@@ -24,6 +25,7 @@ var GamepadIconSet = {
 			"ui_cancel":"res://sprites/GamepadGlyphs/Xbox/B.png",
 			"ui_select":"res://sprites/GamepadGlyphs/Xbox/Y.png",
 			"enter_system":"res://sprites/GamepadGlyphs/Xbox/A.png",
+			"leave_system_orbit":"res://sprites/GamepadGlyphs/Xbox/B.png",
 			"dpad_all":"res://sprites/GamepadGlyphs/dpad/all.png",
 			"dpad_any":"res://sprites/GamepadGlyphs/dpad/any.png",
 			"dpad_up_down":"res://sprites/GamepadGlyphs/dpad/up-down.png",
@@ -39,6 +41,7 @@ var GamepadIconSet = {
 			"ui_cancel":"res://sprites/GamepadGlyphs/Steam/B.png",
 			"ui_select":"res://sprites/GamepadGlyphs/Steam/Y.png",
 			"enter_system":"res://sprites/GamepadGlyphs/Steam/A.png",
+			"leave_system_orbit":"res://sprites/GamepadGlyphs/Steam/B.png",
 			"dpad_all":"res://sprites/GamepadGlyphs/dpad/all.png",
 			"dpad_any":"res://sprites/GamepadGlyphs/dpad/any.png",
 			"dpad_up_down":"res://sprites/GamepadGlyphs/dpad/up_down.png",

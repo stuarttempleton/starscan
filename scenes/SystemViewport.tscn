@@ -161,7 +161,7 @@ custom_styles/disabled = ExtResource( 16 )
 custom_styles/normal = ExtResource( 3 )
 text = "Leave System"
 script = ExtResource( 1 )
-GamepadButton = 1
+GamepadButton = 4
 StarMapViewport_scene = "res://scenes/StarMapViewport.tscn"
 
 [node name="PlayerStats" parent="." instance=ExtResource( 15 )]

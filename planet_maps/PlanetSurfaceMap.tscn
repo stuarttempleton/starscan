@@ -214,6 +214,6 @@ script = ExtResource( 11 )
 __meta__ = {
 "_editor_description_": ""
 }
-GamepadButton = 1
+GamepadButton = 4
 
 [connection signal="button_down" from="LeaveOrbit" to="." method="_on_LeaveOrbit"]

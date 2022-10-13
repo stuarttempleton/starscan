@@ -22,7 +22,7 @@ margin_right = 60.0
 margin_bottom = 24.0
 texture = ExtResource( 3 )
 script = ExtResource( 2 )
-GamepadButton = 4
+GamepadButton = 6
 
 [node name="Label" type="Label" parent="."]
 margin_left = 65.0
