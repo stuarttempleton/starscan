@@ -28,8 +28,34 @@ var LanguageStructure = {
 		["x",0.17],
 		["y",2.11],
 		["z",0.07]], 
-	"CharacterPatterns":[["VC",0.05], ["VCV",1],["VCCV",1.1], ["VCVC",1.1], ["VCVV",1.1], ["VCCVC",1.2],["VCCVCVC",1.03], 
-		["CV",0.04], ["CVC",1], ["CVCV",1.1], ["CVVC",1.1], ["CVCC",1.1], ["CVVCV",1.1], ["CVCCVCV",1.04]]
+	"P":[["'",1.0]],
+	"CharacterPatterns":[
+		["VC",0.05], 
+		["VCV",1],
+		["VCCV",1.1], 
+		["VCVC",1.1], 
+		["VCVV",1.1], 
+		["VCCVC",1.2],
+		["VCCVCVC",1.03], 
+		["CV",0.04], 
+		["CVC",1], 
+		["CVCV",1.1], 
+		["CVVC",1.1], 
+		["CVCC",1.1], 
+		["CVVCV",1.1], 
+		["CVCCVCV",1.04], 
+		["VPCV",0.4],
+		["VPCCV",0.4], 
+		["VPCVC",0.4], 
+		["VPCVV",0.4], 
+		["VCCPVC",0.5],
+		["VCCVPCVC",0.3], 
+		["CPVC",0.3], 
+		["CPVCV",0.4], 
+		["CPVVC",0.4], 
+		["CPVCC",0.4], 
+		["CVVPCV",0.4], 
+		["CVCCPVCV",0.3]]
 		}
 
 # Called when the node enters the scene tree for the first time.
@@ -73,7 +99,10 @@ func CreateUnsafeWord():
 	var pattern = GetWeightedItem(LanguageStructure["CharacterPatterns"],2)[0]
 	var output = ""
 	for i in pattern.length():
-		output += GetWeightedItem(LanguageStructure[pattern[i]],3)[0]
+		if LanguageStructure.has(pattern[i]):
+			output += GetWeightedItem(LanguageStructure[pattern[i]],3)[0]
+		else:
+			output += pattern[i]
 	return(output)
 
 func CreateWordList(_qty):

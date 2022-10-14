@@ -4,11 +4,14 @@ extends CanvasLayer
 export var in_game = true
 export(Array, NodePath) var in_game_nodes
 export(Array, NodePath) var title_nodes
+export(Array, NodePath) var editor_only_nodes
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_nodes_state(in_game_nodes, in_game)
 	set_nodes_state(title_nodes, !in_game)
+	set_nodes_state(editor_only_nodes, OS.has_feature("editor"))
+	
 	GamepadMenu.add_menu(name, get_active_nodes())
 
 func _exit_tree():

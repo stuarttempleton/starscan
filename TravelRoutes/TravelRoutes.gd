@@ -132,9 +132,9 @@ func _drawTravelRoutes(Routes):
 		draw_line(from,to,Routes.color,Routes.width,true)
 		var segment = GetSubSegment(from, to)
 		var label_point = Geometry.get_closest_point_to_segment_2d(ShipPosition, segment[0], segment[1])
-		Routes.pool[i - 1].rect_position = get_viewport_transform().xform(label_point)
-		#_labelPool[i - 1 + pool_offset].rect_scale = Vector2(1,1) / camera.zoom.clamped(2)
-		#draw_circle(label_point,10, Color.red)
+		if Routes.pool.size() >= i:
+			#if the label pool is still resizing when the draw call hits, just defer for a frame. no biggie.
+			Routes.pool[i - 1].rect_position = get_viewport_transform().xform(label_point)
 	pass
 
 func _draw():

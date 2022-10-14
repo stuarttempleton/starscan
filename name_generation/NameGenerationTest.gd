@@ -2,6 +2,10 @@ extends Control
 
 func _ready():
 	SceneChanger.GoAway()
+	GamepadMenu.add_menu(name, $ScenePanel/PanelContainer/HBoxContainer.get_children())
+
+func _exit_tree():
+	GamepadMenu.remove_menu(name)
 
 func _on_GenerateArtifacts_pressed():
 	var list = ""
@@ -10,8 +14,8 @@ func _on_GenerateArtifacts_pressed():
 	for w in $WordGenerator/Artifact.CreateList(qty, true):
 		list += "%d. %s\r\n" % [i, w]
 		i += 1
-	$VBoxContainer/Name.text = "Artifacts"
-	$VBoxContainer/Quote.bbcode_text = list
+	$ScenePanel/ContentPanel/VBoxContainer/Name.text = "Artifacts"
+	$ScenePanel/ContentPanel/VBoxContainer/Quote.bbcode_text = list
 
 
 func _on_GenerateSystem_pressed():
@@ -22,5 +26,5 @@ func _on_GenerateSystem_pressed():
 	for w in $WordGenerator.CreateWordList(planet_qty):
 		PlanetList += "%d. %s\r\n" % [i, w.capitalize()]
 		i += 1
-	$VBoxContainer/Name.text = SystemName
-	$VBoxContainer/Quote.bbcode_text = PlanetList
+	$ScenePanel/ContentPanel/VBoxContainer/Name.text = SystemName
+	$ScenePanel/ContentPanel/VBoxContainer/Quote.bbcode_text = PlanetList

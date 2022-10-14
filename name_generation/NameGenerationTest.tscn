@@ -1,7 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://name_generation/WordGenerator.tscn" type="PackedScene" id=1]
 [ext_resource path="res://name_generation/NameGenerationTest.gd" type="Script" id=2]
+[ext_resource path="res://styles/MenuButton_Focus.tres" type="StyleBox" id=3]
+[ext_resource path="res://styles/MenuButton_HoverFocus.tres" type="StyleBox" id=4]
+[ext_resource path="res://styles/MenuButton_Normal.tres" type="StyleBox" id=5]
+[ext_resource path="res://styles/MenuButton_Disabled.tres" type="StyleBox" id=6]
+[ext_resource path="res://styles/MenuButton_Pressed.tres" type="StyleBox" id=7]
+[ext_resource path="res://styles/dialogPanel.tres" type="StyleBox" id=8]
+[ext_resource path="res://styles/dialogButtonPanel.tres" type="StyleBox" id=9]
+[ext_resource path="res://scenes/background space dust.tscn" type="PackedScene" id=10]
+[ext_resource path="res://GameNarrativeDisplay/GamepadHint.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scripts/menu_button_credits.gd" type="Script" id=12]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-Regular.ttf"
@@ -14,65 +24,122 @@ font_data = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 256.0
-margin_top = 128.0
-margin_right = -256.0
-margin_bottom = -112.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Nebula" parent="." instance=ExtResource( 10 )]
+position = Vector2( 176, 816 )
+scale = Vector2( 6, 6 )
 
-[node name="Name" type="Label" parent="VBoxContainer"]
+[node name="ScenePanel" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -384.0
+margin_top = -360.0
+margin_right = 384.0
+margin_bottom = 360.0
+custom_constants/separation = 0
+alignment = 1
+
+[node name="ContentPanel" type="PanelContainer" parent="ScenePanel"]
+margin_top = 255.0
 margin_right = 768.0
+margin_bottom = 360.0
+custom_styles/panel = ExtResource( 8 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScenePanel/ContentPanel"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 748.0
+margin_bottom = 85.0
+
+[node name="Name" type="Label" parent="ScenePanel/ContentPanel/VBoxContainer"]
+margin_right = 728.0
 margin_bottom = 38.0
 custom_fonts/font = SubResource( 2 )
-text = "NAME"
+text = "Systems & Artifacts"
 valign = 2
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="ScenePanel/ContentPanel/VBoxContainer"]
 self_modulate = Color( 1, 0.847059, 0.545098, 1 )
 margin_top = 42.0
-margin_right = 768.0
+margin_right = 728.0
 margin_bottom = 46.0
 
-[node name="Quote" type="RichTextLabel" parent="VBoxContainer"]
+[node name="Quote" type="RichTextLabel" parent="ScenePanel/ContentPanel/VBoxContainer"]
 margin_top = 50.0
-margin_right = 768.0
+margin_right = 728.0
 margin_bottom = 65.0
 bbcode_enabled = true
-bbcode_text = "This is a big ole test."
-text = "This is a big ole test."
+bbcode_text = "Generate systems and artifact lists with the buttons below."
+text = "Generate systems and artifact lists with the buttons below."
 fit_content_height = true
 
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer"]
-margin_top = 69.0
+[node name="PanelContainer" type="PanelContainer" parent="ScenePanel"]
+margin_top = 360.0
 margin_right = 768.0
-margin_bottom = 169.0
-rect_min_size = Vector2( 0, 100 )
-color = Color( 1, 1, 1, 0 )
+margin_bottom = 429.0
+custom_styles/panel = ExtResource( 9 )
 
-[node name="GenerateSystem" type="Button" parent="VBoxContainer"]
-margin_top = 173.0
-margin_right = 768.0
-margin_bottom = 223.0
-rect_min_size = Vector2( 0, 50 )
-text = "GENERATE SYSTEM"
+[node name="HBoxContainer" type="HBoxContainer" parent="ScenePanel/PanelContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 748.0
+margin_bottom = 49.0
+custom_constants/separation = 15
+alignment = 1
 
-[node name="GenerateArtifacts" type="Button" parent="VBoxContainer"]
-margin_top = 227.0
+[node name="GenerateSystem" type="Button" parent="ScenePanel/PanelContainer/HBoxContainer"]
+margin_left = 157.0
+margin_right = 285.0
+margin_bottom = 29.0
+rect_min_size = Vector2( 128, 29 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 5 )
+text = "SYSTEM"
+
+[node name="GenerateArtifacts" type="Button" parent="ScenePanel/PanelContainer/HBoxContainer"]
+margin_left = 300.0
+margin_right = 428.0
+margin_bottom = 29.0
+rect_min_size = Vector2( 128, 29 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 5 )
+text = "ARTIFACTS"
+
+[node name="Credits" type="Button" parent="ScenePanel/PanelContainer/HBoxContainer"]
+margin_left = 443.0
+margin_right = 571.0
+margin_bottom = 29.0
+rect_min_size = Vector2( 128, 29 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 5 )
+text = "MAIN MENU"
+script = ExtResource( 12 )
+scene_to_load = "res://scenes/Title.tscn"
+
+[node name="Spacer" type="Control" parent="ScenePanel"]
+margin_top = 429.0
 margin_right = 768.0
-margin_bottom = 277.0
-rect_min_size = Vector2( 0, 50 )
-text = "GENERATE ARTIFACTS"
+margin_bottom = 441.0
+rect_min_size = Vector2( 0, 12 )
+
+[node name="GamepadHint" parent="ScenePanel" instance=ExtResource( 11 )]
+margin_left = 0.0
+margin_top = 441.0
+margin_bottom = 465.0
 
 [node name="WordGenerator" parent="." instance=ExtResource( 1 )]
 
-[connection signal="pressed" from="VBoxContainer/GenerateSystem" to="." method="_on_GenerateSystem_pressed"]
-[connection signal="pressed" from="VBoxContainer/GenerateArtifacts" to="." method="_on_GenerateArtifacts_pressed"]
+[connection signal="pressed" from="ScenePanel/PanelContainer/HBoxContainer/GenerateSystem" to="." method="_on_GenerateSystem_pressed"]
+[connection signal="pressed" from="ScenePanel/PanelContainer/HBoxContainer/GenerateArtifacts" to="." method="_on_GenerateArtifacts_pressed"]
+[connection signal="pressed" from="ScenePanel/PanelContainer/HBoxContainer/Credits" to="ScenePanel/PanelContainer/HBoxContainer/Credits" method="_on_Credits_button_down"]
