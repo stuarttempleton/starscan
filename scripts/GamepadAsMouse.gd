@@ -2,6 +2,7 @@ extends Node2D
 
 
 export var MAX_MOUSE_SPEED = 25
+var CURRENT_MOUSE_SPEED = 0
 var hw_tick = 0
 var IsUsingMouse = true
 signal mouse_emulation_change(useMouse)
@@ -22,7 +23,11 @@ func scene_changed(scene_path = ""):
 func _process(_delta):
 	var _target = Input.get_vector("move_mouse_left","move_mouse_right","move_mouse_up","move_mouse_down")
 	if _target != Vector2.ZERO:
-		MoveTo(get_viewport().get_mouse_position() + Vector2(-MAX_MOUSE_SPEED * -_target.x,-MAX_MOUSE_SPEED * -_target.y))
+		CURRENT_MOUSE_SPEED += _delta * MAX_MOUSE_SPEED
+		CURRENT_MOUSE_SPEED = min(CURRENT_MOUSE_SPEED, MAX_MOUSE_SPEED)
+		MoveTo(get_viewport().get_mouse_position() + Vector2(-CURRENT_MOUSE_SPEED * -_target.x,-CURRENT_MOUSE_SPEED * -_target.y))
+	else:
+		CURRENT_MOUSE_SPEED = 0
 	
 	if Input.is_action_just_pressed("joystick_mouse_button"):
 		SendButtonPress(true)

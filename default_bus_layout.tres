@@ -9,7 +9,7 @@ resource_name = "LowShelfFilter"
 cutoff_hz = 1000.0
 
 [resource]
-bus/0/volume_db = -0.130497
+bus/0/volume_db = -3.76831
 bus/0/effect/0/effect = SubResource( 1 )
 bus/0/effect/0/enabled = false
 bus/0/effect/1/effect = SubResource( 2 )

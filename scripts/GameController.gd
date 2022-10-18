@@ -33,6 +33,8 @@ func LoadWindowSettings():
 	OS.window_fullscreen = PlayerPrefs.get_pref("window_fullscreen", true)
 	if !OS.window_fullscreen:
 		OS.window_size = Vector2(PlayerPrefs.get_pref("window_size", 1280).x,PlayerPrefs.get_pref("window_size", 720).y)
+		#OS.set_window_position(OS.get_screen_position(OS.get_current_screen()) + OS.get_screen_size()*0.5 - OS.get_window_size()*0.5)
+		
 
 func SaveWindowSettings():
 	PlayerPrefs.set_pref("window_fullscreen", OS.window_fullscreen)
@@ -117,7 +119,13 @@ func _process(_delta):
 	if Input.is_action_just_pressed("fullscreen_mode"):
 		PlayerPrefs.set_pref("window_fullscreen", !OS.window_fullscreen)
 		LoadWindowSettings()
+#		if get_viewport_rect().has_point(get_viewport().get_mouse_position()):
+#			if Input.get_connected_joypads().size() > 0:
+#				get_viewport().warp_mouse(get_viewport_rect().get_center())
 		SaveWindowSettings()
+	if Input.is_key_pressed(KEY_Q):
+		print("Mouse coords: %d,%d" %[get_viewport().get_mouse_position().x, get_viewport().get_mouse_position().y])
+		
 
 
 func MapToggle():

@@ -3,6 +3,15 @@
 set buildroot=D:\StarscanBuilds
 set itchproject=starscan
 set itchowner=voltur
+set artdirectory=custom_steam_images
+
+echo.
+echo Copying custom steam images to build dirs
+echo.
+
+xcopy %buildroot%\%artdirectory% %buildroot%\Linux\%artdirectory% /y /i /q
+xcopy %buildroot%\%artdirectory% %buildroot%\Windows\%artdirectory% /y /i /q
+xcopy %buildroot%\%artdirectory% %buildroot%\macOS\%artdirectory% /y /i /q
 
 echo.
 echo Deploying %itchproject% from %buildroot% for %itchowner%

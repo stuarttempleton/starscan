@@ -294,7 +294,7 @@ custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 2 )
 custom_styles/normal = ExtResource( 5 )
 action_mode = 0
-text = "Scan"
+text = "Scan System"
 script = ExtResource( 10 )
 
 [node name="CancelButton" type="Button" parent="CanvasLayer/SceneBackground/ButtonPanel/Buttons"]
@@ -309,7 +309,7 @@ custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 2 )
 custom_styles/normal = ExtResource( 5 )
 action_mode = 0
-text = "Cancel"
+text = "Abort Scan"
 script = ExtResource( 10 )
 GamepadButton = 1
 

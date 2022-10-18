@@ -44,18 +44,18 @@ var LanguageStructure = {
 		["CVCC",1.1], 
 		["CVVCV",1.1], 
 		["CVCCVCV",1.04], 
-		["VPCV",0.4],
-		["VPCCV",0.4], 
-		["VPCVC",0.4], 
-		["VPCVV",0.4], 
-		["VCCPVC",0.5],
-		["VCCVPCVC",0.3], 
-		["CPVC",0.3], 
-		["CPVCV",0.4], 
-		["CPVVC",0.4], 
-		["CPVCC",0.4], 
-		["CVVPCV",0.4], 
-		["CVCCPVCV",0.3]]
+		["VPCV",0.2],
+		#["VPCCV",0.2], 
+		#["VPCVC",0.2], 
+		["VPCVV",0.2], 
+		["VCCPVC",0.25],
+		["VCCVPCVC",0.15], 
+		["CPVC",0.015], 
+		#["CPVCV",0.02], 
+		#["CPVVC",0.02], 
+		["CPVCC",0.2], 
+		["CVVPCV",0.2], 
+		["CVCCPVCV",0.15]]
 		}
 
 # Called when the node enters the scene tree for the first time.
@@ -100,7 +100,7 @@ func CreateUnsafeWord():
 	var output = ""
 	for i in pattern.length():
 		if LanguageStructure.has(pattern[i]):
-			output += GetWeightedItem(LanguageStructure[pattern[i]],3)[0]
+			output += GetWeightedItem(LanguageStructure[pattern[i]],8)[0]
 		else:
 			output += pattern[i]
 	return(output)
