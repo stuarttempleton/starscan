@@ -26,7 +26,7 @@ func ChoiceResponse(choice):
 func DoResponse():
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
-	WorldGenerator.generate(rng.randi())
+	WorldGenerator.generate_universe(rng.randi())
 	StarMapData.ResetMap()
 	ShipData.ResetShip()
 	AudioPlayer.FadeOutMusic(2)

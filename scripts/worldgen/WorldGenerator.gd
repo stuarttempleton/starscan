@@ -1,10 +1,10 @@
 extends Node
 
 export var seedNumber = -1
-export var MinStarDistance = 0.05
+export var MinStarDistance = 0.04 #0.05
 export var MinNebulaDistance = 0.2
-export var MinOutpostDistance = 0.2
-export var TotalArtifacts = 100
+#export var MinOutpostDistance = 0.2
+#export var TotalArtifacts = 100
 export var MinPlanetsPerStar = 1
 export var MaxPlanetsPerStar = 6
 export var RingChance = 0.1
@@ -22,6 +22,7 @@ export var Artifact2_Chance = 0.15
 export var Artifact3_Chance = 0.05
 export var Hostility_Modifier = 0.25
 export var MaxTargetTries = 5
+export var Sectors_QTY = 25
 
 export var NameGenerationNodePath = ""
 var NameGenerator
@@ -29,20 +30,40 @@ var NameGenerator
 func _ready():
 	NameGenerator = $"/root/StoryGenerator/WordGenerator"
 
-func generate(seednumber):
+func generate_universe(seednumber):
 	if seednumber < 0:
-		print("World generator seed is negative, choosing a random seed")
+		print("Universe seed is negative, choosing a random seed")
 		seednumber = randi()
 	var rng = RandomNumberGenerator.new()
 	rng.seed = seednumber
-	print("Generating world data with seed " + str(seednumber) + "...")
+	print("Generating universe data with seed " + str(seednumber) + "...")
+	
+	var universe = Dictionary()
+	universe.UniverseSeed = seednumber
+	universe.Sectors = []
+	
+	for i in range(Sectors_QTY):
+		universe.Sectors.push_back({"MapSeed":rng.randi()})
+	universe.Sectors[0] = generate_map(universe.Sectors[0].MapSeed)
+	
+	var filename = serializeToFile(universe, rng)
+	print("...universe generated. Saved to file " + filename)
+
+func generate_map(seednumber):
+	if seednumber < 0:
+		print("Sector seed is negative, choosing a random seed")
+		seednumber = randi()
+	var rng = RandomNumberGenerator.new()
+	rng.seed = seednumber
+	print("Generating sector data with seed " + str(seednumber) + "...")
 	
 	var map = Dictionary()
 	map.Systems = generateStars(rng)
 	map.Nebulae = generateNebulae(rng)
 	map.MapSeed = seednumber
-	var filename = serializeToFile(map, rng)
-	print("...World generated. Saved to file " + filename)
+	#var filename = serializeToFile(map, rng)
+	#print("...World generated. Saved to file " + filename)
+	return map
 	
 func serializeToFile(map, _rng):
 	StarMapData.StarMap = map
