@@ -29,5 +29,6 @@ func DoResponse():
 	WorldGenerator.generate_universe(rng.randi())
 	StarMapData.ResetMap()
 	ShipData.ResetShip()
+	StarMapData.SetSector(ShipData.Ship().Sector)
 	AudioPlayer.FadeOutMusic(2)
 	SceneChanger.LoadScene(scene_to_load,0.0)

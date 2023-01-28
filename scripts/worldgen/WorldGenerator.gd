@@ -44,12 +44,12 @@ func generate_universe(seednumber):
 	
 	for i in range(Sectors_QTY):
 		universe.Sectors.push_back({"MapSeed":rng.randi()})
-	universe.Sectors[0] = generate_map(universe.Sectors[0].MapSeed)
+	universe.Sectors[0] = generate_sector(universe.Sectors[0].MapSeed)
 	
 	var filename = serializeToFile(universe, rng)
 	print("...universe generated. Saved to file " + filename)
 
-func generate_map(seednumber):
+func generate_sector(seednumber):
 	if seednumber < 0:
 		print("Sector seed is negative, choosing a random seed")
 		seednumber = randi()
@@ -61,12 +61,10 @@ func generate_map(seednumber):
 	map.Systems = generateStars(rng)
 	map.Nebulae = generateNebulae(rng)
 	map.MapSeed = seednumber
-	#var filename = serializeToFile(map, rng)
-	#print("...World generated. Saved to file " + filename)
 	return map
 	
 func serializeToFile(map, _rng):
-	StarMapData.StarMap = map
+	StarMapData.Universe = map
 	var _currtime = OS.get_datetime()
 	#var filename = "user://Starmap_%04d-%02d-%02d_%02d-%02d-%02d_%s.json" % [currtime.year, currtime.month, currtime.day, currtime.hour, currtime.minute, currtime.second, str(rng.seed)]
 	StarMapData.Save(StarMapData.BaseUniverseFile)
