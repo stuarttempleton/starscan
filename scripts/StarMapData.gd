@@ -62,10 +62,12 @@ func ResetMap() :
 func LoadSave() :
 	if (!self.SaveExists()):
 		self.LoadMapData(GetMostRecentGeneratedFile())
-		self.SaveMap()
-	self.LoadMapData(SavedUniverseFile)
+	else:
+		self.LoadMapData(SavedUniverseFile)
+	self.SaveMap()
 
 func SaveMap() :
+	print("Saving map data to %s" % SavedUniverseFile)
 	self.Save(SavedUniverseFile)
 
 func BaseExists():
@@ -83,6 +85,13 @@ func LoadMapData(filename):
 	var starmapdata_json = JSON.parse(starmapdata_file.get_as_text())
 	starmapdata_file.close()
 	Universe = starmapdata_json.result
+	
+	#Check for legacy/single system save
+	if Universe.has("MapSeed"):
+		#Rebuild new universe format
+		print("Upgrading legacy save...")
+		Universe = WorldGenerator.generate_universe(-1, starmapdata_json.result)
+	
 	SetSector(CurrentSector)
 	
 	if !StarMap.has("MapSeed") || StarMap.MapSeed == null:

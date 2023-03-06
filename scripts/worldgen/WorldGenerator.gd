@@ -30,7 +30,7 @@ var NameGenerator
 func _ready():
 	NameGenerator = $"/root/StoryGenerator/WordGenerator"
 
-func generate_universe(seednumber):
+func generate_universe(seednumber, prebuilt_sector = null):
 	if seednumber < 0:
 		print("Universe seed is negative, choosing a random seed")
 		seednumber = randi()
@@ -42,12 +42,17 @@ func generate_universe(seednumber):
 	universe.UniverseSeed = seednumber
 	universe.Sectors = []
 	
-	for i in range(Sectors_QTY):
+	for _i in range(Sectors_QTY):
 		universe.Sectors.push_back({"MapSeed":rng.randi()})
-	universe.Sectors[0] = generate_sector(universe.Sectors[0].MapSeed)
+	if prebuilt_sector:
+		universe.Sectors[0] = prebuilt_sector
+		universe.Dirty = true #this universe cannot be reconstructed from seed
+	else:
+		universe.Sectors[0] = generate_sector(universe.Sectors[0].MapSeed)
 	
 	var filename = serializeToFile(universe, rng)
 	print("...universe generated. Saved to file " + filename)
+	return universe
 
 func generate_sector(seednumber):
 	if seednumber < 0:
