@@ -58,8 +58,14 @@ func LoadShipData(filename):
 	var shipdata_json = JSON.parse(shipdata_file.get_as_text())
 	shipdata_file.close()
 	StarShip = shipdata_json.result
+	
+	# Set default known routes if needed
 	if !StarShip.has("KnownRoutes") || StarShip.KnownRoutes == null:
 		StarShip.KnownRoutes = []
+		
+	# Set default ship sector if needed
+	if !StarShip.has("Sector"):
+		StarShip.Sector = 0
 	Loaded = true
 	SavedSinceLoad = false
 	

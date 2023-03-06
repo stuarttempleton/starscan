@@ -1,8 +1,10 @@
 extends Node
 
 
-var StarMap
-var MapScale = 30000
+var StarMap # Current sector star map
+var Universe # Array of sector star map data
+var CurrentSector = 0# Index into sector array for local map
+var MapScale = 50000
 var Loaded = false
 var SavedSinceLoad = false
 export var DefaultUniverseFile = "res://starmap_data/generated/Generated_2021-3-31_6-32-20_6527443740791628228.json"
@@ -60,10 +62,12 @@ func ResetMap() :
 func LoadSave() :
 	if (!self.SaveExists()):
 		self.LoadMapData(GetMostRecentGeneratedFile())
-		self.SaveMap()
-	self.LoadMapData(SavedUniverseFile)
+	else:
+		self.LoadMapData(SavedUniverseFile)
+	self.SaveMap()
 
 func SaveMap() :
+	print("Saving map data to %s" % SavedUniverseFile)
 	self.Save(SavedUniverseFile)
 
 func BaseExists():
@@ -80,7 +84,15 @@ func LoadMapData(filename):
 	starmapdata_file.open(filename, File.READ)
 	var starmapdata_json = JSON.parse(starmapdata_file.get_as_text())
 	starmapdata_file.close()
-	StarMap = starmapdata_json.result
+	Universe = starmapdata_json.result
+	
+	#Check for legacy/single system save
+	if Universe.has("MapSeed"):
+		#Rebuild new universe format
+		print("Upgrading legacy save...")
+		Universe = WorldGenerator.generate_universe(-1, starmapdata_json.result)
+	
+	SetSector(CurrentSector)
 	
 	if !StarMap.has("MapSeed") || StarMap.MapSeed == null:
 		StarMap.MapSeed = randi()
@@ -93,11 +105,16 @@ func LoadMapData(filename):
 	SetOutpostRoutes()
 	Loaded = true
 	SavedSinceLoad = false
-	
+	print("Systems: %d" % [StarMap.Systems.size()])
+
+func SetSector(sector = 0):
+	CurrentSector = sector
+	StarMap = Universe.Sectors[CurrentSector]
+
 func Save(filename):
 	var file = File.new()
 	file.open(filename, File.WRITE)
-	file.store_string(JSON.print(StarMap, "\t"))
+	file.store_string(JSON.print(Universe, "\t"))
 	file.close()
 	SavedSinceLoad = true;
 
