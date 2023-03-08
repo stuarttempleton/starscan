@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=4 format=2]
 
-[ext_resource path="res://planet_maps/PlanetSurfaceMap.shader" type="Shader" id=1]
+[ext_resource path="res://planet_maps/PlanetSurfaceMap.gdshader" type="Shader" id=1]
 [ext_resource path="res://planet_maps/goldilocks_planet_surface_gradient.tres" type="Gradient" id=2]
 
 [sub_resource type="GradientTexture" id=5]
