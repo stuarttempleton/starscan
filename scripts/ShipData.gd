@@ -55,7 +55,9 @@ func LoadShipData(filename):
 	print("Loading ship data from %s" % filename)
 	var shipdata_file = File.new()
 	shipdata_file.open(filename, File.READ)
-	var shipdata_json = JSON.parse(shipdata_file.get_as_text())
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(shipdata_file.get_as_text())
+	var shipdata_json = test_json_conv.get_data()
 	shipdata_file.close()
 	StarShip = shipdata_json.result
 	
@@ -72,7 +74,7 @@ func LoadShipData(filename):
 func Save(filename):
 	var file = File.new()
 	file.open(filename, File.WRITE)
-	file.store_string(JSON.print(StarShip, "\t"))
+	file.store_string(JSON.stringify(StarShip, "\t"))
 	file.close()
 	SavedSinceLoad = true;
 	

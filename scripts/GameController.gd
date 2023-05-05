@@ -1,7 +1,7 @@
 extends Node2D
 
 
-export var pause_menu_path = ""
+@export var pause_menu_path = ""
 var is_gameloop = false
 var pause_menu_scene
 var pause_menu_instance
@@ -30,16 +30,16 @@ func _init():
 
 
 func LoadWindowSettings():
-	OS.window_fullscreen = PlayerPrefs.get_pref("window_fullscreen", true)
-	if !OS.window_fullscreen:
-		OS.window_size = Vector2(PlayerPrefs.get_pref("window_size", 1280).x,PlayerPrefs.get_pref("window_size", 720).y)
-		#OS.set_window_position(OS.get_screen_position(OS.get_current_screen()) + OS.get_screen_size()*0.5 - OS.get_window_size()*0.5)
+	get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (PlayerPrefs.get_pref("window_fullscreen", true)) else Window.MODE_WINDOWED
+	if !((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN)):
+		get_window().size = Vector2(PlayerPrefs.get_pref("window_size", 1280).x,PlayerPrefs.get_pref("window_size", 720).y)
+		#get_window().set_position(DisplayServer.screen_get_position(get_window().get_current_screen()) + DisplayServer.screen_get_size()*0.5 - get_window().get_size()*0.5)
 		
 
 func SaveWindowSettings():
-	PlayerPrefs.set_pref("window_fullscreen", OS.window_fullscreen)
-	if !OS.window_fullscreen:
-		PlayerPrefs.set_pref("window_size", {"x":OS.window_size.x,"y":OS.window_size.y})
+	PlayerPrefs.set_pref("window_fullscreen", ((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN)))
+	if !((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN)):
+		PlayerPrefs.set_pref("window_size", {"x":get_window().size.x,"y":get_window().size.y})
 
 func _ready():
 	pause_menu_scene = load(pause_menu_path)
@@ -50,7 +50,7 @@ func _ready():
 
 func Pause():
 	AudioPlayer._play_UI_Button_Select()
-	pause_menu_instance = pause_menu_scene.instance()
+	pause_menu_instance = pause_menu_scene.instantiate()
 	add_child(pause_menu_instance)
 	emit_signal("pause_state", true)
 	EnableMovement(false)
@@ -117,7 +117,7 @@ func _process(_delta):
 		if Input.is_action_just_released("starmap_mapview"):
 			MapToggle()
 	if Input.is_action_just_pressed("fullscreen_mode"):
-		PlayerPrefs.set_pref("window_fullscreen", !OS.window_fullscreen)
+		PlayerPrefs.set_pref("window_fullscreen", !((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN)))
 		LoadWindowSettings()
 #		if get_viewport_rect().has_point(get_viewport().get_mouse_position()):
 #			if Input.get_connected_joypads().size() > 0:

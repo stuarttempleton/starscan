@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/274189__littlerobotsoundfactory__spaceengine-start-01.ogg-e478f9c123ccd448639869c68fcfeb42.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://x68lvb3gkv4a"
+path="res://.godot/imported/274189__littlerobotsoundfactory__spaceengine-start-01.ogg-e478f9c123ccd448639869c68fcfeb42.oggvorbisstr"
 
 [deps]
 
 source_file="res://Audio/SFX/274189__littlerobotsoundfactory__spaceengine-start-01.ogg"
-dest_files=[ "res://.import/274189__littlerobotsoundfactory__spaceengine-start-01.ogg-e478f9c123ccd448639869c68fcfeb42.oggstr" ]
+dest_files=["res://.godot/imported/274189__littlerobotsoundfactory__spaceengine-start-01.ogg-e478f9c123ccd448639869c68fcfeb42.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

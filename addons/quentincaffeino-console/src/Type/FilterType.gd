@@ -18,7 +18,7 @@ var _mode
 
 # @param  Array  filterList
 # @param  int    mode
-func _init(filterList, mode = MODE.ALLOW).('Filter'):
+func _init(filterList,mode = MODE.ALLOW,'Filter'):
 	self._filterList = filterList
 	self._mode = mode
 

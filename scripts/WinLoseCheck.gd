@@ -1,7 +1,7 @@
 extends Node2D
 
 
-export var ArtifactsRequiredToWin = 10
+@export var ArtifactsRequiredToWin = 10
 var starmap_scene_path = "res://scenes/StarMapViewport.tscn"
 var menu_scene_path = "res://scenes/Title.tscn"
 var handlingGameOver = false
@@ -26,9 +26,9 @@ func Reset():
 	handlingGameOver = false
 
 func DialogTextDone(choice):
-	GameNarrativeDisplay.disconnect("ChoiceSelected",self,"DialogTextDone")
+	GameNarrativeDisplay.disconnect("ChoiceSelected",Callable(self,"DialogTextDone"))
 	if choice == 0:
-		GameNarrativeDisplay.connect("ChoiceSelected", self, "DialogTextDone")
+		GameNarrativeDisplay.connect("ChoiceSelected",Callable(self,"DialogTextDone"))
 		viewing_stats = !viewing_stats
 		if viewing_stats:
 			GameNarrativeDisplay.DisplayText(StoryGenerator.PlayStats(),["MESSAGE","MENU","QUIT"])
@@ -54,13 +54,13 @@ func _process(_delta):
 			GameNarrativeDisplay.CancelDialog()
 			AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_WIN)
 			AudioPlayer.PlayMusic(AudioPlayer.AUDIO_KEY.MUSIC_WIN)
-			GameNarrativeDisplay.connect("ChoiceSelected", self, "DialogTextDone")
+			GameNarrativeDisplay.connect("ChoiceSelected",Callable(self,"DialogTextDone"))
 			GameNarrativeDisplay.DisplayText(GetStoryText(),["STATS","MENU","QUIT"])
 		elif LoseConditionMet():
 			handlingGameOver = true
 			GameNarrativeDisplay.CancelDialog()
 			AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_LOSE)
 			AudioPlayer.PlayMusic(AudioPlayer.AUDIO_KEY.MUSIC_LOSE)
-			GameNarrativeDisplay.connect("ChoiceSelected", self, "DialogTextDone")
+			GameNarrativeDisplay.connect("ChoiceSelected",Callable(self,"DialogTextDone"))
 			GameNarrativeDisplay.DisplayText(GetStoryText(),["STATS","MENU","QUIT"])
 

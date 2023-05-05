@@ -1,7 +1,7 @@
 class_name Sysinfo_Leave_button
 extends "res://scripts/GamepadButton.gd"
 
-export(String) var StarMapViewport_scene
+@export var StarMapViewport_scene: String
 
 
 func _process(_delta):

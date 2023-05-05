@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/starscan_transition.ogg-491f90f58c6a7319f2c63f748caefa7a.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ceffbo8x1h0vq"
+path="res://.godot/imported/starscan_transition.ogg-491f90f58c6a7319f2c63f748caefa7a.oggvorbisstr"
 
 [deps]
 
 source_file="res://Audio/MUSIC/starscan_transition.ogg"
-dest_files=[ "res://.import/starscan_transition.ogg-491f90f58c6a7319f2c63f748caefa7a.oggstr" ]
+dest_files=["res://.godot/imported/starscan_transition.ogg-491f90f58c6a7319f2c63f748caefa7a.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

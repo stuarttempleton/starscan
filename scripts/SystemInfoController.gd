@@ -1,14 +1,14 @@
 extends Control
 
-export var system_detail_boilerplate = "Outpost: %s\r\nPlanets: %d\r\nScan: %s\r\nSuitability: %s"
-export var nebula_detail_boilerplate = "Scan: %s\r\nDanger: %s\r\nDestination: %s"
+@export var system_detail_boilerplate = "Outpost: %s\r\nPlanets: %d\r\nScan: %s\r\nSuitability: %s"
+@export var nebula_detail_boilerplate = "Scan: %s\r\nDanger: %s\r\nDestination: %s"
 
 var DisplayedSystem
 var NarrativeYield = false
 
 func _ready():
 	# warning-ignore:return_value_discarded
-	$Background/InfoContainer/ScanButton.connect("minigameComplete", self, "RefreshDisplayedData")
+	$Background/InfoContainer/ScanButton.connect("minigameComplete",Callable(self,"RefreshDisplayedData"))
 
 func NearestBody():
 	var shipPos = Vector2(ShipData.Ship().X,ShipData.Ship().Y)

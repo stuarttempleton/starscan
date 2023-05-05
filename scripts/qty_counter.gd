@@ -2,7 +2,7 @@ extends HBoxContainer
 
 
 var lastpeek
-export(String) var inventory_type_key
+@export var inventory_type_key: String
 
 var boiler_plate = "x %s"
 var inventory

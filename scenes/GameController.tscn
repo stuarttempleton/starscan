@@ -2,18 +2,18 @@
 
 [ext_resource path="res://scripts/GameController.gd" type="Script" id=1]
 [ext_resource path="res://scripts/WinLoseCheck.gd" type="Script" id=2]
-[ext_resource path="res://sprites/Gear-icon.png" type="Texture" id=3]
-[ext_resource path="res://sprites/map-icon.png" type="Texture" id=4]
+[ext_resource path="res://sprites/Gear-icon.png" type="Texture2D" id=3]
+[ext_resource path="res://sprites/map-icon.png" type="Texture2D" id=4]
 
-[sub_resource type="DynamicFontData" id=1]
+[sub_resource type="FontFile" id=1]
 font_path = "res://fonts/Montserrat-Regular.ttf"
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="FontFile" id=2]
 size = 60
 font_data = SubResource( 1 )
 
 [node name="GameController" type="Node2D"]
-pause_mode = 2
+process_mode = 2
 script = ExtResource( 1 )
 pause_menu_path = "res://scenes/MainMenu.tscn"
 
@@ -22,18 +22,18 @@ script = ExtResource( 2 )
 ArtifactsRequiredToWin = 50
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-pause_mode = 2
+process_mode = 2
 layer = 12
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer"]
 self_modulate = Color( 1, 1, 1, 0.694118 )
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -63.9999
-margin_top = 8.0
-margin_right = 448.0
-margin_bottom = 520.0
-rect_scale = Vector2( 0.1, 0.1 )
+offset_left = -63.9999
+offset_top = 8.0
+offset_right = 448.0
+offset_bottom = 520.0
+scale = Vector2( 0.1, 0.1 )
 texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 3 )
 texture_hover = ExtResource( 3 )
@@ -46,10 +46,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -256.0
-margin_top = 256.0
-margin_right = 256.0
-margin_bottom = 360.0
+offset_left = -256.0
+offset_top = 256.0
+offset_right = 256.0
+offset_bottom = 360.0
 custom_fonts/font = SubResource( 2 )
 text = "Options"
 align = 1
@@ -63,11 +63,11 @@ __meta__ = {
 self_modulate = Color( 1, 1, 1, 0.694118 )
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -112.0
-margin_top = 8.0
-margin_right = 400.0
-margin_bottom = 520.0
-rect_scale = Vector2( 0.1, 0.1 )
+offset_left = -112.0
+offset_top = 8.0
+offset_right = 400.0
+offset_bottom = 520.0
+scale = Vector2( 0.1, 0.1 )
 texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 4 )
 texture_hover = ExtResource( 4 )
@@ -80,10 +80,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -256.0
-margin_top = 256.0
-margin_right = 256.0
-margin_bottom = 360.0
+offset_left = -256.0
+offset_top = 256.0
+offset_right = 256.0
+offset_bottom = 360.0
 custom_fonts/font = SubResource( 2 )
 text = "Map"
 align = 1

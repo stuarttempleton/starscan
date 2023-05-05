@@ -22,7 +22,7 @@ func generate(rng):
 	posCount = 0
 	
 	# Build a list to point to the "active" star positions
-	var activePositionIndices = PoolIntArray([])
+	var activePositionIndices = PackedInt32Array([])
 	
 	# Create a var to target the position the next star should be created at
 	# Initialize the target position to a random Vec2

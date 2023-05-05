@@ -15,7 +15,7 @@ func _on_GenerateArtifacts_pressed():
 		list += "%d. %s\r\n" % [i, w]
 		i += 1
 	$ScenePanel/ContentPanel/VBoxContainer/Name.text = "Artifacts"
-	$ScenePanel/ContentPanel/VBoxContainer/Quote.bbcode_text = list
+	$ScenePanel/ContentPanel/VBoxContainer/Quote.text = list
 
 
 func _on_GenerateSystem_pressed():
@@ -27,4 +27,4 @@ func _on_GenerateSystem_pressed():
 		PlanetList += "%d. %s\r\n" % [i, w.capitalize()]
 		i += 1
 	$ScenePanel/ContentPanel/VBoxContainer/Name.text = SystemName
-	$ScenePanel/ContentPanel/VBoxContainer/Quote.bbcode_text = PlanetList
+	$ScenePanel/ContentPanel/VBoxContainer/Quote.text = PlanetList

@@ -7,9 +7,9 @@ func StartEvent():
 	var system = StarMapData.NearestSystem
 	var EntryCost = ShipData.PayToVisitAStar()
 	# warning-ignore:return_value_discarded
-	GameNarrativeDisplay.connect("ChoiceSelected", self, "ChoiceMade")
+	GameNarrativeDisplay.connect("ChoiceSelected",Callable(self,"ChoiceMade"))
 	GameNarrativeDisplay.DisplayText(StoryGenerator.SystemStory(system, EntryCost),["OK"])
 
 
 func ChoiceMade(_choice):
-	GameNarrativeDisplay.disconnect("ChoiceSelected",self,"ChoiceMade")
+	GameNarrativeDisplay.disconnect("ChoiceSelected",Callable(self,"ChoiceMade"))

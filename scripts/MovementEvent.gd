@@ -1,6 +1,6 @@
 extends Node2D
 
-export var DeadZones = {}
+@export var DeadZones = {}
 
 
 func is_valid(position:Vector2):

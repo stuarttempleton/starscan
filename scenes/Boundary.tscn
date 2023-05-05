@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/Boundary.gd" type="Script" id=1]
-[ext_resource path="res://sprites/caution_rect.png" type="Texture" id=2]
+[ext_resource path="res://sprites/caution_rect.png" type="Texture2D" id=2]
 
 [node name="Boundary" type="TextureRect"]
 modulate = Color( 1.2, 1.2, 1.2, 0.215686 )
-margin_right = 40.0
-margin_bottom = 40.0
+offset_right = 40.0
+offset_bottom = 40.0
 texture = ExtResource( 2 )
 stretch_mode = 2
 script = ExtResource( 1 )

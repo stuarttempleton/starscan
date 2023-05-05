@@ -1,8 +1,8 @@
 class_name Sysinfo_scan_button
 extends "res://scripts/GamepadButton.gd"
 
-export(String) var minigame_scene
-export var additive_load_scene = true #additive or replacement
+@export var minigame_scene: String
+@export var additive_load_scene = true #additive or replacement
 
 signal minigameComplete
 
@@ -22,9 +22,9 @@ func _on_ScanButton_pressed() :
 	hoverflag = false
 	disabled = true
 	var loaded_scene = load(minigame_scene)
-	minigame = loaded_scene.instance()
+	minigame = loaded_scene.instantiate()
 	add_child(minigame)
-	minigame.get_node("CanvasLayer/SceneBackground/Scanner Minigame").connect("complete", self, "scanPerformed")
+	minigame.get_node("CanvasLayer/SceneBackground/Scanner Minigame").connect("complete",Callable(self,"scanPerformed"))
 
 func scanPerformed():
 	emit_signal("minigameComplete")

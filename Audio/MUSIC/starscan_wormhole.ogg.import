@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/starscan_wormhole.ogg-a55cd06d736623534ddd31a29af8d612.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dvfohyil0ilpe"
+path="res://.godot/imported/starscan_wormhole.ogg-a55cd06d736623534ddd31a29af8d612.oggvorbisstr"
 
 [deps]
 
 source_file="res://Audio/MUSIC/starscan_wormhole.ogg"
-dest_files=[ "res://.import/starscan_wormhole.ogg-a55cd06d736623534ddd31a29af8d612.oggstr" ]
+dest_files=["res://.godot/imported/starscan_wormhole.ogg-a55cd06d736623534ddd31a29af8d612.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -11,7 +11,7 @@ var _error
 
 # @param  Variant  value
 # @param  Variant  error
-func _init(value, error = null):
+func _init(value,error = null):
 	self._value = value
 
 	if error is String:

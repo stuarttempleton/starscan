@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/288960__littlerobotsoundfactory__click-electronic-10.ogg-dd91d18c6cd810a96fb88cd93d0aa147.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://83q88n5ra1mo"
+path="res://.godot/imported/288960__littlerobotsoundfactory__click-electronic-10.ogg-dd91d18c6cd810a96fb88cd93d0aa147.oggvorbisstr"
 
 [deps]
 
 source_file="res://Audio/UI/288960__littlerobotsoundfactory__click-electronic-10.ogg"
-dest_files=[ "res://.import/288960__littlerobotsoundfactory__click-electronic-10.ogg-dd91d18c6cd810a96fb88cd93d0aa147.oggstr" ]
+dest_files=["res://.godot/imported/288960__littlerobotsoundfactory__click-electronic-10.ogg-dd91d18c6cd810a96fb88cd93d0aa147.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

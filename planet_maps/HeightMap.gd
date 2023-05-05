@@ -1,13 +1,13 @@
 extends TextureRect
 
-export(NodePath) var PointsOfInterest_path
+@export var PointsOfInterest_path: NodePath
 var PointsOfInterest
 
-export var colormap: GradientTexture
+@export var colormap: GradientTexture2D
 const L8_MAX := 255 #8 bit max color
 
 
-export var PlanetGradientMaps = {
+@export var PlanetGradientMaps = {
 	"Gas":"res://planet_maps/gas_planet_surface_gradient.tres",
 	"Ice":"res://planet_maps/ice_planet_surface_gradient.tres",
 	"Lava":"res://planet_maps/lava_planet_surface_gradient.tres",
@@ -26,7 +26,7 @@ func _ready() -> void:
 
 func _generate(planet):
 	
-	var planet_texture_gradient = GradientTexture.new()
+	var planet_texture_gradient = GradientTexture2D.new()
 	planet_texture_gradient.gradient = load(PlanetGradientMaps[planet.Type])
 	
 	var new_noise = OpenSimplexNoise.new()
@@ -43,14 +43,14 @@ func _generate(planet):
 	
 	texture = new_texture
 	
-	yield(texture, "changed")
+	await texture.changed
 	var heightmap_minmax := _get_heightmap_minmax(texture.get_data())
 	
-	material.set_shader_param("noise_texture", new_texture)
+	material.set_shader_parameter("noise_texture", new_texture)
 	
-	# Use the material's `set_shader_param` method to assign values to a shader's uniforms.
-	material.set_shader_param("noise_minmax", heightmap_minmax)
-	material.set_shader_param("colormap", planet_texture_gradient)
+	# Use the material's `set_shader_parameter` method to assign values to a shader's uniforms.
+	material.set_shader_parameter("noise_minmax", heightmap_minmax)
+	material.set_shader_parameter("colormap", planet_texture_gradient)
 
 # gotta normalize the noise data to 0..1
 func _get_heightmap_minmax(image: Image) -> Vector2:

@@ -1,5 +1,5 @@
 
-extends Reference
+extends RefCounted
 
 const Argument = preload('../Argument/Argument.gd')
 
@@ -21,7 +21,7 @@ var _description
 # @param  Callback     target
 # @param  Argument[]   arguments
 # @param  String|null  description
-func _init(name, target, arguments = [], description = null):
+func _init(name,target,arguments = [],description = null):
 	self._name = name
 	self._target = target
 	self._arguments = arguments

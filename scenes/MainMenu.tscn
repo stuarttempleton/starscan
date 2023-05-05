@@ -1,237 +1,136 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=11 format=3 uid="uid://b5c4awynpsf14"]
 
-[ext_resource path="res://scripts/MainMenuController.gd" type="Script" id=1]
-[ext_resource path="res://sprites/starscan-logo.png" type="Texture" id=2]
-[ext_resource path="res://scripts/menu_button_exit.gd" type="Script" id=3]
-[ext_resource path="res://styles/MenuButton_Disabled.tres" type="StyleBox" id=4]
-[ext_resource path="res://scripts/menu_button_play.gd" type="Script" id=5]
-[ext_resource path="res://scripts/menu_button_back_to_menu.gd" type="Script" id=6]
-[ext_resource path="res://scripts/menu_button_continue.gd" type="Script" id=7]
-[ext_resource path="res://styles/MenuButton_Normal.tres" type="StyleBox" id=8]
-[ext_resource path="res://styles/MenuButton_HoverFocus.tres" type="StyleBox" id=9]
-[ext_resource path="res://styles/MenuButton_Pressed.tres" type="StyleBox" id=10]
-[ext_resource path="res://shaders/white.png" type="Texture" id=11]
-[ext_resource path="res://GameNarrativeDisplay/blur_shader_material.tres" type="Material" id=12]
-[ext_resource path="res://scenes/menu_button_generate_universe.gd" type="Script" id=13]
-[ext_resource path="res://scripts/menu_button_credits.gd" type="Script" id=14]
-[ext_resource path="res://styles/MenuButton_Focus.tres" type="StyleBox" id=15]
-[ext_resource path="res://styles/TitleMenuButton_Normal.tres" type="StyleBox" id=16]
-[ext_resource path="res://fonts/menu_button_font.tres" type="DynamicFont" id=17]
-[ext_resource path="res://GameNarrativeDisplay/GamepadHint.tscn" type="PackedScene" id=19]
-
-[sub_resource type="DynamicFontData" id=1]
-font_path = "res://fonts/Montserrat-ExtraLight.ttf"
-
-[sub_resource type="DynamicFont" id=2]
-size = 115
-font_data = SubResource( 1 )
+[ext_resource type="Script" path="res://scripts/MainMenuController.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/menu_button_exit.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://cgq6lq4t3l3tj" path="res://sprites/starscan-logo.png" id="3_pv6q6"]
+[ext_resource type="Script" path="res://scripts/menu_button_play.gd" id="5"]
+[ext_resource type="Script" path="res://scripts/menu_button_back_to_menu.gd" id="6"]
+[ext_resource type="Script" path="res://scripts/menu_button_continue.gd" id="7"]
+[ext_resource type="Material" path="res://GameNarrativeDisplay/blur_shader_material.tres" id="12"]
+[ext_resource type="Script" path="res://scenes/menu_button_generate_universe.gd" id="13"]
+[ext_resource type="Script" path="res://scripts/menu_button_credits.gd" id="14"]
+[ext_resource type="PackedScene" uid="uid://bw0vjh12s4c5o" path="res://GameNarrativeDisplay/GamepadHint.tscn" id="19"]
 
 [node name="MainMenu" type="CanvasLayer"]
-pause_mode = 2
+process_mode = 2
 layer = 11
-script = ExtResource( 1 )
-in_game_nodes = [ NodePath("MenuUIContainer/Background"), NodePath("MenuUIContainer/Menu/Buttons/Continue"), NodePath("MenuUIContainer/Menu/Buttons/Back To Menu") ]
-title_nodes = [ NodePath("MenuUIContainer/Menu/Buttons/Play"), NodePath("MenuUIContainer/Menu/Buttons/Generate Universe"), NodePath("MenuUIContainer/Menu/Buttons/Credits") ]
-editor_only_nodes = [ NodePath("MenuUIContainer/Menu/Buttons/NameGenerator") ]
+script = ExtResource("1")
+in_game_nodes = [NodePath("MenuUIContainer/Background"), NodePath("MenuUIContainer/Menu/Buttons/Continue"), NodePath("MenuUIContainer/Menu/Buttons/Back To Menu")]
+title_nodes = [NodePath("MenuUIContainer/Menu/Buttons/Play"), NodePath("MenuUIContainer/Menu/Buttons/Generate Universe"), NodePath("MenuUIContainer/Menu/Buttons/Credits")]
+editor_only_nodes = [NodePath("MenuUIContainer/Menu/Buttons/NameGenerator")]
 
 [node name="MenuUIContainer" type="Control" parent="."]
-modulate = Color( 1.1, 1.1, 1, 1 )
+modulate = Color(1.1, 1.1, 1, 1)
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Background" type="TextureRect" parent="MenuUIContainer"]
 visible = false
-self_modulate = Color( 0.435294, 0.435294, 0.435294, 1 )
-material = ExtResource( 12 )
+self_modulate = Color(0.435294, 0.435294, 0.435294, 1)
+material = ExtResource("12")
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 11 )
-expand = true
+expand_mode = 1
 
 [node name="Menu" type="VBoxContainer" parent="MenuUIContainer"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -440.0
-margin_top = -99.9167
-margin_right = 440.0
-margin_bottom = 100.083
+offset_left = -440.0
+offset_top = -99.9167
+offset_right = 440.0
+offset_bottom = 100.083
 alignment = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MenuUIContainer/Menu"]
 visible = false
-margin_right = 880.0
-margin_bottom = 142.0
-custom_fonts/normal_font = SubResource( 2 )
-fit_content_height = true
+layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="MenuUIContainer/Menu"]
-margin_right = 880.0
-margin_bottom = 83.0
-texture = ExtResource( 2 )
-stretch_mode = 4
+layout_mode = 2
+texture = ExtResource("3_pv6q6")
+stretch_mode = 3
 
 [node name="Buttons" type="VBoxContainer" parent="MenuUIContainer/Menu"]
-margin_top = 87.0
-margin_right = 880.0
-margin_bottom = 434.0
+layout_mode = 2
 size_flags_vertical = 3
-custom_constants/separation = 10
 alignment = 1
 
 [node name="Play" type="Button" parent="MenuUIContainer/Menu/Buttons"]
-self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_right = 880.0
-margin_bottom = 41.0
+self_modulate = Color(1.1, 1.1, 1.1, 1)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
-custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
-custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
-custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 17 )
-custom_styles/hover = ExtResource( 9 )
-custom_styles/pressed = ExtResource( 10 )
-custom_styles/focus = ExtResource( 15 )
-custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 8 )
 text = "RESUME GAME"
-script = ExtResource( 5 )
+script = ExtResource("5")
 scene_to_load = "res://scenes/StarMapViewport.tscn"
 
 [node name="Generate Universe" type="Button" parent="MenuUIContainer/Menu/Buttons"]
-self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 51.0
-margin_right = 880.0
-margin_bottom = 92.0
+self_modulate = Color(1.1, 1.1, 1.1, 1)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
-custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
-custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
-custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 17 )
-custom_styles/hover = ExtResource( 9 )
-custom_styles/pressed = ExtResource( 10 )
-custom_styles/focus = ExtResource( 15 )
-custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 8 )
 text = "NEW GAME"
-script = ExtResource( 13 )
+script = ExtResource("13")
 scene_to_load = "res://scenes/StarMapViewport.tscn"
 
 [node name="Continue" type="Button" parent="MenuUIContainer/Menu/Buttons"]
-self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 102.0
-margin_right = 880.0
-margin_bottom = 143.0
+self_modulate = Color(1.1, 1.1, 1.1, 1)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
-custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
-custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
-custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 17 )
-custom_styles/hover = ExtResource( 9 )
-custom_styles/pressed = ExtResource( 10 )
-custom_styles/focus = ExtResource( 15 )
-custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 8 )
 text = "CONTINUE"
-script = ExtResource( 7 )
+script = ExtResource("7")
 
 [node name="Back To Menu" type="Button" parent="MenuUIContainer/Menu/Buttons"]
-self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 153.0
-margin_right = 880.0
-margin_bottom = 194.0
+self_modulate = Color(1.1, 1.1, 1.1, 1)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
-custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
-custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
-custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 17 )
-custom_styles/hover = ExtResource( 9 )
-custom_styles/pressed = ExtResource( 10 )
-custom_styles/focus = ExtResource( 15 )
-custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 8 )
 text = "MAIN MENU"
-script = ExtResource( 6 )
+script = ExtResource("6")
 scene_to_load = "res://scenes/Title.tscn"
 
 [node name="Credits" type="Button" parent="MenuUIContainer/Menu/Buttons"]
-self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 204.0
-margin_right = 880.0
-margin_bottom = 245.0
+self_modulate = Color(1.1, 1.1, 1.1, 1)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
-custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
-custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
-custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 17 )
-custom_styles/hover = ExtResource( 9 )
-custom_styles/pressed = ExtResource( 10 )
-custom_styles/focus = ExtResource( 15 )
-custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 8 )
 text = "CREDITS"
-script = ExtResource( 14 )
+script = ExtResource("14")
 scene_to_load = "res://scenes/credits.tscn"
 
 [node name="NameGenerator" type="Button" parent="MenuUIContainer/Menu/Buttons"]
-self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 255.0
-margin_right = 880.0
-margin_bottom = 296.0
+self_modulate = Color(1.1, 1.1, 1.1, 1)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = ExtResource( 17 )
-custom_styles/hover = ExtResource( 9 )
-custom_styles/pressed = ExtResource( 10 )
-custom_styles/focus = ExtResource( 15 )
-custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 16 )
 text = "NAME GENERATOR"
-script = ExtResource( 14 )
+script = ExtResource("14")
 scene_to_load = "res://name_generation/NameGenerationTest.tscn"
 
 [node name="Exit" type="Button" parent="MenuUIContainer/Menu/Buttons"]
-self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 306.0
-margin_right = 880.0
-margin_bottom = 347.0
+self_modulate = Color(1.1, 1.1, 1.1, 1)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
-custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
-custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
-custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 17 )
-custom_styles/hover = ExtResource( 9 )
-custom_styles/pressed = ExtResource( 10 )
-custom_styles/focus = ExtResource( 15 )
-custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 8 )
 text = "QUIT"
-script = ExtResource( 3 )
+script = ExtResource("3")
 
 [node name="GamepadSpacer" type="ColorRect" parent="MenuUIContainer/Menu"]
-margin_top = 438.0
-margin_right = 880.0
-margin_bottom = 448.0
-rect_min_size = Vector2( 0, 10 )
-color = Color( 1, 1, 1, 0 )
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+color = Color(1, 1, 1, 0)
 
-[node name="GamepadHint2" parent="MenuUIContainer/Menu" instance=ExtResource( 19 )]
-margin_left = 0.0
-margin_top = 452.0
-margin_right = 880.0
-margin_bottom = 476.0
+[node name="GamepadHint2" parent="MenuUIContainer/Menu" instance=ExtResource("19")]
+layout_mode = 2
 
 [connection signal="button_down" from="MenuUIContainer/Menu/Buttons/Credits" to="MenuUIContainer/Menu/Buttons/Credits" method="_on_Credits_button_down"]
 [connection signal="pressed" from="MenuUIContainer/Menu/Buttons/NameGenerator" to="MenuUIContainer/Menu/Buttons/NameGenerator" method="_on_Credits_button_down"]

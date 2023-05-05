@@ -1,11 +1,11 @@
 
-extends Reference
+extends RefCounted
 
 const Utils = preload('./Utils.gd')
 const errors = preload('../assets/translations/errors.en.gd').messages
 
 
-# @var  Reference
+# @var  RefCounted
 var _target
 
 # @var  Utils.Type
@@ -15,15 +15,15 @@ var _type
 var _bind_argv
 
 
-# @param  Reference   target
+# @param  RefCounted   target
 # @param  Utils.Type  type
-func _init(target, type):
+func _init(target,type):
 	self._target = target
 	self._type = type
 	self._bind_argv = []
 
 
-func getTarget():  # Reference
+func getTarget():  # RefCounted
 	return self._target
 
 

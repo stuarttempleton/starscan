@@ -1,6 +1,6 @@
 extends Node2D
 
-export var planet_scene_path = ""
+@export var planet_scene_path = ""
 var system
 var orbit_color = Color(0.2, 0.2, 0.2)
 
@@ -29,7 +29,7 @@ func _ready():
 		$"../../Nebula".visible = false
 	
 	# warning-ignore:return_value_discarded
-	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
+	get_tree().root.connect("size_changed",Callable(self,"_on_viewport_size_changed"))
 
 
 func _on_viewport_size_changed():
@@ -66,7 +66,7 @@ func BuildSystem():
 
 func AddPlanetToMap( planet_position, planet_size, planet_type, planet_id, planet_name ) :
 	var loaded_scene = load(planet_scene_path)
-	var planet = loaded_scene.instance()
+	var planet = loaded_scene.instantiate()
 	add_child(planet)
 	
 	#set position, sprite, and scale
@@ -76,10 +76,10 @@ func AddPlanetToMap( planet_position, planet_size, planet_type, planet_id, plane
 
 func draw_circle_arc(center, radius, angle_from, angle_to, color, rng):
 	var nb_points = 64
-	var points_arc = PoolVector2Array()
+	var points_arc = PackedVector2Array()
 
 	for i in range(nb_points + 1):
-		var angle_point = deg2rad(angle_from + i * (angle_to-angle_from) / nb_points - 90)
+		var angle_point = deg_to_rad(angle_from + i * (angle_to-angle_from) / nb_points - 90)
 		points_arc.push_back(center + Vector2(cos(angle_point), sin(angle_point)) * radius)
 
 	for index_point in range(nb_points):

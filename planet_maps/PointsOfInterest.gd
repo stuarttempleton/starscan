@@ -2,12 +2,12 @@ extends Node2D
 
 const TotalPOIsPerPlanet = 10
 
-export var POITemplates = {
+@export var POITemplates = {
 	"Artifact":"PATH",
 	"Resource":"PATH",
 	"Hazard":"PATH"
 }
-export var poi_template_path = "res://planet_maps/POI.tscn"
+@export var poi_template_path = "res://planet_maps/POI.tscn"
 
 var Planet
 var Scan
@@ -15,9 +15,9 @@ var poi_nodes = []
 
 func _ready():
 	# warning-ignore:return_value_discarded
-	Cheat.connect("cheat_resetpois", self, "_reset")
+	Cheat.connect("cheat_resetpois",Callable(self,"_reset"))
 	# warning-ignore:return_value_discarded
-	Cheat.connect("cheat_setscan", self, "_reset")
+	Cheat.connect("cheat_setscan",Callable(self,"_reset"))
 
 func _reset():
 	_generate(Planet, Scan)
@@ -94,7 +94,7 @@ func _addPOINodes():
 
 func _addPOINode( poiScreenPos, poiData ) :
 	var loaded_scene = load(poi_template_path)
-	var poi = loaded_scene.instance()
+	var poi = loaded_scene.instantiate()
 	add_child(poi)
 	poi_nodes.append(poi)
 	

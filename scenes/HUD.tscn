@@ -5,17 +5,17 @@
 [ext_resource path="res://styles/dialogPanelNoButtons.tres" type="StyleBox" id=3]
 [ext_resource path="res://scripts/TowNotification.gd" type="Script" id=6]
 
-[sub_resource type="DynamicFontData" id=1]
+[sub_resource type="FontFile" id=1]
 font_path = "res://fonts/Montserrat-Medium.ttf"
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="FontFile" id=2]
 size = 12
 font_data = SubResource( 1 )
 
-[sub_resource type="DynamicFontData" id=3]
+[sub_resource type="FontFile" id=3]
 font_path = "res://fonts/Montserrat-Medium.ttf"
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="FontFile" id=4]
 size = 19
 font_data = SubResource( 3 )
 
@@ -33,17 +33,17 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -512.0
-margin_top = -32.0
-margin_right = 512.0
-margin_bottom = -11.0
+offset_left = -512.0
+offset_top = -32.0
+offset_right = 512.0
+offset_bottom = -11.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="NearestSystem" type="Label" parent="NearestSystemStatus"]
-margin_right = 510.0
-margin_bottom = 21.0
+offset_right = 510.0
+offset_bottom = 21.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 2 )
@@ -52,9 +52,9 @@ align = 2
 valign = 1
 
 [node name="SystemInfo" type="Label" parent="NearestSystemStatus"]
-margin_left = 514.0
-margin_right = 1024.0
-margin_bottom = 21.0
+offset_left = 514.0
+offset_right = 1024.0
+offset_bottom = 21.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 2 )
@@ -67,17 +67,17 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -512.0
-margin_top = -56.0
-margin_right = 512.0
-margin_bottom = -35.0
+offset_left = -512.0
+offset_top = -56.0
+offset_right = 512.0
+offset_bottom = -35.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="NearestSystem" type="Label" parent="NearestOutpostStatus"]
-margin_right = 510.0
-margin_bottom = 21.0
+offset_right = 510.0
+offset_bottom = 21.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 2 )
@@ -86,9 +86,9 @@ align = 2
 valign = 1
 
 [node name="SystemInfo" type="Label" parent="NearestOutpostStatus"]
-margin_left = 514.0
-margin_right = 1024.0
-margin_bottom = 21.0
+offset_left = 514.0
+offset_right = 1024.0
+offset_bottom = 21.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 2 )
@@ -102,17 +102,17 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -128.0
-margin_top = -208.0
-margin_right = 128.0
-margin_bottom = -148.0
+offset_left = -128.0
+offset_top = -208.0
+offset_right = 128.0
+offset_bottom = -148.0
 custom_styles/panel = ExtResource( 3 )
 
 [node name="TowDetails" type="Label" parent="TowNotification"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 236.0
-margin_bottom = 44.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 236.0
+offset_bottom = 44.0
 custom_fonts/font = SubResource( 4 )
 text = "Towing to %s"
 align = 1

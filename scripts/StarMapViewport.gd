@@ -8,7 +8,7 @@ func _ready():
 		_on_FirstPlay()
 	GameController.EnableMap()
 	# warning-ignore:return_value_discarded
-	GameController.connect("map_state", self, "MapToggle")
+	GameController.connect("map_state",Callable(self,"MapToggle"))
 	
 func _on_FirstPlay():
 	#place at center
@@ -27,7 +27,7 @@ func _on_FirstPlay():
 	ShipData.SaveShip()
 	AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_HAIL)
 	# warning-ignore:return_value_discarded
-	GameNarrativeDisplay.connect("ChoiceSelected", self, "StartingTextDone")
+	GameNarrativeDisplay.connect("ChoiceSelected",Callable(self,"StartingTextDone"))
 	GameNarrativeDisplay.DisplayText(StoryGenerator.Greeting(StarMapData.GetOutpost(nearestOutpostSystem)),["Begin"])
 
 
@@ -46,7 +46,7 @@ func MapToggle(usemap):
 
 func StartingTextDone(_choice):
 	ShipData.Ship().FirstRun = false
-	GameNarrativeDisplay.disconnect("ChoiceSelected",self,"StartingTextDone")
+	GameNarrativeDisplay.disconnect("ChoiceSelected",Callable(self,"StartingTextDone"))
 
 
 

@@ -1,7 +1,7 @@
 class_name Sysinfo_enter_button
 extends "res://scripts/GamepadButton.gd"
 
-export(String) var SystemViewport_scene
+@export var SystemViewport_scene: String
 var hoverflag = false
 
 
@@ -19,7 +19,7 @@ func _on_EnterButton_pressed():
 	var Nearby = StarMapData.GetNearestBody()
 	if Nearby.has("Destination"):
 		var Destination = StarMapData.GetBodyByName(Nearby.Destination, "Nebulae")
-		var Wormhole = get_tree().get_root().find_node("WormholeAction", true, false)
+		var Wormhole = get_tree().get_root().find_child("WormholeAction", true, false)
 		Wormhole.EnterWormholeTo(StarMapData.SystemPosition(Destination, true))
 	else:
 		hoverflag = false

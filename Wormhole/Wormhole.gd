@@ -16,16 +16,16 @@ func _process(delta):
 		Appear()
 		
 	if reveal:
-		if $Particles2D.modulate.a <= max_alpha:
-			$Particles2D.modulate.a = clamp($Particles2D.modulate.a + delta * fade_rate, min_alpha, max_alpha)
+		if $GPUParticles2D.modulate.a <= max_alpha:
+			$GPUParticles2D.modulate.a = clamp($GPUParticles2D.modulate.a + delta * fade_rate, min_alpha, max_alpha)
 	else:
-		if $Particles2D.modulate.a >= min_alpha:
-			$Particles2D.modulate.a = clamp($Particles2D.modulate.a - delta * fade_rate, min_alpha, max_alpha)
+		if $GPUParticles2D.modulate.a >= min_alpha:
+			$GPUParticles2D.modulate.a = clamp($GPUParticles2D.modulate.a - delta * fade_rate, min_alpha, max_alpha)
 
 func Appear():
 	reveal = true
-	$Particles2D.emitting = true
+	$GPUParticles2D.emitting = true
 
 func Disappear():
 	reveal = false
-	$Particles2D.emitting = false
+	$GPUParticles2D.emitting = false

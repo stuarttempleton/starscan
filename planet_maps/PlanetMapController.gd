@@ -1,15 +1,15 @@
 extends Node
 
 
-export var PlanetDetailBoilerPlate = "Type: %s\r\nSize: %s\r\nOrbital Debris: %s"
+@export var PlanetDetailBoilerPlate = "Type: %s\r\nSize: %s\r\nOrbital Debris: %s"
 var args
-export var scene = "res://scenes/SystemViewport.tscn"
+@export var scene = "res://scenes/SystemViewport.tscn"
 
 func _ready():
 	args = SceneChanger.SceneVars[get_tree().current_scene.filename]
 	_generate_planet_map(args["planet"], args["scan"])
 	# warning-ignore:return_value_discarded
-	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
+	get_tree().root.connect("size_changed",Callable(self,"_on_viewport_size_changed"))
 
 
 func _on_viewport_size_changed():

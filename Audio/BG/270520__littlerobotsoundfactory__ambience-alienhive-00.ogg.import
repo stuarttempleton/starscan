@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/270520__littlerobotsoundfactory__ambience-alienhive-00.ogg-665af7556d80d3c7bb14b6bc2a4e273c.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cwcy1m11s2iyf"
+path="res://.godot/imported/270520__littlerobotsoundfactory__ambience-alienhive-00.ogg-665af7556d80d3c7bb14b6bc2a4e273c.oggvorbisstr"
 
 [deps]
 
 source_file="res://Audio/BG/270520__littlerobotsoundfactory__ambience-alienhive-00.ogg"
-dest_files=[ "res://.import/270520__littlerobotsoundfactory__ambience-alienhive-00.ogg-665af7556d80d3c7bb14b6bc2a4e273c.oggstr" ]
+dest_files=["res://.godot/imported/270520__littlerobotsoundfactory__ambience-alienhive-00.ogg-665af7556d80d3c7bb14b6bc2a4e273c.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

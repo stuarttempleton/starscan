@@ -5,10 +5,10 @@ extends Node2D
 # var a = 2
 # var b = "text"
 
-export var UseNebulaInstead = false
-export var UseOutpostInstead = false
+@export var UseNebulaInstead = false
+@export var UseOutpostInstead = false
 
-onready var arrow = $arrow
+@onready var arrow = $arrow
 
 var MapScale = StarMapData.MapScale
 

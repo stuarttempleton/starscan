@@ -1,5 +1,5 @@
 
-extends Reference
+extends RefCounted
 
 const Argument = preload('../Argument/Argument.gd')
 const TypeFactory = preload('../Type/TypeFactory.gd')

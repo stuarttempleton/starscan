@@ -1,8 +1,8 @@
 extends Node
 
 
-export var default_prefs_file_name = "res://PlayerPrefs/DefaultPlayerPrefs.json"
-export var prefs_file_name = "user://PlayerPrefs.json"
+@export var default_prefs_file_name = "res://PlayerPrefs/DefaultPlayerPrefs.json"
+@export var prefs_file_name = "user://PlayerPrefs.json"
 
 var settings = {}
 var saved_since_load = false
@@ -41,7 +41,9 @@ func _load_data(filename):
 	print("Loading player preference data from %s" % filename)
 	var _file = File.new()
 	_file.open(filename, File.READ)
-	var _json = JSON.parse(_file.get_as_text())
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(_file.get_as_text())
+	var _json = test_json_conv.get_data()
 	_file.close()
 	settings = _json.result
 	loaded = true
@@ -51,6 +53,6 @@ func _load_data(filename):
 func _save_data(filename = prefs_file_name):
 	var file = File.new()
 	file.open(filename, File.WRITE)
-	file.store_string(JSON.print(settings, "\t"))
+	file.store_string(JSON.stringify(settings, "\t"))
 	file.close()
 	saved_since_load = true;

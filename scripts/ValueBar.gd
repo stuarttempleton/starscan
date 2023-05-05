@@ -1,21 +1,21 @@
 extends Control
 
-export(String) var ship_value_key
-export(String) var ship_capacity_key
-export(float) var warn_fraction
-export(Color) var normal_color
-export(Color) var warn_color
-export(float) var Lerp_Rate
+@export var ship_value_key: String
+@export var ship_capacity_key: String
+@export var warn_fraction: float
+@export var normal_color: Color
+@export var warn_color: Color
+@export var Lerp_Rate: float
 
-export(NodePath) var bg_animator_path
-export(NodePath) var scale_bar_path
-export(NodePath) var bar_particles_path
-export(NodePath) var fill_colorrect_path
+@export var bg_animator_path: NodePath
+@export var scale_bar_path: NodePath
+@export var bar_particles_path: NodePath
+@export var fill_colorrect_path: NodePath
 
-onready var bg_animator = get_node(bg_animator_path)
-onready var scale_bar = get_node(scale_bar_path)
-onready var bar_particles = get_node(bar_particles_path)
-onready var fill_colorrect = get_node(fill_colorrect_path)
+@onready var bg_animator = get_node(bg_animator_path)
+@onready var scale_bar = get_node(scale_bar_path)
+@onready var bar_particles = get_node(bar_particles_path)
+@onready var fill_colorrect = get_node(fill_colorrect_path)
 
 var targetScaleX
 var currentState = State.Normal
@@ -35,11 +35,11 @@ func Refresh():
 	HandleState()
 		
 func EaseToTarget():
-	var fractionDiff = scale_bar.rect_scale.x - targetScaleX
+	var fractionDiff = scale_bar.scale.x - targetScaleX
 	bar_particles.set_emitting(fractionDiff > 0.001)
 	if (abs(fractionDiff) > 0.001) :
 		var fractionDelta = fractionDiff * Lerp_Rate
-		var newFraction = scale_bar.rect_scale.x - fractionDelta
+		var newFraction = scale_bar.scale.x - fractionDelta
 		DisplayFraction(newFraction)
 		
 func GetModelFraction() -> float:
@@ -48,7 +48,7 @@ func GetModelFraction() -> float:
 	return value / capacity
 	
 func DisplayFraction(newFraction):
-	scale_bar.rect_scale = Vector2(newFraction, 1)
+	scale_bar.scale = Vector2(newFraction, 1)
 	
 func SetPercent(fraction) :
 	if (fraction > 1.0):

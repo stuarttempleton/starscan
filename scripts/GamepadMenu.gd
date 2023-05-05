@@ -1,12 +1,12 @@
 extends Control
 
 
-export var menus = {}
+@export var menus = {}
 var menu_cursor = {}
 var current_menu = ""
 
 func _ready():
-	var _connection = Input.connect("joy_connection_changed",self,"_joypad_changed")
+	var _connection = Input.connect("joy_connection_changed",Callable(self,"_joypad_changed"))
 	if Input.get_connected_joypads().size() > 0:
 		$GamepadInfo.text = "Gamepad: %s" % Input.get_joy_name(0)
 	else:
@@ -18,14 +18,14 @@ func _joypad_changed(_device, _connected):
 		activate_top_menu()
 	else:
 		$GamepadInfo.text = "Gamepad: mouse/touch"
-		var foc = get_focus_owner()
+		var foc = get_viewport().gui_get_focus_owner()
 		if foc:
 			foc.release_focus()
 
 func menu_is_active():
 	#see if whatever has focus is part of our menu
 	#quirk of godot input is that mouse interaction will give a button focus
-	var foc = get_focus_owner()
+	var foc = get_viewport().gui_get_focus_owner()
 	if menus.has(current_menu) && (foc):
 		if menus[current_menu].has(foc):
 			return true

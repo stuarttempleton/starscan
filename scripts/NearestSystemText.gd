@@ -4,8 +4,8 @@ extends Label
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-export var boiler_plate = "%s (%.1f sector units)"
-export var UseOutpostInstead = false
+@export var boiler_plate = "%s (%.1f sector units)"
+@export var UseOutpostInstead = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#SetSystemText()

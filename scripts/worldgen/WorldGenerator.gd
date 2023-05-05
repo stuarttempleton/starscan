@@ -1,30 +1,30 @@
 extends Node
 
-export var seedNumber = -1
-export var MinStarDistance = 0.04 #0.05
-export var MinNebulaDistance = 0.2
+@export var seedNumber = -1
+@export var MinStarDistance = 0.04 #0.05
+@export var MinNebulaDistance = 0.2
 #export var MinOutpostDistance = 0.2
 #export var TotalArtifacts = 100
-export var MinPlanetsPerStar = 1
-export var MaxPlanetsPerStar = 6
-export var RingChance = 0.1
-export var Resource0_Chance = 0.5
-export var Resource1_Chance = 0.3
-export var Resource2_Chance = 0.15
-export var Resource3_Chance = 0.05
-export var Hazard0_Chance = 0.2
-export var Hazard1_Chance = 0.4
-export var Hazard2_Chance = 0.3
-export var Hazard3_Chance = 0.1
-export var Artifact0_Chance = 0.6
-export var Artifact1_Chance = 0.2
-export var Artifact2_Chance = 0.15
-export var Artifact3_Chance = 0.05
-export var Hostility_Modifier = 0.25
-export var MaxTargetTries = 5
-export var Sectors_QTY = 25
+@export var MinPlanetsPerStar = 1
+@export var MaxPlanetsPerStar = 6
+@export var RingChance = 0.1
+@export var Resource0_Chance = 0.5
+@export var Resource1_Chance = 0.3
+@export var Resource2_Chance = 0.15
+@export var Resource3_Chance = 0.05
+@export var Hazard0_Chance = 0.2
+@export var Hazard1_Chance = 0.4
+@export var Hazard2_Chance = 0.3
+@export var Hazard3_Chance = 0.1
+@export var Artifact0_Chance = 0.6
+@export var Artifact1_Chance = 0.2
+@export var Artifact2_Chance = 0.15
+@export var Artifact3_Chance = 0.05
+@export var Hostility_Modifier = 0.25
+@export var MaxTargetTries = 5
+@export var Sectors_QTY = 25
 
-export var NameGenerationNodePath = ""
+@export var NameGenerationNodePath = ""
 var NameGenerator
 
 func _ready():
@@ -70,7 +70,7 @@ func generate_sector(seednumber):
 	
 func serializeToFile(map, _rng):
 	StarMapData.Universe = map
-	var _currtime = OS.get_datetime()
+	var _currtime = Time.get_datetime_dict_from_system()
 	#var filename = "user://Starmap_%04d-%02d-%02d_%02d-%02d-%02d_%s.json" % [currtime.year, currtime.month, currtime.day, currtime.hour, currtime.minute, currtime.second, str(rng.seed)]
 	StarMapData.Save(StarMapData.BaseUniverseFile)
 	return StarMapData.BaseUniverseFile

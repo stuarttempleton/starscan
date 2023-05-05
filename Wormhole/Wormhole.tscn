@@ -1,16 +1,16 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Wormhole/Wormhole.gd" type="Script" id=2]
-[ext_resource path="res://sprites/effect_4.png" type="Texture" id=3]
+[ext_resource path="res://sprites/effect_4.png" type="Texture2D" id=3]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
 
 [sub_resource type="Gradient" id=2]
-offsets = PoolRealArray( 0, 0.310976, 0.512195, 1 )
-colors = PoolColorArray( 0.78125, 0, 1, 1, 0.40533, 0.0551143, 0.929799, 1, 0, 0.646341, 0.176734, 1, 0, 1, 0.273438, 1 )
+offsets = PackedFloat32Array( 0, 0.310976, 0.512195, 1 )
+colors = PackedColorArray( 0.78125, 0, 1, 1, 0.40533, 0.0551143, 0.929799, 1, 0, 0.646341, 0.176734, 1, 0, 1, 0.273438, 1 )
 
-[sub_resource type="GradientTexture" id=3]
+[sub_resource type="GradientTexture2D" id=3]
 gradient = SubResource( 2 )
 
 [sub_resource type="Curve" id=4]
@@ -19,7 +19,7 @@ _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -3.29142, 0.0, 0, 0 
 [sub_resource type="CurveTexture" id=5]
 curve = SubResource( 4 )
 
-[sub_resource type="ParticlesMaterial" id=6]
+[sub_resource type="ParticleProcessMaterial" id=6]
 flag_disable_z = true
 gravity = Vector3( 0, 0, 0 )
 angular_velocity = 50.0
@@ -33,7 +33,7 @@ color_ramp = SubResource( 3 )
 [node name="Wormhole" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="Particles2D" type="Particles2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 self_modulate = Color( 0.490196, 0.490196, 0.490196, 1 )
 material = SubResource( 1 )
 scale = Vector2( 1.5, 1.5 )

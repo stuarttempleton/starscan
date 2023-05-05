@@ -2,7 +2,7 @@ extends Node2D
 
 const poi_types = ["Artifact","Resource","Hazard", "Empty", "Exhausted", "Unknown"]
 
-var POIModel setget set_POIModel, get_POIModel
+var POIModel : get = get_POIModel, set = set_POIModel
 var poi_node = ""
 var defaultScale
 var bigScale = Vector2(0.35,0.35)
@@ -12,11 +12,11 @@ var lerpSpeed = 10
 func _ready():
 	$Hover.hide()
 	# warning-ignore:return_value_discarded
-	$ClickArea.connect("selected", self, "selected")
+	$ClickArea.connect("selected",Callable(self,"selected"))
 	# warning-ignore:return_value_discarded
-	$ClickArea.connect("hover", self, "hover")
+	$ClickArea.connect("hover",Callable(self,"hover"))
 	# warning-ignore:return_value_discarded
-	$ClickArea.connect("unhover", self, "unhover")
+	$ClickArea.connect("unhover",Callable(self,"unhover"))
 
 func hover(_hover_position):
 	if POIModel.PerceivedType == "Empty": return
@@ -38,7 +38,7 @@ func selected():
 		CollectPOI(POIModel.ActualType, qty)
 		AudioPlayer.PlaySFX(GetAudioKeyForPOI(POIModel.ActualType))
 		# warning-ignore:return_value_discarded
-		GameNarrativeDisplay.connect("ChoiceSelected", self, "StoryResponse")
+		GameNarrativeDisplay.connect("ChoiceSelected",Callable(self,"StoryResponse"))
 		GameNarrativeDisplay.DisplayText(StoryGenerator.POIStory(POIModel.ActualType, qty),["OK"])
 	pass
 	
@@ -64,7 +64,7 @@ func CollectPOI(POIType, qty):
 			ShipData.DeductCrew(qty)
 
 func StoryResponse(_choice):
-	GameNarrativeDisplay.disconnect("ChoiceSelected", self, "StoryResponse")
+	GameNarrativeDisplay.disconnect("ChoiceSelected",Callable(self,"StoryResponse"))
 	_setPOIInfo("Exhausted", "Exhausted")
 	pass
 
@@ -72,7 +72,7 @@ func _process(delta):
 	if poi_node.scale.distance_to(ScaleToVector) <= 0.01:
 		poi_node.scale = ScaleToVector
 	else:
-		poi_node.scale = poi_node.scale.linear_interpolate(ScaleToVector, lerpSpeed * delta)
+		poi_node.scale = poi_node.scale.lerp(ScaleToVector, lerpSpeed * delta)
 
 func get_POIModel():
 	return POIModel

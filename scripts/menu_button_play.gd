@@ -1,14 +1,14 @@
 extends Button
 
 
-export var scene_to_load = ""
-export var RemoveFromMenu = false
+@export var scene_to_load = ""
+@export var RemoveFromMenu = false
 
 func _ready():
 	if (!StarMapData.SaveExists()):
 		RemoveFromMenu = true
 	# warning-ignore:return_value_discarded
-	connect("pressed", self, "on_button_pressed")
+	connect("pressed",Callable(self,"on_button_pressed"))
 
 func on_button_pressed () :
 	if (scene_to_load != "") :

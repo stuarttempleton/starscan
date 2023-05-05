@@ -3,7 +3,7 @@ extends Node2D
 
 var allow_planet_click = false # this is a toggle for what you're viewing.
 var allow_poi_click = true #
-export var PlanetSurfaceMap_scene = "res://planet_maps/PlanetSurfaceMap.tscn"
+@export var PlanetSurfaceMap_scene = "res://planet_maps/PlanetSurfaceMap.tscn"
 var args
 
 func _ready():

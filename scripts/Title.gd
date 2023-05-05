@@ -5,7 +5,7 @@ func _ready():
 	GameController.EnterGameLoop(false)
 	AudioPlayer.PlayMusic(AudioPlayer.AUDIO_KEY.MUSIC_TITLE)
 	SceneChanger.UnFade(0)
-	var vol = db2linear($"/root/AudioPlayer/MusicPlayer".volume_db)
+	var vol = db_to_linear($"/root/AudioPlayer/MusicPlayer".volume_db)
 	if vol <= 0.1:
 		doFade = true #we are just launching the game.
 
@@ -20,5 +20,5 @@ func _process(delta):
 		if fade_counter > 1:
 			fade_counter = 1
 			doFade = false #done done!
-		$"/root/AudioPlayer/MusicPlayer".volume_db = linear2db(fade_counter)
-		$Nebula/BGAudio.volume_db = linear2db(fade_counter)
+		$"/root/AudioPlayer/MusicPlayer".volume_db = linear_to_db(fade_counter)
+		$Nebula/BGAudio.volume_db = linear_to_db(fade_counter)

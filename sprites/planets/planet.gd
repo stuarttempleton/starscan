@@ -1,7 +1,7 @@
 extends Node2D
 
 
-export var Planets = {}
+@export var Planets = {}
 var Planet
 var PlanetID = 0
 var PlanetName = ""
@@ -21,11 +21,11 @@ func get_planet_scale(size_str):
 
 func _ready():
 	# warning-ignore:return_value_discarded
-	$ClickArea.connect("planet_selected", self, "planet_selected")
+	$ClickArea.connect("planet_selected",Callable(self,"planet_selected"))
 	# warning-ignore:return_value_discarded
-	$ClickArea.connect("planet_hover", self, "planet_hover")
+	$ClickArea.connect("planet_hover",Callable(self,"planet_hover"))
 	# warning-ignore:return_value_discarded
-	$ClickArea.connect("planet_unhover", self, "planet_unhover")
+	$ClickArea.connect("planet_unhover",Callable(self,"planet_unhover"))
 
 func planet_hover(planet_position, planet_name):
 	ScaleToVector = bigScale
@@ -48,7 +48,7 @@ func _process(delta):
 	if Planet.scale.distance_to(ScaleToVector) <= 0.01:
 		Planet.scale = ScaleToVector
 	else:
-		Planet.scale = Planet.scale.linear_interpolate(ScaleToVector, lerpSpeed * delta)
+		Planet.scale = Planet.scale.lerp(ScaleToVector, lerpSpeed * delta)
 
 
 func SetPlanetInfo(planet_type, planet_scale, planet_id, planet_name):

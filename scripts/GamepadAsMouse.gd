@@ -1,7 +1,7 @@
 extends Node2D
 
 
-export var MAX_MOUSE_SPEED = 25
+@export var MAX_MOUSE_SPEED = 25
 var CURRENT_MOUSE_SPEED = 0
 var hw_tick = 0
 var IsUsingMouse = true
@@ -15,7 +15,7 @@ var enable_full_input = false
 
 func _ready():
 	# warning-ignore:return_value_discarded
-	SceneChanger.connect("scene_changed",self,"scene_changed")
+	SceneChanger.connect("scene_changed",Callable(self,"scene_changed"))
 
 func scene_changed(scene_path = ""):
 	enable_full_input = scenes_for_ui_accept.has(scene_path)
@@ -49,8 +49,8 @@ func MoveTo(target):
 
 func SendButtonPress(pressed = true):
 	var ev = InputEventMouseButton.new()
-	ev.pressed = pressed
-	ev.button_index = BUTTON_LEFT  
+	ev.button_pressed = pressed
+	ev.button_index = MOUSE_BUTTON_LEFT  
 	ev.position =  get_viewport().get_mouse_position()
 	get_tree().input_event(ev)
 

@@ -4,7 +4,7 @@ const action_console_toggle = {
   "name": 'quentincaffeino_console_toggle',
   "events": [
     {
-      "scancode": KEY_QUOTELEFT,
+      "keycode": KEY_QUOTELEFT,
     }
   ]
 }
@@ -14,7 +14,7 @@ const action_console_autocomplete = {
   "name": 'quentincaffeino_console_autocomplete',
   "events": [
     {
-      "scancode": KEY_TAB,
+      "keycode": KEY_TAB,
     }
   ]
 }
@@ -24,7 +24,7 @@ const action_console_history_up = {
   "name": 'quentincaffeino_console_history_up',
   "events": [
     {
-      "scancode": KEY_UP,
+      "keycode": KEY_UP,
     }
   ]
 }
@@ -34,7 +34,7 @@ const action_console_history_down = {
   "name": 'quentincaffeino_console_history_down',
   "events": [
     {
-      "scancode": KEY_DOWN,
+      "keycode": KEY_DOWN,
     }
   ]
 }

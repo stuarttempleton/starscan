@@ -8,8 +8,8 @@
 script = ExtResource( 3 )
 
 [node name="BackgroundUI" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+offset_right = 40.0
+offset_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -17,8 +17,8 @@ __meta__ = {
 [node name="ColorRect" type="ColorRect" parent="BackgroundUI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 984.0
-margin_bottom = 552.0
+offset_right = 984.0
+offset_bottom = 552.0
 color = Color( 0, 0, 0, 0.858824 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -77,72 +77,72 @@ format = 1
 
 [node name="GeneratorUI" type="Control" parent="."]
 visible = false
-margin_left = 512.0
-margin_top = 64.0
-margin_right = 552.0
-margin_bottom = 104.0
+offset_left = 512.0
+offset_top = 64.0
+offset_right = 552.0
+offset_bottom = 104.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="GeneratorButtonList" type="VBoxContainer" parent="GeneratorUI"]
-margin_right = 128.0
-margin_bottom = 88.0
+offset_right = 128.0
+offset_bottom = 88.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Gas" type="Button" parent="GeneratorUI/GeneratorButtonList"]
-margin_right = 128.0
-margin_bottom = 20.0
+offset_right = 128.0
+offset_bottom = 20.0
 text = "Gas"
 
 [node name="Ice" type="Button" parent="GeneratorUI/GeneratorButtonList"]
-margin_top = 24.0
-margin_right = 128.0
-margin_bottom = 44.0
+offset_top = 24.0
+offset_right = 128.0
+offset_bottom = 44.0
 text = "Icy"
 
 [node name="Lava" type="Button" parent="GeneratorUI/GeneratorButtonList"]
-margin_top = 48.0
-margin_right = 128.0
-margin_bottom = 68.0
+offset_top = 48.0
+offset_right = 128.0
+offset_bottom = 68.0
 text = "Lava"
 
 [node name="Goldilocks" type="Button" parent="GeneratorUI/GeneratorButtonList"]
-margin_top = 72.0
-margin_right = 128.0
-margin_bottom = 92.0
+offset_top = 72.0
+offset_right = 128.0
+offset_bottom = 92.0
 text = "Goldilocks"
 
 [node name="Desert" type="Button" parent="GeneratorUI/GeneratorButtonList"]
-margin_top = 96.0
-margin_right = 128.0
-margin_bottom = 116.0
+offset_top = 96.0
+offset_right = 128.0
+offset_bottom = 116.0
 text = "Desert"
 
 [node name="Ocean" type="Button" parent="GeneratorUI/GeneratorButtonList"]
-margin_top = 120.0
-margin_right = 128.0
-margin_bottom = 140.0
+offset_top = 120.0
+offset_right = 128.0
+offset_bottom = 140.0
 text = "Ocean"
 
 [node name="Asteroid Belt" type="Button" parent="GeneratorUI/GeneratorButtonList"]
-margin_top = 144.0
-margin_right = 128.0
-margin_bottom = 164.0
+offset_top = 144.0
+offset_right = 128.0
+offset_bottom = 164.0
 text = "Asteroid Belt"
 
 [node name="Comet" type="Button" parent="GeneratorUI/GeneratorButtonList"]
-margin_top = 168.0
-margin_right = 128.0
-margin_bottom = 188.0
+offset_top = 168.0
+offset_right = 128.0
+offset_bottom = 188.0
 text = "Comet"
 
 [node name="Outpost" type="Button" parent="GeneratorUI/GeneratorButtonList"]
-margin_top = 192.0
-margin_right = 128.0
-margin_bottom = 212.0
+offset_top = 192.0
+offset_right = 128.0
+offset_bottom = 212.0
 text = "Outpost"
 [connection signal="pressed" from="GeneratorUI/GeneratorButtonList/Gas" to="." method="_on_generate_button_pressed" binds= [ "Gas" ]]
 [connection signal="pressed" from="GeneratorUI/GeneratorButtonList/Ice" to="." method="_on_generate_button_pressed" binds= [ "Ice" ]]

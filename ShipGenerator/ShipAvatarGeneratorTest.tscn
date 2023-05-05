@@ -13,10 +13,10 @@ script = ExtResource( 2 )
 position = Vector2( 142.072, 78.5763 )
 
 [node name="Button" type="Button" parent="."]
-margin_left = 29.3669
-margin_top = 261.127
-margin_right = 118.367
-margin_bottom = 296.127
+offset_left = 29.3669
+offset_top = 261.127
+offset_right = 118.367
+offset_bottom = 296.127
 text = "New Ship"
 __meta__ = {
 "_edit_use_anchors_": false

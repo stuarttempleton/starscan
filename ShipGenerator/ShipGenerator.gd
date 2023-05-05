@@ -5,11 +5,11 @@ extends Node2D
 # var a = 2
 # var b = "text"
 
-export(Array, NodePath) var ship_base = []
-export(Array, NodePath) var ship_engine = []
-export(Array, NodePath) var ship_detail = []
-export(Array, NodePath) var ship_paint_base = []
-export(Array, NodePath) var ship_paint_detail = []
+@export var ship_base = [] # (Array, NodePath)
+@export var ship_engine = [] # (Array, NodePath)
+@export var ship_detail = [] # (Array, NodePath)
+@export var ship_paint_base = [] # (Array, NodePath)
+@export var ship_paint_detail = [] # (Array, NodePath)
 var rng
 
 var colors = [Color(1.0, 0.0, 0.0, 1.0),

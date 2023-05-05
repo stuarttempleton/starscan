@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
 // Our gradient texture.
-uniform sampler2D colormap : hint_black;
+uniform sampler2D colormap : hint_default_black;
 
 uniform vec2 noise_minmax = vec2(0.0, 1.0);
 

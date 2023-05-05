@@ -3,7 +3,7 @@
 [ext_resource path="res://planet_maps/PlanetSurfaceMap.gdshader" type="Shader" id=1]
 [ext_resource path="res://planet_maps/goldilocks_planet_surface_gradient.tres" type="Gradient" id=2]
 
-[sub_resource type="GradientTexture" id=5]
+[sub_resource type="GradientTexture2D" id=5]
 gradient = ExtResource( 2 )
 
 [resource]

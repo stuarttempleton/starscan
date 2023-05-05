@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/starscan_transition_F.ogg-51bbdbe0dbfe558d2a838d9bb4bc15c4.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bhvas173025ji"
+path="res://.godot/imported/starscan_transition_F.ogg-51bbdbe0dbfe558d2a838d9bb4bc15c4.oggvorbisstr"
 
 [deps]
 
 source_file="res://Audio/MUSIC/starscan_transition_F.ogg"
-dest_files=[ "res://.import/starscan_transition_F.ogg-51bbdbe0dbfe558d2a838d9bb4bc15c4.oggstr" ]
+dest_files=["res://.godot/imported/starscan_transition_F.ogg-51bbdbe0dbfe558d2a838d9bb4bc15c4.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

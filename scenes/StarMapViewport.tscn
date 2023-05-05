@@ -7,16 +7,16 @@
 [ext_resource path="res://scenes/SystemInformation.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scripts/StarMapViewport.gd" type="Script" id=6]
 [ext_resource path="res://scripts/Grid.gd" type="Script" id=7]
-[ext_resource path="res://sprites/grid_square.png" type="Texture" id=8]
+[ext_resource path="res://sprites/grid_square.png" type="Texture2D" id=8]
 [ext_resource path="res://scenes/Boundary.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scripts/warning hud.gd" type="Script" id=10]
 [ext_resource path="res://scripts/map_FuelRange.gd" type="Script" id=11]
 [ext_resource path="res://TravelRoutes/TravelRoutes.tscn" type="PackedScene" id=12]
 
-[sub_resource type="DynamicFontData" id=1]
+[sub_resource type="FontFile" id=1]
 font_path = "res://fonts/Montserrat-ExtraBold.ttf"
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="FontFile" id=2]
 size = 17
 font_data = SubResource( 1 )
 
@@ -31,20 +31,20 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.1, 0.5, 1, 2 ),
-"transitions": PoolRealArray( 1, 0.435275, 1, 1 ),
+"times": PackedFloat32Array( 0.1, 0.5, 1, 2 ),
+"transitions": PackedFloat32Array( 1, 0.435275, 1, 1 ),
 "update": 0,
 "values": [ Color( 1.2, 0, 0, 0 ), Color( 1.2, 0, 0, 1 ), Color( 1.2, 0, 0, 1 ), Color( 1.2, 0, 0, 0 ) ]
 }
 
-[sub_resource type="DynamicFontData" id=4]
+[sub_resource type="FontFile" id=4]
 font_path = "res://fonts/Montserrat-Regular.ttf"
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="FontFile" id=5]
 size = 30
 font_data = SubResource( 4 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="FontFile" id=6]
 font_data = SubResource( 4 )
 
 [node name="StarMapView" type="Node2D"]
@@ -54,30 +54,30 @@ script = ExtResource( 6 )
 [node name="VFX Scene" parent="." instance=ExtResource( 4 )]
 
 [node name="BoundaryTop" parent="." instance=ExtResource( 9 )]
-margin_right = 500.0
-margin_bottom = 200.0
+offset_right = 500.0
+offset_bottom = 200.0
 
 [node name="BoundaryRight" parent="." instance=ExtResource( 9 )]
-margin_right = 500.0
-margin_bottom = 200.0
+offset_right = 500.0
+offset_bottom = 200.0
 Side = 1
 
 [node name="BoundaryBottom" parent="." instance=ExtResource( 9 )]
-margin_right = 500.0
-margin_bottom = 200.0
+offset_right = 500.0
+offset_bottom = 200.0
 Side = 2
 
 [node name="BoundaryLeft" parent="." instance=ExtResource( 9 )]
-margin_right = 500.0
-margin_bottom = 200.0
+offset_right = 500.0
+offset_bottom = 200.0
 Side = 3
 
 [node name="Grid" type="TextureRect" parent="."]
 self_modulate = Color( 0.0666667, 0.0862745, 0.164706, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 1280.0
-margin_bottom = 720.0
+offset_right = 1280.0
+offset_bottom = 720.0
 texture = ExtResource( 8 )
 stretch_mode = 2
 script = ExtResource( 7 )
@@ -105,8 +105,8 @@ self_modulate = Color( 1.2, 0, 0, 0 )
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -88.0
-margin_bottom = -66.0
+offset_top = -88.0
+offset_bottom = -66.0
 custom_fonts/font = SubResource( 2 )
 text = "WARNING: INTRACLUSTER MEDIUM"
 align = 1
@@ -130,8 +130,8 @@ __meta__ = {
 
 [node name="MapTitle" type="Label" parent="MapName/MapUI"]
 anchor_right = 1.0
-margin_top = 40.0
-margin_bottom = 78.0
+offset_top = 40.0
+offset_bottom = 78.0
 custom_fonts/font = SubResource( 5 )
 text = "Sector Space"
 align = 1
@@ -139,8 +139,8 @@ uppercase = true
 
 [node name="FuelRange" type="Label" parent="MapName/MapUI"]
 anchor_right = 1.0
-margin_top = 88.0
-margin_bottom = 126.0
+offset_top = 88.0
+offset_bottom = 126.0
 custom_fonts/font = SubResource( 6 )
 text = "Fuel Range"
 align = 1

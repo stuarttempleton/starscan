@@ -48,7 +48,7 @@ func DisplayText(txt, array_buttons):
 	
 	if array_buttons.size() > buttons.size():
 		print("TOO MANY OPTIONS SENT! ONLY USING %d", buttons.size())
-	$GameNarrativeDisplay2/Message.bbcode_text = message
+	$GameNarrativeDisplay2/Message.text = message
 	SetMessageNodeVisibility(true)
 	$GameNarrativeDisplay2/Message.percent_visible = 0
 	

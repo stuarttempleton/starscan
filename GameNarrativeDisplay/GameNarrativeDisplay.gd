@@ -44,7 +44,7 @@ func DisplayText(txt, array_buttons, button_selected = 0):
 	
 	if array_buttons.size() > buttons.size():
 		print("TOO MANY OPTIONS SENT! ONLY USING %d", buttons.size())
-	$MessageBoxUI/Vbox/Panel/Message.bbcode_text = message
+	$MessageBoxUI/Vbox/Panel/Message.text = message
 	SetMessageNodeVisibility(true)
 	$MessageBoxUI/Vbox/Panel/Message.percent_visible = 0
 	

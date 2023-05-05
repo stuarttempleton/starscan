@@ -10,18 +10,18 @@
 [ext_resource path="res://styles/MenuButton_Focus.tres" type="StyleBox" id=8]
 [ext_resource path="res://styles/dialogPanelNoButtons.tres" type="StyleBox" id=9]
 
-[sub_resource type="DynamicFontData" id=1]
+[sub_resource type="FontFile" id=1]
 font_path = "res://fonts/Montserrat-Black.ttf"
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="FontFile" id=2]
 outline_size = 2
 outline_color = Color( 0, 0, 0, 0.87451 )
 font_data = SubResource( 1 )
 
-[sub_resource type="DynamicFontData" id=3]
+[sub_resource type="FontFile" id=3]
 font_path = "res://fonts/Montserrat-Medium.ttf"
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="FontFile" id=4]
 size = 15
 outline_size = 2
 outline_color = Color( 0, 0, 0, 0.6 )
@@ -40,32 +40,32 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 120.0
-margin_top = -112.0
-margin_right = 328.0
-margin_bottom = 30.0
+offset_left = 120.0
+offset_top = -112.0
+offset_right = 328.0
+offset_bottom = 30.0
 custom_styles/panel = ExtResource( 9 )
 
 [node name="InfoContainer" type="VBoxContainer" parent="Control/Background"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 188.0
-margin_bottom = 136.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 188.0
+offset_bottom = 136.0
 size_flags_vertical = 0
 
 [node name="SystemName" type="Label" parent="Control/Background/InfoContainer"]
-margin_right = 168.0
-margin_bottom = 21.0
-rect_min_size = Vector2( 0, 20 )
+offset_right = 168.0
+offset_bottom = 21.0
+custom_minimum_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 2 )
 text = "System Name"
 
 [node name="SystemDetail" type="Label" parent="Control/Background/InfoContainer"]
 self_modulate = Color( 0.796078, 0.796078, 0.796078, 1 )
-margin_top = 25.0
-margin_right = 168.0
-margin_bottom = 44.0
+offset_top = 25.0
+offset_right = 168.0
+offset_bottom = 44.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 custom_fonts/font = SubResource( 4 )
@@ -73,21 +73,21 @@ text = "Outpost Info"
 autowrap = true
 
 [node name="Spacer" type="Control" parent="Control/Background/InfoContainer"]
-margin_top = 48.0
-margin_right = 168.0
-margin_bottom = 58.0
-rect_min_size = Vector2( 0, 10 )
+offset_top = 48.0
+offset_right = 168.0
+offset_bottom = 58.0
+custom_minimum_size = Vector2( 0, 10 )
 
 [node name="ScanButton" type="Button" parent="Control/Background/InfoContainer"]
-margin_top = 62.0
-margin_right = 168.0
-margin_bottom = 87.0
-rect_min_size = Vector2( 0, 25 )
+offset_top = 62.0
+offset_right = 168.0
+offset_bottom = 87.0
+custom_minimum_size = Vector2( 0, 25 )
 custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
-custom_constants/hseparation = 5
+custom_constants/h_separation = 5
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 6 )
 custom_styles/focus = ExtResource( 8 )
@@ -99,15 +99,15 @@ GamepadButton = 2
 minigame_scene = "res://scenes/Scanner Minigame.tscn"
 
 [node name="EnterButton" type="Button" parent="Control/Background/InfoContainer"]
-margin_top = 91.0
-margin_right = 168.0
-margin_bottom = 116.0
-rect_min_size = Vector2( 0, 25 )
+offset_top = 91.0
+offset_right = 168.0
+offset_bottom = 116.0
+custom_minimum_size = Vector2( 0, 25 )
 custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
-custom_constants/hseparation = 5
+custom_constants/h_separation = 5
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 6 )
 custom_styles/focus = ExtResource( 8 )

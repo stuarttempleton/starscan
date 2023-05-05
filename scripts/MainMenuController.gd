@@ -1,10 +1,10 @@
 extends CanvasLayer
 
 
-export var in_game = true
-export(Array, NodePath) var in_game_nodes
-export(Array, NodePath) var title_nodes
-export(Array, NodePath) var editor_only_nodes
+@export var in_game = true
+@export var in_game_nodes # (Array, NodePath)
+@export var title_nodes # (Array, NodePath)
+@export var editor_only_nodes # (Array, NodePath)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -11,7 +11,7 @@ signal inside_medium()
 
 var EnteredMedium = false
 var time = 0
-export var  MEDIUM_TICK = 1.5
+@export var  MEDIUM_TICK = 1.5
 var MediumCostInCrew = 1
 
 func IsInMedium():

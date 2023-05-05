@@ -279,7 +279,7 @@ func CorrectAAN(item):
 				split[i] = "An"
 			else:
 				split[i] = "A"
-	return split.join(" ")
+	return " ".join(split)
 
 func ExpandPattern(pat):
 	var item = pat
@@ -307,7 +307,7 @@ func Create(RarityFloat=-1, color=false):
 
 func NewRand(_max):
 	randomize()
-	return randi() % _max # int(rand_range(0, _max))
+	return randi() % _max # int(randf_range(0, _max))
 
 func CreateList(_qty, color=false):
 	var items = []

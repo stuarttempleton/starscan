@@ -2,8 +2,8 @@ extends Node2D
 
 var rng
 var SeedNumber = -1
-export var TravelRouteLabel = "res://TravelRoutes/TravelRouteLabel.tscn"
-export var Enabled = true
+@export var TravelRouteLabel = "res://TravelRoutes/TravelRouteLabel.tscn"
+@export var Enabled = true
 
 var RouteLists = {
 	"Sector": {
@@ -62,7 +62,7 @@ func GrowPool(pool, number):
 	var needed = number - pool.size()
 	if needed > 0:
 		for i in needed:
-			var label = _loadedLabelTemplate.instance()
+			var label = _loadedLabelTemplate.instantiate()
 			$LabelPool.add_child(label)
 			pool.append(label)
 	elif needed < 0:
@@ -129,12 +129,12 @@ func _drawTravelRoutes(Routes):
 		var rte = Routes.routes[i - 1]
 		var from = StarMapData.SystemPosition(StarMapData.StarMap[rte.ObjectPool][rte.A]) * StarMapData.MapScale
 		var to = StarMapData.SystemPosition(StarMapData.StarMap[rte.ObjectPool][rte.B]) * StarMapData.MapScale
-		draw_line(from,to,Routes.color,Routes.width,true)
+		draw_line(from,to,Routes.color,Routes.width)
 		var segment = GetSubSegment(from, to)
-		var label_point = Geometry.get_closest_point_to_segment_2d(ShipPosition, segment[0], segment[1])
+		var label_point = Geometry.get_closest_point_to_segment(ShipPosition, segment[0], segment[1])
 		if Routes.pool.size() >= i:
 			#if the label pool is still resizing when the draw call hits, just defer for a frame. no biggie.
-			Routes.pool[i - 1].rect_position = get_viewport_transform().xform(label_point)
+			Routes.pool[i - 1].position = get_viewport_transform() * label_point
 	pass
 
 func _draw():

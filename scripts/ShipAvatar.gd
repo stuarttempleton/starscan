@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 var target = Vector2()
 var velocity = Vector2()
@@ -21,18 +21,18 @@ func _ready():
 	target = self.position
 	GameController.ResetMoveBlock()
 	# warning-ignore:return_value_discarded
-	ShipData.connect("FuelTanksEmpty", self, "_on_FuelTanksEmpty")
+	ShipData.connect("FuelTanksEmpty",Callable(self,"_on_FuelTanksEmpty"))
 	# warning-ignore:return_value_discarded
-	GameController.connect("map_state", self, "MapToggle")
+	GameController.connect("map_state",Callable(self,"MapToggle"))
 
 func _input(event):
 	if GameController.is_movement_enabled():
 		if event is InputEventMouseButton and !UsingMap:
-			if event.button_index == BUTTON_LEFT:
+			if event.button_index == MOUSE_BUTTON_LEFT:
 				mouseIsPressed = event.pressed
-			elif event.button_index == BUTTON_WHEEL_DOWN and event.pressed:
+			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
 				Zoom(0.25)
-			elif event.button_index == BUTTON_WHEEL_UP and event.pressed:
+			elif event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
 				Zoom(-0.25)
 
 func _process(_delta):
@@ -159,7 +159,9 @@ func _physics_process(_delta):
 		if look_enabled:
 			look_at(target)
 		velocity = position.direction_to(target) * speedToHitTargetThisFrame
-		velocity = move_and_slide(velocity)
+		set_velocity(velocity)
+		move_and_slide()
+		velocity = velocity
 		if !ShipIsTowing:
 			ShipData.ConsumeFuel(fuelRequired)
 			
@@ -215,12 +217,12 @@ func _on_FuelTanksEmpty():
 				opts.append("%s ARTIFACT%s" % [TowEncounter.Artifacts, "S" if TowEncounter.Artifacts > 1 else ""])
 		AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.DIALOG_HAIL_FRIENDLY if TowEncounter.Friendly else AudioPlayer.AUDIO_KEY.DIALOG_HAIL_HOSTILE)
 		# warning-ignore:return_value_discarded
-		GameNarrativeDisplay.connect("ChoiceSelected", self, "DialogChoice")
+		GameNarrativeDisplay.connect("ChoiceSelected",Callable(self,"DialogChoice"))
 		GameNarrativeDisplay.DisplayText(StoryGenerator.LowFuel(TowEncounter),opts)
 
 
 func DialogChoice(choice):
-	GameNarrativeDisplay.disconnect("ChoiceSelected",self,"DialogChoice")
+	GameNarrativeDisplay.disconnect("ChoiceSelected",Callable(self,"DialogChoice"))
 	if choice == 0:
 		if !TowEncounter.Friendly:
 			ShipData.UpdatePlayStat("Conscripts",ShipData.DeductCrew(TowEncounter.Crew))

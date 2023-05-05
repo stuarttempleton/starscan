@@ -2,7 +2,7 @@
 extends 'res://addons/quentincaffeino-console/src/Type/BaseRegexCheckedType.gd'
 
 
-func _init().('Int', '^[+-]?\\d+$'):
+func _init('Int','^[+-]?\\d+$'):
 	pass
 
 

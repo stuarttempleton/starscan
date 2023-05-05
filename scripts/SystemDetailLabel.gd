@@ -5,8 +5,8 @@ extends Label
 # var a = 2
 # var b = "text"
 
-export var main_boiler_plate = "System %s...\r\nScan confidence: %s\r\nKnown planets: %d\r\n"
-export var planet_sub_boiler_plate = "%s: %s, %s"
+@export var main_boiler_plate = "System %s...\r\nScan confidence: %s\r\nKnown planets: %d\r\n"
+@export var planet_sub_boiler_plate = "%s: %s, %s"
 # Called when the node enters the scene tree for the first time.
 var display_speed = 0.5
 

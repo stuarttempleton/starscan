@@ -1,14 +1,14 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://sprites/smokeparticle.png" type="Texture" id=1]
-[ext_resource path="res://sprites/smoke-particle-png-2.png" type="Texture" id=3]
+[ext_resource path="res://sprites/smokeparticle.png" type="Texture2D" id=1]
+[ext_resource path="res://sprites/smoke-particle-png-2.png" type="Texture2D" id=3]
 [ext_resource path="res://Audio/BG/270526__littlerobotsoundfactory__ambience-blackhole-00.ogg" type="AudioStream" id=4]
 
 [sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0, 0.437037, 1 )
-colors = PoolColorArray( 0, 0, 0, 0, 1, 0.703125, 0, 0.278431, 1, 1, 1, 0 )
+offsets = PackedFloat32Array( 0, 0.437037, 1 )
+colors = PackedColorArray( 0, 0, 0, 0, 1, 0.703125, 0, 0.278431, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=2]
+[sub_resource type="GradientTexture2D" id=2]
 gradient = SubResource( 1 )
 
 [sub_resource type="Curve" id=3]
@@ -24,7 +24,7 @@ _data = [ Vector2( 0, 0.669318 ), 0.0, 0.628409, 0, 0, Vector2( 0.993671, 0.6147
 [sub_resource type="CurveTexture" id=6]
 curve = SubResource( 5 )
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticleProcessMaterial" id=7]
 emission_shape = 2
 emission_box_extents = Vector3( 50, 50, 1 )
 flag_disable_z = true
@@ -40,13 +40,13 @@ color_ramp = SubResource( 2 )
 hue_variation_curve = SubResource( 4 )
 
 [sub_resource type="Gradient" id=8]
-offsets = PoolRealArray( 0, 0.437037, 1 )
-colors = PoolColorArray( 0, 0, 0, 0, 0.584314, 0, 0.839216, 0.32549, 1, 1, 1, 0 )
+offsets = PackedFloat32Array( 0, 0.437037, 1 )
+colors = PackedColorArray( 0, 0, 0, 0, 0.584314, 0, 0.839216, 0.32549, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=9]
+[sub_resource type="GradientTexture2D" id=9]
 gradient = SubResource( 8 )
 
-[sub_resource type="ParticlesMaterial" id=10]
+[sub_resource type="ParticleProcessMaterial" id=10]
 emission_shape = 2
 emission_box_extents = Vector3( 50, 50, 1 )
 flag_disable_z = true
@@ -62,9 +62,9 @@ color_ramp = SubResource( 9 )
 hue_variation_curve = SubResource( 4 )
 
 [node name="Nebula" type="Node2D"]
-pause_mode = 2
+process_mode = 2
 
-[node name="Particles2D2" type="Particles2D" parent="."]
+[node name="Particles2D2" type="GPUParticles2D" parent="."]
 position = Vector2( -0.106857, 0.208084 )
 amount = 5
 lifetime = 10.0
@@ -73,7 +73,7 @@ visibility_rect = Rect2( -300, -300, 600, 600 )
 process_material = SubResource( 7 )
 texture = ExtResource( 3 )
 
-[node name="Particles2D" type="Particles2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 5
 lifetime = 10.0
 preprocess = 5.0
@@ -89,10 +89,10 @@ bus = "Anomaly"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 self_modulate = Color( 1.2, 1, 1.2, 1 )
-margin_top = -7.0
-margin_right = 10.0
-margin_bottom = 3.0
-rect_rotation = 45.0
+offset_top = -7.0
+offset_right = 10.0
+offset_bottom = 3.0
+rotation = 45.0
 color = Color( 0.478431, 0, 1, 1 )
 __meta__ = {
 "_edit_use_anchors_": false

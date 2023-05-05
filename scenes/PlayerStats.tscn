@@ -2,11 +2,11 @@
 
 [ext_resource path="res://scripts/ValueBar.gd" type="Script" id=1]
 [ext_resource path="res://scripts/qty_counter.gd" type="Script" id=2]
-[ext_resource path="res://sprites/system_100px_outlined.png" type="Texture" id=3]
-[ext_resource path="res://sprites/artifact_100px_outlined.png" type="Texture" id=4]
-[ext_resource path="res://sprites/fuel_100px_outlined.png" type="Texture" id=5]
-[ext_resource path="res://sprites/redshirt.png" type="Texture" id=6]
-[ext_resource path="res://sprites/droplet.png" type="Texture" id=7]
+[ext_resource path="res://sprites/system_100px_outlined.png" type="Texture2D" id=3]
+[ext_resource path="res://sprites/artifact_100px_outlined.png" type="Texture2D" id=4]
+[ext_resource path="res://sprites/fuel_100px_outlined.png" type="Texture2D" id=5]
+[ext_resource path="res://sprites/redshirt.png" type="Texture2D" id=6]
+[ext_resource path="res://sprites/droplet.png" type="Texture2D" id=7]
 
 [sub_resource type="Animation" id=3]
 resource_name = "WarnFlash"
@@ -18,20 +18,20 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 1, 2 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 0, 0, 0, 1 ), Color( 0.64, 0, 0, 1 ), Color( 0, 0, 0, 1 ) ]
 }
 
 [sub_resource type="Gradient" id=4]
-offsets = PoolRealArray( 0, 0.222222, 0.515873 )
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+offsets = PackedFloat32Array( 0, 0.222222, 0.515873 )
+colors = PackedColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="DynamicFontData" id=1]
+[sub_resource type="FontFile" id=1]
 font_path = "res://fonts/Montserrat-Medium.ttf"
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="FontFile" id=2]
 size = 10
 font_data = SubResource( 1 )
 
@@ -46,39 +46,39 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 1, 2 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 0, 0, 0, 1 ), Color( 0.64, 0, 0, 1 ), Color( 0, 0, 0, 1 ) ]
 }
 
-[sub_resource type="DynamicFontData" id=6]
+[sub_resource type="FontFile" id=6]
 font_path = "res://fonts/Montserrat-BoldItalic.ttf"
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="FontFile" id=7]
 size = 60
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
 font_data = SubResource( 6 )
 
 [node name="PlayerStats" type="Control"]
-margin_right = 40.0
-margin_bottom = 40.0
+offset_right = 40.0
+offset_bottom = 40.0
 mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Vitals" type="Control" parent="."]
-margin_left = 64.0
-margin_top = 22.0
-margin_right = 350.0
-margin_bottom = 57.0
+offset_left = 64.0
+offset_top = 22.0
+offset_right = 350.0
+offset_bottom = 57.0
 size_flags_vertical = 0
 
 [node name="Crew Bar" type="Control" parent="Vitals"]
-margin_right = 250.0
-margin_bottom = 15.0
+offset_right = 250.0
+offset_bottom = 15.0
 mouse_filter = 1
 size_flags_vertical = 0
 script = ExtResource( 1 )
@@ -106,10 +106,10 @@ color = Color( 0, 0.960784, 0.172549, 1 )
 [node name="Background Rect" type="ColorRect" parent="Vitals/Crew Bar"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1.0
-margin_top = 1.0
-margin_right = -1.0
-margin_bottom = -1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
 mouse_filter = 1
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -121,10 +121,10 @@ anims/WarnFlash = SubResource( 3 )
 [node name="Scale Bar" type="Control" parent="Vitals/Crew Bar"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 2.0
-margin_top = 2.0
-margin_right = -2.0
-margin_bottom = -2.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
 
 [node name="Fill Rect" type="ColorRect" parent="Vitals/Crew Bar/Scale Bar"]
 anchor_right = 1.0
@@ -161,10 +161,10 @@ color_ramp = SubResource( 4 )
 [node name="Label" type="Label" parent="Vitals/Crew Bar"]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_left = -37.0
-margin_top = -6.5
-margin_right = -5.0
-margin_bottom = 6.5
+offset_left = -37.0
+offset_top = -6.5
+offset_right = -5.0
+offset_bottom = 6.5
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 1
@@ -175,9 +175,9 @@ align = 2
 valign = 1
 
 [node name="Fuel Bar" type="Control" parent="Vitals"]
-margin_top = 19.0
-margin_right = 200.0
-margin_bottom = 34.0
+offset_top = 19.0
+offset_right = 200.0
+offset_bottom = 34.0
 mouse_filter = 1
 size_flags_vertical = 0
 script = ExtResource( 1 )
@@ -198,7 +198,7 @@ fill_colorrect_path = NodePath("Scale Bar/Fill Rect")
 [node name="Label" type="Label" parent="Vitals/Fuel Bar"]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_right = -5.0
+offset_right = -5.0
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 1
@@ -224,10 +224,10 @@ __meta__ = {
 [node name="Background Rect" type="ColorRect" parent="Vitals/Fuel Bar"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1.0
-margin_top = 1.0
-margin_right = -1.0
-margin_bottom = -1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
 mouse_filter = 1
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -242,10 +242,10 @@ anims/WarnFlash = SubResource( 5 )
 [node name="Scale Bar" type="Control" parent="Vitals/Fuel Bar"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 2.0
-margin_top = 2.0
-margin_right = -2.0
-margin_bottom = -2.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
 
 [node name="Fill Rect" type="ColorRect" parent="Vitals/Fuel Bar/Scale Bar"]
 anchor_right = 1.0
@@ -282,29 +282,29 @@ __meta__ = {
 }
 
 [node name="Inventory" type="VBoxContainer" parent="."]
-margin_left = 64.0
-margin_top = 64.0
-margin_right = 350.0
-margin_bottom = 372.0
-rect_scale = Vector2( 0.2, 0.2 )
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 350.0
+offset_bottom = 372.0
+scale = Vector2( 0.2, 0.2 )
 
 [node name="StarsScanned" type="HBoxContainer" parent="Inventory"]
-margin_right = 286.0
-margin_bottom = 100.0
+offset_right = 286.0
+offset_bottom = 100.0
 custom_constants/separation = 25
 script = ExtResource( 2 )
 inventory_type_key = "Scan Data"
 
 [node name="Icon" type="TextureRect" parent="Inventory/StarsScanned"]
-margin_right = 100.0
-margin_bottom = 100.0
+offset_right = 100.0
+offset_bottom = 100.0
 texture = ExtResource( 3 )
 
 [node name="QTY" type="Label" parent="Inventory/StarsScanned"]
-margin_left = 125.0
-margin_top = 12.0
-margin_right = 213.0
-margin_bottom = 87.0
+offset_left = 125.0
+offset_top = 12.0
+offset_right = 213.0
+offset_bottom = 87.0
 custom_fonts/font = SubResource( 7 )
 text = "x 2"
 __meta__ = {
@@ -312,23 +312,23 @@ __meta__ = {
 }
 
 [node name="Artifacts" type="HBoxContainer" parent="Inventory"]
-margin_top = 104.0
-margin_right = 286.0
-margin_bottom = 204.0
+offset_top = 104.0
+offset_right = 286.0
+offset_bottom = 204.0
 custom_constants/separation = 25
 script = ExtResource( 2 )
 inventory_type_key = "Artifacts"
 
 [node name="Icon" type="TextureRect" parent="Inventory/Artifacts"]
-margin_right = 100.0
-margin_bottom = 100.0
+offset_right = 100.0
+offset_bottom = 100.0
 texture = ExtResource( 4 )
 
 [node name="QTY" type="Label" parent="Inventory/Artifacts"]
-margin_left = 125.0
-margin_top = 12.0
-margin_right = 213.0
-margin_bottom = 87.0
+offset_left = 125.0
+offset_top = 12.0
+offset_right = 213.0
+offset_bottom = 87.0
 custom_fonts/font = SubResource( 7 )
 text = "x 2"
 __meta__ = {
@@ -336,23 +336,23 @@ __meta__ = {
 }
 
 [node name="Resources" type="HBoxContainer" parent="Inventory"]
-margin_top = 208.0
-margin_right = 286.0
-margin_bottom = 308.0
+offset_top = 208.0
+offset_right = 286.0
+offset_bottom = 308.0
 custom_constants/separation = 25
 script = ExtResource( 2 )
 inventory_type_key = "Resources"
 
 [node name="Icon" type="TextureRect" parent="Inventory/Resources"]
-margin_right = 100.0
-margin_bottom = 100.0
+offset_right = 100.0
+offset_bottom = 100.0
 texture = ExtResource( 5 )
 
 [node name="QTY" type="Label" parent="Inventory/Resources"]
-margin_left = 125.0
-margin_top = 12.0
-margin_right = 213.0
-margin_bottom = 87.0
+offset_left = 125.0
+offset_top = 12.0
+offset_right = 213.0
+offset_bottom = 87.0
 custom_fonts/font = SubResource( 7 )
 text = "x 2"
 __meta__ = {

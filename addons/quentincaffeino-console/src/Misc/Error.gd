@@ -8,7 +8,7 @@ var _code
 
 # @param  String        message
 # @param  Variant|null  code
-func _init(message, code = null):
+func _init(message,code = null):
   self._message = message
   self._code = code
 

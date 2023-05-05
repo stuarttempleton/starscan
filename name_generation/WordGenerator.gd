@@ -67,7 +67,7 @@ func GetVCPattern():
 	
 func NewRand(_max):
 	randomize()
-	return randi() % _max # int(rand_range(0, _max))
+	return randi() % _max # int(randf_range(0, _max))
 	
 func GetWeightedItem(CharacterList, distribution_test):
 	if (distribution_test < 1):
@@ -77,7 +77,7 @@ func GetWeightedItem(CharacterList, distribution_test):
 	for i in distribution_test:
 		c1.append(CharacterList[NewRand(CharacterList.size())])
 	
-	c1.sort_custom(self, "DistributionComparison")
+	c1.sort_custom(Callable(self,"DistributionComparison"))
 	
 	return c1[0]
 	pass

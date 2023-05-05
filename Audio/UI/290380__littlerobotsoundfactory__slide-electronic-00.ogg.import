@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/290380__littlerobotsoundfactory__slide-electronic-00.ogg-a39507f9f503898a273b2e93983386c0.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ciaponi6mo848"
+path="res://.godot/imported/290380__littlerobotsoundfactory__slide-electronic-00.ogg-a39507f9f503898a273b2e93983386c0.oggvorbisstr"
 
 [deps]
 
 source_file="res://Audio/UI/290380__littlerobotsoundfactory__slide-electronic-00.ogg"
-dest_files=[ "res://.import/290380__littlerobotsoundfactory__slide-electronic-00.ogg-a39507f9f503898a273b2e93983386c0.oggstr" ]
+dest_files=["res://.godot/imported/290380__littlerobotsoundfactory__slide-electronic-00.ogg-a39507f9f503898a273b2e93983386c0.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

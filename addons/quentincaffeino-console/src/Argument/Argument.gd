@@ -1,5 +1,5 @@
 
-extends Reference
+extends RefCounted
 
 
 enum ASSIGNMENT \
@@ -29,7 +29,7 @@ var _normalized_value
 # @param  String       name
 # @param  BaseType     type
 # @param  String|null  description
-func _init(name, type, description = null):
+func _init(name,type,description = null):
 	self._name = name
 	self._type = type
 	self._description = description

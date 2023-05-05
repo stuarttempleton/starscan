@@ -16,7 +16,9 @@ func _ready():
 func LoadWords():
 	var _file = File.new()
 	_file.open(NoNoWordFile, File.READ)
-	var shipdata_json = JSON.parse(_file.get_as_text())
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(_file.get_as_text())
+	var shipdata_json = test_json_conv.get_data()
 	_file.close()
 	NoNoWords = shipdata_json.result
 

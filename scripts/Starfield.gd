@@ -3,8 +3,8 @@ extends Node2D
 
 var MapScale = StarMapData.MapScale
 var PlanetSizeScale = 5
-export var NebulaPath = ""
-export var WormholePath = ""
+@export var NebulaPath = ""
+@export var WormholePath = ""
 
 func _ready():
 	GameController.EnterGameLoop(true)
@@ -15,14 +15,14 @@ func _ready():
 
 func AddWormholeToMap(pos):
 	var loaded_scene = load(WormholePath)
-	var wormhole = loaded_scene.instance()
+	var wormhole = loaded_scene.instantiate()
 	add_child(wormhole)
 	
 	wormhole.position = pos
 
 func AddNebulaToMap(pos,size):
 	var loaded_scene = load(NebulaPath)
-	var nebula = loaded_scene.instance()
+	var nebula = loaded_scene.instantiate()
 	add_child(nebula)
 	
 	nebula.position = pos
@@ -42,10 +42,10 @@ func AddSystemToMap( system ) :
 
 func draw_circle_arc(center, radius, angle_from, angle_to, color):
 	var nb_points = 64
-	var points_arc = PoolVector2Array()
+	var points_arc = PackedVector2Array()
 
 	for i in range(nb_points + 1):
-		var angle_point = deg2rad(angle_from + i * (angle_to-angle_from) / nb_points - 90)
+		var angle_point = deg_to_rad(angle_from + i * (angle_to-angle_from) / nb_points - 90)
 		points_arc.push_back(center + Vector2(cos(angle_point), sin(angle_point)) * radius)
 
 	for index_point in range(nb_points):

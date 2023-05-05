@@ -1,13 +1,13 @@
 [gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://planet_maps/HeightMap.gd" type="Script" id=1]
-[ext_resource path="res://sprites/smokeparticle.png" type="Texture" id=2]
+[ext_resource path="res://sprites/smokeparticle.png" type="Texture2D" id=2]
 [ext_resource path="res://planet_maps/OutpostDialog.gd" type="Script" id=3]
 [ext_resource path="res://planet_maps/gas_planet_surface_gradient.tres" type="Gradient" id=4]
 [ext_resource path="res://planet_maps/PlanetMapController.gd" type="Script" id=5]
 [ext_resource path="res://planet_maps/PointsOfInterest.gd" type="Script" id=6]
 [ext_resource path="res://planet_maps/PlanetDialog.gd" type="Script" id=7]
-[ext_resource path="res://sprites/grid_square.png" type="Texture" id=8]
+[ext_resource path="res://sprites/grid_square.png" type="Texture2D" id=8]
 [ext_resource path="res://scenes/PlayerStats.tscn" type="PackedScene" id=9]
 [ext_resource path="res://planet_maps/AnomalyDialog.gd" type="Script" id=10]
 [ext_resource path="res://planet_maps/LeaveOrbitButton.gd" type="Script" id=11]
@@ -20,7 +20,7 @@
 code = "shader_type canvas_item;
 
 // Our gradient texture.
-uniform sampler2D colormap : hint_black;
+uniform sampler2D colormap : hint_default_black;
 
 uniform vec2 noise_minmax = vec2(0.0, 1.0);
 
@@ -31,7 +31,7 @@ void fragment() {
 	COLOR = texture(colormap, uv_noise);
 }"
 
-[sub_resource type="GradientTexture" id=2]
+[sub_resource type="GradientTexture2D" id=2]
 gradient = ExtResource( 4 )
 
 [sub_resource type="ShaderMaterial" id=3]
@@ -48,34 +48,34 @@ width = 1024
 height = 600
 noise = SubResource( 4 )
 
-[sub_resource type="GradientTexture" id=6]
+[sub_resource type="GradientTexture2D" id=6]
 gradient = ExtResource( 4 )
 
-[sub_resource type="DynamicFontData" id=7]
+[sub_resource type="FontFile" id=7]
 font_path = "res://fonts/Montserrat-Regular.ttf"
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="FontFile" id=8]
 size = 29
 outline_size = 1
 outline_color = Color( 0, 0, 0, 0.403922 )
 font_data = SubResource( 7 )
 
-[sub_resource type="DynamicFontData" id=9]
+[sub_resource type="FontFile" id=9]
 font_path = "res://fonts/Montserrat-Regular.ttf"
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="FontFile" id=10]
 outline_size = 1
 outline_color = Color( 0, 0, 0, 0.423529 )
 font_data = SubResource( 9 )
 
 [sub_resource type="Gradient" id=11]
-offsets = PoolRealArray( 0, 0.00552486, 0.370166, 0.690608, 1 )
-colors = PoolColorArray( 1, 1, 1, 0.091954, 1, 1, 1, 0, 2, 2, 2, 1, 1.90196, 1.90196, 1.90196, 1, 1, 1, 1, 0 )
+offsets = PackedFloat32Array( 0, 0.00552486, 0.370166, 0.690608, 1 )
+colors = PackedColorArray( 1, 1, 1, 0.091954, 1, 1, 1, 0, 2, 2, 2, 1, 1.90196, 1.90196, 1.90196, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=12]
+[sub_resource type="GradientTexture2D" id=12]
 gradient = SubResource( 11 )
 
-[sub_resource type="ParticlesMaterial" id=13]
+[sub_resource type="ParticleProcessMaterial" id=13]
 emission_shape = 2
 emission_box_extents = Vector3( 400, 300, 1 )
 flag_disable_z = true
@@ -126,10 +126,10 @@ colormap = SubResource( 6 )
 self_modulate = Color( 1, 1, 1, 0.121569 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 64.0
-margin_top = 64.0
-margin_right = -64.0
-margin_bottom = -80.0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = -64.0
+offset_bottom = -80.0
 mouse_filter = 2
 texture = ExtResource( 8 )
 stretch_mode = 2
@@ -139,10 +139,10 @@ stretch_mode = 2
 [node name="PlanetName" type="Label" parent="PlanetSurfaceMap"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -182.0
-margin_top = 56.0
-margin_right = -63.0
-margin_bottom = 93.0
+offset_left = -182.0
+offset_top = 56.0
+offset_right = -63.0
+offset_bottom = 93.0
 grow_horizontal = 0
 custom_fonts/font = SubResource( 8 )
 text = "PLANET"
@@ -156,10 +156,10 @@ __meta__ = {
 [node name="PlanetInformation" type="Label" parent="PlanetSurfaceMap"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -208.0
-margin_top = 96.0
-margin_right = -63.0
-margin_bottom = 224.0
+offset_left = -208.0
+offset_top = 96.0
+offset_right = -63.0
+offset_bottom = 224.0
 grow_horizontal = 0
 custom_fonts/font = SubResource( 10 )
 text = "Type: Gas
@@ -170,7 +170,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Particles2D" type="Particles2D" parent="PlanetSurfaceMap"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="PlanetSurfaceMap"]
 visible = false
 self_modulate = Color( 1, 1, 1, 0.2 )
 position = Vector2( 512, 320 )
@@ -194,12 +194,12 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -160.0
-margin_top = -72.0
-margin_right = -32.0
-margin_bottom = -47.0
+offset_left = -160.0
+offset_top = -72.0
+offset_right = -32.0
+offset_bottom = -47.0
 grow_vertical = 0
-rect_min_size = Vector2( 0, 25 )
+custom_minimum_size = Vector2( 0, 25 )
 custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )

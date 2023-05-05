@@ -56,7 +56,7 @@ var CurrentIconSet = "Mouse/Touch"
 
 
 func _ready():
-	var _connection = Input.connect("joy_connection_changed",self,"UpdateIcon")
+	var _connection = Input.connect("joy_connection_changed",Callable(self,"UpdateIcon"))
 	UpdateIcon()
 
 func UpdateIcon(device = 0, _connected = false):
@@ -78,5 +78,5 @@ func get_icon(icon):
 		return load(GamepadIconSet[CurrentIconSet][GamepadButtonTypes.keys()[icon]])
 
 func _exit_tree():
-	Input.disconnect("joy_connection_changed",self,"UpdateIcon")
+	Input.disconnect("joy_connection_changed",Callable(self,"UpdateIcon"))
 

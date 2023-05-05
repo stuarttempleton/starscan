@@ -1,5 +1,5 @@
 
-extends Reference
+extends RefCounted
 
 
 # @param  string  pattern

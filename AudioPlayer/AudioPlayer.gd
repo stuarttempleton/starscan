@@ -38,7 +38,7 @@ enum AUDIO_KEY {
 }
 
 
-export var Audio = {
+@export var Audio = {
 	AUDIO_KEY.UI_BUTTON_HOVER:"res://Audio/UI/288949__littlerobotsoundfactory__click-electronic-03.ogg",
 	AUDIO_KEY.UI_BUTTON_SELECT:"res://Audio/UI/288965__littlerobotsoundfactory__click-electronic-13.ogg",
 	
@@ -131,8 +131,8 @@ func _process(delta):
 		elif fade_counter > 1:
 			fade_counter = 1
 			doFade = false #done done!
-		#AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear2db(fade_counter))
-		$MusicPlayer.volume_db = linear2db(fade_counter)
+		#AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear_to_db(fade_counter))
+		$MusicPlayer.volume_db = linear_to_db(fade_counter)
 
 func FadeOutMusic(spd = 1.0):
 	fade_counter = 1.0

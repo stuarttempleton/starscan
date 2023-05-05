@@ -11,7 +11,7 @@ var _regex
 
 # @param  String  name
 # @param  String  pattern
-func _init(name, pattern).(name):
+func _init(name,pattern,name):
 	self._pattern = pattern
 	self._regex = RegEx.new()
 	self._regex.compile(self._pattern)

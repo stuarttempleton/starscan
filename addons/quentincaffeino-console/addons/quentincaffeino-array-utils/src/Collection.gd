@@ -11,7 +11,7 @@ var _collection
 var _iterationCurrent = 0
 
 # @var  int
-var length setget _setProtected, length
+var length : get = length, set = _setProtected
 
 
 # @param  Variant  collection

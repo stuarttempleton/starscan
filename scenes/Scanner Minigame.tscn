@@ -3,37 +3,37 @@
 [ext_resource path="res://scripts/Scanner Minigame.gd" type="Script" id=1]
 [ext_resource path="res://styles/MenuButton_Disabled.tres" type="StyleBox" id=2]
 [ext_resource path="res://styles/MenuButton_Focus.tres" type="StyleBox" id=3]
-[ext_resource path="res://fonts/star_dynamicfont.tres" type="DynamicFont" id=4]
+[ext_resource path="res://fonts/star_dynamicfont.tres" type="FontFile" id=4]
 [ext_resource path="res://styles/MenuButton_Normal.tres" type="StyleBox" id=5]
 [ext_resource path="res://styles/MenuButton_HoverFocus.tres" type="StyleBox" id=6]
 [ext_resource path="res://styles/MenuButton_Pressed.tres" type="StyleBox" id=7]
 [ext_resource path="res://GameNarrativeDisplay/blur_shader_material.tres" type="Material" id=8]
-[ext_resource path="res://shaders/white.png" type="Texture" id=9]
+[ext_resource path="res://shaders/white.png" type="Texture2D" id=9]
 [ext_resource path="res://scripts/ScanMinigameButton.gd" type="Script" id=10]
 [ext_resource path="res://styles/dialogPanel.tres" type="StyleBox" id=11]
 [ext_resource path="res://styles/dialogButtonPanel.tres" type="StyleBox" id=12]
 
-[sub_resource type="DynamicFontData" id=2]
+[sub_resource type="FontFile" id=2]
 font_path = "res://fonts/Montserrat-Medium.ttf"
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="FontFile" id=3]
 size = 23
 font_data = SubResource( 2 )
 
-[sub_resource type="DynamicFontData" id=4]
-font_path = "res://fonts/Montserrat-Light.ttf"
+[sub_resource type="FontFile" id=4]
+font_path = "res://fonts/Montserrat-Light3D.ttf"
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="FontFile" id=5]
 font_data = SubResource( 4 )
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0.243816, 0 ), 0.0, 4.35385, 0, 1, Vector2( 0.473498, 1 ), 4.35385, 0.0, 1, 1, Vector2( 0.522968, 1 ), 0.0, -4.49206, 1, 1, Vector2( 0.745583, 0 ), -4.49206, 0.0, 1, 0 ]
 
 [sub_resource type="Gradient" id=6]
-offsets = PoolRealArray( 0.253906, 0.398438, 0.644531, 0.796875 )
-colors = PoolColorArray( 0.458824, 1, 0.501961, 0, 0.458824, 1, 0.501961, 1, 0.458824, 1, 0.501961, 1, 0.458824, 1, 0.501961, 0 )
+offsets = PackedFloat32Array( 0.253906, 0.398438, 0.644531, 0.796875 )
+colors = PackedColorArray( 0.458824, 1, 0.501961, 0, 0.458824, 1, 0.501961, 1, 0.458824, 1, 0.501961, 1, 0.458824, 1, 0.501961, 0 )
 
-[sub_resource type="GradientTexture" id=7]
+[sub_resource type="GradientTexture2D" id=7]
 gradient = SubResource( 6 )
 width = 32
 
@@ -47,8 +47,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.6, 1 ),
-"transitions": PoolRealArray( 1, 2.82842, 4.75683 ),
+"times": PackedFloat32Array( 0, 0.6, 1 ),
+"transitions": PackedFloat32Array( 1, 2.82842, 4.75683 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
@@ -59,20 +59,20 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 1 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 1,
 "values": [ true, true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath(".:rect_position")
+tracks/2/path = NodePath(".:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 1 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, -100 ) ]
 }
@@ -83,8 +83,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 1 ),
+"transitions": PackedFloat32Array( 1 ),
 "values": [ {
 "args": [  ],
 "method": "_on_endAnimComplete"
@@ -117,20 +117,20 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -192.0
-margin_top = -168.0
-margin_right = 192.0
+offset_left = -192.0
+offset_top = -168.0
+offset_right = 192.0
 custom_styles/panel = ExtResource( 11 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/SceneBackground/ScanPanel"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 364.0
-margin_bottom = 148.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 364.0
+offset_bottom = 148.0
 
 [node name="Title" type="Label" parent="CanvasLayer/SceneBackground/ScanPanel/VBoxContainer"]
-margin_right = 344.0
-margin_bottom = 29.0
+offset_right = 344.0
+offset_bottom = 29.0
 custom_fonts/font = SubResource( 3 )
 text = "Scanning %s system"
 align = 1
@@ -139,9 +139,9 @@ __meta__ = {
 }
 
 [node name="Description" type="Label" parent="CanvasLayer/SceneBackground/ScanPanel/VBoxContainer"]
-margin_top = 33.0
-margin_right = 344.0
-margin_bottom = 54.0
+offset_top = 33.0
+offset_right = 344.0
+offset_bottom = 54.0
 custom_fonts/font = SubResource( 5 )
 text = "Attenuating..."
 align = 1
@@ -154,8 +154,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_top = -120.0
-margin_bottom = -120.0
+offset_top = -120.0
+offset_bottom = -120.0
 script = ExtResource( 1 )
 oscillator_path = NodePath("Oscillator")
 bg_path = NodePath("BG")
@@ -172,10 +172,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -157.0
-margin_top = -104.0
-margin_right = 163.0
-margin_bottom = 16.0
+offset_left = -157.0
+offset_top = -104.0
+offset_right = 163.0
+offset_bottom = 16.0
 color = Color( 0.396078, 0.396078, 0.396078, 0.870588 )
 
 [node name="Text BG" type="ColorRect" parent="CanvasLayer/SceneBackground/Scanner Minigame"]
@@ -184,10 +184,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -155.0
-margin_top = -102.0
-margin_right = 161.0
-margin_bottom = 14.0
+offset_left = -155.0
+offset_top = -102.0
+offset_right = 161.0
+offset_bottom = 14.0
 color = Color( 0.0862745, 0.0862745, 0.0862745, 0.956863 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -198,10 +198,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -160.0
-margin_top = 48.0
-margin_right = 166.0
-margin_bottom = 96.0
+offset_left = -160.0
+offset_top = 48.0
+offset_right = 166.0
+offset_bottom = 96.0
 color = Color( 0.545098, 0.545098, 0.545098, 0.482353 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -212,10 +212,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -157.0
-margin_top = 52.0
-margin_right = -8.0
-margin_bottom = 92.0
+offset_left = -157.0
+offset_top = 52.0
+offset_right = -8.0
+offset_bottom = 92.0
 mouse_filter = 0
 texture = SubResource( 7 )
 expand = true
@@ -229,10 +229,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -160.0
-margin_top = 48.0
-margin_right = -154.0
-margin_bottom = 96.0
+offset_left = -160.0
+offset_top = 48.0
+offset_right = -154.0
+offset_bottom = 96.0
 color = Color( 1, 1, 1, 0.494118 )
 
 [node name="ResultTextHandle" type="Control" parent="CanvasLayer/SceneBackground/Scanner Minigame/Oscillator"]
@@ -265,29 +265,29 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -192.0
-margin_right = 192.0
-margin_bottom = 65.0
+offset_left = -192.0
+offset_right = 192.0
+offset_bottom = 65.0
 custom_styles/panel = ExtResource( 12 )
 
 [node name="Buttons" type="HBoxContainer" parent="CanvasLayer/SceneBackground/ButtonPanel"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 364.0
-margin_bottom = 45.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 364.0
+offset_bottom = 45.0
 custom_constants/separation = 15
 alignment = 1
 
 [node name="ScanButton" type="Button" parent="CanvasLayer/SceneBackground/ButtonPanel/Buttons"]
-margin_left = 36.0
-margin_right = 164.0
-margin_bottom = 25.0
-rect_min_size = Vector2( 128, 25 )
+offset_left = 36.0
+offset_right = 164.0
+offset_bottom = 25.0
+custom_minimum_size = Vector2( 128, 25 )
 custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
-custom_constants/hseparation = 5
+custom_constants/h_separation = 5
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 7 )
 custom_styles/focus = ExtResource( 3 )
@@ -298,11 +298,11 @@ text = "Scan System"
 script = ExtResource( 10 )
 
 [node name="CancelButton" type="Button" parent="CanvasLayer/SceneBackground/ButtonPanel/Buttons"]
-margin_left = 179.0
-margin_right = 307.0
-margin_bottom = 25.0
-rect_min_size = Vector2( 128, 0 )
-custom_constants/hseparation = 5
+offset_left = 179.0
+offset_right = 307.0
+offset_bottom = 25.0
+custom_minimum_size = Vector2( 128, 0 )
+custom_constants/h_separation = 5
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 7 )
 custom_styles/focus = ExtResource( 3 )

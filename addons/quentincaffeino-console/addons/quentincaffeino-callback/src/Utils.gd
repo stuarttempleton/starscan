@@ -1,5 +1,5 @@
 
-extends Reference
+extends RefCounted
 
 
 enum Type \
@@ -10,7 +10,7 @@ enum Type \
 }
 
 
-# @param  Reference  target
+# @param  RefCounted  target
 # @param  string     name
 static func getType(target, name):  # int
 	# Is it a METHOD
@@ -24,6 +24,6 @@ static func getType(target, name):  # int
 	return Type.UNKNOWN
 
 
-# @param  Reference  obj
+# @param  RefCounted  obj
 static func isFunkRef(obj):  # boolean
 	return obj.has_method('set_instance') and obj.has_method('set_function')

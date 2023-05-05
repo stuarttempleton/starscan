@@ -7,9 +7,9 @@ var CurrentSector = 0# Index into sector array for local map
 var MapScale = 50000
 var Loaded = false
 var SavedSinceLoad = false
-export var DefaultUniverseFile = "res://starmap_data/generated/Generated_2021-3-31_6-32-20_6527443740791628228.json"
-export var SavedUniverseFile = "user://Player_Universe_Data.json"
-export var BaseUniverseFile = "user://Base_Universe_Data.json"
+@export var DefaultUniverseFile = "res://starmap_data/generated/Generated_2021-3-31_6-32-20_6527443740791628228.json"
+@export var SavedUniverseFile = "user://Player_Universe_Data.json"
+@export var BaseUniverseFile = "user://Base_Universe_Data.json"
 
 var NearestSystem = null
 var NearestSystemDistance = INF
@@ -41,7 +41,7 @@ func _ready():
 func PruneLegacySaves():
 	var dir = Directory.new()
 	dir.open("user://")
-	dir.list_dir_begin(true, true)
+	dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 	while true:
 		var file = dir.get_next()
 		if file == "":
@@ -82,7 +82,9 @@ func LoadMapData(filename):
 	print("Loading map data from %s" % filename)
 	var starmapdata_file = File.new()
 	starmapdata_file.open(filename, File.READ)
-	var starmapdata_json = JSON.parse(starmapdata_file.get_as_text())
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(starmapdata_file.get_as_text())
+	var starmapdata_json = test_json_conv.get_data()
 	starmapdata_file.close()
 	Universe = starmapdata_json.result
 	
@@ -114,7 +116,7 @@ func SetSector(sector = 0):
 func Save(filename):
 	var file = File.new()
 	file.open(filename, File.WRITE)
-	file.store_string(JSON.print(Universe, "\t"))
+	file.store_string(JSON.stringify(Universe, "\t"))
 	file.close()
 	SavedSinceLoad = true;
 
@@ -180,7 +182,7 @@ func ObjectsByDistance(origin, objects_by_index, object_pool = "Systems"):
 	for i in objects_by_index:
 		if origin.Name != StarMap[object_pool][i].Name:
 			list.append({"A":i,"Distance":DistanceBetween(StarMap[object_pool][i], origin)})
-	list.sort_custom(self, "DistanceComparisonSort")
+	list.sort_custom(Callable(self,"DistanceComparisonSort"))
 	return list
 	
 func DistanceComparisonSort(a, b):
@@ -237,7 +239,7 @@ func DistanceBetween(system_a, system_b):
 	return SystemPosition(system_a).distance_to(SystemPosition(system_b))
 
 func AngleBetween(system_a, system_b):
-	return rad2deg(SystemPosition(system_a).angle_to_point(SystemPosition(system_b)))
+	return rad_to_deg(SystemPosition(system_a).angle_to_point(SystemPosition(system_b)))
 
 func NewRoute(ab, object_pool = "Systems"):
 	var route = {

@@ -2,7 +2,7 @@ extends HBoxContainer
 
 
 func _ready():
-	var _connection = Input.connect("joy_connection_changed",self,"_joypad_changed")
+	var _connection = Input.connect("joy_connection_changed",Callable(self,"_joypad_changed"))
 	_joypad_changed()
 
 func _joypad_changed(_device = 0, _connected = false):
@@ -16,4 +16,4 @@ func dpad_visible(show = true):
 	$Label.visible = show && (Input.get_connected_joypads().size() > 0)
 
 func _exit_tree():
-	Input.disconnect("joy_connection_changed",self,"_joypad_changed")
+	Input.disconnect("joy_connection_changed",Callable(self,"_joypad_changed"))

@@ -1,6 +1,6 @@
 extends Button
 
-export var scene_to_load = ""
+@export var scene_to_load = ""
 
 
 func handleSelect():

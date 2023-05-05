@@ -5,7 +5,7 @@ extends Node2D
 # var a = 2
 # var b = "text"
 
-export var NavArrow_template = ""
+@export var NavArrow_template = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

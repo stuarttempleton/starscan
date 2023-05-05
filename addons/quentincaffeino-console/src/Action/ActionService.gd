@@ -8,7 +8,7 @@ var _actions = {}
 
 # @param  InputMap    input_map
 # @param  Dictionary  actions
-func _init(input_map, actions = {}):
+func _init(input_map,actions = {}):
 	self._input_map = input_map
 
 	for action_name in actions:
@@ -32,7 +32,7 @@ func register_action(original_action_name, action):
 	var events = action["events"]
 	for event_map in events:
 		var event = InputEventKey.new()
-		event.scancode = event_map["scancode"]
+		event.keycode = event_map["keycode"]
 		self._input_map.action_add_event(action_name, event)
 
 	self._actions[original_action_name] = action

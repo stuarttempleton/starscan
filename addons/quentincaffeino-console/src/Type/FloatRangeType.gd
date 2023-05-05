@@ -5,7 +5,7 @@ extends 'res://addons/quentincaffeino-console/src/Type/BaseRangeType.gd'
 # @param  float  minValue
 # @param  float  maxValue
 # @param  float  step
-func _init(minValue = 0.0, maxValue = 100.0, step = 0.1).('FloatRange', minValue, maxValue, step):
+func _init(minValue = 0.0,maxValue = 100.0,step = 0.1,'FloatRange',minValue,maxValue,step):
 	pass
 
 

@@ -10,20 +10,20 @@ script = ExtResource( 2 )
 position = Vector2( 640, 384 )
 
 [node name="Reveal" type="Button" parent="."]
-margin_left = 608.0
-margin_top = 512.0
-margin_right = 672.0
-margin_bottom = 532.0
+offset_left = 608.0
+offset_top = 512.0
+offset_right = 672.0
+offset_bottom = 532.0
 text = "Reveal"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Hide" type="Button" parent="."]
-margin_left = 608.0
-margin_top = 552.0
-margin_right = 672.0
-margin_bottom = 572.0
+offset_left = 608.0
+offset_top = 552.0
+offset_right = 672.0
+offset_bottom = 572.0
 text = "Hide"
 __meta__ = {
 "_edit_use_anchors_": false
