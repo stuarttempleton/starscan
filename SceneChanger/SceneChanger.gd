@@ -32,6 +32,7 @@ func UnFade(delay = 0.5):
 	animation_player.play_backwards("fade")
 	await animation_player.animation_finished
 	emit_signal("fade_in_complete")
+	print("Done fading...")
 	
 func Fade(delay = 0.5):
 	await get_tree().create_timer(delay).timeout

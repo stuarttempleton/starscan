@@ -80,7 +80,6 @@ func GetWeightedItem(CharacterList, distribution_test):
 	c1.sort_custom(Callable(self,"DistributionComparison"))
 	
 	return c1[0]
-	pass
 
 func DistributionComparison(a, b):
 	return a[1] > b[1]

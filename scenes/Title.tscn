@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b5c4awynpsf14" path="res://scenes/MainMenu.tscn" id="1"]
 [ext_resource type="Script" path="res://scripts/Title.gd" id="2"]
-[ext_resource type="PackedScene" path="res://StarField/StarField.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://cbklshxn302bx" path="res://StarField/StarField.tscn" id="3"]
 [ext_resource type="AudioStream" uid="uid://dkh6t8n4e8hrc" path="res://Audio/BG/270526__littlerobotsoundfactory__ambience-blackhole-00.ogg" id="4"]
 [ext_resource type="Texture2D" uid="uid://7e2ouf4ickhm" path="res://sprites/smokeparticle.png" id="4_bloq2"]
 [ext_resource type="PackedScene" path="res://scenes/VFX Scene.tscn" id="5"]
@@ -97,6 +97,7 @@ max_distance = 1000.0
 bus = &"Anomaly"
 
 [node name="ColorRect" type="ColorRect" parent="Nebula"]
+visible = false
 self_modulate = Color(1.2, 1, 1.2, 1)
 offset_top = -7.0
 offset_right = 10.0

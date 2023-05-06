@@ -3,9 +3,9 @@ extends Node2D
 @export var DeadZones = {}
 
 
-func is_valid(position:Vector2):
+func is_valid(_position:Vector2):
 	for zone in DeadZones.values():
-		if zone.has_point(position):
+		if zone.has_point(_position):
 			return false
 	return true
 

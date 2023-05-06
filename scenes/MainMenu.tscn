@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/menu_button_play.gd" id="5"]
 [ext_resource type="Script" path="res://scripts/menu_button_back_to_menu.gd" id="6"]
 [ext_resource type="Script" path="res://scripts/menu_button_continue.gd" id="7"]
-[ext_resource type="Material" path="res://GameNarrativeDisplay/blur_shader_material.tres" id="12"]
+[ext_resource type="Material" uid="uid://bl1nfitu0tgu7" path="res://GameNarrativeDisplay/blur_shader_material.tres" id="12"]
 [ext_resource type="Script" path="res://scenes/menu_button_generate_universe.gd" id="13"]
 [ext_resource type="Script" path="res://scripts/menu_button_credits.gd" id="14"]
 [ext_resource type="PackedScene" uid="uid://bw0vjh12s4c5o" path="res://GameNarrativeDisplay/GamepadHint.tscn" id="19"]

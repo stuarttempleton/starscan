@@ -1,24 +1,17 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://b6stis3wjteik"]
 
-[ext_resource path="res://scripts/GameController.gd" type="Script" id=1]
-[ext_resource path="res://scripts/WinLoseCheck.gd" type="Script" id=2]
-[ext_resource path="res://sprites/Gear-icon.png" type="Texture2D" id=3]
-[ext_resource path="res://sprites/map-icon.png" type="Texture2D" id=4]
-
-[sub_resource type="FontFile" id=1]
-font_path = "res://fonts/Montserrat-Regular.ttf"
-
-[sub_resource type="FontFile" id=2]
-size = 60
-font_data = SubResource( 1 )
+[ext_resource type="Script" path="res://scripts/GameController.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/WinLoseCheck.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://xa3w4hyldxw6" path="res://sprites/Gear-icon.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://baaovks538vq7" path="res://sprites/map-icon.png" id="4"]
 
 [node name="GameController" type="Node2D"]
 process_mode = 2
-script = ExtResource( 1 )
+script = ExtResource("1")
 pause_menu_path = "res://scenes/MainMenu.tscn"
 
 [node name="WinLoseCheck" type="Node2D" parent="."]
-script = ExtResource( 2 )
+script = ExtResource("2")
 ArtifactsRequiredToWin = 50
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -26,22 +19,24 @@ process_mode = 2
 layer = 12
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer"]
-self_modulate = Color( 1, 1, 1, 0.694118 )
+self_modulate = Color(1, 1, 1, 0.694118)
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -63.9999
 offset_top = 8.0
 offset_right = 448.0
 offset_bottom = 520.0
-scale = Vector2( 0.1, 0.1 )
-texture_normal = ExtResource( 3 )
-texture_pressed = ExtResource( 3 )
-texture_hover = ExtResource( 3 )
-texture_disabled = ExtResource( 3 )
-texture_focused = ExtResource( 3 )
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("3")
+texture_pressed = ExtResource("3")
+texture_hover = ExtResource("3")
+texture_disabled = ExtResource("3")
+texture_focused = ExtResource("3")
 
 [node name="Label" type="Label" parent="CanvasLayer/TextureButton"]
 visible = false
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -50,32 +45,28 @@ offset_left = -256.0
 offset_top = 256.0
 offset_right = 256.0
 offset_bottom = 360.0
-custom_fonts/font = SubResource( 2 )
 text = "Options"
-align = 1
-valign = 1
 uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="MapButton" type="TextureButton" parent="CanvasLayer"]
-self_modulate = Color( 1, 1, 1, 0.694118 )
+self_modulate = Color(1, 1, 1, 0.694118)
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -112.0
 offset_top = 8.0
 offset_right = 400.0
 offset_bottom = 520.0
-scale = Vector2( 0.1, 0.1 )
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 4 )
-texture_hover = ExtResource( 4 )
-texture_disabled = ExtResource( 4 )
-texture_focused = ExtResource( 4 )
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("4")
+texture_pressed = ExtResource("4")
+texture_hover = ExtResource("4")
+texture_disabled = ExtResource("4")
+texture_focused = ExtResource("4")
 
 [node name="Label2" type="Label" parent="CanvasLayer/MapButton"]
 visible = false
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -84,14 +75,8 @@ offset_left = -256.0
 offset_top = 256.0
 offset_right = 256.0
 offset_bottom = 360.0
-custom_fonts/font = SubResource( 2 )
 text = "Map"
-align = 1
-valign = 1
 uppercase = true
-__meta__ = {
-"_edit_use_anchors_": true
-}
 
 [connection signal="mouse_entered" from="CanvasLayer/TextureButton" to="." method="_on_TextureButton_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/TextureButton" to="." method="_on_TextureButton_mouse_exited"]

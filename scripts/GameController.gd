@@ -30,7 +30,7 @@ func _init():
 
 
 func LoadWindowSettings():
-	DisplayServer.window_set_mode( DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN if (PlayerPrefs.get_pref("window_fullscreen", true)) else DisplayServer.WINDOW_MODE_WINDOWED)
+	DisplayServer.window_set_mode( DisplayServer.WINDOW_MODE_FULLSCREEN if (PlayerPrefs.get_pref("window_fullscreen", true)) else DisplayServer.WINDOW_MODE_WINDOWED)
 	if !((DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN) or (DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN)):
 		DisplayServer.window_set_size( Vector2(PlayerPrefs.get_pref("window_size", 1280).x,PlayerPrefs.get_pref("window_size", 720).y) )
 		#get_window().set_position(DisplayServer.screen_get_position(get_window().get_current_screen()) + DisplayServer.screen_get_size()*0.5 - get_window().get_size()*0.5)
@@ -116,8 +116,10 @@ func _process(_delta):
 			togglePause()
 		if Input.is_action_just_released("starmap_mapview"):
 			MapToggle()
-	if Input.is_action_just_pressed("fullscreen_mode"):
-		PlayerPrefs.set_pref("window_fullscreen", !((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN)))
+	if Input.is_action_just_released("fullscreen_mode"):
+		print("Fullscreen toggle pressed")
+		PlayerPrefs.set_pref("window_fullscreen", ((DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN) or (DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN)))
+		#PlayerPrefs.set_pref("window_fullscreen", !((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN)))
 		LoadWindowSettings()
 #		if get_viewport_rect().has_point(get_viewport().get_mouse_position()):
 #			if Input.get_connected_joypads().size() > 0:
