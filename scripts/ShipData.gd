@@ -34,8 +34,7 @@ func ResetShip() :
 	self.LoadShipData(DefaultShipFile)
 	StarShip.Captain = $"/root/StoryGenerator/WordGenerator".CreateWord().capitalize()
 	StarShip.ShipSeedNumber = randi()
-	var dir = Directory.new()
-	dir.remove(SavedShipFile)
+	DirAccess.remove_absolute(SavedShipFile)
 	self.SaveShip()
 
 func LoadSave() :
@@ -48,18 +47,15 @@ func SaveShip() :
 	self.Save(SavedShipFile)
 	
 func SaveExists():
-	var save_file = File.new()
-	return save_file.file_exists(SavedShipFile)
+	return FileAccess.file_exists(SavedShipFile)
 	
 func LoadShipData(filename):
 	print("Loading ship data from %s" % filename)
-	var shipdata_file = File.new()
-	shipdata_file.open(filename, File.READ)
-	var test_json_conv = JSON.new()
-	test_json_conv.parse(shipdata_file.get_as_text())
-	var shipdata_json = test_json_conv.get_data()
+	var shipdata_file = FileAccess.open(filename, FileAccess.READ)
+	var json = JSON.new()
+	json.parse(shipdata_file.get_as_text())
 	shipdata_file.close()
-	StarShip = shipdata_json.result
+	StarShip = json.data
 	
 	# Set default known routes if needed
 	if !StarShip.has("KnownRoutes") || StarShip.KnownRoutes == null:
@@ -72,8 +68,7 @@ func LoadShipData(filename):
 	SavedSinceLoad = false
 	
 func Save(filename):
-	var file = File.new()
-	file.open(filename, File.WRITE)
+	var file = FileAccess.open(filename, FileAccess.WRITE)
 	file.store_string(JSON.stringify(StarShip, "\t"))
 	file.close()
 	SavedSinceLoad = true;
@@ -91,8 +86,6 @@ func Ship() :
 		return StarShip
 		
 func ConsumeFuel(amount):
-	if Cheat.godmode_enabled: return
-	
 	StarShip.Fuel -= amount
 	if StarShip.Fuel < 0.001:
 		StarShip.Fuel = 0
@@ -175,7 +168,6 @@ func PayResourcesDefaultToCrew(resourcesToPay, crewLostPerUnpaidResource):
 	return paid
 
 func DeductCrew(crewLost):
-	if Cheat.godmode_enabled: return 0
 	UpdatePlayStat("CrewLost", crewLost)
 	StarShip.Crew -= crewLost
 	return crewLost

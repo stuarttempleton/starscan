@@ -39,8 +39,7 @@ func _ready():
 	self.LoadMapData(DefaultUniverseFile)
 
 func PruneLegacySaves():
-	var dir = Directory.new()
-	dir.open("user://")
+	var dir = DirAccess.open("user://")
 	dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 	while true:
 		var file = dir.get_next()
@@ -55,8 +54,7 @@ func GetMostRecentGeneratedFile():
 
 func ResetMap() :
 	self.LoadMapData(GetMostRecentGeneratedFile())
-	var dir = Directory.new()
-	dir.remove(SavedUniverseFile)
+	DirAccess.remove_absolute(SavedUniverseFile)
 	self.SaveMap()
 
 func LoadSave() :
@@ -71,28 +69,24 @@ func SaveMap() :
 	self.Save(SavedUniverseFile)
 
 func BaseExists():
-	var save_file = File.new()
-	return save_file.file_exists(BaseUniverseFile)
+	return FileAccess.file_exists(BaseUniverseFile)
 	
 func SaveExists():
-	var save_file = File.new()
-	return save_file.file_exists(SavedUniverseFile)
+	return FileAccess.file_exists(SavedUniverseFile)
 	
 func LoadMapData(filename):
 	print("Loading map data from %s" % filename)
-	var starmapdata_file = File.new()
-	starmapdata_file.open(filename, File.READ)
-	var test_json_conv = JSON.new()
-	test_json_conv.parse(starmapdata_file.get_as_text())
-	var starmapdata_json = test_json_conv.get_data()
+	var starmapdata_file = FileAccess.open(filename, FileAccess.READ)
+	var json = JSON.new()
+	json.parse(starmapdata_file.get_as_text())
 	starmapdata_file.close()
-	Universe = starmapdata_json.result
+	Universe = json.data
 	
 	#Check for legacy/single system save
 	if Universe.has("MapSeed"):
 		#Rebuild new universe format
 		print("Upgrading legacy save...")
-		Universe = WorldGenerator.generate_universe(-1, starmapdata_json.result)
+		Universe = WorldGenerator.generate_universe(-1, json.data)
 	
 	SetSector(CurrentSector)
 	
@@ -114,8 +108,7 @@ func SetSector(sector = 0):
 	StarMap = Universe.Sectors[CurrentSector]
 
 func Save(filename):
-	var file = File.new()
-	file.open(filename, File.WRITE)
+	var file = FileAccess.open(filename, FileAccess.WRITE)
 	file.store_string(JSON.stringify(Universe, "\t"))
 	file.close()
 	SavedSinceLoad = true;
@@ -195,7 +188,7 @@ func SetWormholeRoutes():
 	var nebs = AllNebulaeByIndex()
 	while nebs.size() > 0:
 		var origin = nebs[0]
-		nebs.remove(0) 
+		nebs.remove_at(0) 
 		var endpoints = ObjectsByDistance(StarMap.Nebulae[origin], nebs, "Nebulae")
 		var destination = endpoints[0]
 		nebs.erase(destination.A)

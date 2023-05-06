@@ -63,26 +63,26 @@ func reset_menus():
 func activate_top_menu():
 	if menus.keys().size() > 0:
 		current_menu = menus.keys().back()
-		grab_focus()
+		take_focus()
 
-func grab_focus():
+func take_focus():
 	if menus.size() > 0:
 		if Input.get_connected_joypads().size() > 0:
-			menus[current_menu][menu_cursor[current_menu]].grab_focus()
+			menus[current_menu][menu_cursor[current_menu]].take_focus()
 
 func focus_next():
 	if menus.size() > 0:
 		menu_cursor[current_menu] += 1
 		if menu_cursor[current_menu] >= menus[current_menu].size():
 			menu_cursor[current_menu] = 0
-		grab_focus()
+		take_focus()
 
 func focus_previous():
 	if menus.size() > 0:
 		menu_cursor[current_menu] -= 1
 		if menu_cursor[current_menu] < 0:
 			menu_cursor[current_menu] = menus[current_menu].size() - 1
-		grab_focus()
+		take_focus()
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_left") || Input.is_action_just_pressed("ui_up"):

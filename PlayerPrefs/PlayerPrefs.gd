@@ -33,26 +33,25 @@ func set_pref(property, value):
 
 
 func _player_prefs_exists():
-	var save_file = File.new()
-	return save_file.file_exists(prefs_file_name)
+	return FileAccess.file_exists(prefs_file_name)
 
 
 func _load_data(filename):
 	print("Loading player preference data from %s" % filename)
-	var _file = File.new()
-	_file.open(filename, File.READ)
-	var test_json_conv = JSON.new()
-	test_json_conv.parse(_file.get_as_text())
-	var _json = test_json_conv.get_data()
+	var _file = FileAccess.open(filename, FileAccess.READ)
+	var _json = JSON.new()
+	_json.parse(_file.get_as_text())
+	if _json.data:
+		settings = _json.data
+	else:
+		settings = {}
 	_file.close()
-	settings = _json.result
 	loaded = true
 	saved_since_load = false
 
 
 func _save_data(filename = prefs_file_name):
-	var file = File.new()
-	file.open(filename, File.WRITE)
+	var file = FileAccess.open(filename, FileAccess.WRITE)
 	file.store_string(JSON.stringify(settings, "\t"))
 	file.close()
 	saved_since_load = true;

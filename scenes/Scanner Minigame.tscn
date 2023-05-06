@@ -21,7 +21,7 @@ size = 23
 font_data = SubResource( 2 )
 
 [sub_resource type="FontFile" id=4]
-font_path = "res://fonts/Montserrat-Light3D.ttf"
+font_path = "res://fonts/Montserrat-Light.ttf"
 
 [sub_resource type="FontFile" id=5]
 font_data = SubResource( 4 )

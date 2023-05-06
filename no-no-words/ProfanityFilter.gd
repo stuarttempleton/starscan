@@ -14,13 +14,11 @@ func _ready():
 
 
 func LoadWords():
-	var _file = File.new()
-	_file.open(NoNoWordFile, File.READ)
-	var test_json_conv = JSON.new()
-	test_json_conv.parse(_file.get_as_text())
-	var shipdata_json = test_json_conv.get_data()
+	var _file = FileAccess.open(NoNoWordFile, FileAccess.READ)
+	var json = JSON.new()
+	json.parse(_file.get_as_text())
 	_file.close()
-	NoNoWords = shipdata_json.result
+	NoNoWords = json.data
 
 
 func isRestricted(word):

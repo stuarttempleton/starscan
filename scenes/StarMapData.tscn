@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://crtwat6kv6erp"]
 
-[ext_resource path="res://scripts/StarMapData.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://scripts/StarMapData.gd" id="1"]
 
 [node name="StarMapData" type="Node"]
-script = ExtResource( 1 )
+script = ExtResource("1")

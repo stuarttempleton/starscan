@@ -14,10 +14,7 @@ var Scan
 var poi_nodes = []
 
 func _ready():
-	# warning-ignore:return_value_discarded
-	Cheat.connect("cheat_resetpois",Callable(self,"_reset"))
-	# warning-ignore:return_value_discarded
-	Cheat.connect("cheat_setscan",Callable(self,"_reset"))
+	pass
 
 func _reset():
 	_generate(Planet, Scan)

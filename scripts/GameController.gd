@@ -30,16 +30,16 @@ func _init():
 
 
 func LoadWindowSettings():
-	get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (PlayerPrefs.get_pref("window_fullscreen", true)) else Window.MODE_WINDOWED
-	if !((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN)):
-		get_window().size = Vector2(PlayerPrefs.get_pref("window_size", 1280).x,PlayerPrefs.get_pref("window_size", 720).y)
+	DisplayServer.window_set_mode( DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN if (PlayerPrefs.get_pref("window_fullscreen", true)) else DisplayServer.WINDOW_MODE_WINDOWED)
+	if !((DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN) or (DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN)):
+		DisplayServer.window_set_size( Vector2(PlayerPrefs.get_pref("window_size", 1280).x,PlayerPrefs.get_pref("window_size", 720).y) )
 		#get_window().set_position(DisplayServer.screen_get_position(get_window().get_current_screen()) + DisplayServer.screen_get_size()*0.5 - get_window().get_size()*0.5)
 		
 
 func SaveWindowSettings():
-	PlayerPrefs.set_pref("window_fullscreen", ((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN)))
-	if !((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN)):
-		PlayerPrefs.set_pref("window_size", {"x":get_window().size.x,"y":get_window().size.y})
+	PlayerPrefs.set_pref("window_fullscreen", ((DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN) or (DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN)))
+	if !((DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN) or (DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN)):
+		PlayerPrefs.set_pref("window_size", {"x":DisplayServer.window_get_size().x,"y":DisplayServer.window_get_size().y})
 
 func _ready():
 	pause_menu_scene = load(pause_menu_path)

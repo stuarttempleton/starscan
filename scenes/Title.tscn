@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://cfkrut4ookxiu"]
+[gd_scene load_steps=17 format=3 uid="uid://cfkrut4ookxiu"]
 
 [ext_resource type="PackedScene" uid="uid://b5c4awynpsf14" path="res://scenes/MainMenu.tscn" id="1"]
 [ext_resource type="Script" path="res://scripts/Title.gd" id="2"]
 [ext_resource type="PackedScene" path="res://StarField/StarField.tscn" id="3"]
 [ext_resource type="AudioStream" uid="uid://dkh6t8n4e8hrc" path="res://Audio/BG/270526__littlerobotsoundfactory__ambience-blackhole-00.ogg" id="4"]
+[ext_resource type="Texture2D" uid="uid://7e2ouf4ickhm" path="res://sprites/smokeparticle.png" id="4_bloq2"]
 [ext_resource type="PackedScene" path="res://scenes/VFX Scene.tscn" id="5"]
 
 [sub_resource type="Gradient" id="1"]
@@ -75,6 +76,7 @@ scale = Vector2(5, 5)
 position = Vector2(-0.106857, 0.208084)
 amount = 5
 process_material = SubResource("7")
+texture = ExtResource("4_bloq2")
 lifetime = 10.0
 preprocess = 5.0
 visibility_rect = Rect2(-300, -300, 600, 600)
@@ -82,6 +84,7 @@ visibility_rect = Rect2(-300, -300, 600, 600)
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Nebula"]
 amount = 5
 process_material = SubResource("10")
+texture = ExtResource("4_bloq2")
 lifetime = 10.0
 preprocess = 5.0
 visibility_rect = Rect2(-150, -150, 300, 300)

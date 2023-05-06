@@ -97,7 +97,7 @@ func generate(rng):
 			targetPosition = null
 		else:
 			# Remove the current active position from the active positions list
-			activePositionIndices.remove(indexIndex)
+			activePositionIndices.remove_at(indexIndex)
 	positions.resize(posCount)
 	return positions
 
