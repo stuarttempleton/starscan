@@ -1,10 +1,11 @@
 extends Node
+class_name ArtifactNameGenerator
+
 
 var RarityColor = {
 	"Rare": "[color=#FFBF00]%s[/color]",
 	"Common": "[color=#3261c7]%s[/color]"
 }
-
 var Patterns = {
 	"Rare": ["%name's %Noun", "%Noun of %name", "The %name %Noun", "%name %Noun"],
 	"Common": [
@@ -235,6 +236,7 @@ var Words = {
 }
 var Nouns = ["Hammer"]
 
+
 func GetUpperKey(key):
 	var newKey = key
 	newKey[1] = newKey[1].to_upper()
@@ -283,8 +285,8 @@ func CorrectAAN(item):
 
 func ExpandPattern(pat):
 	var item = pat
-	item = item.replace("%name", get_parent().CreateWord().capitalize())
-	item = item.replace("%Name", get_parent().CreateWord().capitalize())
+	item = item.replace("%name", WordGenerator.Create().capitalize())
+	item = item.replace("%Name", WordGenerator.Create().capitalize())
 	for key in Words.keys():
 		item = SwapBoilerPlate(item, GetUpperKey(key))
 		item = SwapBoilerPlate(item, key)

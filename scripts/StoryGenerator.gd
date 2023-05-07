@@ -226,16 +226,16 @@ func _generate_poi_storylet(POIType):
 		"Artifact":
 			txt = "Captain, the Away Team has returned successfully from the Resource Extraction Point and deposited an artifact in our cargo hold. "
 			txt += "\r\n\r\n"
-			txt += "You have uncovered: %s \r\n\r\n" % [$WordGenerator/Artifact.Create(-1, true)]
+			txt += "You have uncovered: %s \r\n\r\n" % [ItemFactory.GenerateItem(ItemFactory.ItemTypes.ARTIFACT).Name]
 			#txt += "With it, your science team discovered a message: \r\n\r\n\"%s\" " % [LoremIpsum(1)]
 		"Resource":
 			txt = "Captain, the Away Team has returned successfully from the Resource Extraction Point and deposited additional resources for system entry in our cargo hold. "
 		"Hazard":
 			txt = "Captain, a member of the Away Team has perished due to surface and atmospheric instability. "
-			var fname = $WordGenerator.CreateWord().capitalize()
-			var lname = $WordGenerator.CreateWord().capitalize()
-			var fname2 = $WordGenerator.CreateWord().capitalize()
-			var fname3 = $WordGenerator.CreateWord().capitalize()
+			var fname = WordGenerator.Create().capitalize()
+			var lname = WordGenerator.Create().capitalize()
+			var fname2 = WordGenerator.Create().capitalize()
+			var fname3 = WordGenerator.Create().capitalize()
 			txt += "Their name was %s %s. They are survived by %s and %s %s. I will begin notifying next of kin. " % [fname, lname, fname2, fname3, lname]
 		"Empty":
 			txt = "Captain, the Away Team has returned from the Resource Extraction Point empty handed. It appears that this reading was a false positive. "
@@ -267,7 +267,7 @@ func _poi_item_detail(POIType, qty):
 func LowFuel(TowEncounter):
 	var outpost = StarMapData.GetOutpost(TowEncounter.nearestOutpostSystem)
 	var title = "LOW FUEL DISTRESS RESPONDER"
-	var NPCShip = $WordGenerator/NPCShip.GenerateNPCShip(TowEncounter.Friendly)
+	var NPCShip = ItemFactory.GenerateItem(ItemFactory.ItemTypes.SHIP, -1, {"disposition":TowEncounter.Friendly}) #WordGenerator/NPCShip.GenerateNPCShip(TowEncounter.Friendly)
 	var txt = "This is Captain %s of %s Vessel %s, responding to your low fuel distress beacon. \r\n\r\n" %  [NPCShip.Captain, NPCShip.Disposition, NPCShip.FullDesignation]
 	
 	if TowEncounter.Friendly:
@@ -293,7 +293,7 @@ func LowFuel(TowEncounter):
 
 func Win():
 	var title = "Congratulations, Captain %s!" %[ShipData.StarShip.Captain]
-	var SectorLeaderName = $WordGenerator.CreateWord().capitalize()
+	var SectorLeaderName = WordGenerator.Create().capitalize()
 	var txt = "You have delivered the " + str($"/root/GameController/WinLoseCheck".ArtifactsRequiredToWin) + " required artifacts to the Supercluster Federation outposts spread around your sector. "
 	txt += "Thanks to you and other captains like you throughout the galaxy, " 
 	txt += "we are now able to study these ancient civilizations and find a path of our own through the next Great Filter. "
@@ -311,7 +311,7 @@ func Win():
 
 func Lose():
 	var title = "GAME OVER, Captain %s!" %[ShipData.StarShip.Captain]
-	var SectorLeaderName = $WordGenerator.CreateWord().capitalize()
+	var SectorLeaderName = WordGenerator.Create().capitalize()
 	var txt = "The tragedy that has befallen the crew of %s will ripple through the sector. " % [ ShipData.Ship().Name]
 	txt += "The complete and total loss of your crew will not be in vain, though, "
 	txt += "as new captains throughout the galaxy step forward to take on the grim task of exploring ancient civilizations. "

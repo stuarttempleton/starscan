@@ -1,5 +1,7 @@
+# WordGenerator.gd
 extends Node
 
+# Language construct vars
 var LanguageStructure = {
 	"V":[["a",8.12],
 		["e",12],
@@ -58,9 +60,10 @@ var LanguageStructure = {
 		["CVCCPVCV",0.15]]
 		}
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
 func GetVCPattern():
 	return LanguageStructure["CharacterPatterns"][NewRand(LanguageStructure["CharacterPatterns"].size())]
@@ -85,12 +88,13 @@ func GetWeightedItem(CharacterList, distribution_test):
 func DistributionComparison(a, b):
 	return a[1] > b[1]
 
-func CreateWord():
+
+func Create():
 	var word = CreateUnsafeWord()
 	var threshold = 5
-	while $ProfanityFilter.isRestricted(word):
+	while ProfanityFilter.isRestricted(word):
 		#print("profanity filtered: ", word)
-		word = CreateWord()
+		word = Create()
 		threshold -= 1
 		if threshold < 1: break
 	return word
@@ -105,10 +109,10 @@ func CreateUnsafeWord():
 			output += pattern[i]
 	return(output)
 
-func CreateWordList(_qty):
+func CreateList(_qty):
 	var words = []
 	for i in _qty:
-		words.append(CreateWord())
+		words.append(Create())
 	return words
 
 func RawLetters(qty):
