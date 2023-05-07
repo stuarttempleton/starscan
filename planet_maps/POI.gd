@@ -39,7 +39,7 @@ func selected():
 		AudioPlayer.PlaySFX(GetAudioKeyForPOI(POIModel.ActualType))
 		# warning-ignore:return_value_discarded
 		GameNarrativeDisplay.connect("ChoiceSelected", self, "StoryResponse")
-		GameNarrativeDisplay.DisplayText(StoryGenerator.POIStory(POIModel.ActualType, qty),["OK"])
+		GameNarrativeDisplay.DisplayText(StoryGenerator.POIStory(POIModel.ActualType, qty, POIModel.ItemSeed),["OK"])
 	pass
 	
 func GetAudioKeyForPOI(POIType):

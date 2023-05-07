@@ -32,8 +32,8 @@ func _ready():
 	
 func ResetShip() :
 	self.LoadShipData(DefaultShipFile)
-	StarShip.Captain = $"/root/StoryGenerator/WordGenerator".Create().capitalize()
 	StarShip.ShipSeedNumber = randi()
+	StarShip.Captain = WordGenerator.Create(StarShip.ShipSeedNumber).capitalize()
 	var dir = Directory.new()
 	dir.remove(SavedShipFile)
 	self.SaveShip()

@@ -11,6 +11,8 @@ func _on_GenerateArtifacts_pressed():
 	var list = ""
 	var qty = 10
 	var i = 1
+	#list += "--. %s\r\n" % [ItemFactory.GenerateItem(ItemFactory.ItemTypes.ARTIFACT, 3729348799).Name]
+	
 	for w in ItemFactory.GenerateItemList(ItemFactory.ItemTypes.ARTIFACT, qty):
 		list += "%d. %s\r\n" % [i, w.Name]
 		i += 1
@@ -21,7 +23,7 @@ func _on_GenerateArtifacts_pressed():
 func _on_GenerateSystem_pressed():
 	var SystemName = WordGenerator.Create().to_upper()
 	var PlanetList = ""
-	var planet_qty = WordGenerator.NewRand(8) + 1
+	var planet_qty = randi() % 9
 	var i = 1
 	for w in WordGenerator.CreateList(planet_qty):
 		PlanetList += "%d. %s\r\n" % [i, w.capitalize()]

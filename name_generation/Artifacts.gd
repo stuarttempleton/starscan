@@ -235,6 +235,7 @@ var Words = {
 	]
 }
 var Nouns = ["Hammer"]
+var rng
 
 
 func GetUpperKey(key):
@@ -285,8 +286,8 @@ func CorrectAAN(item):
 
 func ExpandPattern(pat):
 	var item = pat
-	item = item.replace("%name", WordGenerator.Create().capitalize())
-	item = item.replace("%Name", WordGenerator.Create().capitalize())
+	item = item.replace("%name", WordGenerator.Create(rng.randi()).capitalize())
+	item = item.replace("%Name", WordGenerator.Create(rng.randi()).capitalize())
 	for key in Words.keys():
 		item = SwapBoilerPlate(item, GetUpperKey(key))
 		item = SwapBoilerPlate(item, key)
@@ -298,21 +299,23 @@ func ConvertRarityFromFloat(rarity):
 		return "Rare"
 	return "Common"
 
-func Create(RarityFloat=-1, color=false):
+func Create(_seed:int = randi(), RarityFloat=-1, color=false):
+	if _seed < 0: _seed = randi()
+	rng = RandomNumberGenerator.new()
+	rng.seed = _seed
+	
 	if RarityFloat < 0:
-		RarityFloat = (NewRand(99) + 1) * 0.01
+		RarityFloat = rng.randf() #(NewRand(99) + 1) * 0.01
 	var rarity = ConvertRarityFromFloat(RarityFloat)
 	var item = ExpandPattern( Patterns[rarity][NewRand(Patterns[rarity].size())])
 	if color: item = RarityColor[rarity] % [ item ]
 	return item
 
-
 func NewRand(_max):
-	randomize()
-	return randi() % _max # int(rand_range(0, _max))
+	return rng.randi() % _max
 
 func CreateList(_qty, color=false):
 	var items = []
 	for i in _qty:
-		items.append( Create(-1, color) )
+		items.append( Create(-1, -1, color) )
 	return items

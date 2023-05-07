@@ -7,7 +7,7 @@ enum ItemTypes {BASE, ARTIFACT, RESOURCE, SHIP}
 
 
 # Generation Functions
-func GenerateItem( _type:int = ItemTypes.BASE, _seed:float = randf(), _opts = {}):
+func GenerateItem( _type:int = ItemTypes.BASE, _seed = randi(), _opts = {}):
 	var item
 	match _type:
 		ItemTypes.SHIP:
@@ -21,5 +21,5 @@ func GenerateItem( _type:int = ItemTypes.BASE, _seed:float = randf(), _opts = {}
 func GenerateItemList(_type:int = ItemTypes.BASE, _qty:int = 5, _opts = {}):
 	var items = []
 	for i in _qty:
-		items.append(GenerateItem(_type, -1, _opts))
+		items.append(GenerateItem(_type, randi(), _opts))
 	return items
