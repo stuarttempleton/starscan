@@ -1,5 +1,7 @@
+# WordGenerator.gd
 extends Node
 
+# Language construct vars
 var LanguageStructure = {
 	"V":[["a",8.12],
 		["e",12],
@@ -57,17 +59,17 @@ var LanguageStructure = {
 		["CVVPCV",0.2], 
 		["CVCCPVCV",0.15]]
 		}
+var rng
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
 func GetVCPattern():
 	return LanguageStructure["CharacterPatterns"][NewRand(LanguageStructure["CharacterPatterns"].size())]
 	
 func NewRand(_max):
-	randomize()
-	return randi() % _max # int(rand_range(0, _max))
+	return rng.randi() % _max
 	
 func GetWeightedItem(CharacterList, distribution_test):
 	if (distribution_test < 1):
@@ -85,12 +87,16 @@ func GetWeightedItem(CharacterList, distribution_test):
 func DistributionComparison(a, b):
 	return a[1] > b[1]
 
-func CreateWord():
+
+func Create(_seed:int = randi()):
+	rng = RandomNumberGenerator.new()
+	rng.seed = _seed
+	
 	var word = CreateUnsafeWord()
 	var threshold = 5
-	while $ProfanityFilter.isRestricted(word):
+	while ProfanityFilter.isRestricted(word):
 		#print("profanity filtered: ", word)
-		word = CreateWord()
+		word = Create(rng.randi())
 		threshold -= 1
 		if threshold < 1: break
 	return word
@@ -105,10 +111,10 @@ func CreateUnsafeWord():
 			output += pattern[i]
 	return(output)
 
-func CreateWordList(_qty):
+func CreateList(_qty):
 	var words = []
 	for i in _qty:
-		words.append(CreateWord())
+		words.append(Create())
 	return words
 
 func RawLetters(qty):
@@ -117,5 +123,5 @@ func RawLetters(qty):
 	FullLetterList.append_array(LanguageStructure["C"])
 	var letters = ""
 	for i in qty:
-		letters += FullLetterList[randi() % FullLetterList.size()-1][0]
+		letters += FullLetterList[rng.randi() % FullLetterList.size()][0]
 	return letters

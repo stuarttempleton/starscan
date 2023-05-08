@@ -72,6 +72,7 @@ func _generatePOIsOfType(poiType, count, rng):
 		poiData.PerceivedType = "Unknown"
 		poiData.IsExhausted = false
 		poiData.ScanDifficulty = rng.randf_range(0, 0.5) + rng.randf_range(0, 0.3) + 0.1
+		poiData.ItemSeed = rng.randi()
 		Planet.POIs.append(poiData)
 		poi_scan_difficulties.append(poiData.ScanDifficulty)
 	

@@ -1,5 +1,8 @@
+# WorldGenerator.gd
 extends Node
 
+
+# base vars
 export var seedNumber = -1
 export var MinStarDistance = 0.04 #0.05
 export var MinNebulaDistance = 0.2
@@ -24,12 +27,8 @@ export var Hostility_Modifier = 0.25
 export var MaxTargetTries = 5
 export var Sectors_QTY = 25
 
-export var NameGenerationNodePath = ""
-var NameGenerator
 
-func _ready():
-	NameGenerator = $"/root/StoryGenerator/WordGenerator"
-
+# Universe generation funcs
 func generate_universe(seednumber, prebuilt_sector = null):
 	if seednumber < 0:
 		print("Universe seed is negative, choosing a random seed")
@@ -87,7 +86,7 @@ func generateNebulae(rng):
 	nebs.resize(nebCount)
 	for i in range(nebCount):
 		var neb = Dictionary()
-		neb.Name = NameGenerator.CreateWord().capitalize()
+		neb.Name = WordGenerator.Create().capitalize()
 		neb.X = positions[i].x
 		neb.Y = positions[i].y
 		neb.Scan = 0.0
@@ -105,7 +104,7 @@ func generateStars(rng):
 	stars.resize(starCount)
 	for i in range(starCount):
 		var star = Dictionary()
-		star.Name = NameGenerator.CreateWord().capitalize()
+		star.Name = WordGenerator.Create().capitalize()
 		star.X = positions[i].x
 		star.Y = positions[i].y
 		star.Scan = 0.0
@@ -121,7 +120,7 @@ func generatePlanets(rng, _starName):
 	planets.resize(planetCount)
 	for j in range(planetCount):
 		var planet = Dictionary()
-		planet.Name = NameGenerator.CreateWord().capitalize()
+		planet.Name = WordGenerator.Create().capitalize()
 		planet.Type = StarMapData.PlanetTypes[rng.randi_range(0, StarMapData.PlanetTypes.size()-1)]
 		if planet.Type == "Outpost":
 			hasOutposts = true

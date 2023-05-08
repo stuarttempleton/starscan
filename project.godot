@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "ArtifactNameGenerator",
+"language": "GDScript",
+"path": "res://name_generation/Artifacts.gd"
+}, {
+"base": "Node",
+"class": "BaseItem",
+"language": "GDScript",
+"path": "res://ItemFactory/BaseItem.gd"
+}, {
 "base": "Button",
 "class": "GamepadButton",
 "language": "GDScript",
@@ -45,6 +55,8 @@ _global_script_classes=[ {
 "path": "res://scripts/SysInfo_scan_button.gd"
 } ]
 _global_script_class_icons={
+"ArtifactNameGenerator": "",
+"BaseItem": "",
 "GamepadButton": "",
 "Planetsurface_Leave_button": "",
 "ScanMinigameButton": "",
@@ -65,6 +77,9 @@ config/windows_native_icon="res://AppIcon/icon.ico"
 [autoload]
 
 PlayerPrefs="*res://PlayerPrefs/PlayerPrefs.tscn"
+ProfanityFilter="*res://no-no-words/ProfanityFilter.tscn"
+WordGenerator="*res://name_generation/WordGenerator.tscn"
+ItemFactory="*res://ItemFactory/ItemFactory.tscn"
 ShipData="*res://scenes/ShipData.tscn"
 StarMapData="*res://scenes/StarMapData.tscn"
 GameController="*res://scenes/GameController.tscn"

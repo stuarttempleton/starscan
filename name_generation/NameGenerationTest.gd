@@ -9,21 +9,23 @@ func _exit_tree():
 
 func _on_GenerateArtifacts_pressed():
 	var list = ""
-	var qty = 10 #$WordGenerator.NewRand(8) + 1
+	var qty = 10
 	var i = 1
-	for w in $WordGenerator/Artifact.CreateList(qty, true):
-		list += "%d. %s\r\n" % [i, w]
+	#list += "--. %s\r\n" % [ItemFactory.GenerateItem(ItemFactory.ItemTypes.ARTIFACT, 3729348799).Name]
+	
+	for w in ItemFactory.GenerateItemList(ItemFactory.ItemTypes.ARTIFACT, qty):
+		list += "%d. %s\r\n" % [i, w.Name]
 		i += 1
 	$ScenePanel/ContentPanel/VBoxContainer/Name.text = "Artifacts"
 	$ScenePanel/ContentPanel/VBoxContainer/Quote.bbcode_text = list
 
 
 func _on_GenerateSystem_pressed():
-	var SystemName = $WordGenerator.CreateWord().to_upper()
+	var SystemName = WordGenerator.Create().to_upper()
 	var PlanetList = ""
-	var planet_qty = $WordGenerator.NewRand(8) + 1
+	var planet_qty = randi() % 9
 	var i = 1
-	for w in $WordGenerator.CreateWordList(planet_qty):
+	for w in WordGenerator.CreateList(planet_qty):
 		PlanetList += "%d. %s\r\n" % [i, w.capitalize()]
 		i += 1
 	$ScenePanel/ContentPanel/VBoxContainer/Name.text = SystemName
