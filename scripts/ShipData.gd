@@ -34,6 +34,7 @@ func ResetShip() :
 	self.LoadShipData(DefaultShipFile)
 	StarShip.ShipSeedNumber = randi()
 	StarShip.Captain = WordGenerator.Create(StarShip.ShipSeedNumber).capitalize()
+	AddItemListToInventory(ItemFactory.GenerateItemList(ItemFactory.ItemTypes.RESOURCE, 8))
 	var dir = Directory.new()
 	dir.remove(SavedShipFile)
 	self.SaveShip()
@@ -106,44 +107,66 @@ func PayToVisitAPlanet():
 	return PayResourcesDefaultToCrew(1, 1.0)
 
 func DeductArtifact(_Payment):
-	var qty = TurnInCargoType("Artifacts",0, _Payment)
+	var qty = RemoveQTYItemsFromInventory(ItemFactory.ItemTypes.ARTIFACT, _Payment)
 	return qty
 
-func TurnInArtifacts():
-	var qty = TurnInCargoType("Artifacts",0, GetInventoryQTYFor("Artifacts"))
+func TurnInArtifacts(_items:Array = []):
+	var qty = _items.size()
+	for item in _items:
+		RemoveItemFromInventory(item)
 	StarShip.DeliveredArtifacts += qty
 	UpdatePlayStat("ArtifactsTurnedIn", qty)
 	return qty #report how many we turned in for displayor whatever
 
+func TurnInArtifact(_item):
+	TurnInArtifacts([_item])
 
-func TurnInCargoType(cargoType, _tradeValue, qty):
-	if qty > GetInventoryQTYFor(cargoType):
-		qty = GetInventoryQTYFor(cargoType)
-	GainInventoryItem(cargoType, qty * -1) #nuke it
-	return qty
+func TurnInArtifactsBySeed(_seed):
+	var items = []
+	for item in StarShip.Inventory:
+		if item.Seed == _seed:
+			items.append(item)
+	TurnInArtifacts(items)
 
+func GetInventoryFor(_itemType:int = 0):
+	var items = []
+	for item in StarShip.Inventory:
+		if item.Type == _itemType:
+			items.append(item)
+	return items
 
-func GetInventoryQTYFor(resourceName):
+func AddItemToInventory(_item):
+	StarShip.Inventory.append(_item)
+
+func AddItemListToInventory(_items = []):
+	for _item in _items:
+		AddItemToInventory(_item)
+
+func GetInventoryQTYFor(_itemType:int = 0):
 	var qty = 0
-	for cargo in StarShip.Inventory:
-		if cargo.Type == resourceName:
-			return cargo.Quantity
+	for _item in StarShip.Inventory:
+		if _item.Type == _itemType:
+			qty += 1
 	return qty
 
+func RemoveItemFromInventory(_item):
+	StarShip.Inventory.erase(_item)
 
-func GainInventoryItem(resourceName, resourcesToGain):
-	var updated = false
-	
-	for cargo in StarShip.Inventory:
-		if cargo.Type == resourceName:
-			cargo.Quantity += resourcesToGain
-			updated = true
+func RemoveItemFromInventoryBySeed(_seed):
+	for item in StarShip.Inventory:
+		if item.Seed == _seed:
+			StarShip.Inventory.erase(item)
+
+func RemoveQTYItemsFromInventory(_itemType:int = 0, _qty = 0):
+	var qty = 0
+	var items = GetInventoryFor(_itemType)
+	items.shuffle()
+	for item in items:
+		qty += 1
+		StarShip.Inventory.erase(item)
+		if qty == _qty:
 			break
-	if !updated:
-		#add it
-		StarShip.Inventory.append({
-			"Type": resourceName,
-			"Quantity": resourcesToGain })
+	return qty
 
 func PayResourcesDefaultToCrew(resourcesToPay, crewLostPerUnpaidResource):
 	var paid = {
@@ -151,29 +174,14 @@ func PayResourcesDefaultToCrew(resourcesToPay, crewLostPerUnpaidResource):
 		"Crew" : 0
 	}
 	
-	var availableResources
-	for cargo in StarShip.Inventory:
-		if cargo.Type == "Resources":
-			availableResources = cargo
-			break
-	
-	if availableResources == null || availableResources.Quantity < paid.Resources:
-		var difference = paid.Resources
-		
-		if availableResources != null:
-			paid.Resources = availableResources.Quantity
-			difference -= availableResources.Quantity
-			availableResources.Quantity = 0
-		
-		paid.Crew = difference * crewLostPerUnpaidResource
-		DeductCrew(paid.Crew)
-	else:
-		availableResources.Quantity -= paid.Resources
-	
+	paid.Resources = RemoveQTYItemsFromInventory(ItemFactory.ItemTypes.RESOURCE, resourcesToPay)
+	paid.Crew = DeductCrew(resourcesToPay - paid.Resources)
 	return paid
 
 func DeductCrew(crewLost):
 	if Cheat.godmode_enabled: return 0
+	if crewLost == 0: return 0
+	
 	UpdatePlayStat("CrewLost", crewLost)
 	StarShip.Crew -= crewLost
 	return crewLost

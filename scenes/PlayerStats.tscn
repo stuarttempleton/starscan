@@ -293,7 +293,7 @@ margin_right = 286.0
 margin_bottom = 100.0
 custom_constants/separation = 25
 script = ExtResource( 2 )
-inventory_type_key = "Scan Data"
+inventory_type_key = 4
 
 [node name="Icon" type="TextureRect" parent="Inventory/StarsScanned"]
 margin_right = 100.0
@@ -317,7 +317,7 @@ margin_right = 286.0
 margin_bottom = 204.0
 custom_constants/separation = 25
 script = ExtResource( 2 )
-inventory_type_key = "Artifacts"
+inventory_type_key = 1
 
 [node name="Icon" type="TextureRect" parent="Inventory/Artifacts"]
 margin_right = 100.0
@@ -341,7 +341,7 @@ margin_right = 286.0
 margin_bottom = 308.0
 custom_constants/separation = 25
 script = ExtResource( 2 )
-inventory_type_key = "Resources"
+inventory_type_key = 2
 
 [node name="Icon" type="TextureRect" parent="Inventory/Resources"]
 margin_right = 100.0

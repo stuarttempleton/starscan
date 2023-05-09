@@ -60,14 +60,14 @@ scale = Vector2( 5, 5 )
 visible = false
 
 [node name="Credits" type="Button" parent="."]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -704.0
-margin_top = -240.0
-margin_right = -576.0
-margin_bottom = -208.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -64.0
+margin_top = 120.0
+margin_right = 64.0
+margin_bottom = 152.0
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 7 )
 custom_styles/focus = ExtResource( 10 )
@@ -78,9 +78,14 @@ script = ExtResource( 2 )
 scene_to_load = "res://scenes/Title.tscn"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-margin_top = 192.0
-margin_right = 1280.0
-margin_bottom = 448.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -640.0
+margin_top = -168.0
+margin_right = 640.0
+margin_bottom = 88.0
 custom_fonts/mono_font = SubResource( 2 )
 custom_fonts/bold_italics_font = SubResource( 4 )
 custom_fonts/italics_font = SubResource( 6 )

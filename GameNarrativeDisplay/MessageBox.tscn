@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://GameNarrativeDisplay/GameNarrativeDisplay.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Montserrat-Light.ttf" type="DynamicFontData" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://GameNarrativeDisplay/GamepadHint.tscn" type="PackedScene" id=10]
 [ext_resource path="res://styles/dialogPanel.tres" type="StyleBox" id=11]
 [ext_resource path="res://styles/dialogButtonPanel.tres" type="StyleBox" id=12]
+[ext_resource path="res://Inventory/ItemListUI.gd" type="Script" id=13]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://fonts/Montserrat-Regular.ttf"
@@ -81,16 +82,20 @@ custom_constants/separation = 0
 alignment = 1
 
 [node name="Panel" type="PanelContainer" parent="MessageBoxUI/Vbox"]
-margin_top = 236.0
+margin_top = 232.0
 margin_right = 640.0
-margin_bottom = 347.0
+margin_bottom = 351.0
 custom_styles/panel = ExtResource( 11 )
 
-[node name="Message" type="RichTextLabel" parent="MessageBoxUI/Vbox/Panel"]
+[node name="Vbox" type="VBoxContainer" parent="MessageBoxUI/Vbox/Panel"]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 620.0
-margin_bottom = 91.0
+margin_bottom = 99.0
+
+[node name="Message" type="RichTextLabel" parent="MessageBoxUI/Vbox/Panel/Vbox"]
+margin_right = 600.0
+margin_bottom = 71.0
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_fonts/mono_font = SubResource( 2 )
 custom_fonts/bold_italics_font = SubResource( 4 )
@@ -109,10 +114,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ItemList" type="VBoxContainer" parent="MessageBoxUI/Vbox/Panel/Vbox"]
+margin_top = 75.0
+margin_right = 600.0
+margin_bottom = 75.0
+script = ExtResource( 13 )
+
+[node name="Scroll" type="ScrollContainer" parent="MessageBoxUI/Vbox/Panel/Vbox"]
+margin_top = 79.0
+margin_right = 600.0
+margin_bottom = 79.0
+size_flags_vertical = 3
+follow_focus = true
+scroll_horizontal_enabled = false
+
+[node name="ItemList" type="VBoxContainer" parent="MessageBoxUI/Vbox/Panel/Vbox/Scroll"]
+script = ExtResource( 13 )
+
 [node name="ButtonPanel" type="PanelContainer" parent="MessageBoxUI/Vbox"]
-margin_top = 347.0
+margin_top = 351.0
 margin_right = 640.0
-margin_bottom = 416.0
+margin_bottom = 420.0
 custom_styles/panel = ExtResource( 12 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MessageBoxUI/Vbox/ButtonPanel"]
@@ -176,16 +198,16 @@ custom_styles/normal = ExtResource( 4 )
 text = "BUTTON4"
 
 [node name="Spacer" type="Control" parent="MessageBoxUI/Vbox"]
-margin_top = 416.0
+margin_top = 420.0
 margin_right = 640.0
-margin_bottom = 428.0
+margin_bottom = 432.0
 rect_min_size = Vector2( 0, 12 )
 
 [node name="GamepadHint" parent="MessageBoxUI/Vbox" instance=ExtResource( 10 )]
 margin_left = 0.0
-margin_top = 428.0
+margin_top = 432.0
 margin_right = 640.0
-margin_bottom = 452.0
+margin_bottom = 456.0
 
 [node name="ColorRect" type="ColorRect" parent="MessageBoxUI"]
 visible = false

@@ -205,7 +205,7 @@ func _on_FuelTanksEmpty():
 		elif chanceOfHostile < 0.2:
 			chanceOfHostile -= 0.2
 		TowEncounter = {"Friendly":true if randf() > chanceOfHostile else false, 
-						"Artifacts": randi() % int(ShipData.GetInventoryQTYFor("Artifacts") + 1),
+						"Artifacts": randi() % int(ShipData.GetInventoryQTYFor(ItemFactory.ItemTypes.ARTIFACT) + 1),
 						"Crew": 1 + randi() % 1, #int(ShipData.StarShip.CrewCapacity / 2 - 1),
 						"nearestOutpostSystem": outpost}
 		var opts = ["OK"]

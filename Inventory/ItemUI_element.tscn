@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://styles/MenuButton_HoverFocus.tres" type="StyleBox" id=1]
+[ext_resource path="res://styles/MenuButton_Focus.tres" type="StyleBox" id=2]
+[ext_resource path="res://styles/MenuButton_Normal.tres" type="StyleBox" id=3]
+[ext_resource path="res://styles/MenuButton_Pressed.tres" type="StyleBox" id=4]
+[ext_resource path="res://styles/MenuButton_Disabled.tres" type="StyleBox" id=5]
+[ext_resource path="res://Inventory/ItemUI_element.gd" type="Script" id=6]
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color( 0.0588235, 0.0588235, 0.0588235, 0.956863 )
+border_width_left = 2
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color( 0.172549, 0.172549, 0.172549, 1 )
+corner_radius_top_left = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id=2]
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color( 0.0313726, 0.0313726, 0.0313726, 0.956863 )
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.172549, 0.172549, 0.172549, 1 )
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+
+[node name="ItemUI_element" type="HBoxContainer"]
+margin_right = 856.0
+margin_bottom = 49.0
+custom_constants/separation = 0
+script = ExtResource( 6 )
+
+[node name="ItemTextPanel" type="PanelContainer" parent="."]
+margin_right = 728.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 1 )
+
+[node name="ItemText" type="RichTextLabel" parent="ItemTextPanel"]
+margin_left = 20.0
+margin_top = 18.0
+margin_right = 708.0
+margin_bottom = 33.0
+size_flags_vertical = 4
+bbcode_enabled = true
+bbcode_text = "An artifact here."
+text = "An artifact here."
+fit_content_height = true
+
+[node name="ItemButtons" type="PanelContainer" parent="."]
+margin_left = 728.0
+margin_right = 856.0
+margin_bottom = 52.0
+custom_styles/panel = SubResource( 2 )
+
+[node name="Button" type="Button" parent="ItemButtons"]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 108.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 88, 32 )
+custom_styles/hover = ExtResource( 1 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/disabled = ExtResource( 5 )
+custom_styles/normal = ExtResource( 3 )
+text = "Destroy"
+
+[connection signal="pressed" from="ItemButtons/Button" to="." method="_on_Button_pressed"]

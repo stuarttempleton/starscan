@@ -38,16 +38,44 @@ func SetMessageNodeVisibility(newState):
 
 
 func DisplayText(txt, array_buttons, button_selected = 0):
+	$MessageBoxUI/Vbox/Panel/Vbox/ItemList.ClearList()
+	$MessageBoxUI/Vbox/Panel/Vbox/Scroll/ItemList.ClearList()
 	emit_signal("DisplayState", true)
 	GameController.EnableMovement(false)
 	var message = txt if not Texts.has(txt) else Texts[txt]
 	
+	# Search message of artifact ids to render
+	#message += " [id=12345]  [id=12345]  [id=12345]  [id=12345]  [id=12345] "
+	var filtered_message = ""
+	var item_ids = []
+	for w in message.split(" "):
+		if w.substr(0,4) == "[id=":
+			var id = w.substr(4,w.length()-1).to_int()
+			print("Found: %s -> %d" % [w, id])
+			item_ids.append(id)
+			#$MessageBoxUI/Vbox/Panel/Vbox/ItemList.LoadItem(ItemFactory.GenerateItem(ItemFactory.ItemTypes.ARTIFACT, id), 0)
+		else:
+			filtered_message += "%s " % w
+	
+	var itemlist
+	
+	if item_ids.size() > 4:
+		$MessageBoxUI/Vbox/Panel/Vbox/ItemList.visible = false
+		$MessageBoxUI/Vbox/Panel/Vbox/Scroll/ItemList.visible = true
+		itemlist = $MessageBoxUI/Vbox/Panel/Vbox/Scroll/ItemList
+	else:
+		$MessageBoxUI/Vbox/Panel/Vbox/ItemList.visible = true
+		$MessageBoxUI/Vbox/Panel/Vbox/Scroll/ItemList.visible = false
+		itemlist = $MessageBoxUI/Vbox/Panel/Vbox/ItemList
+	
+	for id in item_ids:
+		itemlist.LoadItem(ItemFactory.GenerateItem(ItemFactory.ItemTypes.ARTIFACT, id), ItemUI_element.CONTEXT.DESTROY)
+	
 	if array_buttons.size() > buttons.size():
 		print("TOO MANY OPTIONS SENT! ONLY USING %d", buttons.size())
-	$MessageBoxUI/Vbox/Panel/Message.bbcode_text = message
+	$MessageBoxUI/Vbox/Panel/Vbox/Message.bbcode_text = filtered_message
 	SetMessageNodeVisibility(true)
-	$MessageBoxUI/Vbox/Panel/Message.percent_visible = 0
-	
+	$MessageBoxUI/Vbox/Panel/Vbox/Message.percent_visible = 0
 	for btn in buttons:
 		btn.visible = false
 	
@@ -63,10 +91,10 @@ func DisplayText(txt, array_buttons, button_selected = 0):
 
 
 func _process(delta):
-	if($MessageBoxUI/Vbox/Panel/Message.percent_visible > 0.9):
-		$MessageBoxUI/Vbox/Panel/Message.percent_visible = 1
+	if($MessageBoxUI/Vbox/Panel/Vbox/Message.percent_visible > 0.9):
+		$MessageBoxUI/Vbox/Panel/Vbox/Message.percent_visible = 1
 	else:
-		$MessageBoxUI/Vbox/Panel/Message.percent_visible += display_speed * delta
+		$MessageBoxUI/Vbox/Panel/Vbox/Message.percent_visible += display_speed * delta
 
 
 func CancelDialog():

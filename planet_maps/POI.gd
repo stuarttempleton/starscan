@@ -35,7 +35,7 @@ func selected():
 		if POIModel.PerceivedType == "Unknown":
 			ShipData.UpdatePlayStat("UnknownsLooted",1)
 		var qty = 1 #TODO: Adjust this for "severity"
-		CollectPOI(POIModel.ActualType, qty)
+		CollectPOI(POIModel.ActualType, qty, POIModel.ItemSeed)
 		AudioPlayer.PlaySFX(GetAudioKeyForPOI(POIModel.ActualType))
 		# warning-ignore:return_value_discarded
 		GameNarrativeDisplay.connect("ChoiceSelected", self, "StoryResponse")
@@ -52,13 +52,13 @@ func GetAudioKeyForPOI(POIType):
 			return AudioPlayer.AUDIO_KEY.DIALOG_POI_HAZARD
 	return AudioPlayer.AUDIO_KEY.DIALOG_POI_DEFAULT
 
-func CollectPOI(POIType, qty):
+func CollectPOI(POIType, qty, ItemSeed):
 	match POIType:
 		"Artifact":
-			ShipData.GainInventoryItem("Artifacts", qty)
+			ShipData.AddItemToInventory(ItemFactory.GenerateItem(ItemFactory.ItemTypes.ARTIFACT, ItemSeed))
 			get_parent().Planet.ArtifactCount = max(get_parent().Planet.ArtifactCount - qty, 0)
 		"Resource":
-			ShipData.GainInventoryItem("Resources", qty)
+			ShipData.AddItemToInventory(ItemFactory.GenerateItem(ItemFactory.ItemTypes.RESOURCE, ItemSeed))
 			get_parent().Planet.ResourceCount = max(get_parent().Planet.ResourceCount - qty, 0)
 		"Hazard":
 			ShipData.DeductCrew(qty)

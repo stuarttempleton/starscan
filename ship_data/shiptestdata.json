@@ -12,16 +12,7 @@
     "Crew":20,
 	"CrewCapacity":20,
     "MaxInventory":10,
-    "Inventory":[
-        {
-            "Type": "Resources",
-            "Quantity": 8
-        },
-        {
-            "Type": "Artifacts",
-            "Quantity": 0
-        }
-    ],
+    "Inventory":[],
     "PlayStats":{
         "SystemsScanned":0,
         "SystemsVisited":0,

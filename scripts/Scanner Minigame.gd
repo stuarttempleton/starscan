@@ -133,7 +133,7 @@ func handleScanResult(isSuccess, accuracy):
 	updateText(str(int(accuracy * 100)), "HIGH" if isSuccess else "LOW")
 	resultTextAnimator.play("WinAnim")
 	if StarMapData.ScanNearestSystem(accuracy) && isSuccess:
-		ShipData.GainInventoryItem("Scan Data", 1)
+		ShipData.AddItemToInventory(ItemFactory.GenerateItem(ItemFactory.ItemTypes.SCAN_DATA, randi(), {"SystemName":StarMapData.NearestSystem.Name}))
 		ShipData.UpdatePlayStat("SystemsScanned",1)
 	if isSuccess && !StarMapData.GetNearestBody().has("Destination"):
 		ShipData.AddRouteList(StarMapData.AllRoutesBySystem(StarMapData.GetNearestBody()))

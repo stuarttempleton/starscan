@@ -6,12 +6,14 @@ var is_gameloop = false
 var pause_menu_scene
 var pause_menu_instance
 var is_usingmap = false
+var is_usinginventory = false
 var scene_has_map = false
 var movement_block_queue = 0
 
 signal gameloop_state(loopstate)
 signal map_state(mapstate)
 signal pause_state(pausestate)
+signal inventory_state(inventorystate)
 
 
 func _init():
@@ -116,6 +118,8 @@ func _process(_delta):
 			togglePause()
 		if Input.is_action_just_released("starmap_mapview"):
 			MapToggle()
+		if Input.is_action_just_released("Inventory"):
+			InventoryToggle()
 	if Input.is_action_just_pressed("fullscreen_mode"):
 		PlayerPrefs.set_pref("window_fullscreen", !OS.window_fullscreen)
 		LoadWindowSettings()
@@ -127,7 +131,14 @@ func _process(_delta):
 		print("Mouse coords: %d,%d" %[get_viewport().get_mouse_position().x, get_viewport().get_mouse_position().y])
 		
 
-
+func InventoryToggle():
+	if !get_tree().paused:
+		AudioPlayer._play_UI_Button_Select()
+		is_usinginventory = !is_usinginventory
+		EnableMovement(!is_usinginventory)
+		emit_signal("inventory_state", is_usinginventory)
+		
+		
 func MapToggle():
 	if scene_has_map and !get_tree().paused:
 		AudioPlayer._play_UI_Button_Select()

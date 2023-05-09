@@ -3,13 +3,17 @@ extends Node
 
 
 # Types of items that can be generated
-enum ItemTypes {BASE, ARTIFACT, RESOURCE, SHIP}
+enum ItemTypes {BASE, ARTIFACT, RESOURCE, SHIP, SCAN_DATA}
 
 
 # Generation Functions
 func GenerateItem( _type:int = ItemTypes.BASE, _seed = randi(), _opts = {}):
 	var item
 	match _type:
+		ItemTypes.SCAN_DATA:
+			item = $ScanDataItem._generate(_seed, _opts)
+		ItemTypes.RESOURCE:
+			item = $ResourceItem._generate(_seed, _opts)
 		ItemTypes.SHIP:
 			item = $ShipItem._generate(_seed, _opts)
 		ItemTypes.ARTIFACT:

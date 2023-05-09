@@ -2,13 +2,11 @@ extends HBoxContainer
 
 
 var lastpeek
-export(String) var inventory_type_key
+export(ItemFactory.ItemTypes) var inventory_type_key
 
 var boiler_plate = "x %s"
-var inventory
 
 func _ready():
-	inventory = ShipData.StarShip.Inventory
 	SetQTY(1.0)
 
 func SetQTY(qty) :

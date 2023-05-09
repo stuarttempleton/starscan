@@ -4,10 +4,30 @@ class_name ArtifactNameGenerator
 
 var RarityColor = {
 	"Rare": "[color=#FFBF00]%s[/color]",
-	"Common": "[color=#3261c7]%s[/color]"
+	"Uncommon": "[color=#3261c7]%s[/color]",
+	"Common": "[color=#AAAAAA]%s[/color]"
 }
 var Patterns = {
 	"Rare": ["%name's %Noun", "%Noun of %name", "The %name %Noun", "%name %Noun"],
+	"Uncommon": [
+		"%A|N %adjective %noun",
+		"%A|N %adjective %appearance %noun",
+		"%A|N %size %noun",
+		"%A|N %color %noun",
+		"%A|N %appearance %noun",
+		"%A|N %appearance %color %noun",
+		"%A|N %size %color %noun",
+		"%A|N %size %adjective %noun",
+		"%A|N %size %adjective %color %noun",
+		"%A|N %tech-adjective %tech-noun",
+		"%A|N %appearance %tech-adjective %tech-noun",
+		"%A|N %size %tech-noun",
+		"%A|N %color %tech-noun",
+		"%A|N %appearance %tech-noun",
+		"%A|N %appearance %color %tech-adjective %tech-noun",
+		"%A|N %size %color %tech-noun",
+		"%A|N %size %tech-adjective %tech-noun",
+		"%A|N %size %color %tech-adjective %tech-noun"],
 	"Common": [
 		"%A|N %adjective %noun",
 		"%A|N %adjective %appearance %noun",
@@ -297,6 +317,8 @@ func ExpandPattern(pat):
 func ConvertRarityFromFloat(rarity):
 	if rarity > 0.9:
 		return "Rare"
+	if rarity > 0.5:
+		return "Uncommon"
 	return "Common"
 
 func Create(_seed:int = randi(), RarityFloat=-1, color=false):

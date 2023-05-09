@@ -35,7 +35,7 @@ func ChoiceResponse(choice):
 		-1: return
 		0: BackToLobbySelected()
 		1: RefuelSelected()
-		2: TurnInSeelected()
+		2: TurnInSelected()
 		3: return LeaveOrbitSelected()
 	DialogPrompt(choice)
 
@@ -52,7 +52,7 @@ func RefuelSelected():
 	ShipData.Refuel()
 
 
-func TurnInSeelected():
+func TurnInSelected():
 	Qty = ShipData.TurnInArtifacts()
 	State = StoryGenerator.OUTPOST_STATE.TURN_IN_EMPTY
 	if Qty > 0:

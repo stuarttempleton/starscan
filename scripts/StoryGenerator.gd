@@ -64,12 +64,7 @@ func ReportSystemEntryCost(cost):
 	elif cost.Crew <= 0:
 		return "[color=#00ff00]Interstellar travel is free.[/color]\r\n"
 	
-	var remainingResources = null
-	for cargo in ShipData.StarShip.Inventory:
-		if cargo.Type == "Resources":
-			remainingResources = cargo
-			break
-	if remainingResources == null || remainingResources.Quantity == 0:
+	if ShipData.GetInventoryQTYFor(ItemFactory.ItemTypes.RESOURCE) == 0:
 		report = "%s[color=#ff0000]WARNING: resources depleted![/color]\r\n" % [report]
 	
 	return report
@@ -224,10 +219,8 @@ func _generate_poi_storylet(POIType, ItemSeed):
 	var txt = ""
 	match POIType:
 		"Artifact":
-			txt = "Captain, the Away Team has returned successfully from the Resource Extraction Point and deposited an artifact in our cargo hold. "
-			txt += "\r\n\r\n"
-			txt += "You have uncovered: %s \r\n\r\n" % [ItemFactory.GenerateItem(ItemFactory.ItemTypes.ARTIFACT, ItemSeed).Name]
-			#txt += "With it, your science team discovered a message: \r\n\r\n\"%s\" " % [LoremIpsum(1)]
+			txt = "Captain, the Away Team has returned successfully from the Resource Extraction Point and deposited an artifact in our cargo hold. If you wish to destroy this artifact instead, you may do so now. "
+			txt += "[id=%d] " % [ItemSeed]
 		"Resource":
 			txt = "Captain, the Away Team has returned successfully from the Resource Extraction Point and deposited additional resources for system entry in our cargo hold. "
 		"Hazard":

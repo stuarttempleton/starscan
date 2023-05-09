@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ItemFactory/ItemFactory.gd" type="Script" id=1]
 [ext_resource path="res://ItemFactory/ArtifactItem.gd" type="Script" id=2]
 [ext_resource path="res://ItemFactory/BaseItem.gd" type="Script" id=3]
 [ext_resource path="res://ItemFactory/ShipItem.gd" type="Script" id=4]
+[ext_resource path="res://ItemFactory/ResourceItem.gd" type="Script" id=5]
+[ext_resource path="res://ItemFactory/ScanDataItem.gd" type="Script" id=6]
 
 [node name="ItemFactory" type="Node"]
 script = ExtResource( 1 )
@@ -16,3 +18,9 @@ script = ExtResource( 3 )
 
 [node name="ShipItem" type="Node" parent="."]
 script = ExtResource( 4 )
+
+[node name="ResourceItem" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="ScanDataItem" type="Node" parent="."]
+script = ExtResource( 6 )
