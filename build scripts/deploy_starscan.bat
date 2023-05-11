@@ -1,6 +1,6 @@
 @echo off
 
-set buildroot=D:\StarscanBuilds
+set buildroot=C:\StarscanBuilds
 set itchproject=starscan
 set itchowner=voltur
 set artdirectory=custom_steam_images

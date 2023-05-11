@@ -45,18 +45,14 @@ func BackToLobbySelected():
 
 
 func RefuelSelected():
-	State = StoryGenerator.OUTPOST_STATE.FUEL_FULL
-	if ShipData.StarShip.Fuel < ShipData.StarShip.FuelCapacity:
-		State = StoryGenerator.OUTPOST_STATE.FUEL
+	State = StoryGenerator.OUTPOST_STATE.DOCK
 	Qty = ShipData.StarShip.FuelCapacity - ShipData.StarShip.Fuel
 	ShipData.Refuel()
 
 
 func TurnInSelected():
-	Qty = ShipData.TurnInArtifacts()
-	State = StoryGenerator.OUTPOST_STATE.TURN_IN_EMPTY
-	if Qty > 0:
-		State = StoryGenerator.OUTPOST_STATE.TURN_IN
+	Qty = ShipData.GetInventoryQTYFor(ItemFactory.ItemTypes.ARTIFACT)
+	State = StoryGenerator.OUTPOST_STATE.SCIENCE
 
 
 func LeaveOrbitSelected():

@@ -1,7 +1,7 @@
 extends Node2D
 
 
-enum OUTPOST_STATE {LOBBY, FUEL, FUEL_FULL, TURN_IN, TURN_IN_EMPTY}
+enum OUTPOST_STATE {LOBBY, DOCK, SCIENCE}
 var main_boiler = "[b]%s[/b]\r\n\r\n%s"
 var stats_boiler = "\r\n\r\n[indent][code]%s[/code][/indent]"
 
@@ -172,35 +172,30 @@ func Outpost_Refuel(system, _planet, qty):
 func Outpost_ScienceBay(_system, _planet, qty):
 	var txt = ""
 	if qty > 0:
-		txt += "Captain, we have received your latest  %s contributions and will begin researching them immediately. " % [str(qty)]
+		txt += "Captain, welcome to the %s Research Facility. Your cargo manifest contains %d artifacts for ready study. " % [_planet.Name, qty]
+		txt += "You may transfer any cargo you wish at this time and we will begin. "
+		txt += "[context=%d] " %[ItemUI_element.CONTEXT.TURN_IN]
+		for _item in ShipData.GetInventoryFor(ItemFactory.ItemTypes.ARTIFACT):
+			txt += "[id=%d] " % [_item.Seed]
 	else:
-		txt += "We couldn't find any artifacts in your cargo hold. Your mission is vital to the survival of humankind. "
-	if ShipData.StarShip.DeliveredArtifacts > 0:
-		txt += "You have brought us a total of %s artifacts to study. Humanity owes you a debt of gratitude." % [str(ShipData.StarShip.DeliveredArtifacts)]
-	
-	txt += "\r\n\r\n"
-	txt += "Come back when you have gathered more artifacts. We currently require %s to study. You can bring them to us or any Supercluster Outpost." % [ str($"/root/GameController/WinLoseCheck".ArtifactsRequiredToWin - ShipData.StarShip.DeliveredArtifacts)]
-		
-	txt += "\r\n\r\n"
-	if qty > 0:
-		txt += "[indent][code][color=#00ff00]You have turned in %s artifacts.[/color][/code][/indent]" % [str(qty)]
-	txt += "\r\n\r\n"
+		txt += "Captain, welcome to the %s Research Facility. We couldn't find any artifacts in your cargo hold. Your mission is vital to the survival of humankind. " % [_planet.Name]
+		txt += "By studying the artifacts of other civilizations, we may be able to avoid our own catastrophic filter event. "
+		txt += "\r\n\r\n"
+		txt += "Come back when you have gathered more artifacts. We currently require %s to study. You can bring them to us or any Supercluster Outpost. " % [ str($"/root/GameController/WinLoseCheck".ArtifactsRequiredToWin - ShipData.StarShip.DeliveredArtifacts)]
+		if ShipData.StarShip.DeliveredArtifacts > 0:
+			txt += "Humanity owes you a debt of gratitude."
+		txt += "\r\n\r\n[indent][code][color=#FFBF00]- Collect and deliver %d remaining planetary artifacts.[/color][/code][/indent]\r\n\r\n" % [ $"/root/GameController/WinLoseCheck".ArtifactsRequiredToWin - ShipData.StarShip.DeliveredArtifacts]
 	return txt
 
 func OutpostStory(_state, system, planet, qty, routes):
 	var title = "Outpost %s" % [planet.Name]
 	var txt = ""
-	
 	match _state:
 		OUTPOST_STATE.LOBBY:
 			txt += Outpost_Promenade(system, planet, routes)
-		OUTPOST_STATE.FUEL:
+		OUTPOST_STATE.DOCK:
 			txt += Outpost_Refuel(system, planet, qty)
-		OUTPOST_STATE.FUEL_FULL:
-			txt += Outpost_Refuel(system, planet, qty)
-		OUTPOST_STATE.TURN_IN:
-			txt += Outpost_ScienceBay(system, planet, qty)
-		OUTPOST_STATE.TURN_IN_EMPTY:
+		OUTPOST_STATE.SCIENCE:
 			txt += Outpost_ScienceBay(system, planet, qty)
 	return main_boiler % [title, txt]
 

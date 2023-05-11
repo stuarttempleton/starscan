@@ -45,31 +45,29 @@ func DisplayText(txt, array_buttons, button_selected = 0):
 	var message = txt if not Texts.has(txt) else Texts[txt]
 	
 	# Search message of artifact ids to render
-	#message += " [id=12345]  [id=12345]  [id=12345]  [id=12345]  [id=12345] "
 	var filtered_message = ""
 	var item_ids = []
+	var context = ItemUI_element.CONTEXT.DESTROY
 	for w in message.split(" "):
 		if w.substr(0,4) == "[id=":
 			var id = w.substr(4,w.length()-1).to_int()
 			print("Found: %s -> %d" % [w, id])
 			item_ids.append(id)
-			#$MessageBoxUI/Vbox/Panel/Vbox/ItemList.LoadItem(ItemFactory.GenerateItem(ItemFactory.ItemTypes.ARTIFACT, id), 0)
+		elif w.substr(0,9) == "[context=":
+			context = w.substr(9,w.length()-1).to_int()
 		else:
 			filtered_message += "%s " % w
 	
 	var itemlist
+	$MessageBoxUI/Vbox/Panel/Vbox/Spacer.visible = item_ids.size() > 0
 	
-	if item_ids.size() > 4:
-		$MessageBoxUI/Vbox/Panel/Vbox/ItemList.visible = false
-		$MessageBoxUI/Vbox/Panel/Vbox/Scroll/ItemList.visible = true
+	if item_ids.size() > 3:
 		itemlist = $MessageBoxUI/Vbox/Panel/Vbox/Scroll/ItemList
 	else:
-		$MessageBoxUI/Vbox/Panel/Vbox/ItemList.visible = true
-		$MessageBoxUI/Vbox/Panel/Vbox/Scroll/ItemList.visible = false
 		itemlist = $MessageBoxUI/Vbox/Panel/Vbox/ItemList
 	
 	for id in item_ids:
-		itemlist.LoadItem(ItemFactory.GenerateItem(ItemFactory.ItemTypes.ARTIFACT, id), ItemUI_element.CONTEXT.DESTROY)
+		itemlist.LoadItem(ItemFactory.GenerateItem(ItemFactory.ItemTypes.ARTIFACT, id), context)
 	
 	if array_buttons.size() > buttons.size():
 		print("TOO MANY OPTIONS SENT! ONLY USING %d", buttons.size())
