@@ -21,9 +21,9 @@ func SetContext(_context:int = 0):
 	context = _context
 	match context:
 		CONTEXT.TURN_IN:
-			$ItemButtons/Button.text = "Transfer"
+			$ItemButtons/Button.text = "Turn In"
 		CONTEXT.DESTROY, _:
-			$ItemButtons/Button.text = "Destroy"
+			$ItemButtons/Button.text = "Discard"
 
 func _on_Button_pressed():
 	match context:
