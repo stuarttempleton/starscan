@@ -11,6 +11,12 @@ func ClearList():
 		w.queue_free()
 	pass
 
+func GetButtons():
+	var buttons = []
+	for w in get_children():
+		buttons.append(w.find_node("Button"))
+	return buttons
+
 func LoadItem(_item, _context:int = 0):
 	# Load an item UI object.
 	var loaded_scene = load(PathToItemUI)

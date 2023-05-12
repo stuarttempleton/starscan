@@ -13,7 +13,7 @@ func _ready():
 	GamepadMenu.add_menu(name, $InventoryUI/ButtonContainer/HBoxContainer.get_children())
 	# warning-ignore:return_value_discarded
 	GameController.connect("inventory_state", self, "ShowInventory")
-	ShowInventory(false)
+	ShowInventory(true)
 
 func ShowInventory(state:bool=true):
 	# Clear existing stuff
@@ -27,7 +27,14 @@ func ShowInventory(state:bool=true):
 	# Set the whole thing to visible=state.
 	$InventoryUI.visible = state
 	$BlurBackground.visible = state
-	# Set game state
+	
+	# Update buttons
+	var buttons:Array = []
+	buttons.append_array($InventoryUI/CargoContainer/VBoxContainer/ScrollContainer/ItemList.GetButtons())
+	buttons.append_array($InventoryUI/ButtonContainer/HBoxContainer.get_children())
+	GamepadMenu.remove_menu(name)
+	GamepadMenu.add_menu(name, buttons)
+	
 	pass
 
 func AddInventory(_item):
