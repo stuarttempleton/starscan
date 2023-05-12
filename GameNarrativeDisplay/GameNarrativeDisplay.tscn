@@ -77,9 +77,9 @@ custom_constants/separation = 0
 alignment = 1
 
 [node name="Panel" type="PanelContainer" parent="MessageBoxUI/Vbox"]
-margin_top = 103.0
+margin_top = 105.0
 margin_right = 640.0
-margin_bottom = 480.0
+margin_bottom = 478.0
 rect_min_size = Vector2( 640, 0 )
 custom_styles/panel = ExtResource( 11 )
 
@@ -87,7 +87,7 @@ custom_styles/panel = ExtResource( 11 )
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 620.0
-margin_bottom = 357.0
+margin_bottom = 353.0
 script = ExtResource( 13 )
 
 [node name="Message" type="RichTextLabel" parent="MessageBoxUI/Vbox/Panel/Vbox"]
@@ -118,16 +118,10 @@ margin_right = 600.0
 margin_bottom = 129.0
 rect_min_size = Vector2( 0, 12 )
 
-[node name="ItemList" type="VBoxContainer" parent="MessageBoxUI/Vbox/Panel/Vbox"]
+[node name="Scroll" type="ScrollContainer" parent="MessageBoxUI/Vbox/Panel/Vbox"]
 margin_top = 133.0
 margin_right = 600.0
-margin_bottom = 133.0
-script = ExtResource( 7 )
-
-[node name="Scroll" type="ScrollContainer" parent="MessageBoxUI/Vbox/Panel/Vbox"]
-margin_top = 137.0
-margin_right = 600.0
-margin_bottom = 337.0
+margin_bottom = 333.0
 rect_min_size = Vector2( 0, 200 )
 size_flags_vertical = 3
 follow_focus = true
@@ -139,9 +133,9 @@ size_flags_horizontal = 3
 script = ExtResource( 7 )
 
 [node name="ButtonPanel" type="PanelContainer" parent="MessageBoxUI/Vbox"]
-margin_top = 480.0
+margin_top = 478.0
 margin_right = 640.0
-margin_bottom = 549.0
+margin_bottom = 547.0
 custom_styles/panel = ExtResource( 12 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MessageBoxUI/Vbox/ButtonPanel"]
@@ -208,16 +202,16 @@ custom_styles/normal = ExtResource( 4 )
 text = "BUTTON4"
 
 [node name="Spacer" type="Control" parent="MessageBoxUI/Vbox"]
-margin_top = 549.0
+margin_top = 547.0
 margin_right = 640.0
-margin_bottom = 561.0
+margin_bottom = 559.0
 rect_min_size = Vector2( 0, 12 )
 
 [node name="GamepadHint" parent="MessageBoxUI/Vbox" instance=ExtResource( 10 )]
 margin_left = 0.0
-margin_top = 561.0
+margin_top = 559.0
 margin_right = 640.0
-margin_bottom = 585.0
+margin_bottom = 583.0
 
 [node name="ColorRect" type="ColorRect" parent="MessageBoxUI"]
 visible = false

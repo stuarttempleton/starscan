@@ -34,7 +34,9 @@ enum AUDIO_KEY {
 	MUSIC_SYSTEM_MAP,
 	MUSIC_PLANET_MAP,
 	MUSIC_OUTPOST,
-	MUSIC_TOW
+	MUSIC_TOW,
+	CARGO_TURN_IN,
+	CARGO_DESTROY
 }
 
 
@@ -72,7 +74,10 @@ export var Audio = {
 	AUDIO_KEY.MUSIC_SYSTEM_MAP:"res://Audio/MUSIC/starscan_transition_D.ogg",
 	AUDIO_KEY.MUSIC_PLANET_MAP:"res://Audio/UI/288965__littlerobotsoundfactory__click-electronic-13.ogg",
 	AUDIO_KEY.MUSIC_OUTPOST:"res://Audio/UI/288965__littlerobotsoundfactory__click-electronic-13.ogg",
-	AUDIO_KEY.MUSIC_TOW:"res://Audio/UI/288965__littlerobotsoundfactory__click-electronic-13.ogg"
+	AUDIO_KEY.MUSIC_TOW:"res://Audio/UI/288965__littlerobotsoundfactory__click-electronic-13.ogg",
+	
+	AUDIO_KEY.CARGO_TURN_IN:"res://Audio/MUSIC/starscan_transition_scan_success.ogg",
+	AUDIO_KEY.CARGO_DESTROY:"res://Audio/MUSIC/starscan_transition_scan_failure.ogg"
 	
 }
 

@@ -21,14 +21,16 @@ func SetContext(_context:int = 0):
 	context = _context
 	match context:
 		CONTEXT.TURN_IN:
-			$ItemButtons/Button.text = "TRANSFER"
+			$ItemButtons/Button.text = "Transfer"
 		CONTEXT.DESTROY, _:
-			$ItemButtons/Button.text = "DESTROY"
+			$ItemButtons/Button.text = "Destroy"
 
 func _on_Button_pressed():
 	match context:
 		CONTEXT.TURN_IN:
+			AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.CARGO_TURN_IN)
 			ShipData.TurnInArtifactsBySeed(Seed)
 		CONTEXT.DESTROY, _:
+			AudioPlayer.PlaySFX(AudioPlayer.AUDIO_KEY.CARGO_DESTROY)
 			RemoveItemFromCargo()
 	queue_free()
