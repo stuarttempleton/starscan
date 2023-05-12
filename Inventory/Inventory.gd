@@ -13,7 +13,7 @@ func _ready():
 	GamepadMenu.add_menu(name, $InventoryUI/ButtonContainer/HBoxContainer.get_children())
 	# warning-ignore:return_value_discarded
 	GameController.connect("inventory_state", self, "ShowInventory")
-	ShowInventory(true)
+	ShowInventory(false)
 
 func ShowInventory(state:bool=true):
 	# Clear existing stuff

@@ -112,6 +112,7 @@ custom_constants/separation = 15
 alignment = 1
 
 [node name="AddItem" type="Button" parent="InventoryUI/ButtonContainer/HBoxContainer"]
+visible = false
 margin_left = 93.0
 margin_right = 221.0
 margin_bottom = 32.0
@@ -124,8 +125,9 @@ custom_styles/normal = ExtResource( 4 )
 text = "ADD ITEMS"
 
 [node name="Discard" type="Button" parent="InventoryUI/ButtonContainer/HBoxContainer"]
-margin_left = 236.0
-margin_right = 364.0
+visible = false
+margin_left = 164.0
+margin_right = 292.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 128, 32 )
 custom_styles/hover = ExtResource( 2 )
@@ -136,8 +138,8 @@ custom_styles/normal = ExtResource( 4 )
 text = "DISCARD ALL"
 
 [node name="Done" type="Button" parent="InventoryUI/ButtonContainer/HBoxContainer"]
-margin_left = 379.0
-margin_right = 507.0
+margin_left = 236.0
+margin_right = 364.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 128, 32 )
 custom_styles/hover = ExtResource( 2 )
