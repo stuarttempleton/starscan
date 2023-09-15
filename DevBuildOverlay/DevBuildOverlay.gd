@@ -8,6 +8,7 @@ extends CanvasLayer
 export var VersionNumber = "0.01a"
 export var VersionClass = "Preview"
 export var UseBuildOverlay = true
+export var UseFPSCounter = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,3 +17,6 @@ func _ready():
 	else:
 		queue_free()
 
+func _process(delta):
+	if UseFPSCounter:
+		$FPSCount.set_text( "FPS: %d" % Engine.get_frames_per_second())

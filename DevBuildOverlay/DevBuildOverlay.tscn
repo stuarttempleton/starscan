@@ -15,6 +15,7 @@ script = ExtResource( 1 )
 VersionNumber = "0.1"
 VersionClass = "ALPHA"
 UseBuildOverlay = false
+UseFPSCounter = false
 
 [node name="BuildNumber" type="Label" parent="."]
 self_modulate = Color( 1, 1, 1, 0.419608 )
@@ -28,6 +29,16 @@ grow_vertical = 0
 custom_fonts/font = SubResource( 2 )
 text = "STARSCAN %s BUILD v%s"
 align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="FPSCount" type="Label" parent="."]
+self_modulate = Color( 1, 1, 1, 0.419608 )
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -50.0
+margin_right = -20.0
+margin_bottom = -31.0
+grow_vertical = 0
+custom_fonts/font = SubResource( 2 )
+text = "FPS %d"
+align = 2
