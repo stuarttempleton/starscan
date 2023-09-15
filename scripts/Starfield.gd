@@ -3,6 +3,9 @@ extends Node2D
 
 var MapScale = StarMapData.MapScale
 var PlanetSizeScale = 5
+var camera
+var avatar
+var cached_zoom = Vector2.ZERO
 export var NebulaPath = ""
 export var WormholePath = ""
 
@@ -11,7 +14,17 @@ func _ready():
 	for nebula in StarMapData.Nebulae():
 		AddNebulaToMap(Vector2(nebula.X * MapScale, nebula.Y * MapScale), StarMapData.get_nebula_scale(nebula.Size) * (MapScale / 10000))
 		AddWormholeToMap(Vector2(nebula.X * MapScale, nebula.Y * MapScale))
-		pass
+	# warning-ignore:return_value_discarded
+	camera = $"../ShipAvatarView/ShipAvatar/Camera2D"
+	avatar = $"../ShipAvatarView/ShipAvatar"
+	GameController.connect("map_state", self, "MapToggle")
+
+func _process(delta):
+	if avatar.CurrentSpeed > 0:
+		update()
+	if cached_zoom != camera.zoom:
+		cached_zoom = camera.zoom
+		update()
 
 func AddWormholeToMap(pos):
 	var loaded_scene = load(WormholePath)
@@ -29,7 +42,13 @@ func AddNebulaToMap(pos,size):
 	nebula.scale *= Vector2(nebula.scale.x * size, nebula.scale.y * size)
 	
 func _draw():
-	var systems = StarMapData.Systems()
+	var ShipPosition = ShipData.GetPosition()
+	var ScreenRect = get_viewport_rect()
+	ScreenRect.size = ScreenRect.size * camera.zoom * 1.5
+	ScreenRect.position = ShipPosition - ScreenRect.size * 0.5
+	
+	var systems = StarMapData.AllSystemsInRect(ScreenRect)
+	
 	for system in systems :
 		AddSystemToMap(system)
 
@@ -51,3 +70,5 @@ func draw_circle_arc(center, radius, angle_from, angle_to, color):
 	for index_point in range(nb_points):
 		draw_line(points_arc[index_point], points_arc[index_point + 1], color)
 
+func MapToggle(usemap):
+	update()
