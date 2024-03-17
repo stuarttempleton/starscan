@@ -13,32 +13,49 @@ func _ready():
 	GamepadMenu.add_menu(name, $InventoryUI/ButtonContainer/HBoxContainer.get_children())
 	# warning-ignore:return_value_discarded
 	GameController.connect("inventory_state", self, "ShowInventory")
+	$InventoryUI/CargoContainer/VBoxContainer/ScrollContainer/ItemList.connect("item_list_changed",self,"BuildInventory")
 	ShowInventory(false)
 
+
 func ShowInventory(state:bool=true):
-	# Clear existing stuff
-	$InventoryUI/CargoContainer/VBoxContainer/ScrollContainer/ItemList.ClearList()
 	if state:
-		UpdateBoilerText()
-		# Populate with ship inventory
-		for item in ShipData.GetInventoryFor(ItemFactory.ItemTypes.ARTIFACT):
-			AddInventory(item)
-	
-	# Set the whole thing to visible=state.
+		MovementEvent.add_deadzone(name, $InventoryUI.get_global_rect())
+		BuildInventory()
+	else:
+		MovementEvent.remove_deadzone(name)
+		GamepadMenu.remove_menu(name)
 	$InventoryUI.visible = state
 	$BlurBackground.visible = state
 	
+	
+func BuildInventory():
+	# Clear existing stuff
+	$InventoryUI/CargoContainer/VBoxContainer/ScrollContainer/ItemList.ClearList()
+	
+	#Update the UI text
+	UpdateBoilerText()
+	
+	# Populate with ship inventory
+	for item in ShipData.GetInventoryFor(ItemFactory.ItemTypes.ARTIFACT):
+		AddInventory(item)
+
 	# Update buttons
 	var buttons:Array = []
 	buttons.append_array($InventoryUI/CargoContainer/VBoxContainer/ScrollContainer/ItemList.GetButtons())
-	buttons.append_array($InventoryUI/ButtonContainer/HBoxContainer.get_children())
-	GamepadMenu.remove_menu(name)
-	GamepadMenu.add_menu(name, buttons)
+	for button in $InventoryUI/ButtonContainer/HBoxContainer.get_children():
+		if button.visible:
+			buttons.append(button)
 	
-	pass
+	# Either focus on the first item or the the removed item -1
+	var button_selected = max(0, GamepadMenu.get_cursor(name) - 1)
+	
+	# Remove the menu buttons, then re-add the new list
+	GamepadMenu.remove_menu(name)
+	GamepadMenu.add_menu(name, buttons, button_selected)
+
 
 func AddInventory(_item):
-	$InventoryUI/CargoContainer/VBoxContainer/ScrollContainer/ItemList.LoadItem(_item)
+	$InventoryUI/CargoContainer/VBoxContainer/ScrollContainer/ItemList.LoadItem(_item, ItemUI_element.CONTEXT.DESTROY)
 
 func UpdateBoilerText():
 	$InventoryUI/CargoContainer/VBoxContainer/ContainerDescription.bbcode_text = DescBoilerPlate % [ShipData.StarShip.DeliveredArtifacts, $"/root/GameController/WinLoseCheck".ArtifactsRequiredToWin]

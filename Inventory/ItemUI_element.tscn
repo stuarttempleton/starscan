@@ -42,6 +42,7 @@ script = ExtResource( 6 )
 [node name="ItemTextPanel" type="PanelContainer" parent="."]
 margin_right = 728.0
 margin_bottom = 52.0
+mouse_filter = 1
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 1 )
 
@@ -50,6 +51,7 @@ margin_left = 20.0
 margin_top = 18.0
 margin_right = 708.0
 margin_bottom = 33.0
+mouse_filter = 1
 size_flags_vertical = 4
 bbcode_enabled = true
 bbcode_text = "An artifact here."

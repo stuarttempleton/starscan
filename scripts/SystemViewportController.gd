@@ -12,6 +12,7 @@ func _ready():
 		AudioPlayer.PlayBG(AudioPlayer.AUDIO_KEY.BG_SPACE)
 		AudioPlayer.PlayMusic(AudioPlayer.AUDIO_KEY.MUSIC_SYSTEM_MAP)
 		$EnterSystemEvent.StartEvent()
+	GameController.EnableCargo()
 
 func PlanetHover(planet_position, planet_name):
 	$HoverUI/Label.text = planet_name

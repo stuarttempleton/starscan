@@ -15,6 +15,7 @@ func LoadScene(path, delay = 0.5, args = {}):
 	animation_player.play("fade")
 	yield(animation_player,"animation_finished")
 	GameController.DisableMap()
+	GameController.DisableCargo()
 	if get_tree().change_scene(path):
 		print("Error loading scene")
 	animation_player.play_backwards("fade")

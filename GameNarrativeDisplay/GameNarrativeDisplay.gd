@@ -30,6 +30,7 @@ func _ready():
 		$MessageBoxUI
 	]
 	SetMessageNodeVisibility(false)
+	$MessageBoxUI/Vbox/Panel/Vbox/Scroll/ItemList.connect("item_list_changed",self,"item_list_changed")
 
 
 func SetMessageNodeVisibility(newState):
@@ -75,8 +76,24 @@ func DisplayText(txt, array_buttons, button_selected = 0):
 		i += 1
 		if ( i == buttons.size() ):
 			break
-	GamepadMenu.add_menu(name,buttons.slice(0,i - 1), button_selected)
+	var temp_button_list = []
+	temp_button_list.append_array(buttons.slice(0,i - 1))
+	temp_button_list.append_array($MessageBoxUI/Vbox/Panel/Vbox/Scroll/ItemList.GetButtons())
+	GamepadMenu.add_menu(name,temp_button_list, min(temp_button_list.size() - 1, button_selected))
 	$MessageBoxUI/Vbox/GamepadHint.dpad_visible((array_buttons.size() > 1))
+
+
+func item_list_changed():
+	#rebuild menu buttons
+	var temp_button_list = []
+	for button in buttons:
+		if button.visible:
+			temp_button_list.append(button)
+	temp_button_list.append_array($MessageBoxUI/Vbox/Panel/Vbox/Scroll/ItemList.GetButtons())
+	var button_selected = max(0, GamepadMenu.menu_cursor[name] - 1)
+	GamepadMenu.remove_menu(name)
+	GamepadMenu.add_menu(name,temp_button_list, min(temp_button_list.size() - 1, button_selected))
+	$MessageBoxUI/Vbox/GamepadHint.dpad_visible((temp_button_list.size() > 1))	
 
 
 func _process(delta):

@@ -60,6 +60,10 @@ func reset_menus():
 	menu_cursor.clear()
 	activate_top_menu()
 
+func get_cursor(id):
+	if menu_cursor.has(id): return menu_cursor[id]
+	return 0
+
 func activate_top_menu():
 	if menus.keys().size() > 0:
 		current_menu = menus.keys().back()

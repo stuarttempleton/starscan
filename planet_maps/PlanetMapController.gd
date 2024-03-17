@@ -10,6 +10,7 @@ func _ready():
 	_generate_planet_map(args["planet"], args["scan"])
 	# warning-ignore:return_value_discarded
 	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
+	GameController.EnableCargo()
 
 
 func _on_viewport_size_changed():

@@ -8,6 +8,7 @@ var pause_menu_instance
 var is_usingmap = false
 var is_usinginventory = false
 var scene_has_map = false
+var scene_has_cargo = false
 var movement_block_queue = 0
 
 signal gameloop_state(loopstate)
@@ -36,18 +37,45 @@ func LoadWindowSettings():
 	if !OS.window_fullscreen:
 		OS.window_size = Vector2(PlayerPrefs.get_pref("window_size", 1280).x,PlayerPrefs.get_pref("window_size", 720).y)
 		#OS.set_window_position(OS.get_screen_position(OS.get_current_screen()) + OS.get_screen_size()*0.5 - OS.get_window_size()*0.5)
-		
+	print("Screen DPI: %d" % [OS.get_screen_dpi()])
 
 func SaveWindowSettings():
 	PlayerPrefs.set_pref("window_fullscreen", OS.window_fullscreen)
-	if !OS.window_fullscreen:
-		PlayerPrefs.set_pref("window_size", {"x":OS.window_size.x,"y":OS.window_size.y})
+	#if !OS.window_fullscreen:
+	#	PlayerPrefs.set_pref("window_size", {"x":OS.window_size.x,"y":OS.window_size.y})
 
+func GetScaleByDPI(dpi = 96):
+	if dpi > 640:
+		return 2.75
+	if dpi > 560:
+		return 2.5
+	if dpi > 480:
+		return 2.25
+	if dpi > 400:
+		return 2
+	if dpi > 320:
+		return 1.75
+	if dpi > 240:
+		return 1.50
+	if dpi > 160:
+		return 1.25
+	if dpi > 80:
+		return 1
+	return 0.5
+	
 func _ready():
 	pause_menu_scene = load(pause_menu_path)
 	
 	$CanvasLayer/TextureButton.visible = is_gameloop
 	$CanvasLayer/MapButton.visible = is_gameloop && scene_has_map
+	$CanvasLayer/CargoButton.visible = is_gameloop && scene_has_cargo
+	SetUIDeadzones()
+	if OS.window_fullscreen:
+		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_VIEWPORT,  SceneTree.STRETCH_ASPECT_EXPAND, OS.window_size, GetScaleByDPI(OS.get_screen_dpi()) )
+	
+func SetUIDeadzones():
+	for obj in $CanvasLayer.get_children():
+		MovementEvent.add_deadzone(obj.name, obj.get_global_rect())
 
 
 func Pause():
@@ -58,6 +86,7 @@ func Pause():
 	EnableMovement(false)
 	get_tree().paused = true
 	$CanvasLayer/MapButton.visible = false
+	$CanvasLayer/CargoButton.visible = false
 
 
 func Unpause():
@@ -68,6 +97,7 @@ func Unpause():
 	EnableMovement(true)
 	emit_signal("pause_state", false)
 	$CanvasLayer/MapButton.visible = is_gameloop && scene_has_map
+	$CanvasLayer/CargoButton.visible = is_gameloop && scene_has_cargo
 
 
 func EnterGameLoop(is_loop):
@@ -75,6 +105,7 @@ func EnterGameLoop(is_loop):
 	emit_signal("gameloop_state",is_gameloop)
 	$CanvasLayer/TextureButton.visible = is_gameloop
 	$CanvasLayer/MapButton.visible = is_gameloop && scene_has_map
+	$CanvasLayer/CargoButton.visible = is_gameloop && scene_has_cargo
 	$WinLoseCheck.isInGame = is_gameloop
 	is_usingmap = false
 
@@ -105,6 +136,15 @@ func DisableMap():
 	scene_has_map = false
 	$CanvasLayer/MapButton.visible = is_gameloop && scene_has_map
 
+func EnableCargo():
+	scene_has_cargo = true
+	$CanvasLayer/CargoButton.visible = is_gameloop && scene_has_cargo
+
+func DisableCargo():
+	scene_has_cargo = false
+	$CanvasLayer/CargoButton.visible = is_gameloop && scene_has_cargo
+
+
 func togglePause():
 	if get_tree().paused:
 		Unpause()
@@ -132,7 +172,7 @@ func _process(_delta):
 		
 
 func InventoryToggle():
-	if !get_tree().paused:
+	if scene_has_cargo and !get_tree().paused:
 		AudioPlayer._play_UI_Button_Select()
 		is_usinginventory = !is_usinginventory
 		EnableMovement(!is_usinginventory)
@@ -164,3 +204,6 @@ func _on_MapButton_mouse_exited():
 
 func _on_MapButton_pressed():
 	MapToggle()
+
+func _on_CargoButton_pressed():
+	InventoryToggle()

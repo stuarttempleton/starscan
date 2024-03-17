@@ -3,18 +3,28 @@ extends VBoxContainer
 
 # Declare member variables here. Examples:
 var PathToItemUI = "res://Inventory/ItemUI_element.tscn"
+signal item_list_changed()
+var item_length_cache = 0
 
-
+func _process(delta):
+	if item_length_cache != get_children().size():
+		
+		print("Item list changed! from %d to %d" % [item_length_cache, get_child_count()])
+		item_length_cache = get_children().size()
+		emit_signal("item_list_changed")
+		
 # List management functions
 func ClearList():
 	for w in get_children():
 		w.queue_free()
+		remove_child(w)
 	pass
 
 func GetButtons():
 	var buttons = []
 	for w in get_children():
 		buttons.append(w.find_node("Button"))
+	print("Returning %d buttons" % buttons.size())
 	return buttons
 
 func LoadItem(_item, _context:int = 0):

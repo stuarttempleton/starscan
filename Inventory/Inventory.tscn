@@ -15,7 +15,7 @@
 [ext_resource path="res://GameNarrativeDisplay/BlurBackground.tscn" type="PackedScene" id=13]
 
 [node name="Control" type="CanvasLayer"]
-layer = 100
+layer = 12
 script = ExtResource( 1 )
 
 [node name="Nebula" parent="." instance=ExtResource( 10 )]
@@ -87,6 +87,7 @@ margin_top = 100.0
 margin_right = 600.0
 margin_bottom = 400.0
 rect_min_size = Vector2( 0, 300 )
+mouse_filter = 1
 size_flags_vertical = 3
 follow_focus = true
 scroll_horizontal_enabled = false

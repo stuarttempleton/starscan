@@ -7,6 +7,7 @@ func _ready():
 	if ShipData.Ship().FirstRun:
 		_on_FirstPlay()
 	GameController.EnableMap()
+	GameController.EnableCargo()
 	# warning-ignore:return_value_discarded
 	GameController.connect("map_state", self, "MapToggle")
 	

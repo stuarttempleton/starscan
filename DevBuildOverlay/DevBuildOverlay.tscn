@@ -14,8 +14,6 @@ layer = 128
 script = ExtResource( 1 )
 VersionNumber = "0.1"
 VersionClass = "ALPHA"
-UseBuildOverlay = false
-UseFPSCounter = false
 
 [node name="BuildNumber" type="Label" parent="."]
 self_modulate = Color( 1, 1, 1, 0.419608 )

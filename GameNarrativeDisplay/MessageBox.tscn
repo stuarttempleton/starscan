@@ -54,7 +54,7 @@ font_data = SubResource( 10 )
 
 [node name="MessageBox" type="CanvasLayer"]
 pause_mode = 2
-layer = 12
+layer = 13
 script = ExtResource( 1 )
 
 [node name="MessageBoxUI" type="Control" parent="."]
@@ -127,6 +127,7 @@ margin_top = 91.0
 margin_right = 600.0
 margin_bottom = 291.0
 rect_min_size = Vector2( 0, 200 )
+mouse_filter = 1
 size_flags_vertical = 3
 follow_focus = true
 scroll_horizontal_enabled = false
