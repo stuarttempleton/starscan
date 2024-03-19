@@ -18,6 +18,7 @@ var Texts = {
 var buttons = []
 var messageNodes = []
 var display_speed = 1.5
+var current_button = 0
 
 func _ready():
 	buttons = [
@@ -39,6 +40,7 @@ func SetMessageNodeVisibility(newState):
 
 
 func DisplayText(txt, array_buttons, button_selected = 0):
+	current_button = button_selected
 	emit_signal("DisplayState", true)
 	GameController.EnableMovement(false)
 	var message = txt if not Texts.has(txt) else Texts[txt]
@@ -86,11 +88,22 @@ func DisplayText(txt, array_buttons, button_selected = 0):
 func item_list_changed():
 	#rebuild menu buttons
 	var temp_button_list = []
+	var dialog_button_count = -1 # off by one
 	for button in buttons:
 		if button.visible:
 			temp_button_list.append(button)
+			dialog_button_count += 1
 	temp_button_list.append_array($MessageBoxUI/Vbox/Panel/Vbox/Scroll/ItemList.GetButtons())
+	
+	# set focus to correct button
 	var button_selected = max(0, GamepadMenu.menu_cursor[name] - 1)
+	# if we no longer have any items, use the current button on the dialog
+	if $MessageBoxUI/Vbox/Panel/Vbox/Scroll/ItemList.GetButtons().size() < 1: 
+		button_selected = current_button
+	# still some items in the queue
+	elif button_selected <= dialog_button_count:
+		button_selected += 1 
+	
 	GamepadMenu.remove_menu(name)
 	GamepadMenu.add_menu(name,temp_button_list, min(temp_button_list.size() - 1, button_selected))
 	$MessageBoxUI/Vbox/GamepadHint.dpad_visible((temp_button_list.size() > 1))	
