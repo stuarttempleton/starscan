@@ -3,6 +3,7 @@ extends Node2D
 export var planet_scene_path = ""
 var system
 var orbit_color = Color(0.2, 0.2, 0.2)
+var build_menu_on_complete = false
 
 
 func _ready():
@@ -54,7 +55,6 @@ func BuildSystem():
 	#Build orbits and planets
 	var i = 0
 	for planet in system.Planets:
-		#print(planet.Type)
 		var rng = RandomNumberGenerator.new()
 		rng.seed = planet.SurfaceSeednumber
 		
@@ -62,8 +62,16 @@ func BuildSystem():
 		orbital_radius += planet.RadialOffset
 		AddPlanetToMap(next_planet_center, planet.Size, planet.Type, i, planet.Name)
 		i += 1
+	if build_menu_on_complete:
+		EnableMenu()
 
-
+func EnableMenu():
+	#System is not ready
+	if (get_children().size() < system.Planets.size() + 1): # include the sun
+		build_menu_on_complete = true
+		return
+	GamepadMenu.add_menu( name ,get_children())
+	
 func AddPlanetToMap( planet_position, planet_size, planet_type, planet_id, planet_name ) :
 	var loaded_scene = load(planet_scene_path)
 	var planet = loaded_scene.instance()

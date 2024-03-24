@@ -68,6 +68,17 @@ func StoryResponse(_choice):
 	_setPOIInfo("Exhausted", "Exhausted")
 	pass
 
+# Respond to button/control focus stuff for gamepad input
+func grab_focus():
+	hover(position)
+	
+func release_focus():
+	unhover()
+	
+func select():
+	selected()
+
+
 func _process(delta):
 	if poi_node.scale.distance_to(ScaleToVector) <= 0.01:
 		poi_node.scale = ScaleToVector

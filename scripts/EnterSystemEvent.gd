@@ -13,3 +13,4 @@ func StartEvent():
 
 func ChoiceMade(_choice):
 	GameNarrativeDisplay.disconnect("ChoiceSelected",self,"ChoiceMade")
+	get_parent()._on_event_complete()

@@ -93,6 +93,9 @@ func _addPOINodes():
 		var poiScreenPos = _convertToScreenPos(Vector2(poiData.X, poiData.Y), maxPos, offset)
 		_addPOINode(poiScreenPos, poiData)
 
+func EnableMenu():
+	GamepadMenu.add_menu( name ,get_children())
+
 func _addPOINode( poiScreenPos, poiData ) :
 	var loaded_scene = load(poi_template_path)
 	var poi = loaded_scene.instance()

@@ -69,13 +69,21 @@ func activate_top_menu():
 		current_menu = menus.keys().back()
 		grab_focus()
 
+func release_focus():
+	if menus.size() > 0:
+		if Input.get_connected_joypads().size() > 0:
+			if menus[current_menu][menu_cursor[current_menu]].has_method("release_focus"):
+				menus[current_menu][menu_cursor[current_menu]].release_focus()
+
 func grab_focus():
 	if menus.size() > 0:
 		if Input.get_connected_joypads().size() > 0:
-			menus[current_menu][menu_cursor[current_menu]].grab_focus()
+			if menus[current_menu][menu_cursor[current_menu]].has_method("grab_focus"):
+				menus[current_menu][menu_cursor[current_menu]].grab_focus()
 
 func focus_next():
 	if menus.size() > 0:
+		release_focus()
 		menu_cursor[current_menu] += 1
 		if menu_cursor[current_menu] >= menus[current_menu].size():
 			menu_cursor[current_menu] = 0
@@ -83,13 +91,22 @@ func focus_next():
 
 func focus_previous():
 	if menus.size() > 0:
+		release_focus()
 		menu_cursor[current_menu] -= 1
 		if menu_cursor[current_menu] < 0:
 			menu_cursor[current_menu] = menus[current_menu].size() - 1
 		grab_focus()
+
+func select_current():
+	if menus.size() > 0:
+		if Input.get_connected_joypads().size() > 0:
+			if menus[current_menu][menu_cursor[current_menu]].has_method("select"):
+				menus[current_menu][menu_cursor[current_menu]].select()
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_left") || Input.is_action_just_pressed("ui_up"):
 		focus_previous()
 	elif Input.is_action_just_pressed("ui_right") || Input.is_action_just_pressed("ui_down"):
 		focus_next()
+	if Input.is_action_just_pressed("ui_accept"):
+		select_current()

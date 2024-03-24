@@ -24,6 +24,8 @@ func _generate_poi(planet, scan):
 		$PointsOfInterest.ClearPOINodes()
 	else:
 		$PointsOfInterest._generate(planet, scan)
+		GamepadMenu.remove_menu($PointsOfInterest.name)
+		GamepadMenu.add_menu($PointsOfInterest.name, $PointsOfInterest.get_children())
 
 
 func _show_dialog(planet):
@@ -56,4 +58,5 @@ func _process(_delta):
 func _on_LeaveOrbit(play_sfx = true):
 	if play_sfx:
 		AudioPlayer._play_UI_Button_Select()
+	GamepadMenu.remove_menu($PointsOfInterest.name)
 	SceneChanger.LoadScene(scene, 0.0, {"do_entry": false})

@@ -12,7 +12,12 @@ func _ready():
 		AudioPlayer.PlayBG(AudioPlayer.AUDIO_KEY.BG_SPACE)
 		AudioPlayer.PlayMusic(AudioPlayer.AUDIO_KEY.MUSIC_SYSTEM_MAP)
 		$EnterSystemEvent.StartEvent()
+	else:
+		_on_event_complete()
 	GameController.EnableCargo()
+	
+func _on_event_complete():
+	$SystemView/SolarSystem.EnableMenu()
 
 func PlanetHover(planet_position, planet_name):
 	$HoverUI/Label.text = planet_name
@@ -24,6 +29,7 @@ func PlanetUnhover():
 
 func ViewPlanet(_planetID):
 	AudioPlayer._play_UI_Button_Select()
+	GamepadMenu.remove_menu($SystemView/SolarSystem.name)
 	
 	var planet = $SystemView/SolarSystem.system.Planets[_planetID]
 	var scan = $SystemView/SolarSystem.system.Scan

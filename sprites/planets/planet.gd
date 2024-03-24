@@ -43,6 +43,16 @@ func planet_selected():
 	if (PlanetID >= 0):
 		get_parent().get_parent().get_parent().ViewPlanet(PlanetID)
 
+# Respond to button/control focus stuff for gamepad input
+func grab_focus():
+	planet_hover(position, PlanetName)
+
+func release_focus():
+	planet_unhover()
+
+func select():
+	planet_selected()
+
 
 func _process(delta):
 	if Planet.scale.distance_to(ScaleToVector) <= 0.01:
