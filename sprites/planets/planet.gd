@@ -60,7 +60,6 @@ func _process(delta):
 	else:
 		Planet.scale = Planet.scale.linear_interpolate(ScaleToVector, lerpSpeed * delta)
 
-
 func SetPlanetInfo(planet_type, planet_scale, planet_id, planet_name):
 	for _p in Planets.values():
 		get_node(_p).visible = false

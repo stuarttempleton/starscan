@@ -34,6 +34,9 @@ func _generate(planet, scan):
 	_applyScanToPOIs()
 	_addPOINodes()
 
+func _exit_tree():
+	GamepadMenu.remove_menu(name)
+
 func ClearPOINodes():
 	for poi in poi_nodes:
 		poi.queue_free()
@@ -75,7 +78,14 @@ func _generatePOIsOfType(poiType, count, rng):
 		poiData.ItemSeed = rng.randi()
 		Planet.POIs.append(poiData)
 		poi_scan_difficulties.append(poiData.ScanDifficulty)
-	
+
+func _get_visible_children():
+	var POI = []
+	for poi in get_children():
+		if poi.POIModel.PerceivedType != "Empty":
+			POI.append(poi)
+	return POI
+
 func _applyScanToPOIs():
 	for poi in Planet.POIs:
 		if Scan >= poi.ScanDifficulty:

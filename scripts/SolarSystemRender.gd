@@ -42,6 +42,8 @@ func _on_viewport_size_changed():
 func _draw():
 	BuildSystem()
 
+func _exit_tree():
+	GamepadMenu.remove_menu(name)
 
 func BuildSystem():
 	var center = Vector2(get_viewport().get_visible_rect().size.x/2, get_viewport().get_visible_rect().size.y/2)

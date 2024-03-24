@@ -25,7 +25,7 @@ func _generate_poi(planet, scan):
 	else:
 		$PointsOfInterest._generate(planet, scan)
 		GamepadMenu.remove_menu($PointsOfInterest.name)
-		GamepadMenu.add_menu($PointsOfInterest.name, $PointsOfInterest.get_children())
+		GamepadMenu.add_menu($PointsOfInterest.name, $PointsOfInterest._get_visible_children())
 
 
 func _show_dialog(planet):
