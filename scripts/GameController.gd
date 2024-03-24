@@ -54,11 +54,11 @@ func GetScaleByDPI(dpi = 96):
 	if dpi > 400:
 		return 2
 	if dpi > 320:
-		return 1.75
-	if dpi > 240:
 		return 1.50
-	if dpi > 160:
+	if dpi > 240:
 		return 1.25
+	if dpi > 160:
+		return 1
 	if dpi > 80:
 		return 1
 	return 0.5
