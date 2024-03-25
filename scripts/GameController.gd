@@ -69,9 +69,9 @@ func _ready():
 	$CanvasLayer/TextureButton.visible = is_gameloop
 	$CanvasLayer/MapButton.visible = is_gameloop && scene_has_map
 	$CanvasLayer/CargoButton.visible = is_gameloop && scene_has_cargo
-	SetUIDeadzones()
 	if OS.window_fullscreen:
 		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_VIEWPORT,  SceneTree.STRETCH_ASPECT_EXPAND, OS.window_size, GetScaleByDPI(OS.get_screen_dpi()) )
+	SetUIDeadzones()
 	
 func SetUIDeadzones():
 	for obj in $CanvasLayer.get_children():
