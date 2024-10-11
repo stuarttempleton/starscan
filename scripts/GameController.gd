@@ -51,7 +51,7 @@ func _ready():
 	$CanvasLayer/MapButton.visible = is_gameloop && scene_has_map
 	$CanvasLayer/CargoButton.visible = is_gameloop && scene_has_cargo
 	if OS.window_fullscreen:
-		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_VIEWPORT,  SceneTree.STRETCH_ASPECT_EXPAND, OS.window_size, PlayerPrefs.get_pref("window_scale", 1) )
+		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_DISABLED,  SceneTree.STRETCH_ASPECT_IGNORE, OS.window_size, PlayerPrefs.get_pref("window_scale", 1) )
 	SetUIDeadzones()
 	
 func SetUIDeadzones():
