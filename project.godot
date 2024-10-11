@@ -110,8 +110,6 @@ window/size/width=1280
 window/size/height=800
 window/size/resizable=false
 window/dpi/allow_hidpi=true
-window/stretch/mode="viewport"
-window/stretch/aspect="expand"
 
 [editor_plugins]
 

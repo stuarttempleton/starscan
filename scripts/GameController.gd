@@ -36,33 +36,14 @@ func LoadWindowSettings():
 	OS.window_fullscreen = PlayerPrefs.get_pref("window_fullscreen", true)
 	if !OS.window_fullscreen:
 		OS.window_size = Vector2(PlayerPrefs.get_pref("window_size", 1280).x,PlayerPrefs.get_pref("window_size", 720).y)
-		#OS.set_window_position(OS.get_screen_position(OS.get_current_screen()) + OS.get_screen_size()*0.5 - OS.get_window_size()*0.5)
-	print("Screen DPI: %d" % [OS.get_screen_dpi()])
+
 
 func SaveWindowSettings():
 	PlayerPrefs.set_pref("window_fullscreen", OS.window_fullscreen)
 	#if !OS.window_fullscreen:
 	#	PlayerPrefs.set_pref("window_size", {"x":OS.window_size.x,"y":OS.window_size.y})
 
-func GetScaleByDPI(dpi = 96):
-	if dpi > 640:
-		return 2.75
-	if dpi > 560:
-		return 2.5
-	if dpi > 480:
-		return 2.25
-	if dpi > 400:
-		return 2
-	if dpi > 320:
-		return 1.50
-	if dpi > 240:
-		return 1.25
-	if dpi > 160:
-		return 1
-	if dpi > 80:
-		return 1
-	return 0.5
-	
+
 func _ready():
 	pause_menu_scene = load(pause_menu_path)
 	
@@ -70,7 +51,7 @@ func _ready():
 	$CanvasLayer/MapButton.visible = is_gameloop && scene_has_map
 	$CanvasLayer/CargoButton.visible = is_gameloop && scene_has_cargo
 	if OS.window_fullscreen:
-		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_VIEWPORT,  SceneTree.STRETCH_ASPECT_EXPAND, OS.window_size, GetScaleByDPI(OS.get_screen_dpi()) )
+		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_VIEWPORT,  SceneTree.STRETCH_ASPECT_EXPAND, OS.window_size, PlayerPrefs.get_pref("window_scale", 1) )
 	SetUIDeadzones()
 	
 func SetUIDeadzones():
