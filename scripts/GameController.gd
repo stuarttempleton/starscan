@@ -5,8 +5,12 @@ export var pause_menu_path = ""
 var is_gameloop = false
 var pause_menu_scene
 var pause_menu_instance
+
+# toggles for displaying overlay scenes
 var is_usingmap = false
 var is_usinginventory = false
+var is_usingoptions = false
+
 var scene_has_map = false
 var scene_has_cargo = false
 var movement_block_queue = 0
@@ -15,6 +19,7 @@ signal gameloop_state(loopstate)
 signal map_state(mapstate)
 signal pause_state(pausestate)
 signal inventory_state(inventorystate)
+signal options_state(optionsstate)
 
 
 func _init():
@@ -38,10 +43,13 @@ func LoadWindowSettings():
 		OS.window_size = Vector2(PlayerPrefs.get_pref("window_size", 1280).x,PlayerPrefs.get_pref("window_size", 720).y)
 
 
+func SetViewScale():
+	if OS.window_fullscreen:
+		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_DISABLED,  SceneTree.STRETCH_ASPECT_IGNORE, OS.window_size, PlayerPrefs.get_pref("view_scale", 1) )
+
+
 func SaveWindowSettings():
 	PlayerPrefs.set_pref("window_fullscreen", OS.window_fullscreen)
-	#if !OS.window_fullscreen:
-	#	PlayerPrefs.set_pref("window_size", {"x":OS.window_size.x,"y":OS.window_size.y})
 
 
 func _ready():
@@ -50,8 +58,7 @@ func _ready():
 	$CanvasLayer/TextureButton.visible = is_gameloop
 	$CanvasLayer/MapButton.visible = is_gameloop && scene_has_map
 	$CanvasLayer/CargoButton.visible = is_gameloop && scene_has_cargo
-	if OS.window_fullscreen:
-		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_DISABLED,  SceneTree.STRETCH_ASPECT_IGNORE, OS.window_size, PlayerPrefs.get_pref("window_scale", 1) )
+	SetViewScale() #hack because tree node is not ready during init
 	SetUIDeadzones()
 	
 func SetUIDeadzones():
@@ -141,17 +148,21 @@ func _process(_delta):
 			MapToggle()
 		if Input.is_action_just_released("Inventory"):
 			InventoryToggle()
+		if Input.is_action_just_released("Options"):
+			OptionsToggle()
 	if Input.is_action_just_pressed("fullscreen_mode"):
-		PlayerPrefs.set_pref("window_fullscreen", !OS.window_fullscreen)
-		LoadWindowSettings()
-#		if get_viewport_rect().has_point(get_viewport().get_mouse_position()):
-#			if Input.get_connected_joypads().size() > 0:
-#				get_viewport().warp_mouse(get_viewport_rect().get_center())
-		SaveWindowSettings()
+		FullscreenToggle()
 	if Input.is_key_pressed(KEY_Q):
 		print("Mouse coords: %d,%d" %[get_viewport().get_mouse_position().x, get_viewport().get_mouse_position().y])
 		
 
+func OptionsToggle():
+	AudioPlayer._play_UI_Button_Select()
+	is_usingoptions = !is_usingoptions
+	EnableMovement(!is_usingoptions)
+	emit_signal("options_state",is_usingoptions)
+	
+	
 func InventoryToggle():
 	if scene_has_cargo and !get_tree().paused:
 		AudioPlayer._play_UI_Button_Select()
@@ -166,6 +177,13 @@ func MapToggle():
 		is_usingmap = !is_usingmap
 		EnableMovement(!is_usingmap)
 		emit_signal("map_state", is_usingmap)
+
+func FullscreenToggle():
+	PlayerPrefs.set_pref("window_fullscreen", !OS.window_fullscreen)
+	LoadWindowSettings()
+	SaveWindowSettings()
+	SetViewScale()
+	SetUIDeadzones()
 
 
 func _on_TextureButton_pressed():

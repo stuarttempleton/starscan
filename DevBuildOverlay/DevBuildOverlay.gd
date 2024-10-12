@@ -15,8 +15,14 @@ func _ready():
 	if UseBuildOverlay:
 		$BuildNumber.text = $BuildNumber.text % [VersionClass, VersionNumber]
 	else:
-		queue_free()
+		$BuildNumber.visible = false
+	SetFPSCounter(PlayerPrefs.get_pref("show_fps",false))
 
 func _process(delta):
 	if UseFPSCounter:
 		$FPSCount.set_text( "FPS: %d" % Engine.get_frames_per_second())
+		
+
+func SetFPSCounter(enabled):
+	UseFPSCounter = enabled
+	$FPSCount.visible = UseFPSCounter

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scripts/MainMenuController.gd" type="Script" id=1]
 [ext_resource path="res://sprites/starscan-logo.png" type="Texture" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://styles/MenuButton_Focus.tres" type="StyleBox" id=15]
 [ext_resource path="res://styles/TitleMenuButton_Normal.tres" type="StyleBox" id=16]
 [ext_resource path="res://fonts/menu_button_font.tres" type="DynamicFont" id=17]
+[ext_resource path="res://scripts/menu_button_options.gd" type="Script" id=18]
 [ext_resource path="res://GameNarrativeDisplay/GamepadHint.tscn" type="PackedScene" id=19]
 
 [sub_resource type="DynamicFontData" id=1]
@@ -75,7 +76,7 @@ stretch_mode = 4
 [node name="Buttons" type="VBoxContainer" parent="MenuUIContainer/Menu"]
 margin_top = 87.0
 margin_right = 880.0
-margin_bottom = 434.0
+margin_bottom = 485.0
 size_flags_vertical = 3
 custom_constants/separation = 10
 alignment = 1
@@ -162,11 +163,31 @@ text = "MAIN MENU"
 script = ExtResource( 6 )
 scene_to_load = "res://scenes/Title.tscn"
 
-[node name="Credits" type="Button" parent="MenuUIContainer/Menu/Buttons"]
+[node name="Options" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
 margin_top = 204.0
 margin_right = 880.0
 margin_bottom = 245.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 17 )
+custom_styles/hover = ExtResource( 9 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 15 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 8 )
+text = "OPTIONS"
+script = ExtResource( 18 )
+
+[node name="Credits" type="Button" parent="MenuUIContainer/Menu/Buttons"]
+self_modulate = Color( 1.1, 1.1, 1.1, 1 )
+margin_top = 255.0
+margin_right = 880.0
+margin_bottom = 296.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
@@ -185,9 +206,9 @@ scene_to_load = "res://scenes/credits.tscn"
 
 [node name="NameGenerator" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 255.0
+margin_top = 306.0
 margin_right = 880.0
-margin_bottom = 296.0
+margin_bottom = 347.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 17 )
@@ -202,9 +223,9 @@ scene_to_load = "res://name_generation/NameGenerationTest.tscn"
 
 [node name="Exit" type="Button" parent="MenuUIContainer/Menu/Buttons"]
 self_modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 306.0
+margin_top = 357.0
 margin_right = 880.0
-margin_bottom = 347.0
+margin_bottom = 398.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_colors/font_color_disabled = Color( 0.47451, 0.47451, 0.47451, 1 )
@@ -221,17 +242,18 @@ text = "QUIT"
 script = ExtResource( 3 )
 
 [node name="GamepadSpacer" type="ColorRect" parent="MenuUIContainer/Menu"]
-margin_top = 438.0
+margin_top = 489.0
 margin_right = 880.0
-margin_bottom = 448.0
+margin_bottom = 499.0
 rect_min_size = Vector2( 0, 10 )
 color = Color( 1, 1, 1, 0 )
 
 [node name="GamepadHint2" parent="MenuUIContainer/Menu" instance=ExtResource( 19 )]
 margin_left = 0.0
-margin_top = 452.0
+margin_top = 503.0
 margin_right = 880.0
-margin_bottom = 476.0
+margin_bottom = 527.0
 
+[connection signal="button_down" from="MenuUIContainer/Menu/Buttons/Options" to="MenuUIContainer/Menu/Buttons/Options" method="_on_Options_button_down"]
 [connection signal="button_down" from="MenuUIContainer/Menu/Buttons/Credits" to="MenuUIContainer/Menu/Buttons/Credits" method="_on_Credits_button_down"]
 [connection signal="pressed" from="MenuUIContainer/Menu/Buttons/NameGenerator" to="MenuUIContainer/Menu/Buttons/NameGenerator" method="_on_Credits_button_down"]

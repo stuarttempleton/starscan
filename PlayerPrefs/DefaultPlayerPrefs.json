@@ -1,4 +1,8 @@
 {
     "window_fullscreen":true,
-    "window_size":{"x":1280,"y":800}
+    "window_size":{"x":1280,"y":800},
+	"music": true,
+	"sfx": true,
+	"view_scale": 1,
+	"show_fps": false
 }

@@ -99,20 +99,24 @@ func StopMusic(): $MusicPlayer.stop()
 func PlayBG(key):
 	$BGPlayer.stream = load(Audio[key])
 	$BGPlayer.play()
+	$BGPlayer.stream_paused = !PlayerPrefs.get_pref("sfx",true)
 
 func PlayBG_2(key):
 	$BGPlayer2.stream = load(Audio[key])
 	$BGPlayer2.play()
+	$BGPlayer2.stream_paused = !PlayerPrefs.get_pref("sfx",true)
 
 
 func PlayMusic(key):
 	$MusicPlayer.stream = load(Audio[key])
 	$MusicPlayer.play()
+	$MusicPlayer.stream_paused = !PlayerPrefs.get_pref("music",true) 
 
 
 func PlaySFX(key):
 	$SFXPlayer.stream = load(Audio[key])
-	$SFXPlayer.play()
+	if PlayerPrefs.get_pref("sfx",true):
+		$SFXPlayer.play()
 
 
 func _play_UI_Button_Hover(): PlaySFX(AUDIO_KEY.UI_BUTTON_HOVER)
@@ -144,4 +148,11 @@ func FadeOutMusic(spd = 1.0):
 	fade_speed = spd
 	fade_out = true
 	doFade = true
+	pass
+
+func ChangePlaybackPrefs():
+	if PlayerPrefs.get_pref("sfx",false) :$SFXPlayer.stop() # it's a one off so we don't care.
+	$BGPlayer.stream_paused = !PlayerPrefs.get_pref("sfx",true)
+	$BGPlayer2.stream_paused = !PlayerPrefs.get_pref("sfx",true)
+	$MusicPlayer.stream_paused = !PlayerPrefs.get_pref("music",true)
 	pass
