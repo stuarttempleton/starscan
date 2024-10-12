@@ -103,10 +103,16 @@ func select_current():
 			if menus[current_menu][menu_cursor[current_menu]].has_method("select"):
 				menus[current_menu][menu_cursor[current_menu]].select()
 
+func type_disable_lr():
+	if menus.size() > 0:
+		if Input.get_connected_joypads().size() > 0:
+			return (menus[current_menu][menu_cursor[current_menu]] is HSlider)
+	return false # let it through
+
 func _process(_delta):
-	if Input.is_action_just_pressed("ui_left") || Input.is_action_just_pressed("ui_up"):
+	if Input.is_action_just_pressed("ui_left") && !type_disable_lr() || Input.is_action_just_pressed("ui_up"):
 		focus_previous()
-	elif Input.is_action_just_pressed("ui_right") || Input.is_action_just_pressed("ui_down"):
+	elif Input.is_action_just_pressed("ui_right") && !type_disable_lr() || Input.is_action_just_pressed("ui_down"):
 		focus_next()
 	if Input.is_action_just_pressed("ui_accept"):
 		select_current()

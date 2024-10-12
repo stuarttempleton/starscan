@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://styles/MenuButton_Focus.tres" type="StyleBox" id=1]
 [ext_resource path="res://styles/dialogPanel.tres" type="StyleBox" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://GameNarrativeDisplay/BlurBackground.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Options/OptionsMenu.gd" type="Script" id=11]
 [ext_resource path="res://Options/opt_header_font.tres" type="DynamicFont" id=12]
+[ext_resource path="res://GameNarrativeDisplay/GamepadHint.tscn" type="PackedScene" id=13]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 pause_mode = 2
@@ -33,9 +34,9 @@ custom_constants/separation = 0
 alignment = 1
 
 [node name="OptionsContainer" type="PanelContainer" parent="OptionsMenu"]
-margin_top = 98.0
+margin_top = 81.0
 margin_right = 640.0
-margin_bottom = 558.0
+margin_bottom = 541.0
 rect_min_size = Vector2( 0, 460 )
 custom_styles/panel = ExtResource( 2 )
 
@@ -202,9 +203,9 @@ custom_fonts/font = ExtResource( 8 )
 text = "Sound Effects"
 
 [node name="ButtonsContainer" type="PanelContainer" parent="OptionsMenu"]
-margin_top = 558.0
+margin_top = 541.0
 margin_right = 640.0
-margin_bottom = 630.0
+margin_bottom = 613.0
 custom_styles/panel = ExtResource( 7 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="OptionsMenu/ButtonsContainer"]
@@ -238,6 +239,19 @@ custom_styles/focus = ExtResource( 1 )
 custom_styles/disabled = ExtResource( 5 )
 custom_styles/normal = ExtResource( 3 )
 text = "DEFAULTS"
+
+[node name="GamepadSpacer" type="ColorRect" parent="OptionsMenu"]
+margin_top = 613.0
+margin_right = 640.0
+margin_bottom = 623.0
+rect_min_size = Vector2( 0, 10 )
+color = Color( 1, 1, 1, 0 )
+
+[node name="GamepadHint" parent="OptionsMenu" instance=ExtResource( 13 )]
+margin_left = 0.0
+margin_top = 623.0
+margin_right = 640.0
+margin_bottom = 647.0
 
 [connection signal="toggled" from="OptionsMenu/OptionsContainer/VBoxContainer/ScrollContainer/OptionList/FullscreenButton" to="." method="_on_CheckButton_toggled"]
 [connection signal="drag_ended" from="OptionsMenu/OptionsContainer/VBoxContainer/ScrollContainer/OptionList/Scale/HSlider" to="." method="_on_HSlider_drag_ended"]
