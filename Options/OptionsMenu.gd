@@ -77,5 +77,6 @@ func _on_HSlider_drag_ended(value_changed):
 
 
 func _on_FPSButton_toggled(button_pressed):
+	AudioPlayer._play_UI_Button_Select()
 	PlayerPrefs.set_pref("show_fps", button_pressed)
 	DevBuildOverlay.SetFPSCounter(button_pressed)
