@@ -28,7 +28,7 @@ func ShowInventory(state:bool=true):
 	$BlurBackground.visible = state
 	
 	
-func BuildInventory():
+func BuildInventory(_qty = 0):
 	# Clear existing stuff
 	$InventoryUI/CargoContainer/VBoxContainer/ScrollContainer/ItemList.ClearList()
 	

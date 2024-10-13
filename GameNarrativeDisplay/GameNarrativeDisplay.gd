@@ -81,11 +81,12 @@ func DisplayText(txt, array_buttons, button_selected = 0):
 	var temp_button_list = []
 	temp_button_list.append_array(buttons.slice(0,i - 1))
 	temp_button_list.append_array($MessageBoxUI/Vbox/Panel/Vbox/Scroll/ItemList.GetButtons())
+	GamepadMenu.remove_menu(name)
 	GamepadMenu.add_menu(name,temp_button_list, min(temp_button_list.size() - 1, button_selected))
 	$MessageBoxUI/Vbox/GamepadHint.dpad_visible((array_buttons.size() > 1))
 
 
-func item_list_changed():
+func item_list_changed(qty_changed):
 	#rebuild menu buttons
 	var temp_button_list = []
 	var dialog_button_count = -1 # off by one
@@ -98,10 +99,10 @@ func item_list_changed():
 	# set focus to correct button
 	var button_selected = max(0, GamepadMenu.menu_cursor[name] - 1)
 	# if we no longer have any items, use the current button on the dialog
-	if $MessageBoxUI/Vbox/Panel/Vbox/Scroll/ItemList.GetButtons().size() < 1: 
+	if $MessageBoxUI/Vbox/Panel/Vbox/Scroll/ItemList.GetButtons().size() < 1 || qty_changed > 0: 
 		button_selected = current_button
 	# still some items in the queue
-	elif button_selected <= dialog_button_count:
+	elif button_selected <= dialog_button_count: #if change is increase, dont's sweat it
 		button_selected += 1 
 	
 	GamepadMenu.remove_menu(name)
