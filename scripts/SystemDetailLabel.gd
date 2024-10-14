@@ -1,9 +1,9 @@
-extends Label
+extends RichTextLabel
 
 
 export var main_boiler_plate = "System %s...\r\nScan confidence: %s\r\nKnown planets: %d\r\n"
 export var planet_sub_boiler_plate = "%s: %s, %s"
-export var highlight_boiler_plate = "<b>%s</b>"
+export var highlight_boiler_plate = "[b]%s[/b]"
 
 var display_speed = 0.5
 var system
@@ -39,4 +39,4 @@ func UpdateSystemText(highlight_planet = ""):
 		if highlight_planet == planet.Name:
 			planetText = highlight_boiler_plate % planetText
 		details = "%s\r\n%s" % [details, planetText]
-	text = details
+	bbcode_text = details
