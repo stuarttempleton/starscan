@@ -16,12 +16,14 @@ func _ready():
 		$OptionsMenu/ButtonsContainer/HBoxContainer/Done,
 		$OptionsMenu/ButtonsContainer/HBoxContainer/Defaults
 	]
+	# warning-ignore:return_value_discarded
 	GameController.connect("options_state", self, "ShowOptionsMenu")
 	ShowOptionsMenu(false)
 
 
 func ShowOptionsMenu(state:bool=true):
 	if state:
+		# warning-ignore:return_value_discarded
 		GameController.connect("pause_state", self, "HandleUnPauseEvent")
 		MovementEvent.add_deadzone(name, $OptionsMenu.get_global_rect())
 		is_dragging = false # just in case
@@ -34,7 +36,8 @@ func ShowOptionsMenu(state:bool=true):
 		
 		GamepadMenu.add_menu(name, menu_items)
 	else:
-		GameController.disconnect("pause_state", self, "HandleUnPauseEvent")
+		if GameController.is_connected("pause_state", self, "HandleUnPauseEvent"):
+			GameController.disconnect("pause_state", self, "HandleUnPauseEvent")
 		MovementEvent.remove_deadzone(name)
 		GamepadMenu.remove_menu(name)
 	$OptionsMenu.visible = state
@@ -56,7 +59,7 @@ func _on_Defaults_pressed():
 	$OptionsMenu/OptionsContainer/VBoxContainer/ScrollContainer/OptionList/Scale/HSlider.value = 1
 
 
-func _on_CheckButton_toggled(button_pressed):
+func _on_CheckButton_toggled(_button_pressed):
 	AudioPlayer._play_UI_Button_Select()
 	GameController.FullscreenToggle()
 
@@ -91,7 +94,8 @@ func _on_HSlider_drag_started():
 func _on_HSlider_drag_ended(value_changed):
 	is_dragging = false
 	#kinda hacky, but it makes drag and select value work w/out shaking the screen with scaling
-	_on_HSlider_value_changed($OptionsMenu/OptionsContainer/VBoxContainer/ScrollContainer/OptionList/Scale/HSlider.value)
+	if value_changed:
+		_on_HSlider_value_changed($OptionsMenu/OptionsContainer/VBoxContainer/ScrollContainer/OptionList/Scale/HSlider.value)
 
 
 func _on_FPSButton_toggled(button_pressed):

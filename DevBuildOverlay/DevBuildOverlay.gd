@@ -18,7 +18,7 @@ func _ready():
 		$BuildNumber.visible = false
 	SetFPSCounter(PlayerPrefs.get_pref("show_fps",false))
 
-func _process(delta):
+func _process(_delta):
 	if UseFPSCounter:
 		$FPSCount.set_text( "FPS: %d" % Engine.get_frames_per_second())
 		

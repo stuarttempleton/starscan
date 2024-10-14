@@ -6,7 +6,7 @@ var PathToItemUI = "res://Inventory/ItemUI_element.tscn"
 signal item_list_changed(qty_change)
 var item_length_cache = 0
 
-func _process(delta):
+func _process(_delta):
 	if item_length_cache != get_children().size():
 		print("Item list changed! from %d to %d" % [item_length_cache, get_child_count()])
 		var qty =  get_child_count() - item_length_cache

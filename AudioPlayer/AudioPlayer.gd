@@ -88,6 +88,7 @@ export var Audio = {
 #
 
 func _ready():
+	# warning-ignore:return_value_discarded
 	GameController.connect("pause_state", self, "ChangePlaybackPrefs")
 
 func StopBG(): $BGPlayer.stop()

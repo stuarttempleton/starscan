@@ -31,6 +31,7 @@ func _ready():
 		$MessageBoxUI
 	]
 	SetMessageNodeVisibility(false)
+	# warning-ignore:return_value_discarded
 	$MessageBoxUI/Vbox/Panel/Vbox/Scroll/ItemList.connect("item_list_changed",self,"item_list_changed")
 
 

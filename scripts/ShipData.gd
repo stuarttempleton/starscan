@@ -168,7 +168,7 @@ func RemoveQTYItemsFromInventory(_itemType:int = 0, _qty = 0):
 			break
 	return qty
 
-func PayResourcesDefaultToCrew(resourcesToPay, crewLostPerUnpaidResource):
+func PayResourcesDefaultToCrew(resourcesToPay, _crewLostPerUnpaidResource):
 	var paid = {
 		"Resources" : resourcesToPay,
 		"Crew" : 0

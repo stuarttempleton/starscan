@@ -23,9 +23,11 @@ func PlanetHover(planet_position, planet_name):
 	$HoverUI/Label.text = planet_name
 	$HoverUI.set_position(Vector2(planet_position.x - $HoverUI.get_rect().size.x/2, planet_position.y - $HoverUI.get_rect().size.x/2))
 	$HoverUI.visible = true
+	$SystemView/Control/SystemDetailLabel.UpdateSystemText(planet_name)
 
 func PlanetUnhover():
 	$HoverUI.visible = false
+	$SystemView/Control/SystemDetailLabel.UpdateSystemText()
 
 func ViewPlanet(_planetID):
 	AudioPlayer._play_UI_Button_Select()

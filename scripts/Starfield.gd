@@ -19,7 +19,7 @@ func _ready():
 	avatar = $"../ShipAvatarView/ShipAvatar"
 	GameController.connect("map_state", self, "MapToggle")
 
-func _process(delta):
+func _process(_delta):
 	if avatar.CurrentSpeed > 0:
 		update()
 	if cached_zoom != camera.zoom:
@@ -70,5 +70,5 @@ func draw_circle_arc(center, radius, angle_from, angle_to, color):
 	for index_point in range(nb_points):
 		draw_line(points_arc[index_point], points_arc[index_point + 1], color)
 
-func MapToggle(usemap):
+func MapToggle(_usemap):
 	update()
