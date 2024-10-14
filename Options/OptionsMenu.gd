@@ -18,12 +18,11 @@ func _ready():
 	]
 	GameController.connect("options_state", self, "ShowOptionsMenu")
 	ShowOptionsMenu(false)
-	print("Done: %s" % [($OptionsMenu/ButtonsContainer/HBoxContainer/Done is HSlider)])
-	print("Slider: %s" % [($OptionsMenu/OptionsContainer/VBoxContainer/ScrollContainer/OptionList/Scale/HSlider is HSlider)])
 
 
 func ShowOptionsMenu(state:bool=true):
 	if state:
+		GameController.connect("pause_state", self, "HandleUnPauseEvent")
 		MovementEvent.add_deadzone(name, $OptionsMenu.get_global_rect())
 		is_dragging = false # just in case
 		last_val = PlayerPrefs.get_pref("view_scale",1) # stash this early so that the slider doesn't go bonkers
@@ -35,11 +34,15 @@ func ShowOptionsMenu(state:bool=true):
 		
 		GamepadMenu.add_menu(name, menu_items)
 	else:
+		GameController.disconnect("pause_state", self, "HandleUnPauseEvent")
 		MovementEvent.remove_deadzone(name)
 		GamepadMenu.remove_menu(name)
 	$OptionsMenu.visible = state
 	$BlurBackground.visible = state
 
+func HandleUnPauseEvent(state:bool=false):
+	if !state: #if unpause is sent while the options is up, someone has closed the menu below us.
+		GameController.OptionsToggle()
 
 func _on_Done_pressed():
 	GameController.OptionsToggle()

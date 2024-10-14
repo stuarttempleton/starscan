@@ -78,7 +78,6 @@ export var Audio = {
 	
 	AUDIO_KEY.CARGO_TURN_IN:"res://Audio/UI/290380__littlerobotsoundfactory__slide-electronic-00.ogg",
 	AUDIO_KEY.CARGO_DESTROY:"res://Audio/UI/290380__littlerobotsoundfactory__slide-electronic-00.ogg"
-	
 }
 
 
@@ -89,7 +88,7 @@ export var Audio = {
 #
 
 func _ready():
-	pass # Replace with function body.
+	GameController.connect("pause_state", self, "ChangePlaybackPrefs")
 
 func StopBG(): $BGPlayer.stop()
 func StopBG_2(): $BGPlayer2.stop()
@@ -99,18 +98,18 @@ func StopMusic(): $MusicPlayer.stop()
 func PlayBG(key):
 	$BGPlayer.stream = load(Audio[key])
 	$BGPlayer.play()
-	$BGPlayer.stream_paused = !PlayerPrefs.get_pref("sfx",true)
+	ChangePlaybackPrefs()
 
 func PlayBG_2(key):
 	$BGPlayer2.stream = load(Audio[key])
 	$BGPlayer2.play()
-	$BGPlayer2.stream_paused = !PlayerPrefs.get_pref("sfx",true)
+	ChangePlaybackPrefs()
 
 
 func PlayMusic(key):
 	$MusicPlayer.stream = load(Audio[key])
 	$MusicPlayer.play()
-	$MusicPlayer.stream_paused = !PlayerPrefs.get_pref("music",true) 
+	ChangePlaybackPrefs()
 
 
 func PlaySFX(key):
@@ -140,7 +139,6 @@ func _process(delta):
 		elif fade_counter > 1:
 			fade_counter = 1
 			doFade = false #done done!
-		#AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear2db(fade_counter))
 		$MusicPlayer.volume_db = linear2db(fade_counter)
 
 func FadeOutMusic(spd = 1.0):
@@ -150,9 +148,8 @@ func FadeOutMusic(spd = 1.0):
 	doFade = true
 	pass
 
-func ChangePlaybackPrefs():
+func ChangePlaybackPrefs(_state = true):
 	if PlayerPrefs.get_pref("sfx",false) :$SFXPlayer.stop() # it's a one off so we don't care.
 	$BGPlayer.stream_paused = !PlayerPrefs.get_pref("sfx",true)
 	$BGPlayer2.stream_paused = !PlayerPrefs.get_pref("sfx",true)
 	$MusicPlayer.stream_paused = !PlayerPrefs.get_pref("music",true)
-	pass
