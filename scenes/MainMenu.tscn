@@ -69,14 +69,14 @@ fit_content_height = true
 
 [node name="TextureRect" type="TextureRect" parent="MenuUIContainer/Menu"]
 margin_right = 880.0
-margin_bottom = 83.0
+margin_bottom = 84.0
 texture = ExtResource( 2 )
 stretch_mode = 4
 
 [node name="Buttons" type="VBoxContainer" parent="MenuUIContainer/Menu"]
-margin_top = 87.0
+margin_top = 88.0
 margin_right = 880.0
-margin_bottom = 485.0
+margin_bottom = 486.0
 size_flags_vertical = 3
 custom_constants/separation = 10
 alignment = 1
@@ -242,17 +242,17 @@ text = "QUIT"
 script = ExtResource( 3 )
 
 [node name="GamepadSpacer" type="ColorRect" parent="MenuUIContainer/Menu"]
-margin_top = 489.0
+margin_top = 490.0
 margin_right = 880.0
-margin_bottom = 499.0
+margin_bottom = 500.0
 rect_min_size = Vector2( 0, 10 )
 color = Color( 1, 1, 1, 0 )
 
 [node name="GamepadHint2" parent="MenuUIContainer/Menu" instance=ExtResource( 19 )]
 margin_left = 0.0
-margin_top = 503.0
+margin_top = 504.0
 margin_right = 880.0
-margin_bottom = 527.0
+margin_bottom = 528.0
 
 [connection signal="button_down" from="MenuUIContainer/Menu/Buttons/Options" to="MenuUIContainer/Menu/Buttons/Options" method="_on_Options_button_down"]
 [connection signal="button_down" from="MenuUIContainer/Menu/Buttons/Credits" to="MenuUIContainer/Menu/Buttons/Credits" method="_on_Credits_button_down"]
