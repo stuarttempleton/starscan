@@ -96,9 +96,11 @@ scale_amount_random = 1.0
 color_ramp = SubResource( 2 )
 
 [node name="Audio" type="AudioStreamPlayer" parent="ShipAvatar/Warpdrive"]
+bus = "SFX"
 
 [node name="SpeedShift" type="AudioStreamPlayer" parent="ShipAvatar/Warpdrive"]
 stream = ExtResource( 5 )
+bus = "SFX"
 
 [node name="Thruster" type="CPUParticles2D" parent="ShipAvatar"]
 position = Vector2( -32, -16 )
@@ -129,6 +131,7 @@ scale_amount_random = 1.0
 color_ramp = SubResource( 3 )
 
 [node name="Audio" type="AudioStreamPlayer2D" parent="ShipAvatar/Thruster"]
+bus = "SFX"
 
 [node name="ship_test_light1" type="Sprite" parent="ShipAvatar"]
 rotation = -1.5708
@@ -241,6 +244,7 @@ color_ramp = SubResource( 6 )
 
 [node name="Audio" type="AudioStreamPlayer2D" parent="ShipAvatar/LSS_Transporter"]
 stream = ExtResource( 6 )
+bus = "SFX"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShipAvatar"]
 shape = SubResource( 7 )
