@@ -86,10 +86,18 @@ export var Audio = {
 # Music player is for looping, long play music
 # SFX player is for short samples
 #
+var SFX_BUS_ID
+var MUSIC_BUS_ID
+var BACKGROUND_BUS_ID
+var ANOMALY_BUS_ID
 
 func _ready():
 	# warning-ignore:return_value_discarded
 	GameController.connect("pause_state", self, "ChangePlaybackPrefs")
+	SFX_BUS_ID = AudioServer.get_bus_index("SFX")
+	MUSIC_BUS_ID = AudioServer.get_bus_index("Music")
+	BACKGROUND_BUS_ID = AudioServer.get_bus_index("Background")
+	ANOMALY_BUS_ID = AudioServer.get_bus_index("Anomaly")
 
 func StopBG(): $BGPlayer.stop()
 func StopBG_2(): $BGPlayer2.stop()
@@ -115,8 +123,7 @@ func PlayMusic(key):
 
 func PlaySFX(key):
 	$SFXPlayer.stream = load(Audio[key])
-	if PlayerPrefs.get_pref("sfx",true):
-		$SFXPlayer.play()
+	$SFXPlayer.play()
 
 
 func _play_UI_Button_Hover(): PlaySFX(AUDIO_KEY.UI_BUTTON_HOVER)
@@ -150,7 +157,7 @@ func FadeOutMusic(spd = 1.0):
 	pass
 
 func ChangePlaybackPrefs(_state = true):
-	if PlayerPrefs.get_pref("sfx",false) :$SFXPlayer.stop() # it's a one off so we don't care.
-	$BGPlayer.stream_paused = !PlayerPrefs.get_pref("sfx",true)
-	$BGPlayer2.stream_paused = !PlayerPrefs.get_pref("sfx",true)
-	$MusicPlayer.stream_paused = !PlayerPrefs.get_pref("music",true)
+	AudioServer.set_bus_mute(SFX_BUS_ID, !PlayerPrefs.get_pref("sfx",true))
+	AudioServer.set_bus_mute(BACKGROUND_BUS_ID, !PlayerPrefs.get_pref("sfx",true))
+	AudioServer.set_bus_mute(ANOMALY_BUS_ID, !PlayerPrefs.get_pref("sfx",true))
+	AudioServer.set_bus_mute(MUSIC_BUS_ID, !PlayerPrefs.get_pref("music",true))
