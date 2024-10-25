@@ -8,6 +8,7 @@ var avatar
 var cached_zoom = Vector2.ZERO
 export var NebulaPath = ""
 export var WormholePath = ""
+var systems = [] #cache for draw
 
 func _ready():
 	GameController.EnterGameLoop(true)
@@ -18,13 +19,14 @@ func _ready():
 	camera = $"../ShipAvatarView/ShipAvatar/Camera2D"
 	avatar = $"../ShipAvatarView/ShipAvatar"
 	GameController.connect("map_state", self, "MapToggle")
+	BuildStarmapFromView()
 
 func _process(_delta):
 	if avatar.CurrentSpeed > 0:
-		update()
+		BuildStarmapFromView()
 	if cached_zoom != camera.zoom:
 		cached_zoom = camera.zoom
-		update()
+		BuildStarmapFromView()
 
 func AddWormholeToMap(pos):
 	var loaded_scene = load(WormholePath)
@@ -40,15 +42,17 @@ func AddNebulaToMap(pos,size):
 	
 	nebula.position = pos
 	nebula.scale *= Vector2(nebula.scale.x * size, nebula.scale.y * size)
-	
-func _draw():
+
+func BuildStarmapFromView():
 	var ShipPosition = ShipData.GetPosition()
 	var ScreenRect = get_viewport_rect()
 	ScreenRect.size = ScreenRect.size * camera.zoom * 1.5
 	ScreenRect.position = ShipPosition - ScreenRect.size * 0.5
 	
-	var systems = StarMapData.AllSystemsInRect(ScreenRect)
-	
+	systems = StarMapData.AllSystemsInRect(ScreenRect)
+	update()
+
+func _draw():
 	for system in systems :
 		AddSystemToMap(system)
 
@@ -71,4 +75,4 @@ func draw_circle_arc(center, radius, angle_from, angle_to, color):
 		draw_line(points_arc[index_point], points_arc[index_point + 1], color)
 
 func MapToggle(_usemap):
-	update()
+	BuildStarmapFromView()
