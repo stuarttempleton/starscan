@@ -319,17 +319,22 @@ func AllSystemsInRadius(point, radius, systemList = StarMap.Systems, useMapScale
 func SystemHasOutpost(system):
 	return SystemHasMarker(system, "HasOutpost")
 
-
+var prev_origin
+var NearestOutpostSystem
 func GetNearestOutpostSystem(origin):
-	var NearestOutpostSystem
 	var previous_distance = -1
 	
-	for system in StarMap.Systems :
-		if SystemHasOutpost(system):
-			var distance = origin.distance_to(Vector2(system.X, system.Y))
-			if (distance < previous_distance or previous_distance < 0):
-				previous_distance = distance
-				NearestOutpostSystem = system
+	# return cached if we haven't moved much
+	if NearestOutpostSystem && prev_origin && origin.distance_to(prev_origin) * MapScale < 145: 
+		pass #pass through to return
+	else:
+		prev_origin = origin
+		for system in StarMap.Systems :
+			if SystemHasOutpost(system):
+				var distance = origin.distance_to(Vector2(system.X, system.Y))
+				if (distance < previous_distance or previous_distance < 0):
+					previous_distance = distance
+					NearestOutpostSystem = system
 	return NearestOutpostSystem
 
 func GetDistanceToSystem(origin, system):

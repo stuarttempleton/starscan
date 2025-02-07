@@ -5,6 +5,8 @@ export var nebula_detail_boilerplate = "Scan: %s\r\nDanger: %s\r\nDestination: %
 
 var DisplayedSystem
 var NarrativeYield = false
+var poll_rate = 0
+var poll_timer = 0
 
 func _ready():
 	# warning-ignore:return_value_discarded
@@ -26,12 +28,15 @@ func NearestBody():
 		
 	return body
 
-func _process(_delta):
-	var body = NearestBody()
-	if (body.distance * 1000 < 3 ):
-		InRange(body.system)
-	else:
-		NotInRange()
+func _process(delta):
+	poll_timer += delta
+	if poll_timer > poll_rate:
+		poll_timer = 0
+		var body = NearestBody()
+		if (body.distance * 1000 < 3 ):
+			InRange(body.system)
+		else:
+			NotInRange()
 
 func ScanTextHelper(scan):
 	if scan < 0.001:
