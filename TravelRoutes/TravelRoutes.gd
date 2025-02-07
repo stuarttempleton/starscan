@@ -29,7 +29,7 @@ var RouteLists = {
 	}
 }
 
-var poll_rate = 0
+var poll_rate = 0.1
 var poll_timer = 0
 var camera
 var shipavatar

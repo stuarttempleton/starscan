@@ -5,7 +5,7 @@ export var nebula_detail_boilerplate = "Scan: %s\r\nDanger: %s\r\nDestination: %
 
 var DisplayedSystem
 var NarrativeYield = false
-var poll_rate = 0
+var poll_rate = 0.1
 var poll_timer = 0
 
 func _ready():
