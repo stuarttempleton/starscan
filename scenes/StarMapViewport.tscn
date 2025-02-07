@@ -52,6 +52,7 @@ light_mask = -2147483647
 script = ExtResource( 6 )
 
 [node name="VFX Scene" parent="." instance=ExtResource( 4 )]
+visible = true
 
 [node name="BoundaryTop" parent="." instance=ExtResource( 9 )]
 margin_right = 500.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://planet_maps/HeightMap.gd" type="Script" id=1]
 [ext_resource path="res://sprites/smokeparticle.png" type="Texture" id=2]
@@ -71,25 +71,6 @@ font_data = SubResource( 9 )
 [sub_resource type="Gradient" id=11]
 offsets = PoolRealArray( 0, 0.00552486, 0.370166, 0.690608, 1 )
 colors = PoolColorArray( 1, 1, 1, 0.091954, 1, 1, 1, 0, 2, 2, 2, 1, 1.90196, 1.90196, 1.90196, 1, 1, 1, 1, 0 )
-
-[sub_resource type="GradientTexture" id=12]
-gradient = SubResource( 11 )
-
-[sub_resource type="ParticlesMaterial" id=13]
-emission_shape = 2
-emission_box_extents = Vector3( 400, 300, 1 )
-flag_disable_z = true
-direction = Vector3( 0, 0, 0 )
-gravity = Vector3( 0, 0, 0 )
-angular_velocity = 1.0
-angular_velocity_random = 1.0
-orbit_velocity = 0.01
-orbit_velocity_random = 0.0
-angle = 15.9
-angle_random = 1.0
-scale = 3.0
-scale_random = 1.0
-color_ramp = SubResource( 12 )
 
 [node name="PlanetSurface" type="Control"]
 anchor_right = 1.0
@@ -170,15 +151,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Particles2D" type="Particles2D" parent="PlanetSurfaceMap"]
+[node name="Particles2D" type="CPUParticles2D" parent="PlanetSurfaceMap"]
 visible = false
 self_modulate = Color( 1, 1, 1, 0.2 )
 position = Vector2( 512, 320 )
 amount = 10
 lifetime = 20.0
 preprocess = 10.0
-process_material = SubResource( 13 )
 texture = ExtResource( 2 )
+emission_shape = 2
+emission_rect_extents = Vector2( 400, 300 )
+direction = Vector2( 0, 0 )
+gravity = Vector2( 0, 0 )
+angular_velocity = 1.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.01
+angle = 15.9
+angle_random = 1.0
+scale_amount = 3.0
+scale_amount_random = 1.0
+color_ramp = SubResource( 11 )
 
 [node name="OutpostDialog" type="Node2D" parent="."]
 script = ExtResource( 3 )

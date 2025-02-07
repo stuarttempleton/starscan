@@ -82,9 +82,6 @@ margin_bottom = 15.0
 mouse_filter = 1
 size_flags_vertical = 0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 ship_value_key = "Crew"
 ship_capacity_key = "CrewCapacity"
 warn_fraction = 0.2
@@ -181,9 +178,6 @@ margin_bottom = 34.0
 mouse_filter = 1
 size_flags_vertical = 0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 ship_value_key = "Fuel"
 ship_capacity_key = "FuelCapacity"
 warn_fraction = 0.2
