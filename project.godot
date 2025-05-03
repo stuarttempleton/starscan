@@ -10,7 +10,7 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
-"class": "ArtifactNameGenerator",
+"class": "ArtifactDescriptorGenerator",
 "language": "GDScript",
 "path": "res://name_generation/Artifacts.gd"
 }, {
@@ -60,7 +60,7 @@ _global_script_classes=[ {
 "path": "res://scripts/SysInfo_scan_button.gd"
 } ]
 _global_script_class_icons={
-"ArtifactNameGenerator": "",
+"ArtifactDescriptorGenerator": "",
 "BaseItem": "",
 "GamepadButton": "",
 "ItemUI_element": "",
@@ -85,6 +85,7 @@ config/windows_native_icon="res://AppIcon/icon.ico"
 PlayerPrefs="*res://PlayerPrefs/PlayerPrefs.tscn"
 ProfanityFilter="*res://no-no-words/ProfanityFilter.tscn"
 WordGenerator="*res://name_generation/WordGenerator.tscn"
+LanguageGenerator="*res://name_generation/LanguageGenerator.gd"
 ItemFactory="*res://ItemFactory/ItemFactory.tscn"
 ShipData="*res://scenes/ShipData.tscn"
 StarMapData="*res://scenes/StarMapData.tscn"
