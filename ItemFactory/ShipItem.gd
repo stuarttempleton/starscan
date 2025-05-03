@@ -45,7 +45,7 @@ func _generate(_seed:int = randi(), _opts = {}):
 	item.FullDesignation = "%s-%s-%s" % [
 		item.Disposition.left(3).trim_suffix("-").to_upper(),
 		item.Designation,
-		WordGenerator.RawLetters(1).to_upper()
+		WordGenerator.RawLetters(1, _seed).to_upper()
 		]
 	
 #	var Ship = {
