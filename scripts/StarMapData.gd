@@ -131,6 +131,12 @@ func Systems() :
 	else:
 		return StarMap.Systems
 
+func Cultures():
+	if !Loaded:
+		print("Starmap Not Loaded! FAILING ON PURPOSE FIX THIS")
+	else:
+		return StarMap.Cultures
+
 func GetOutpost(system):
 	for planet in system.Planets:
 		if PlanetTypes[8] == planet.Type:
@@ -439,6 +445,39 @@ func AllPlanetsVisited(system):
 			visited = false
 	return visited
 
+func GetCultureForSystem(system):
+	# System culture = territory -> Rand(star content seed)
+	# Example use: print("The %s system is controlled by The %s" % [system.Name, StarMapData.GetCultureForSystem(system).Name])
+	
+	if system.has("Culture"):
+		return Cultures()[system.Culture]
+		
+	# Need to borrow one, use ContentSeed if available!
+	var rng = RandomNumberGenerator.new()
+	rng.seed = system.ContentSeed if system.has("ContentSeed") else randi() # just keep it working
+	var culture_index = rng.randi() % Cultures().size()
+	
+	# Stash it for next time!
+	system.Culture = culture_index
+	
+	return Cultures()[culture_index]
+
+func GetCultureForPlanet(planet):
+	# Planet culture = planet or parent
+	# Example use: print("%s is controlled by The %s" % [planet.Name, StarMapData.GetCultureForPlanet(planet).Name])
+	
+	if planet.has("Culture"):
+		return Cultures()[planet.Culture]
+	else:
+		return GetCultureForSystem(GetSystemFromPlanet(planet))
+
+func GetSystemFromPlanet(planet):
+	var idx = 0
+	if planet.has("Star") and planet.Star.has("Index"):
+		idx = planet.Star.Index
+	else:
+		print("Unable to find system info in planet object! Defaulting to index 0!")
+	return Systems()[idx]
 
 func ScanPlanet(planet, quality):
 	var totalIcons = 10

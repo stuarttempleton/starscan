@@ -156,11 +156,12 @@ func generateStars(rng):
 		star.X = positions[i].x
 		star.Y = positions[i].y
 		star.Scan = 0.0
-		star.Planets = generatePlanets(rng, star.Name)
+		star.Planets = generatePlanets(rng, star.Name, i)
+		star.ContentSeed = rng.randi() # Seed to be used for generating with this star during game play.
 		stars[i] = star
 	return stars
 		
-func generatePlanets(rng, _starName):
+func generatePlanets(rng, _starName, _starIndex):
 	var planetCount = rng.randi_range(MinPlanetsPerStar, MaxPlanetsPerStar)
 	var planets = []
 	var hasOutposts = false
@@ -181,6 +182,7 @@ func generatePlanets(rng, _starName):
 		planet.PerceivedDudCount = -1
 		planet.SurfaceSeednumber = rng.randi_range(0, 2147483646)
 		planet.RadialOffset = rng.randi_range(25, 60)
+		planet.Star = {"Index": _starIndex, "Name": _starName}
 		planets[j] = planet
 	
 	var system_difficulty = -0.25 if hasOutposts else Hostility_Modifier
