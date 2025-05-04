@@ -65,6 +65,14 @@ func generate_sector(seednumber):
 	map.Systems = generateStars(rng)
 	map.Nebulae = generateNebulae(rng)
 	map.MapSeed = seednumber
+	map.Cultures = generateCultures(rng)
+	var culturehomes = select_culturehomes_from_systems(rng, map.Systems, map.Cultures.size(), 0.15)
+	var i = 0
+	for home in culturehomes:
+		home.IsHomeSystem = true
+		home.Culture = i
+		map.Cultures[i].Home = {"X": home.X, "Y": home.Y}
+		i += 1
 	return map
 	
 func serializeToFile(map, _rng):
@@ -73,6 +81,46 @@ func serializeToFile(map, _rng):
 	#var filename = "user://Starmap_%04d-%02d-%02d_%02d-%02d-%02d_%s.json" % [currtime.year, currtime.month, currtime.day, currtime.hour, currtime.minute, currtime.second, str(rng.seed)]
 	StarMapData.Save(StarMapData.BaseUniverseFile)
 	return StarMapData.BaseUniverseFile
+
+func generateCultures(rng):
+	var cultures = []
+	var qty = 3 # 3 base cultures for now
+	for i in qty:
+		cultures.push_back(LanguageGenerator.generate_language_pack(rng.randi()))
+	return cultures
+
+func select_culturehomes_from_systems(rng, systems: Array, num_cultures: int, min_dist: float) -> Array:
+	var culturehome := []
+	var attempts := 0
+	var max_attempts := 1000
+	
+	while culturehome.size() < num_cultures and attempts < max_attempts:
+		var candidate = systems[rng.randi() % systems.size()]
+		var candidate_pos = Vector2(candidate["X"], candidate["Y"])
+		
+		# Make sure we have a suitable planet
+		var has_planet := false
+		for planet in candidate.Planets:
+			if planet.Type != "Outpost":
+				has_planet = true
+				
+		if not has_planet:
+			attempts += 1
+			continue
+		
+		# Check distances to make sure we're set.
+		var too_close := false
+		for home in culturehome:
+			var home_pos = Vector2(home["X"], home["Y"])
+			if home_pos.distance_to(candidate_pos) < min_dist:
+				too_close = true
+				break
+		
+		if has_planet and not too_close:
+			culturehome.append(candidate)
+		attempts += 1
+	print("culture home gen took %d attempts." % [attempts])
+	return culturehome
 
 func generateNebulae(rng):
 	var posGen = StarPosGenerator.new()
@@ -86,7 +134,7 @@ func generateNebulae(rng):
 	nebs.resize(nebCount)
 	for i in range(nebCount):
 		var neb = Dictionary()
-		neb.Name = WordGenerator.Create().capitalize()
+		neb.Name = WordGenerator.Create(rng.randi()).capitalize()
 		neb.X = positions[i].x
 		neb.Y = positions[i].y
 		neb.Scan = 0.0
@@ -104,7 +152,7 @@ func generateStars(rng):
 	stars.resize(starCount)
 	for i in range(starCount):
 		var star = Dictionary()
-		star.Name = WordGenerator.Create().capitalize()
+		star.Name = WordGenerator.Create(rng.randi()).capitalize()
 		star.X = positions[i].x
 		star.Y = positions[i].y
 		star.Scan = 0.0
@@ -120,7 +168,7 @@ func generatePlanets(rng, _starName):
 	planets.resize(planetCount)
 	for j in range(planetCount):
 		var planet = Dictionary()
-		planet.Name = WordGenerator.Create().capitalize()
+		planet.Name = WordGenerator.Create(rng.randi()).capitalize()
 		planet.Type = StarMapData.PlanetTypes[rng.randi_range(0, StarMapData.PlanetTypes.size()-1)]
 		if planet.Type == "Outpost":
 			hasOutposts = true
