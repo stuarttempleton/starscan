@@ -73,6 +73,7 @@ func generate_sector(seednumber):
 		home.Culture = i
 		map.Cultures[i].Home = {"X": home.X, "Y": home.Y}
 		i += 1
+	applyCulturalData(rng, map.Cultures, map.Systems)
 	return map
 	
 func serializeToFile(map, _rng):
@@ -86,8 +87,38 @@ func generateCultures(rng):
 	var cultures = []
 	var qty = 3 # 3 base cultures for now
 	for i in qty:
-		cultures.push_back(LanguageGenerator.generate_language_pack(rng.randi()))
+		var culture = LanguageGenerator.generate_language_pack(rng.randi())
+		culture.TerritoryRadius = rng.randf_range(0.14, 0.16)
+		cultures.append(culture)
 	return cultures
+
+func applyCulturalData(rng, cultures: Array, systems: Array):
+	# Loop through system and apply rules:
+	for system in systems:
+		
+		# DISTANCE: If Distance is less than territory radius, it is owned.
+		var system_pos = Vector2(system["X"], system["Y"])
+		var i = 0
+		for culture in cultures:
+			var home_system_pos = Vector2(culture.Home.X, culture.Home.Y)
+			if system_pos.distance_to(home_system_pos) < culture.TerritoryRadius:
+				
+				# CONTESTED: If already owned it is contested, if it is already contexted, just leave it alone.
+				if system.has("IsHomeSystem") && system.IsHomeSystem && system.Culture != i && !system.IsContested:
+					system.IsContested = true
+					system.IsContestedBy = i
+			i += 1
+		
+		# OUTPOST: If it has an outpost, the outpost gets a random culture
+		for planet in system.Planets:
+			if planet.Type == "Outpost":
+				planet.Culture = rng.randi() % cultures.size()
+		
+		# UNCLAIMED: If it is not claimed by the territories, it is a random culture.
+		if !system.has("IsHomeSystem") || !system.IsHomeSystem:
+			system.IsContested = false
+			system.IsHomeSystem = false
+			system.Culture = rng.randi() % cultures.size()
 
 func select_culturehomes_from_systems(rng, systems: Array, num_cultures: int, min_dist: float) -> Array:
 	var culturehome := []
