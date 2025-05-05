@@ -26,6 +26,7 @@ export var Artifact3_Chance = 0.05
 export var Hostility_Modifier = 0.25
 export var MaxTargetTries = 5
 export var Sectors_QTY = 25
+export var PrimaryCultures_QTY = 3
 
 
 # Universe generation funcs
@@ -85,7 +86,7 @@ func serializeToFile(map, _rng):
 
 func generateCultures(rng):
 	var cultures = []
-	var qty = 3 # 3 base cultures for now
+	var qty = PrimaryCultures_QTY
 	for i in qty:
 		var culture = LanguageGenerator.generate_language_pack(rng.randi())
 		culture.TerritoryRadius = rng.randf_range(0.14, 0.16)
@@ -98,16 +99,13 @@ func applyCulturalData(rng, cultures: Array, systems: Array):
 		
 		# DISTANCE: If Distance is less than territory radius, it is owned.
 		var system_pos = Vector2(system["X"], system["Y"])
-		var i = 0
-		for culture in cultures:
-			var home_system_pos = Vector2(culture.Home.X, culture.Home.Y)
-			if system_pos.distance_to(home_system_pos) < culture.TerritoryRadius:
-				
+		for i in range(0, PrimaryCultures_QTY): # ONLY primary cultures.
+			var home_system_pos = Vector2(cultures[i].Home.X, cultures[i].Home.Y)
+			if system_pos.distance_to(home_system_pos) < cultures[i].TerritoryRadius:
 				# CONTESTED: If already owned it is contested, if it is already contexted, just leave it alone.
 				if system.has("IsHomeSystem") && system.IsHomeSystem && system.Culture != i && !system.IsContested:
 					system.IsContested = true
 					system.IsContestedBy = i
-			i += 1
 		
 		# OUTPOST: If it has an outpost, the outpost gets a random culture
 		for planet in system.Planets:
