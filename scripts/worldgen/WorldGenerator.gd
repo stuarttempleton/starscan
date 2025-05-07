@@ -71,6 +71,7 @@ func generate_sector(seednumber):
 	var i = 0
 	for home in culturehomes:
 		home.IsHomeSystem = true
+		home.IsControlled = true
 		home.Culture = i
 		map.Cultures[i].Home = {"X": home.X, "Y": home.Y}
 		i += 1
@@ -102,10 +103,16 @@ func applyCulturalData(rng, cultures: Array, systems: Array):
 		for i in range(0, PrimaryCultures_QTY): # ONLY primary cultures.
 			var home_system_pos = Vector2(cultures[i].Home.X, cultures[i].Home.Y)
 			if system_pos.distance_to(home_system_pos) < cultures[i].TerritoryRadius:
-				# CONTESTED: If already owned it is contested, if it is already contexted, just leave it alone.
-				if system.has("IsHomeSystem") && system.IsHomeSystem && system.Culture != i && !system.IsContested:
-					system.IsContested = true
-					system.IsContestedBy = i
+				# HOMES: Home systems and contested systems are exempt from these claims
+				if !system.IsHomeSystem && !system.IsContested:
+					# UNCONTROLLED: if it is not controlled or contested, control it.
+					if !system.IsControlled:
+						system.IsControlled = true
+						system.Culture = i
+					# CONTESTED: If already controlled by another culture it is now contested.
+					elif system.Culture != i && system.IsControlled:
+						system.IsContested = true
+						system.IsContestedBy = i
 		
 		# OUTPOST: If it has an outpost, the outpost gets a random culture
 		for planet in system.Planets:
@@ -113,9 +120,7 @@ func applyCulturalData(rng, cultures: Array, systems: Array):
 				planet.Culture = rng.randi() % cultures.size()
 		
 		# UNCLAIMED: If it is not claimed by the territories, it is a random culture.
-		if !system.has("IsHomeSystem") || !system.IsHomeSystem:
-			system.IsContested = false
-			system.IsHomeSystem = false
+		if !system.IsControlled && !system.IsContested:
 			system.Culture = rng.randi() % cultures.size()
 
 func select_culturehomes_from_systems(rng, systems: Array, num_cultures: int, min_dist: float) -> Array:
@@ -187,6 +192,9 @@ func generateStars(rng):
 		star.Scan = 0.0
 		star.Planets = generatePlanets(rng, star.Name, i)
 		star.ContentSeed = rng.randi() # Seed to be used for generating with this star during game play.
+		star.IsHomeSystem = false # Set home state to false for all systems
+		star.IsContested = false
+		star.IsControlled = false
 		stars[i] = star
 	return stars
 		
