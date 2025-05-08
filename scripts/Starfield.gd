@@ -60,8 +60,17 @@ func AddSystemToMap( system ) :
 	if StarMapData.SystemHasOutpost(system):
 		draw_circle_arc(Vector2(system.X * MapScale, system.Y * MapScale), system.Planets.size() * PlanetSizeScale * 9 , 0, 360, Color(1, 1, 1, 0.364706))
 	
-	var color = Color( 1, 0.0784314, 0.576471, 1 ) if system.has("IsHomeSystem") && system.IsHomeSystem else Color(1.12, 1.12, 0.6)
+	var isHome = true if system.has("IsHomeSystem") && system.IsHomeSystem else false
+	var isMajor = true if system.has("IsMajor") && system.IsMajor else false
+	
+	var color = Color( 1, 0.0784314, 0.576471, 1 ) if isHome else Color(1.12, 1.12, 0.6)
 	draw_circle(Vector2(system.X * MapScale, system.Y * MapScale), system.Planets.size() * PlanetSizeScale ,color)
+	
+	if isHome:#&& isMajor:
+		var territory_radius = StarMapData.Cultures()[system.Culture].TerritoryRadius
+		var territory_color = Color( 1, 0.0784314, 0.576471, 0.1 ) if isMajor else Color(1.12, 1.12, 0.6, 0.1)
+		draw_circle(Vector2(system.X * MapScale, system.Y * MapScale), territory_radius * MapScale ,territory_color)
+	
 	pass
 
 func draw_circle_arc(center, radius, angle_from, angle_to, color):

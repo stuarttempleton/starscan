@@ -26,7 +26,8 @@ export var Artifact3_Chance = 0.05
 export var Hostility_Modifier = 0.25
 export var MaxTargetTries = 5
 export var Sectors_QTY = 25
-export var PrimaryCultures_QTY = 3
+export var MajorCultures_QTY = 3
+export var MinorCultures_QTY = 7
 
 
 # Universe generation funcs
@@ -66,7 +67,7 @@ func generate_sector(seednumber):
 	map.Systems = generateStars(rng)
 	map.Nebulae = generateNebulae(rng)
 	map.MapSeed = seednumber
-	map.Cultures = generateCultures(rng)
+	map.Cultures = generateCultures(rng, map.Systems)
 	var culturehomes = select_culturehomes_from_systems(rng, map.Systems, map.Cultures.size(), 0.15)
 	var i = 0
 	for home in culturehomes:
@@ -85,43 +86,65 @@ func serializeToFile(map, _rng):
 	StarMapData.Save(StarMapData.BaseUniverseFile)
 	return StarMapData.BaseUniverseFile
 
-func generateCultures(rng):
+func compute_radius(target_systems: float, total_systems: int) -> float:
+	return sqrt(target_systems / (PI * total_systems))
+
+func generateCultures(rng, systems: Array) -> Array:
 	var cultures = []
-	var qty = PrimaryCultures_QTY
-	for i in qty:
+	var total_systems = systems.size()
+
+	for i in range(MajorCultures_QTY + MinorCultures_QTY):
 		var culture = LanguageGenerator.generate_language_pack(rng.randi())
-		culture.TerritoryRadius = rng.randf_range(0.14, 0.16)
+		var is_major = i < MajorCultures_QTY
+		culture.IsMajor = is_major
+
+		if is_major:
+			var target_systems = rng.randf_range(18, 25)
+			culture.TerritoryRadius = compute_radius(target_systems, total_systems)
+		else:
+			var target_systems = rng.randf_range(3, 8)
+			culture.TerritoryRadius = compute_radius(target_systems, total_systems)
+
 		cultures.append(culture)
+	
 	return cultures
 
 func applyCulturalData(rng, cultures: Array, systems: Array):
-	# Loop through system and apply rules:
 	for system in systems:
-		
-		# DISTANCE: If Distance is less than territory radius, it is owned.
 		var system_pos = Vector2(system["X"], system["Y"])
-		for i in range(0, PrimaryCultures_QTY): # ONLY primary cultures.
-			var home_system_pos = Vector2(cultures[i].Home.X, cultures[i].Home.Y)
-			if system_pos.distance_to(home_system_pos) < cultures[i].TerritoryRadius:
-				# HOMES: Home systems and contested systems are exempt from these claims
-				if !system.IsHomeSystem && !system.IsContested:
-					# UNCONTROLLED: if it is not controlled or contested, control it.
-					if !system.IsControlled:
-						system.IsControlled = true
-						system.Culture = i
-					# CONTESTED: If already controlled by another culture it is now contested.
-					elif system.Culture != i && system.IsControlled:
-						system.IsContested = true
-						system.IsContestedBy = i
 		
-		# OUTPOST: If it has an outpost, the outpost gets a random culture
+		# Check for influence from each culture
+		for i in range(cultures.size()):
+			var culture = cultures[i]
+			var home_pos = Vector2(culture.Home.X, culture.Home.Y)
+			var within_territory = system_pos.distance_to(home_pos) < culture.TerritoryRadius
+			
+			if !within_territory:
+				continue
+			
+			# Skip home and already contested systems
+			if system.IsHomeSystem or system.IsContested:
+				continue
+			
+			# Assign control if unclaimed
+			if !system.IsControlled:
+				system.IsControlled = true
+				system.Culture = i
+				continue
+			
+			# If already controlled by another culture and this one is major, mark as contested
+			if system.Culture != i and culture.IsMajor:
+				system.IsContested = true
+				system.IsContestedBy = i  # Could be an array if you want multi-contest later
+		
+		# Assign random culture to outpost planets
 		for planet in system.Planets:
 			if planet.Type == "Outpost":
 				planet.Culture = rng.randi() % cultures.size()
 		
-		# UNCLAIMED: If it is not claimed by the territories, it is a random culture.
-		if !system.IsControlled && !system.IsContested:
-			system.Culture = rng.randi() % cultures.size()
+		# Unclaimed fallback: assign random minor culture
+		if !system.IsControlled and !system.IsContested:
+			system.Culture = MajorCultures_QTY + rng.randi() % MinorCultures_QTY
 
 func select_culturehomes_from_systems(rng, systems: Array, num_cultures: int, min_dist: float) -> Array:
 	var culturehome := []
