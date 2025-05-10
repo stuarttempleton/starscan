@@ -47,19 +47,4 @@ func _generate(_seed:int = randi(), _opts = {}):
 		item.Designation,
 		WordGenerator.RawLetters(1, _seed).to_upper()
 		]
-	
-#	var Ship = {
-#		"Captain" : WordGenerator.Create().capitalize(),
-#		"Name" : WordGenerator.Create().capitalize(),
-#		"Disposition" : Vessel[disposition][randi() % Vessel[disposition].size()-1],
-#		"Designation" : str(1000 + randi() % 8000),
-#		"FullDesignation" : ""
-#		}
-#
-#	Ship["FullDesignation"] = "%s-%s-%s" % [
-#		Ship.Disposition.left(3).trim_suffix("-").to_upper(),
-#		Ship.Designation,
-#		WordGenerator.RawLetters(1).to_upper()
-#		]
-		
 	return item

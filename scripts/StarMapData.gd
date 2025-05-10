@@ -445,6 +445,15 @@ func AllPlanetsVisited(system):
 			visited = false
 	return visited
 
+func NewAncientCulture(_seed: int = randi()):
+	var lang = LanguageGenerator.generate_language_pack(_seed)
+	return lang
+
+func GetRandomCulture(_seed: int = randi()):
+	var rng = RandomNumberGenerator.new()
+	rng.seed = _seed
+	return Cultures()[rng.randi_range(0,Cultures().size())]
+	
 func GetCultureForSystem(system):
 	# System culture = territory -> Rand(star content seed)
 	# Example use: print("The %s system is controlled by The %s" % [system.Name, StarMapData.GetCultureForSystem(system).Name])

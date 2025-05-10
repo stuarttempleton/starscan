@@ -281,7 +281,7 @@ func LowFuel(TowEncounter):
 
 func Win():
 	var title = "Congratulations, Captain %s!" %[ShipData.StarShip.Captain]
-	var SectorLeaderName = WordGenerator.Create().capitalize()
+	var SectorLeaderName = WordGenerator.Create(StarMapData.StarMap.MapSeed, StarMapData.GetRandomCulture(StarMapData.StarMap.MapSeed)).capitalize()
 	var txt = "You have delivered the " + str($"/root/GameController/WinLoseCheck".ArtifactsRequiredToWin) + " required artifacts to the Supercluster Federation outposts spread around your sector. "
 	txt += "Thanks to you and other captains like you throughout the galaxy, " 
 	txt += "we are now able to study these ancient civilizations and find a path of our own through the next Great Filter. "
@@ -299,7 +299,7 @@ func Win():
 
 func Lose():
 	var title = "GAME OVER, Captain %s!" %[ShipData.StarShip.Captain]
-	var SectorLeaderName = WordGenerator.Create().capitalize()
+	var SectorLeaderName = WordGenerator.Create(StarMapData.StarMap.MapSeed, StarMapData.GetRandomCulture(StarMapData.StarMap.MapSeed)).capitalize()
 	var txt = "The tragedy that has befallen the crew of %s will ripple through the sector. " % [ ShipData.Ship().Name]
 	txt += "The complete and total loss of your crew will not be in vain, though, "
 	txt += "as new captains throughout the galaxy step forward to take on the grim task of exploring ancient civilizations. "

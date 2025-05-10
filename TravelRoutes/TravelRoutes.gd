@@ -76,10 +76,9 @@ func GetRoutes():
 	ScreenRect.size = ScreenRect.size * camera.zoom
 	ScreenRect.position = ShipPosition - ScreenRect.size * 0.5
 	
-	
 	var visible_systems = StarMapData.AllSystemsInRect(ScreenRect)
 	var nearby_systems = StarMapData.AllSystemsInRadius(ShipPosition, 300, visible_systems)
-#
+	
 	RouteLists.Sector.routes = StarMapData.ScannedRoutes()
 	var outpost_routes = StarMapData.AllRoutesBySystemList(nearby_systems)
 	#if outpost_routes.size() > 0:
@@ -134,7 +133,7 @@ func _drawTravelRoutes(Routes):
 		var label_point = Geometry.get_closest_point_to_segment_2d(ShipPosition, segment[0], segment[1])
 		if Routes.pool.size() >= i:
 			#if the label pool is still resizing when the draw call hits, just defer for a frame. no biggie.
-			Routes.pool[i - 1].rect_position = get_viewport_transform().xform(label_point)
+			Routes.pool[i - 1].rect_position = get_viewport().get_canvas_transform().xform(label_point)
 	pass
 
 func _draw():

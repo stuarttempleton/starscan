@@ -33,7 +33,7 @@ func _ready():
 func ResetShip() :
 	self.LoadShipData(DefaultShipFile)
 	StarShip.ShipSeedNumber = randi()
-	StarShip.Captain = WordGenerator.Create(StarShip.ShipSeedNumber).capitalize()
+	StarShip.Captain = WordGenerator.Create(StarShip.ShipSeedNumber, StarMapData.GetRandomCulture(StarShip.ShipSeedNumber)).capitalize()
 	AddItemListToInventory(ItemFactory.GenerateItemList(ItemFactory.ItemTypes.RESOURCE, 8))
 	var dir = Directory.new()
 	dir.remove(SavedShipFile)
