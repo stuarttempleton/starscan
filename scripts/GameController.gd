@@ -46,6 +46,7 @@ func LoadWindowSettings():
 func SetViewScale():
 	if OS.window_fullscreen:
 		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_DISABLED,  SceneTree.STRETCH_ASPECT_IGNORE, OS.window_size, PlayerPrefs.get_pref("view_scale", 1) )
+	SetUIDeadzones()
 
 
 func SaveWindowSettings():
@@ -59,8 +60,8 @@ func _ready():
 	$CanvasLayer/MapButton.visible = is_gameloop && scene_has_map
 	$CanvasLayer/CargoButton.visible = is_gameloop && scene_has_cargo
 	SetViewScale() #hack because tree node is not ready during init
-	SetUIDeadzones()
-	
+
+
 func SetUIDeadzones():
 	for obj in $CanvasLayer.get_children():
 		MovementEvent.add_deadzone(obj.name, obj.get_global_rect())
@@ -183,7 +184,6 @@ func FullscreenToggle():
 	LoadWindowSettings()
 	SaveWindowSettings()
 	SetViewScale()
-	SetUIDeadzones()
 
 
 func _on_TextureButton_pressed():
