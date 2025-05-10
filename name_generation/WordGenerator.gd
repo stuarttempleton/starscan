@@ -70,7 +70,7 @@ func choose_weighted(patterns: Array, _rng: RandomNumberGenerator) -> String:
 func Create(_seed: int = randi(), language_data = null) -> String:
 	var local_rng = get_rng(_seed)
 	if language_data == null:
-		language_data = Languages["Zerathi"]
+		language_data = choose_uniform(Languages.values(), local_rng)
 	
 	var word = generate_word(language_data, local_rng)
 	var retries = 5
@@ -99,14 +99,13 @@ func CreateList(_qty, language_data = null):
 	return words
 
 
-func RawLetters(qty: int, _seed: int = randi(), language_name: String = "UnknownLanguage") -> String:
+func RawLetters(qty: int, _seed: int = randi(), language_data = null) -> String:
 	var _rng = get_rng(_seed)
-	if not Languages.has(language_name):
-		language_name = choose_uniform(Languages.keys(), _rng)
-
-	var lang = Languages[language_name]
-	var FullLetterList = lang["V"] + lang["C"]
-
+	if language_data == null:
+		language_data = choose_uniform(Languages.values(), _rng)
+	
+	var FullLetterList = language_data["V"] + language_data["C"]
+	
 	var letters := ""
 	for i in qty:
 		letters += choose_uniform(FullLetterList, _rng)
