@@ -445,6 +445,19 @@ func AllPlanetsVisited(system):
 			visited = false
 	return visited
 
+func GetAncientCulture(_seed: int = randi()):
+	var string_seed = str(_seed)
+	
+	if !StarMap.has("AncientCultures"):
+		StarMap["AncientCultures"] = {}
+	
+	if StarMap.AncientCultures.has(string_seed):
+		return StarMap.AncientCultures[string_seed]
+	else:
+		var culture = NewAncientCulture(_seed)
+		StarMap.AncientCultures[string_seed] = culture
+		return StarMap.AncientCultures[string_seed]
+
 func NewAncientCulture(_seed: int = randi()):
 	var lang = LanguageGenerator.generate_language_pack(_seed)
 	return lang

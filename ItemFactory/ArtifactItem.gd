@@ -21,7 +21,7 @@ func _generate(_seed:int = randi(), _opts = {}):
 	
 	# Pick rarity if not explicitly provided
 	var rarity = _opts["rarity"] if _opts.has("rarity") else _pick_weighted_rarity(rng)
-	var language_data = _opts["language_data"] if _opts.has("language_data") else StarMapData.NewAncientCulture(_seed)
+	var language_data = _opts["language_data"] if _opts.has("language_data") else StarMapData.GetAncientCulture(_seed)
 	
 	var data = _build_item_data(_seed)
 	data["Name"] = DescriptorGenerator.create_name(_seed, {"rarity": rarity, "language_data": language_data})
