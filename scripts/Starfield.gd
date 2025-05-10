@@ -66,7 +66,7 @@ func AddSystemToMap( system ) :
 	var color = Color( 1, 0.0784314, 0.576471, 1 ) if isHome else Color(1.12, 1.12, 0.6)
 	draw_circle(Vector2(system.X * MapScale, system.Y * MapScale), system.Planets.size() * PlanetSizeScale ,color)
 	
-	if isHome:#&& isMajor:
+	if isHome:
 		var territory_radius = StarMapData.Cultures()[system.Culture].TerritoryRadius
 		var territory_color = Color( 1, 0.0784314, 0.576471, 0.1 ) if isMajor else Color(1.12, 1.12, 0.6, 0.1)
 		draw_circle(Vector2(system.X * MapScale, system.Y * MapScale), territory_radius * MapScale ,territory_color)
