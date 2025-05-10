@@ -81,13 +81,10 @@ func GetRoutes():
 	
 	RouteLists.Sector.routes = StarMapData.ScannedRoutes()
 	var outpost_routes = StarMapData.AllRoutesBySystemList(nearby_systems)
-	#if outpost_routes.size() > 0:
+	
 	RouteLists.Outpost.routes = outpost_routes 
 	if ShipData.Ship().KnownRoutes.size() > 0:
 		RouteLists.ShipMap.routes = ShipData.Ship().KnownRoutes
-#		for rt in ShipData.Ship().KnownRoutes:
-#			if !StarMapData.RouteListHas(RouteLists.Outpost.routes, rt):
-#				RouteLists.ShipMap.routes.append(rt)
 	UpdateLabels()
 
 
@@ -97,18 +94,20 @@ func UpdateLabels():
 		GrowPool(RouteLists[list].pool, RouteLists[list].routes.size())
 		for i in RouteLists[list].pool.size():
 			if i <= RouteLists[list].routes.size():
-				if camera.zoom.x > 2:
-					RouteLists[list].pool[i].get_node("LabelText").text = "%s <--> %s\r\n%.1f sector units" % [StarMapData.StarMap[RouteLists[list].routes[i].ObjectPool][RouteLists[list].routes[i].A].Name, StarMapData.StarMap[RouteLists[list].routes[i].ObjectPool][RouteLists[list].routes[i].B].Name, RouteLists[list].routes[i].Distance * StarMapData.MapScale]
-				else:
-					RouteLists[list].pool[i].get_node("LabelText").text = "%s <--> %s" % [StarMapData.StarMap[RouteLists[list].routes[i].ObjectPool][RouteLists[list].routes[i].A].Name, StarMapData.StarMap[RouteLists[list].routes[i].ObjectPool][RouteLists[list].routes[i].B].Name]
 				if RouteLists[list].showText:
+					var label_node = RouteLists[list].pool[i].get_node("LabelText")
+					var new_text = ""
+					if camera.zoom.x > 2:
+						new_text = "%s <--> %s\r\n%.1f sector units" % [StarMapData.StarMap[RouteLists[list].routes[i].ObjectPool][RouteLists[list].routes[i].A].Name, StarMapData.StarMap[RouteLists[list].routes[i].ObjectPool][RouteLists[list].routes[i].B].Name, RouteLists[list].routes[i].Distance * StarMapData.MapScale]
+					else:
+						new_text = "%s <--> %s" % [StarMapData.StarMap[RouteLists[list].routes[i].ObjectPool][RouteLists[list].routes[i].A].Name, StarMapData.StarMap[RouteLists[list].routes[i].ObjectPool][RouteLists[list].routes[i].B].Name]
+					if label_node.text != new_text:
+						label_node.text = new_text
 					RouteLists[list].pool[i].show()
 				else:
 					RouteLists[list].pool[i].hide()
 			else:
 				RouteLists[list].pool[i].hide()
-			pass
-		pass
 
 
 func GetSubSegment(from, to, offset = 250):
