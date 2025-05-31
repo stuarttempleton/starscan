@@ -1,5 +1,6 @@
 extends Node
 
+#region Variables and Signals
 
 var StarShip
 var Loaded = false
@@ -9,28 +10,18 @@ var SavedShipFile = "user://Player_Ship_Data.json"
 
 signal FuelTanksEmpty
 
+#endregion
+
+#region Lifecycle
+
 func _ready():
 	self.LoadShipData(DefaultShipFile)
-	
-	#EXPLANATION
-	
-	#Print name of ship
-	#print(self.Ship().Name)
-	
-	#Print size of inventory[]
-	#print(self.Inventory().size())
-	
-	#Append an inventory item (dupe the first entry)
-	#self.Inventory().push_back(self.Inventory()[0])
-	#print(self.Inventory().size())
-	
-	#Change name of first planet in first system
-	#self.Systems()[0].Planets[0].Name = "updated name!"
-	
-	#Save to a save file
-	#self.Save(SavedDatabaseFileName)
-	
-func ResetShip() :
+
+#endregion
+
+#region Data Management
+
+func ResetShip():
 	self.LoadShipData(DefaultShipFile)
 	StarShip.ShipSeedNumber = randi()
 	StarShip.Captain = WordGenerator.Create(StarShip.ShipSeedNumber, StarMapData.GetRandomCulture(StarShip.ShipSeedNumber)).capitalize()
@@ -39,19 +30,19 @@ func ResetShip() :
 	dir.remove(SavedShipFile)
 	self.SaveShip()
 
-func LoadSave() :
+func LoadSave():
 	if (!self.SaveExists()):
 		self.LoadShipData(DefaultShipFile)
 		self.SaveShip()
 	self.LoadShipData(SavedShipFile)
 
-func SaveShip() :
+func SaveShip():
 	self.Save(SavedShipFile)
-	
+
 func SaveExists():
 	var save_file = File.new()
 	return save_file.file_exists(SavedShipFile)
-	
+
 func LoadShipData(filename):
 	print("Loading ship data from %s" % filename)
 	var shipdata_file = File.new()
@@ -67,28 +58,41 @@ func LoadShipData(filename):
 	# Set default ship sector if needed
 	if !StarShip.has("Sector"):
 		StarShip.Sector = 0
+		
 	Loaded = true
 	SavedSinceLoad = false
-	
+
 func Save(filename):
 	var file = File.new()
 	file.open(filename, File.WRITE)
 	file.store_string(JSON.print(StarShip, "\t"))
 	file.close()
-	SavedSinceLoad = true;
-	
-func Inventory() :
-	if !Loaded :
+	SavedSinceLoad = true
+
+#endregion
+
+#region Accessors
+
+func Inventory():
+	if !Loaded:
 		print("Ship Data Not Loaded! FAILING ON PURPOSE FIX THIS")
 	else:
 		return StarShip.Inventory
-		
-func Ship() :
-	if !Loaded :
+
+func Ship():
+	if !Loaded:
 		print("Ship Data Not Loaded! FAILING ON PURPOSE FIX THIS")
 	else:
 		return StarShip
-		
+
+func GetPosition(useMapScale = true):
+	var scale = StarMapData.MapScale if useMapScale else 1
+	return Vector2(StarShip.X, StarShip.Y) * scale
+
+#endregion
+
+#region Fuel Management
+
 func ConsumeFuel(amount):
 	if Cheat.godmode_enabled: return
 	
@@ -96,44 +100,40 @@ func ConsumeFuel(amount):
 	if StarShip.Fuel < 0.001:
 		StarShip.Fuel = 0
 		emit_signal("FuelTanksEmpty")
-		
+
 func Refuel():
 	StarShip.Fuel = StarShip.FuelCapacity
 
+#endregion
+
+#region Resource and Crew Payment
+
 func PayToVisitAStar():
 	return PayResourcesDefaultToCrew(2, 1.0)
-	
+
 func PayToVisitAPlanet():
 	return PayResourcesDefaultToCrew(1, 1.0)
 
-func DeductArtifact(_Payment):
-	var qty = RemoveQTYItemsFromInventory(ItemFactory.ItemTypes.ARTIFACT, _Payment)
-	return qty
+func PayResourcesDefaultToCrew(resourcesToPay, _crewLostPerUnpaidResource):
+	var paid = {
+		"Resources": resourcesToPay,
+		"Crew": 0
+	}
+	paid.Resources = RemoveQTYItemsFromInventory(ItemFactory.ItemTypes.RESOURCE, resourcesToPay)
+	paid.Crew = DeductCrew(resourcesToPay - paid.Resources)
+	return paid
 
-func TurnInArtifacts(_items:Array = []):
-	var qty = _items.size()
-	for item in _items:
-		RemoveItemFromInventory(item)
-	StarShip.DeliveredArtifacts += qty
-	UpdatePlayStat("ArtifactsTurnedIn", qty)
-	return qty #report how many we turned in for displayor whatever
+func DeductCrew(crewLost):
+	if Cheat.godmode_enabled: return 0
+	if crewLost == 0: return 0
+	
+	UpdatePlayStat("CrewLost", crewLost)
+	StarShip.Crew -= crewLost
+	return crewLost
 
-func TurnInArtifact(_item):
-	TurnInArtifacts([_item])
+#endregion
 
-func TurnInArtifactsBySeed(_seed):
-	var items = []
-	for item in StarShip.Inventory:
-		if item.Seed == _seed:
-			items.append(item)
-	TurnInArtifacts(items)
-
-func GetInventoryFor(_itemType:int = 0):
-	var items = []
-	for item in StarShip.Inventory:
-		if item.Type == _itemType:
-			items.append(item)
-	return items
+#region Inventory Management
 
 func AddItemToInventory(_item):
 	StarShip.Inventory.append(_item)
@@ -142,7 +142,14 @@ func AddItemListToInventory(_items = []):
 	for _item in _items:
 		AddItemToInventory(_item)
 
-func GetInventoryQTYFor(_itemType:int = 0):
+func GetInventoryFor(_itemType: int = 0):
+	var items = []
+	for item in StarShip.Inventory:
+		if item.Type == _itemType:
+			items.append(item)
+	return items
+
+func GetInventoryQTYFor(_itemType: int = 0):
 	var qty = 0
 	for _item in StarShip.Inventory:
 		if _item.Type == _itemType:
@@ -157,7 +164,7 @@ func RemoveItemFromInventoryBySeed(_seed):
 		if item.Seed == _seed:
 			StarShip.Inventory.erase(item)
 
-func RemoveQTYItemsFromInventory(_itemType:int = 0, _qty = 0):
+func RemoveQTYItemsFromInventory(_itemType: int = 0, _qty = 0):
 	var qty = 0
 	var items = GetInventoryFor(_itemType)
 	items.shuffle()
@@ -168,23 +175,35 @@ func RemoveQTYItemsFromInventory(_itemType:int = 0, _qty = 0):
 			break
 	return qty
 
-func PayResourcesDefaultToCrew(resourcesToPay, _crewLostPerUnpaidResource):
-	var paid = {
-		"Resources" : resourcesToPay,
-		"Crew" : 0
-	}
-	
-	paid.Resources = RemoveQTYItemsFromInventory(ItemFactory.ItemTypes.RESOURCE, resourcesToPay)
-	paid.Crew = DeductCrew(resourcesToPay - paid.Resources)
-	return paid
+#endregion
 
-func DeductCrew(crewLost):
-	if Cheat.godmode_enabled: return 0
-	if crewLost == 0: return 0
-	
-	UpdatePlayStat("CrewLost", crewLost)
-	StarShip.Crew -= crewLost
-	return crewLost
+#region Artifact Turn-In
+
+func DeductArtifact(_Payment):
+	var qty = RemoveQTYItemsFromInventory(ItemFactory.ItemTypes.ARTIFACT, _Payment)
+	return qty
+
+func TurnInArtifacts(_items: Array = []):
+	var qty = _items.size()
+	for item in _items:
+		RemoveItemFromInventory(item)
+	StarShip.DeliveredArtifacts += qty
+	UpdatePlayStat("ArtifactsTurnedIn", qty)
+	return qty
+
+func TurnInArtifact(_item):
+	TurnInArtifacts([_item])
+
+func TurnInArtifactsBySeed(_seed):
+	var items = []
+	for item in StarShip.Inventory:
+		if item.Seed == _seed:
+			items.append(item)
+	TurnInArtifacts(items)
+
+#endregion
+
+#region Route and Navigation
 
 func AddRouteList(Routes):
 	var added = 0
@@ -198,10 +217,9 @@ func AddKnownRoute(Route):
 		return 1
 	return 0
 
-func GetPosition(useMapScale = true):
-	var scale = StarMapData.MapScale if useMapScale else 1
-	return Vector2(StarShip.X, StarShip.Y) * scale
+#endregion
 
+#region Statistics
 
 func UpdatePlayStat(stat, qty):
 	if StarShip.PlayStats.has(stat):
@@ -215,4 +233,4 @@ func GetPlayStat(stat):
 		qty = StarShip.PlayStats[stat]
 	return qty
 
-
+#endregion
