@@ -9,6 +9,8 @@ var cached_zoom = Vector2.ZERO
 export var NebulaPath = ""
 export var WormholePath = ""
 var systems = [] #cache for draw
+var update_timer = 0.0
+var update_interval = 0.2
 
 func _ready():
 	GameController.EnterGameLoop(true)
@@ -21,12 +23,13 @@ func _ready():
 	GameController.connect("map_state", self, "MapToggle")
 	BuildStarmapFromView()
 
-func _process(_delta):
-	if avatar.CurrentSpeed > 0:
-		BuildStarmapFromView()
-	if cached_zoom != camera.zoom:
-		cached_zoom = camera.zoom
-		BuildStarmapFromView()
+func _process(delta):
+	update_timer += delta
+	if avatar.CurrentSpeed > 0 or cached_zoom != camera.zoom:
+		if update_timer >= update_interval:
+			update_timer = 0.0
+			cached_zoom = camera.zoom
+			BuildStarmapFromView()
 
 func AddWormholeToMap(pos):
 	var loaded_scene = load(WormholePath)
@@ -74,7 +77,7 @@ func AddSystemToMap( system ) :
 	pass
 
 func draw_circle_arc(center, radius, angle_from, angle_to, color):
-	var nb_points = 64
+	var nb_points = clamp(int(radius / 4), 16, 128)
 	var points_arc = PoolVector2Array()
 
 	for i in range(nb_points + 1):
