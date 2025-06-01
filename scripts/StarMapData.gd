@@ -192,8 +192,6 @@ func ObjectsByDistance(origin, objects_by_index, object_pool = "Systems"):
 func DistanceComparisonSort(a, b):
 	return a.Distance < b.Distance
 
-func ArrayMinusItem(_array, _item):
-	return []
 
 func SetWormholeRoutes():
 	var nebs = AllNebulaeByIndex()
@@ -263,7 +261,6 @@ func RouteListHas(route_list, route):
 		elif rte.A == route.B and rte.B == route.A:
 			has = true
 	return has
-
 
 func IncrementIfSame(a, b):
 	if a == b: b -= 1
