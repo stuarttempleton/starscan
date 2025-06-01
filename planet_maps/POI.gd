@@ -34,7 +34,7 @@ func selected():
 		POIModel.IsExhausted = true
 		if POIModel.PerceivedType == "Unknown":
 			ShipData.UpdatePlayStat("UnknownsLooted",1)
-		var qty = 1 #TODO: Adjust this for "severity"
+		var qty = 1 #TODO: Adjust this for "severity" of hazard or "bounty" of resources
 		CollectPOI(POIModel.ActualType, qty, POIModel.ItemSeed)
 		AudioPlayer.PlaySFX(GetAudioKeyForPOI(POIModel.ActualType))
 		# warning-ignore:return_value_discarded
