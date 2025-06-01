@@ -5,6 +5,7 @@ class_name ItemUI_element
 enum CONTEXT {NONE, DESTROY, TURN_IN}
 var Seed = 0
 var Rarity = 0
+var RarityThreshold = 0.9
 var context = CONTEXT.DESTROY
 signal item_removed(_seed)
 
@@ -36,8 +37,7 @@ func _on_Button_pressed():
 		DoButtonPress()
 
 func NeedsConfirmation():
-	#todo: rarity
-	return (Rarity >= 0.9)
+	return (Rarity >= RarityThreshold)
 
 func ChoiceResponse(choice):
 	MessageBox.disconnect("ChoiceSelected", self, "ChoiceResponse")
