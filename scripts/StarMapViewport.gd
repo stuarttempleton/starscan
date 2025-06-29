@@ -12,15 +12,21 @@ func _ready():
 	GameController.connect("map_state", self, "MapToggle")
 	
 func _on_FirstPlay():
-	#place at center
-	ShipData.Ship().X = 0.5
-	ShipData.Ship().Y = 0.5
-	
 	#deplete fuel to force education about refueling
 	ShipData.ConsumeFuel(ShipData.Ship().Fuel)
 	
-	var shipPos = Vector2(ShipData.Ship().X,ShipData.Ship().Y)
+	var shipPos: Vector2
+	
+	if ShipData.Ship().has("Culture") and ShipData.Ship().Culture.Home:
+		shipPos = Vector2(ShipData.Ship().Culture.Home.X, ShipData.Ship().Culture.Home.Y)
+	elif StarMapData.StarMap.Cultures.size() > 0 and StarMapData.StarMap.Cultures[0].Home:
+		shipPos = Vector2(StarMapData.StarMap.Cultures[0].Home.X, StarMapData.StarMap.Cultures[0].Home.Y)
+	else:
+		shipPos = Vector2(0.5, 0.5) #default to center of map
+
 	var nearestOutpostSystem = StarMapData.GetNearestOutpostSystem(shipPos)
+	if nearestOutpostSystem == null:
+		print("FATAL ERROR: the map does not appear to have an outpost, which is required for game play!")
 	var outpostSystemPos = Vector2(nearestOutpostSystem.X, nearestOutpostSystem.Y) * StarMapData.MapScale
 	
 	$ShipAvatarView/ShipAvatar.JumpToMapPosition(outpostSystemPos)
