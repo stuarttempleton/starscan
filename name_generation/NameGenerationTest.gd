@@ -11,11 +11,24 @@ func _on_GenerateArtifacts_pressed():
 	var list = ""
 	var qty = 10
 	var i = 1
+	var stat_stash = []
 	#list += "--. %s\r\n" % [ItemFactory.GenerateItem(ItemFactory.ItemTypes.ARTIFACT, 3729348799).Name]
 	
 	for w in ItemFactory.GenerateItemList(ItemFactory.ItemTypes.ARTIFACT, qty, {"language_data": LanguageGenerator.generate_language_pack(randi())}):
-		list += "%d. %s\r\n" % [i, w.Name]
+		var stats = Stats.generate(w.Seed, w.Rarity)
+		var stat_list = ""
+		if stats.size() > 0:
+			stat_stash.append(stats)
+			stat_list += " ("
+			stat_list += Stats.generate_stat_block_string(stats)
+			stat_list += ")"
+		
+		list += "%d. %s" % [i, w.Name]
+		list += stat_list
+		list += "\r\n"
 		i += 1
+	list += "\r\nThis cargo stat block: "
+	list += Stats.generate_stat_block_string(Stats.combine(stat_stash))
 	$ScenePanel/ContentPanel/VBoxContainer/Name.text = "Artifacts"
 	$ScenePanel/ContentPanel/VBoxContainer/Quote.bbcode_text = list
 
