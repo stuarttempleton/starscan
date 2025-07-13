@@ -4,7 +4,7 @@ extends CanvasLayer
 # Inventory UI based vars
 var Ship
 var DescBoilerPlate = "Captain, these are the contents of the ship's cargo bay. [color=yellow]%d / %d artifacts delivered.[/color]"
-
+var context = ItemUI_element.CONTEXT.DESTROY
 
 # Inventory-UI
 func _ready():
@@ -17,8 +17,8 @@ func _ready():
 	$InventoryUI/CargoContainer/VBoxContainer/ScrollContainer/ItemList.connect("item_list_changed",self,"BuildInventory")
 	ShowInventory(false)
 
-
-func ShowInventory(state:bool=true):
+func ShowInventoryWithContext(state, _context):
+	context = _context
 	if state:
 		MovementEvent.add_deadzone(name, $InventoryUI.get_global_rect())
 		BuildInventory()
@@ -27,6 +27,9 @@ func ShowInventory(state:bool=true):
 		GamepadMenu.remove_menu(name)
 	$InventoryUI.visible = state
 	$BlurBackground.visible = state
+	
+func ShowInventory(state:bool=true):
+	ShowInventoryWithContext(state, ItemUI_element.CONTEXT.DESTROY)
 	
 	
 func BuildInventory(_qty = 0):
@@ -56,7 +59,7 @@ func BuildInventory(_qty = 0):
 
 
 func AddInventory(_item):
-	$InventoryUI/CargoContainer/VBoxContainer/ScrollContainer/ItemList.LoadItem(_item, ItemUI_element.CONTEXT.DESTROY)
+	$InventoryUI/CargoContainer/VBoxContainer/ScrollContainer/ItemList.LoadItem(_item, context)
 
 func UpdateBoilerText():
 	$InventoryUI/CargoContainer/VBoxContainer/ContainerDescription.bbcode_text = DescBoilerPlate % [ShipData.StarShip.DeliveredArtifacts, $"/root/GameController/WinLoseCheck".ArtifactsRequiredToWin]
